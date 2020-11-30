@@ -3,26 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Minified CSS taken from https://cdnjs.com/libraries/font-awesome -->
+    <!-- Font Awesome: Minified CSS taken from https://cdnjs.com/libraries/font-awesome -->
     <link 
     rel="stylesheet" 
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-    <!-- Icons taken from https://fontawesome.com/ -->
-    <link 
-    rel="stylesheet" 
-    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <!-- Icons taken from https://materializecss.com/icons.html -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Compiled and minified CSS taken from https://materializecss.com/getting-started.html -->
+    <!-- Materialize: Compiled and minified CSS taken from https://materializecss.com/getting-started.html -->
     <link 
     rel="stylesheet" 
     href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    <!-- Materialize Icons taken from https://materializecss.com/icons.html -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Author's own stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     {% block styles %}
     {% endblock %}
     <title>McTastic Recipes</title>
 </head>
 <body>
+
+    <header>
+        <!-- Top Nav Bar -->
+        <nav class="nav-extended text-shadow">
+            <div class="nav-wrapper">
+            <a href=" {{ url_for('get_recipes')}} " class="brand-logo">McTastic Recipes</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href=".html">Cooking</a></li>
+                <li><a href=".html">Baking</a></li>
+                <li><a href=".html">Snacks</a></li>
+                <li><a href=".html">Contact</a></li>
+                <li><a href=".html">Login</a></li>
+                <li><a href=".html">Register</a></li>
+                <li><a href=".html">Add Recipe</a></li>
+                <li><a href=".html">Profile</a></li>
+            </ul>
+            </div>
+        </nav>
+
+        <!-- Side Nav Bar -->
+        <ul class="sidenav" id="mobile-demo">
+                <li><h4 class="center-align">Menu</h4></li>
+                <li><a href=".html">Cooking</a></li>
+                <li><a href=".html">Baking</a></li>
+                <li><a href=".html">Snacks</a></li>
+                <li><a href=".html">Contact</a></li>
+                <li><a href=".html">Login</a></li>
+                <li><a href=".html">Register</a></li>
+                <li><a href=".html">Add Recipe</a></li>
+                <li><a href=".html">Profile</a></li>
+        </ul>
+    </header>
 
     {% block content %}
     
@@ -33,7 +64,8 @@
 <!-- Compiled and minified JavaScript taken from https://materializecss.com/getting-started.html-->
 <script 
     src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
-</script>   
+</script>
+<!-- Author's own script -->
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 {% block scripts %}
 {% endblock %}

@@ -33,10 +33,10 @@
                 <li><a href=".html">Baking</a></li>
                 <li><a href=".html">Snacks</a></li>
                 <li><a href=".html">Contact</a></li>
-                <li><a href=".html">Login</a></li>
+                <li><a href="{{ url_for('login')}}">Login</a></li>
                 <li><a href="{{ url_for('register')}}">Register</a></li>
                 <li><a href=".html">Add Recipe</a></li>
-                <li><a href=".html">Profile</a></li>
+                <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
             </ul>
             </div>
         </nav>
@@ -48,10 +48,10 @@
                 <li><a href=".html">Baking</a></li>
                 <li><a href=".html">Snacks</a></li>
                 <li><a href=".html">Contact</a></li>
-                <li><a href=".html">Login</a></li>
+                <li><a href="{{ url_for('login')}}">Login</a></li>
                 <li><a href="{{ url_for('register')}}">Register</a></li>
                 <li><a href=".html">Add Recipe</a></li>
-                <li><a href=".html">Profile</a></li>
+                <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
         </ul>
     </header>
 

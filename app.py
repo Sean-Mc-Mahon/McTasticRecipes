@@ -45,7 +45,7 @@ def register():
         # put new user into 'session' cookie
         session['user'] = request.form.get("username").lower()
         flash("Registration Successful!")
-        # return redirect(url_for("profile", username=session["user"]))
+        return redirect(url_for("profile", username=session["user"]))
     return render_template("register.html")
 
 
@@ -57,7 +57,7 @@ def login():
             {"username": request.form.get("username").lower()})
 
         if existing_user:
-            #ensure hashed password matches user input
+            # ensure hashed password matches user input
             if check_password_hash(
                 existing_user["password"], request.form.get("password")):
                     session["user"] = request.form.get("username").lower()
@@ -71,7 +71,7 @@ def login():
                 return redirect(url_for("login"))
 
         else:
-            #username doesn't exist
+            # username doesn't exist
             flash("Incorrect Username and/or password")
             return redirect(url_for("login"))
 
@@ -87,6 +87,14 @@ def profile(username):
     if session["user"]:
         return render_template("profile.html", username=username)
 
+    return redirect(url_for("login"))
+
+
+@app.route("/logout")
+def logout():
+    # remove user from session cookies
+    flash("You have been logged out")
+    session.pop("user")
     return redirect(url_for("login"))
 
 

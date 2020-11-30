@@ -1,10 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
 
-    {% for recipe in recipes %}
-        {{ recipe.recipe_name }}<br>
-        {{ recipe.ingredients }}<br>
-        {{ recipe.instructions }}<br>
-    {% endfor %}
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card hoverable">
+                    {% for recipe in recipes %}
+                <div class="card-image">
+                    <a href="">
+                        <img src="{{ recipe.recipe_image }}">
+                        <span class="card-title text-shadow-2">Thai Green Curry</span>
+                    </a>
+                </div>
+                <ul class="collapsible">
+                    <li>
+                        <div class="collapsible-header">
+                            <i class="material-icons prefix">rice_bowl</i>
+                            <strong>{{ recipe.recipe_name }}</strong>
+                        </div>
+                        <div class="collapsible-body">
+                            {{ recipe.recipe_description }}<br>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
 
 {% endblock %}

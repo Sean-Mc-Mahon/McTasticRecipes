@@ -14,15 +14,15 @@
                 <ul class="collapsible">
                     <li>
                         <div class="collapsible-header">
-                            <i class="fas fa-clock tooltipped" data-position="bottom" data-tooltip="Prep Time">   </i>{{recipe.recipe_time}}   
-                            <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Serves">rice_bowl   </i>{{recipe.recipe_serves   }}   
+                            <i class="fas fa-clock tooltipped" data-position="bottom" data-tooltip="Prep Time">   </i>{{recipe.recipe_time}}
+                            <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Serves">rice_bowl</i>{{recipe.recipe_serves}}
                             {% if recipe.recipe_is_vegetarian == "on" %}
                                 <i class="fas fa-seedling lime-text accent-2 tooltipped"
-                                data-position="bottom" data-tooltip="Vegetarian">   </i>   
+                                data-position="bottom" data-tooltip="Vegetarian"></i>   
                             {% endif %}
                             {% if recipe.recipe_is_vegan == "on" %}
                                 <i class="fas fa-seedling light-green-text accent-4 tooltipped"
-                                data-position="bottom" data-tooltip="Vegan">   </i>   
+                                data-position="bottom" data-tooltip="Vegan"></i>
                             {% endif %}
                         </div>
                         <div class="collapsible-body">

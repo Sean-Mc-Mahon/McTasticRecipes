@@ -14,3 +14,9 @@
     margin-right: 0rem;
     margin-left: 1rem;
 }
+.switch-line {
+    line-height: 2;
+}
+.large-icon {
+    font-size: 2rem;
+}

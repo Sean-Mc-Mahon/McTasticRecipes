@@ -15,7 +15,13 @@
                     <li>
                         <div class="collapsible-header">
                             <i class="material-icons prefix">rice_bowl</i>
-                            <strong>{{ recipe.recipe_name }}</strong>
+                            <strong>{{ recipe.recipe_name }}</strong> : 
+                            <i class="fas fa-clock"></i>{{recipe.recipe_time}}, 
+                            Serves:{{recipe.recipe_serves}}
+                            {% if recipe.recipe_isvegan == "on" %}
+                                <i class="fas fa-seedling tooltipped"
+                                data-position="bottom" data-tooltip="Vegan"></i>
+                            {% endif %}
                         </div>
                         <div class="collapsible-body">
                             {{ recipe.recipe_description }}<br>

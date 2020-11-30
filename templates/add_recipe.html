@@ -4,8 +4,9 @@
     <h3 class="center-align">Add Recipe</h3>
 
     <div class="row">
-        <form class="col s12" method="POST" action="">
+        <form class="col l12" method="POST" action="{{ url_for('add_recipe') }}">
             <div class="row">
+                <!-- Category Selection -->
                 <div class="input-field col s12 l6">
                     <select id="category_name" name="category_name" class="validate" required>
                         <option value="" disabled selected>Choose Category</option>
@@ -14,31 +15,56 @@
                         {% endfor %}
                     </select>
                 </div>
+                <!-- Recipe Name -->
                 <div class="input-field col s12 l6">
                     <input id="recipe_name" name="recipe_name" type="text" minlength="1" maxlength="50" class="validate" required>
                     <label for="recipe_name">Recipe Name</label>
                 </div>
             </div>
             <div class="row">
+                <!-- Recipe Name -->
                 <div class="input-field col s12">
                     <textarea id="recipe_description" name="recipe_description" maxlength="300" class="materialize-textarea"></textarea>
                     <label for="recipe_description">Recipe Description</label>
                 </div>
             </div>
             <div class="row">
+                <!-- Ingredients -->
                 <div class="input-field col s12">
-                    <textarea id="recipe_ingredients" name="recipe_ingredients" maxlength="300" class="materialize-textarea"></textarea>
+                    <textarea id="recipe_ingredients" name="recipe_ingredients" maxlength="1000" class="materialize-textarea"></textarea>
                     <label for="recipe_ingredients">Recipe Ingredients</label>
                 </div>
             </div>
             <div class="row">
+                <!-- Instructions -->
                 <div class="input-field col s12">
-                    <textarea id="recipe_instructions" name="recipe_instructions" maxlength="300" class="materialize-textarea"></textarea>
+                    <textarea id="recipe_instructions" name="recipe_instructions" maxlength="1000" class="materialize-textarea"></textarea>
                     <label for="recipe_instructions">Recipe Instructions</label>
                 </div>
             </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="url" id="recipe_image" name="recipe_image" class="materialize-textarea" minlength="1" maxlength="400" required>
+                    <label for="recipe_image">Add Image URL</label>
+                </div>
+            </div>
             <div class="row switch-line">
-                <div class="input-field col s6">
+                <!-- Prep Time -->
+                <div class="input-field col s12 m6 l3">
+                    <select id="recipe_time" name="recipe_time" class="validate" required>
+                        <option value="" disabled selected>Prep Time</option>
+                            <option value="1">&lt;30mins</option>
+                            <option value="2">30-60mins</option>
+                            <option value="3">&gt;60mins</option>
+                    </select>
+                </div>
+                <!-- Calories -->
+                <div class="input-field col s12 m6 l3">
+                        <input id="recipe_cals" name="recipe_cals" type="text" minlength="1" maxlength="4" pattern="^[0-9]$" class="validate">
+                        <label for="recipe_cals">Calories per Serving</label>
+                    </div>
+                <!-- Vegetarian Switch -->
+                <div class="input-field col s6 l3">
                     <div class="switch">
                         <label for="is_vegetarian">
                             <i class="fas fa-seedling lime-text accent-2 tooltipped large-icon"
@@ -49,16 +75,26 @@
                         </label>
                     </div>
                 </div>
-                <div class="input-field col s6">
+                <!-- Vegan Switch -->
+                <div class="input-field col s6 l3">
                     <div class="switch">
                         <label for="is_vegan">
-                            <i class="fas fa-seedling light-green-text accent-4 tooltipped"
+                            <i class="fas fa-seedling light-green-text accent-4 tooltipped  large-icon"
                                 data-position="bottom" data-tooltip="Vegan"></i>
                             <input type="checkbox" id="is_vegan">
                             <span class="lever"></span>
                             Vegan
                         </label>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Submit Button -->
+                <div class="col s12 center-align">
+                    <button class="btn waves-effect waves-light" id="submit_recipe" type="submit" name="action">
+                        Add Recipe
+                        <i class="material-icons right">send</i>
+                    </button>
                 </div>
             </div>
         </form>

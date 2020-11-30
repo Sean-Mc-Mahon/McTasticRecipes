@@ -8,7 +8,7 @@
                 <div class="card-image">
                     <a href="">
                         <img src="{{ recipe.recipe_image }}">
-                        <span class="card-title text-shadow-2">Thai Green Curry</span>
+                        <span class="card-title text-shadow-2">{{recipe.recipe_name}}</span>
                     </a>
                 </div>
                 <ul class="collapsible">
@@ -26,8 +26,10 @@
                             {% endif %}
                         </div>
                         <div class="collapsible-body">
-                            {{ recipe.recipe_description }}<br>
+                            <p>{{ recipe.recipe_description }}</p>
+                            <p>{{ recipe.created_by }}</p>
                         </div>
+                        
                     </li>
                     {% endfor %}
                 </ul>

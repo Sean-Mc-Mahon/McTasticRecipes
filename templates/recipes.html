@@ -31,8 +31,10 @@
                             </div>                     
                             <div class="col s7 l6 right">
                             <i class="material-icons medium right" id="expand">expand_more</i>
-                            <a href="" class="waves-effect waves-light btn-small right m1">Done</a>
-                            <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small right m1">Edit</a>
+                            {% if session.user|lower == recipe.created_by|lower %}
+                                <a href="" class="waves-effect waves-light btn-small right m1">Done</a>
+                                <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small right m1">Edit</a>
+                            {% endif %}
                             </div>
                         </div>
                         <div class="collapsible-body">

@@ -2,9 +2,10 @@
 {% block content %}
 
     <div class="row">
+        {% for recipe in recipes %}
         <div class="col s12 m6">
             <div class="card hoverable">
-                    {% for recipe in recipes %}
+                    
                 <div class="card-image">
                     <a href="">
                         <img src="{{ recipe.recipe_image }}">
@@ -13,7 +14,8 @@
                 </div>
                 <ul class="collapsible">
                     <li>
-                        <div class="collapsible-header">
+                        <div class="collapsible-header">                       
+                            
                             <i class="fas fa-clock tooltipped" data-position="bottom" data-tooltip="Prep Time">   </i>{{recipe.recipe_time}}
                             <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Serves">rice_bowl</i>{{recipe.recipe_serves}}
                             {% if recipe.recipe_is_vegetarian == "on" %}
@@ -27,14 +29,15 @@
                         </div>
                         <div class="collapsible-body">
                             <p>{{ recipe.recipe_description }}</p>
-                            <p>{{ recipe.created_by }}</p>
+                            <p><em>by:{{ recipe.created_by }}</em></p>
                         </div>
                         
                     </li>
-                    {% endfor %}
+                    
                 </ul>
             </div>
         </div>
+        {% endfor %}
     </div>
 
     

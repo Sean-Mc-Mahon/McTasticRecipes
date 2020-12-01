@@ -20,3 +20,6 @@
 .large-icon {
     font-size: 2rem;
 }
+.ignore {
+    pointer-events: none;
+}

@@ -12,14 +12,26 @@
 }
 .collapsible-header i {
     margin-right: 0rem;
-    margin-left: 1rem;
+    margin-left: 0.3rem;
 }
 .switch-line {
     line-height: 2;
 }
 .large-icon {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
-.ignore {
-    pointer-events: none;
+#expand{
+    font-size: 30px;
+}
+.m1 {
+    margin: 0 0.2rem;
+}
+.xxl-only{
+    display: none;
+}
+/*xxl monitor*/
+@media screen and (min-width: 1500px) {
+  .xxl-only {
+    display: inline-block
+  }
 }

@@ -22,14 +22,30 @@ mongo = PyMongo(app)
 @app.route("/get_recipes")
 def get_recipes():
     recipes = list(mongo.db.recipes.find())
-    return render_template("recipes.html", recipes=recipes)
+    return render_template("index.html", recipes=recipes)
+
+
+@app.route("/filter_recipes/<category_name>")
+def filter_recipes(category_name):
+    recipes = list(mongo.db.recipes.find())
+    categories = mongo.db.categories.find().sort("category_name", 1)
+    return render_template("index.html", recipes=recipes, categories=categories)
+
+
+@app.route("/single_recipe/<recipe_id>")
+def single_recipe(recipe_id):
+    recipes = list(mongo.db.recipes.find())
+
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    categories = mongo.db.categories.find().sort("category_name", 1)
+    return render_template("single_recipe.html", recipe=recipe, categories=categories)
 
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
     recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
-    return render_template("recipes.html", recipes=recipes)
+    return render_template("index.html", recipes=recipes)
 
 
 @app.route("/register", methods=["GET", "POST"])

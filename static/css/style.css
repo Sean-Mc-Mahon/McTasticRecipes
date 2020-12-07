@@ -35,3 +35,20 @@
     display: inline-block
   }
 }
+
+/*perfect square code from: https://codepen.io/Tyler_Potts_/pen/qBBXoVQ*/
+.square {
+    position: relative;
+    overflow: hidden;
+}
+.square:after {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+.content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

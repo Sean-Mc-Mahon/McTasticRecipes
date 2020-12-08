@@ -18,33 +18,40 @@
             </div>
         </form>
     </div>
+
+<!--Recipe Cards-->
 {% if recipes|length > 0 %}
-    <div class="row">
+<div class="row">
         {% for recipe in recipes %}
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
+                    <!--Image square and centered at any screen size-->
                     <div class="square">
-                        <a href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">
-                            <img class="content" src="{{ recipe.recipe_image }}">
-                        </a>
+                        <!-- <a href="{{ url_for('single_recipe', recipe_id=recipe._id) }}"> -->
+                            <img class="content activator" src="{{ recipe.recipe_image }}">
+                        <!-- </a> -->
                     </div>
-                    <ul class="collapsible">
-                        <li>
-                        <div class="collapsible-header"><i class="material-icons">expand_more</i>
-                            {{recipe.recipe_name}}
-                        </div>
-                        <div class="collapsible-body"><span>
-                            <div class="row">
-                                <div class="col s4">
+                    <div class="card-content">
+                        <!--Displayed under image-->
+                        <span class="card-title activator grey-text text-darken-4">{{recipe.recipe_name}}<i class="material-icons right">more_vert</i></span>
+                        <p><a href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">View Recipe</a></p>
+                    </div>
+                    <!--Revelaed when card is clicked-->
+                    <div class="card-reveal flex-vert-between">
+                        <span class="card-title grey-text text-darken-4 margin-b1">{{recipe.recipe_name}}<i class="material-icons right">close</i></span>
+                        <!--Icon info: Servings,Calories,Vegetarian,Vegan-->
+                        <div class="row">
+                            <!-- Might add later
+                            <div class="col s3 l4 xxl-only">
                                 <i class="fas fa-clock tooltipped" data-position="bottom" data-tooltip="Prep Time"></i>{{recipe.recipe_time}}
-                            </div>
-                            <div class="col s3">
-                                <span><strong>Cals:</strong>{{recipe.recipe_cals}}</span>
-                            </div>
-                            <div class="col s3">
+                            </div> -->
+                            <div class="col s4">
                                 <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Serves">rice_bowl</i>{{recipe.recipe_serves}}
                             </div>
-                            <div class="col s2">
+                            <div class="col s4">
+                                <span class="tooltipped" data-position="bottom" data-tooltip="Per Serving"><strong>Cals:</strong>{{recipe.recipe_cals}}</span>
+                            </div>
+                            <div class="col s4">
                                 {% if recipe.recipe_is_vegetarian == "on" %}
                                     <i class="fas fa-seedling lime-text accent-2 tooltipped"
                                     data-position="bottom" data-tooltip="Vegetarian"></i>   
@@ -54,22 +61,24 @@
                                     data-position="bottom" data-tooltip="Vegan"></i>
                                 {% endif %}
                             </div>
-                            <div class="row">
+                        </div>
+                        <!--Description,Creator,link-->
+                        <div class="row">
                             <div class="col s12">
                                 <p>{{ recipe.recipe_description }}</p>
-                                <p><em>by:{{ recipe.created_by }}</em></p>
+                                <div>
+                                    <p><em>by:{{ recipe.created_by }}</em></p>
+                                    <p><a href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">View Recipe</a></p>
+                                </div>
                             </div>
-                            </div>
-                            </div>
-                        </span></div>
-                    
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         {% endfor %}
     </div>
-    {% else %}
+{% else %}
+    <!--Display if there are no results from search-->
     <h3 class="center-align">No Results Found</h3>
 {% endif %}
     

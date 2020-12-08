@@ -55,3 +55,9 @@
 .margin-b1{
     margin-bottom: 2rem;
 }
+.tabs .indicator {
+    background-color: black
+}
+.tabs .tab a:focus, .tabs .tab a:focus.active {
+    background: transparent;
+}

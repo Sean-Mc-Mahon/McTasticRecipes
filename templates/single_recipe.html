@@ -1,29 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div class="row col s12"></div>
+    <div class="row s12"></div>
         <div class="recipe-title center-align">
             <h2>{{ recipe.recipe_name }}</h2>
             <h5>Created by: {{ recipe.created_by }}</h5>
         </div>
+
     <div class="row">
         <div class="col s12 m6">
             <div class="square">
                 <img src="{{ recipe.recipe_image }}" alt="Recipe Image" class="content">
             </div>
-            <p>{{ recipe.recipe_description }}</p>
+            <p><em>{{ recipe.recipe_description }}</em></p>
         </div>
+
         <div class="col s12 m6">
-            <div class="preperation">
-                <h3>Ingredients:</h3>
+            <ul class="tabs">
+                <li class="tab col s6">
+                    <a href="#ingredients" class="indigo-text text-darken-4">Ingredients</a>
+                </li>
+                <li class="tab col s6">
+                    <a href="#instructions" class="indigo-text text-darken-4">Instructions</a>
+                </li>
+            </ul>
+            <div class="col s12" id="ingredients">
                 <p>{{ recipe.recipe_ingredients }}</p>
-                <h3>Instructions:</h3>
-                <p>{{ recipe.recipe_instructions }}</p>
-                {% if session.user|lower == recipe.created_by|lower %}
-                                <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small right m1">Delete</a>
-                                <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small right m1">Edit</a>
-                            {% endif %}
             </div>
+            <div class="col s12" id="instructions">
+                <p>{{ recipe.recipe_instructions }}</p>
+            </div>
+            {% if session.user|lower == recipe.created_by|lower %}
+                <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small right m1">Delete</a>
+                <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small right m1">Edit</a>
+            {% endif %}
         </div>
     </div>
 

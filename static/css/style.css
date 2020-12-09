@@ -1,3 +1,35 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #121212;
+    font-family: 'Montserrat', sans-serif;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Pattaya', sans-serif;
+}
+.border {
+    border:2px solid #263238;
+}
+/* nav {
+    min-height: 8vh;
+} */
+.nav-wrapper {
+    margin: 0 2rem;
+}
+.logo{
+    display: flex;
+}
+#logo {
+    margin: 0.5rem 0;
+}
+nav .brand-logo {
+    display: flex;
+}
+nav ul a {
+    padding: 0 5px;
+}
+
 .text-shadow {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3)
 }
@@ -23,11 +55,40 @@
 #expand{
     font-size: 30px;
 }
-.m1 {
+#search {
+    margin-top: 2rem;
+}
+#name {
+    margin-top: 0.1rem;
+    margin-bottom: 0.1rem;
+}
+#created-by {
+    margin-top: 0.1rem;
+}
+#description {
+    margin-top: 0.2rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+/* Font Rules  */
+.bold {
+    font-weight: 500;
+}
+/* Margin Rules */
+.hm1 {
     margin: 0 0.2rem;
+}
+.mb1 {
+    margin-bottom: 1rem;
 }
 .xxl-only{
     display: none;
+}
+/*s phone*/
+@media screen and (max-width: 600px) {
+  .nav-wrapper {
+    margin: 0 1rem;
+}
 }
 /*xxl monitor*/
 @media screen and (min-width: 1500px) {
@@ -55,8 +116,9 @@
 .margin-b1{
     margin-bottom: 2rem;
 }
+/*Tab styles on single_ingredients modified from The Net Ninja tutorial: https://www.youtube.com/playlist?list=PL4cUxeGkcC9gGrbtvASEZSlFEYBnPkmff */
 .tabs .indicator {
-    background-color: black
+    background-color: #263238
 }
 .tabs .tab a:focus, .tabs .tab a:focus.active {
     background: transparent;

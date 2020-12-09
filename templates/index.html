@@ -23,7 +23,7 @@
 {% if recipes|length > 0 %}
 <div class="row">
         {% for recipe in recipes %}
-            <div class="col s12 m6 l4">
+            <div class="col s12 m6 xxl4">
                 <div class="card hoverable">
                     <!--Image square and centered at any screen size-->
                     <div class="square">
@@ -41,23 +41,22 @@
                         <span class="card-title   margin-b1">{{recipe.recipe_name}}<i class="material-icons right">close</i></span>
                         <!--Icon info: Servings,Calories,Vegetarian,Vegan-->
                         <div class="row">
-                            <!-- Might add later
-                            <div class="col s3 l4 xxl-only">
-                                <i class="fas fa-clock tooltipped" data-position="bottom" data-tooltip="Prep Time"></i>{{recipe.recipe_time}}
-                            </div> -->
-                            <div class="col s4">
-                                <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Serves">rice_bowl</i>{{recipe.recipe_serves}}
+                            <div class="col info-icon s3 xxl4 xxl-only">
+                                <i class="fas fa-clock large-icon tooltipped" data-position="bottom" data-tooltip="Prep Time"></i> {{recipe.recipe_time}}
                             </div>
-                            <div class="col s4">
+                            <div class="col s6 xxl2">
+                                <i class="fas fa-utensils large-icon tooltipped" data-position="bottom" data-tooltip="Serves"></i> {{recipe.recipe_serves}}
+                            </div>
+                            <div class="col s4 xxl3 xxl-only">
                                 <span class="tooltipped" data-position="bottom" data-tooltip="Per Serving"><strong>Cals:</strong>{{recipe.recipe_cals}}</span>
                             </div>
-                            <div class="col s4">
+                            <div class="col s6 xxl3">
                                 {% if recipe.recipe_is_vegetarian == "on" %}
-                                    <i class="fas fa-seedling lime-text accent-2 tooltipped"
+                                    <i class="fas fa-seedling lime-text accent-2 large-icon tooltipped"
                                     data-position="bottom" data-tooltip="Vegetarian"></i>   
                                 {% endif %}
                                 {% if recipe.recipe_is_vegan == "on" %}
-                                    <i class="fas fa-seedling light-green-text accent-4 tooltipped"
+                                    <i class="fas fa-seedling light-green-text accent-4 large-icon tooltipped"
                                     data-position="bottom" data-tooltip="Vegan"></i>
                                 {% endif %}
                             </div>

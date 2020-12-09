@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div class="row card-panel">
+    <div id="search" class="row vm1">
         <form action="{{ url_for('search') }}" method="post" class="col s12">
             <div class="row valign-wrapper center-align">
                 <div class="input-field col s12 m8">
-                    <i class="fas fa-search"></i>
+                    <i class="fas fa-search prefix blue-grey-text text-darken-3"></i>
                     <input type="text" name="query" id="query" minlength="3" class="validate" required>
                     <label for="query">Search Recipes</label>
                 </div>
                 <div class="col s12 m4">
-                    <a href="{{ url_for('get_recipes') }}" class="red btn text-shadow">Reset</a>
-                    <button type="submit" class="btn">
+                    <a href="{{ url_for('get_recipes') }}" class="border transparent blue-grey-text text-darken-3 btn">Reset</a>
+                    <button type="submit" class="btn border transparent blue-grey-text text-darken-3">
                         <i class="fas fa-search left"></i>Search
                     </button>
                 </div>
@@ -33,12 +33,12 @@
                     </div>
                     <div class="card-content">
                         <!--Displayed under image-->
-                        <span class="card-title activator grey-text text-darken-4">{{recipe.recipe_name}}<i class="material-icons right">more_vert</i></span>
+                        <span class=" activator">{{recipe.recipe_name}}<i class="material-icons right">more_vert</i></span>
                         <p><a href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">View Recipe</a></p>
                     </div>
                     <!--Revelaed when card is clicked-->
                     <div class="card-reveal flex-vert-between">
-                        <span class="card-title grey-text text-darken-4 margin-b1">{{recipe.recipe_name}}<i class="material-icons right">close</i></span>
+                        <span class="card-title   margin-b1">{{recipe.recipe_name}}<i class="material-icons right">close</i></span>
                         <!--Icon info: Servings,Calories,Vegetarian,Vegan-->
                         <div class="row">
                             <!-- Might add later

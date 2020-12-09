@@ -35,15 +35,3 @@ $(document).ready(function(){
         });
     }
     });
-
-    // function parallax(element, distance, speed){
-    //     const item = document.querySelector(element);
-
-    //     item.style.transform = `translateY(${distance * speed}px)`;
-    //     }
-
-    // window.addEventListener('scroll', function(){
-    //     parallax('header', window.scrollY, 1);
-    //     parallax('.pasta', window.scrollY, 0.4);
-    //     parallax('.curry', window.scrollY, 0.2);
-    // });

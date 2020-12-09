@@ -8,42 +8,10 @@ body {
 h1,h2,h3,h4,h5,h6 {
     font-family: 'Pattaya', sans-serif;
 }
-/* parallax
-header {
-  min-height: 500px;
-  background: linear-gradient(240deg, #834d4d, #503d3d);
-  position: relative;
-  color: white;
-  font-family: sans-serif;
-  z-index: -1;
-}
-.pasta {
-  position: absolute;
-  height: 230px;
-  top: 10%;
-  right: 10%;
-}
-
-.curry {
-  position: absolute;
-  height: 200px;
-  top: 10%;
-  right: 30%;
-}
-
-.soup {
-  position: absolute;
-  height: 200px;
-  top: 10%;
-  right: 50%;
-} */
 
 .border {
     border:2px solid #263238;
 }
-/* nav {
-    min-height: 8vh;
-} */
 #search-button {
     border: none;
 }

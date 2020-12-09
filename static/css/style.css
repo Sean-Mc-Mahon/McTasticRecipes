@@ -14,6 +14,9 @@ h1,h2,h3,h4,h5,h6 {
 /* nav {
     min-height: 8vh;
 } */
+#search-button {
+    border: none;
+}
 .nav-wrapper {
     margin: 0 2rem;
 }
@@ -80,6 +83,9 @@ nav ul a {
 }
 .mb1 {
     margin-bottom: 1rem;
+}
+.ml1 {
+    margin-left: 1rem;
 }
 .xxl-only{
     display: none;

@@ -12,6 +12,27 @@
             <div class="square">
                 <img src="{{ recipe.recipe_image }}" alt="Recipe Image" class="content">
             </div>
+            <div class="row">
+                <div class="col s3 l3 xxl-only">
+                    <i class="fas fa-clock tooltipped" data-position="bottom" data-tooltip="Prep Time"></i>{{recipe.recipe_time}}
+                </div>
+                <div class="col s6 l3">
+                    <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Serves">rice_bowl</i>{{recipe.recipe_serves}}
+                </div>
+                <div class="col s4 l3">
+                    <span class="tooltipped" data-position="bottom" data-tooltip="Per Serving"><strong>Cals:</strong>{{recipe.recipe_cals}}</span>
+                </div>
+                <div class="col s6 l3">
+                    {% if recipe.recipe_is_vegetarian == "on" %}
+                        <i class="fas fa-seedling lime-text accent-2 large-icon tooltipped"
+                        data-position="bottom" data-tooltip="Vegetarian"></i>   
+                    {% endif %}
+                    {% if recipe.recipe_is_vegan == "on" %}
+                        <i class="fas fa-seedling light-green-text accent-4 large-icon tooltipped"
+                        data-position="bottom" data-tooltip="Vegan"></i>
+                    {% endif %}
+                </div>
+            </div>
             <p id="description"><em>{{ recipe.recipe_description }}</em></p>
         </div>
 
@@ -28,7 +49,15 @@
                 <p>{{ recipe.recipe_ingredients }}</p>
             </div>
             <div class="col s12" id="instructions">
-                <p>{{ recipe.recipe_instructions }}</p>
+                <ul>
+                    {% for line in recipe.recipe_ingredients.splitlines() %}
+                        <li>
+                            <p>{{ line }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <!-- <p>{{ recipe.recipe_instructions }}</p> -->
             </div>
             {% if session.user|lower == recipe.created_by|lower %}
                 <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small right hm1">Delete</a>

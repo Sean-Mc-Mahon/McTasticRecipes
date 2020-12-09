@@ -21,7 +21,11 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/get_recipes")
 def get_recipes():
-    recipes = list(mongo.db.recipes.find())
+
+    limit = 20
+
+    recipes = list(mongo.db.recipes.find().limit(limit))
+    
     return render_template("index.html", recipes=recipes)
 
 

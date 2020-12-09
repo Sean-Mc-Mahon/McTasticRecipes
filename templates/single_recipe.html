@@ -46,11 +46,18 @@
                 </li>
             </ul>
             <div class="col s12" id="ingredients">
-                <p>{{ recipe.recipe_ingredients }}</p>
+            <ul>
+                    {% for line in recipe.recipe_ingredients.splitlines() %}
+                        <li>
+                            <p>{{ line }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <!-- <p>{{ recipe.recipe_ingredients }}</p> -->
             </div>
             <div class="col s12" id="instructions">
                 <ul>
-                    {% for line in recipe.recipe_ingredients.splitlines() %}
+                    {% for line in recipe.recipe_instructions.splitlines() %}
                         <li>
                             <p>{{ line }}</p>
                         </li>

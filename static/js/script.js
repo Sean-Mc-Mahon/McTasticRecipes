@@ -4,6 +4,7 @@ $(document).ready(function(){
         $('.tooltipped').tooltip();
         $('select').formSelect();
         $('.tabs').tabs();
+        $('.parallax').parallax();
         
         //code taken from Materialize Form Validation lesson by Tim Nelson as part of Code Institute Data Centric Development Module: https://courses.codeinstitute.net/courses/course-v1:CodeInstitute+DCP101+2017_T3/courseware/196c000dd670458cafc7b2dc9d4a8245/f2ad3c6775ce4890a53e62de35245c0a/?child=first
         validateMaterializeSelect();
@@ -34,3 +35,15 @@ $(document).ready(function(){
         });
     }
     });
+
+    // function parallax(element, distance, speed){
+    //     const item = document.querySelector(element);
+
+    //     item.style.transform = `translateY(${distance * speed}px)`;
+    //     }
+
+    // window.addEventListener('scroll', function(){
+    //     parallax('header', window.scrollY, 1);
+    //     parallax('.pasta', window.scrollY, 0.4);
+    //     parallax('.curry', window.scrollY, 0.2);
+    // });

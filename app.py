@@ -25,7 +25,6 @@ def get_recipes():
     limit = 20
 
     recipes = list(mongo.db.recipes.find().limit(limit))
-    
     return render_template("index.html", recipes=recipes)
 
 
@@ -33,7 +32,8 @@ def get_recipes():
 def filter_recipes(category_name):
     recipes = list(mongo.db.recipes.find())
     categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("index.html", recipes=recipes, categories=categories)
+    return render_template(
+        "index.html", recipes=recipes, categories=categories)
 
 
 @app.route("/single_recipe/<recipe_id>")
@@ -42,7 +42,8 @@ def single_recipe(recipe_id):
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("single_recipe.html", recipe=recipe, categories=categories)
+    return render_template(
+        "single_recipe.html", recipe=recipe, categories=categories)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -128,8 +129,10 @@ def logout():
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
     if request.method == "POST":
-        recipe_is_vegetarian = "on" if request.form.get("recipe_is_vegetarian") else "off"
-        recipe_is_vegan = "on" if request.form.get("recipe_is_vegan") else "off"
+        recipe_is_vegetarian = "on" if request.form.get(
+            "recipe_is_vegetarian") else "off"
+        recipe_is_vegan = "on" if request.form.get(
+            "recipe_is_vegan") else "off"
         recipe = {
             "category_name": request.form.get("category_name"),
             "recipe_name": request.form.get("recipe_name"),
@@ -152,11 +155,13 @@ def add_recipe():
     return render_template("add_recipe.html", categories=categories)
 
 
-@app.route("/edit_recipe/<recipe_id>", methods=["GET","POST"])
+@app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
     if request.method == "POST":
-        recipe_is_vegetarian = "on" if request.form.get("recipe_is_vegetarian") else "off"
-        recipe_is_vegan = "on" if request.form.get("recipe_is_vegan") else "off"
+        recipe_is_vegetarian = "on" if request.form.get(
+            "recipe_is_vegetarian") else "off"
+        recipe_is_vegan = "on" if request.form.get(
+            "recipe_is_vegan") else "off"
         submit = {
             "category_name": request.form.get("category_name"),
             "recipe_name": request.form.get("recipe_name"),
@@ -176,7 +181,8 @@ def edit_recipe(recipe_id):
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("edit_recipe.html", recipe=recipe, categories=categories)
+    return render_template(
+        "edit_recipe.html", recipe=recipe, categories=categories)
 
 
 @app.route("/delete_recipe/<recipe_id>")

@@ -2,100 +2,100 @@
 {% block content %}
 
     <!-- RECIPE TITLE AND CREATER-->
-    <div class="row s12"></div>
+    <div class="row s12">
         <div class="recipe-title center-align blue-grey-text text-darken-3 mb1">
             <h2 id="name">{{ recipe.recipe_name }}</h2>
             <h5 id="created-by">Created by: {{ recipe.created_by }}</h5>
         </div>
-
-    <!-- MAIN CONTENT -->
-    <div class="row container">
-        <!-- LEFT HAND SIDE -->
-        <div class="col s12 l6">
-            <!-- IMAGE: images are displayed as square regardless of aspect ratio-->
-            <div class="square">
-                <img src="{{ recipe.recipe_image }}" alt="Recipe Image" class="content materialboxed">
-            </div>
-            <!-- DESCRIPTION -->
-            <p id="description"><em>{{ recipe.recipe_description }}</em></p>
-            <!-- ICONS -->
-            <div class="icons grey lighten-2">
-                <!-- TIME -->
-                <div class="icon">
-                    <i class="fas fa-clock large-icon tooltipped" data-position="bottom" data-tooltip="Prep Time"></i>{{recipe.recipe_time}}
-                </div>
-                <!-- SERVES -->
-                <div class="icon">
-                    <i class="fas fa-utensils large-icon tooltipped" data-position="bottom" data-tooltip="Serves"></i>  {{recipe.recipe_serves}}
-                </div>
-                <!-- CALORIES -->
-                <div class="icon">
-                    <span class="tooltipped" data-position="bottom" data-tooltip="Per Serving"><strong>Cals:  </strong>{{recipe.recipe_cals}}</span>
-                </div>
-                <!-- VEGETARIAN AND VEGAN -->
-                <div class="icon">
-                    {% if recipe.recipe_is_vegetarian == "on" %}
-                        <i class="fas fa-seedling lime-text accent-2 large-icon tooltipped"
-                        data-position="bottom" data-tooltip="Vegetarian"></i>   
-                    {% endif %}
-                    {% if recipe.recipe_is_vegan == "on" %}
-                        <i class="fas fa-seedling light-green-text accent-4 large-icon tooltipped"
-                        data-position="bottom" data-tooltip="Vegan"></i>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
-        <!-- RIGHT HAND SIDE -->
-        <div class="col s12 l6 method">
-            <!-- INGREDIENTS AND INSTRUCTIONS -->
-            <ul class="tabs">
-                <li class="tab col s6">
-                    <a href="#ingredients" class="blue-grey-text text-darken-3 bold tab-title">Ingredients</a>
-                </li>
-                <li class="tab col s6">
-                    <a href="#instructions" class="blue-grey-text text-darken-3 bold tab-title">Instructions</a>
-                </li>
-            </ul>
-            <div class="col s12" id="ingredients">
-            <ul>
-                    {% for line in recipe.recipe_ingredients.splitlines() %}
-                        <li>
-                        {{ line }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col s12" id="instructions">
-                <ul>
-                    {% for line in recipe.recipe_instructions.splitlines() %}
-                        <li>
-                            <p>{{ line }}</p>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% if session.user|lower == recipe.created_by|lower %}
-                <div class="edit-btns">
-                    <!-- Modal Trigger -->
-                    <a class="waves-effect waves-light btn-small modal-trigger right" href="#modal1">Delete</a>
-
-                    <!-- Modal Structure -->
-                    <div id="modal1" class="modal">
-                        <div class="modal-content">
-                        <h4>Are you sure?</h4>
-                        <p>You could always edit instead</p>
-                        </div>
-                        <div class="modal-footer">
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
-                        <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" 
-                        class="modal-close waves-effect waves-green btn-flat">Delete</a>
-                        </div>
-                    </div>
-                    <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small right hm1">Edit</a>
-                </div>
-            {% endif %}
-        </div>
     </div>
 
+        <!-- MAIN CONTENT -->
+        <div class="row container">
+            <!-- LEFT HAND SIDE -->
+            <div class="col s12 l6">
+                <!-- IMAGE: images are displayed as square regardless of aspect ratio-->
+                <div class="square">
+                    <img src="{{ recipe.recipe_image }}" alt="Recipe Image" class="content materialboxed">
+                </div>
+                <!-- DESCRIPTION -->
+                <p id="description"><em>{{ recipe.recipe_description }}</em></p>
+                <!-- ICONS -->
+                <div class="icons grey lighten-2">
+                    <!-- TIME -->
+                    <div class="icon">
+                        <i class="fas fa-clock large-icon tooltipped" data-position="bottom" data-tooltip="Prep Time"></i>{{recipe.recipe_time}}
+                    </div>
+                    <!-- SERVES -->
+                    <div class="icon">
+                        <i class="fas fa-utensils large-icon tooltipped" data-position="bottom" data-tooltip="Serves"></i>  {{recipe.recipe_serves}}
+                    </div>
+                    <!-- CALORIES -->
+                    <div class="icon">
+                        <span class="tooltipped" data-position="bottom" data-tooltip="Per Serving"><strong>Cals:  </strong>{{recipe.recipe_cals}}</span>
+                    </div>
+                    <!-- VEGETARIAN AND VEGAN -->
+                    <div class="icon">
+                        {% if recipe.recipe_is_vegetarian == "on" %}
+                            <i class="fas fa-seedling orange-text text-accent-4 large-icon tooltipped"
+                            data-position="bottom" data-tooltip="Vegetarian"></i>   
+                        {% endif %}
+                        {% if recipe.recipe_is_vegan == "on" %}
+                            <i class="fas fa-seedling light-green-text accent-4 large-icon tooltipped"
+                            data-position="bottom" data-tooltip="Vegan"></i>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT HAND SIDE -->
+            <div class="col s12 l6 method">
+                <!-- INGREDIENTS AND INSTRUCTIONS -->
+                <ul class="tabs">
+                    <li class="tab col s6">
+                        <a href="#ingredients" class="blue-grey-text text-darken-3 bold tab-title">Ingredients</a>
+                    </li>
+                    <li class="tab col s6">
+                        <a href="#instructions" class="blue-grey-text text-darken-3 bold tab-title">Instructions</a>
+                    </li>
+                </ul>
+                <div class="col s12" id="ingredients">
+                    <ul>
+                        {% for line in recipe.recipe_ingredients.splitlines() %}
+                            <li>
+                            {{ line }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col s12" id="instructions">
+                    <ul>
+                        {% for line in recipe.recipe_instructions.splitlines() %}
+                            <li>
+                                <p>{{ line }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% if session.user|lower == recipe.created_by|lower %}
+                    <div class="edit-btns">
+                        <!-- Modal Trigger -->
+                        <a class="waves-effect waves-light btn-small modal-trigger right" href="#modal1">Delete</a>
+
+                        <!-- Modal Structure -->
+                        <div id="modal1" class="modal">
+                            <div class="modal-content">
+                                <h4>Are you sure?</h4>
+                                <p>You could always edit instead</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+                                <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" 
+                                class="modal-close waves-effect waves-green btn-flat">Delete</a>
+                            </div>
+                        </div>
+                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small right hm1">Edit</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
 {% endblock %}

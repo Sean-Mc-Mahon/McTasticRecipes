@@ -33,12 +33,14 @@
         <!-- Top Nav Bar -->
         <nav class="nav-extended blue-grey darken-3 text-shadow">
             <div class="nav-wrapper">
+                <!-- LOGO -->
                 <div class="left">
                     <a class="logo valign-wrapper" href="{{ url_for('get_recipes')}}">
                         <img id="logo" src="https://i.imgur.com/hwREljI.png" alt="logo">
                         <h5 class="ml1">McTastic Recipes</h5>
                     </a>
                 </div>
+                <!-- LINKS -->
                 <div class="right-align">
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger right  ">
                     <i class="material-icons  right">menu</i></a>
@@ -47,10 +49,12 @@
                         <li><a class=" " href=".html">Baking</a></li>
                         <li><a class=" " href=".html">Snacks</a></li>
                         <li><a class=" " href=".html">Contact</a></li>
+                        <!-- LOGGED IN USERS -->
                         {% if session.user %}
                             <li><a class=" " href="{{ url_for('logout')}}">Log Out</a></li>
                             <li><a class=" " href="{{ url_for('add_recipe')}}">Add Recipe</a></li>
                             <li><a class=" " href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                        <!-- NOT LOGGED IN USERS -->
                         {% else %}
                             <li><a class=" " href="{{ url_for('login')}}">Log In</a></li>
                             <li><a class=" " href="{{ url_for('register')}}">Register</a></li>
@@ -67,29 +71,18 @@
             <li><a class=" " href=".html">Baking</a></li>
             <li><a class=" " href=".html">Snacks</a></li>
             <li><a class=" " href=".html">Contact</a></li>
+            <!-- LOGGED IN USERS -->
             {% if session.user %}
                 <li><a class=" " href="{{ url_for('logout')}}">Log Out</a></li>
                 <li><a class=" " href="{{ url_for('add_recipe')}}">Add Recipe</a></li>
                 <li><a class=" " href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+            <!-- NOT LOGGED IN USERS -->
             {% else %}
                 <li><a class=" " href="{{ url_for('login')}}">Log In</a></li>
                 <li><a class=" " href="{{ url_for('register')}}">Register</a></li>
             {% endif %}
         </ul>
     </header>
-    
-        <!-- <div class="intro-text">
-            <h1>McTastic Ingredients</h1>
-            <h3>McTastic Flavours</h3>
-        </div> -->
-    <section>
-        <div class="parallax-container">
-            <div class="parallax">
-                <img class="responsive-img" src="https://i.imgur.com/hfShEgC.jpg" alt="fruit">
-            </div>
-        </div>
-    </section>
-
     <section>
         <!-- Flash Messages -->
         {% with messages = get_flashed_messages() %}
@@ -101,7 +94,7 @@
         {% endwith %}
     </section>
 
-    <main class="container">
+    <main>
         {% block content %}
         {% endblock %}
     </main>

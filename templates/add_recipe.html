@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="center-align">Add Recipe</h3>
+    <h3 class="center-align container mt1">Add Recipe</h3>
 
-    <div class="row">
+    <div class="card-outline row container">
         <form class="col l12" method="POST" action="{{ url_for('add_recipe') }}">
             <div class="row">
                 <!-- Category Selection -->
@@ -97,9 +97,9 @@
             <div class="row">
                 <!-- Submit Button -->
                 <div class="col s12 center-align">
-                    <button class="btn waves-effect waves-light" id="submit_recipe" type="submit" name="action">
+                    <button class="btn waves-effect waves-light transparent btn-outline" id="submit_recipe" type="submit" name="action">
                         Add Recipe
-                        <i class="material-icons right">send</i>
+                        <i class="fas fa-plus"></i>
                     </button>
                 </div>
             </div>

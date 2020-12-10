@@ -3,14 +3,14 @@
 
     <h3 class="center-align">Log In</h3>
     
-    <div class="row">
+    <div class="row container">
         <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('login') }}">
-            <div class="card-panel teal hoverable">
+            <div class="card-outline card-panel transparent hoverable">
                 <!-- Username -->
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">account_circle</i>
-                        <input id="username" name="username" type="text" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+                        <input id="username" name="username" type="text" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate transparent" required>
                         <label for="username">Username</label>
                     </div>
                 </div>
@@ -18,14 +18,14 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">vpn_key</i>
-                        <input id="password" name="password" type="password" minlength="5" maxlength="15" class="validate" required>
+                        <input id="password" name="password" type="password" minlength="5" maxlength="15" class="validate transparent" required>
                         <label for="password">Password</label>
                     </div>
                 </div>
                 <!-- Login -->
                 <div class="row">
-                    <button type="submit" class="col s12 btn-large">
-                    Log In <i class="material-icons prefix">login</i>
+                    <button type="submit" class="col s12 btn-large transparent btn-outline">
+                    <i class="fas fa-sign-in-alt"></i>
                     </button>
                 </div>
             </div>
@@ -34,7 +34,7 @@
 
     <div class="row">
         <div class="col s12">
-            <p class="center-align">
+            <p class="center-align bold">
                 New Here? 
                 <a href="{{ url_for('register') }}">Register Account</a>
             </p>

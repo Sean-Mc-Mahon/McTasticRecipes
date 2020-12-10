@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div id="search" class="vm1">
+    <div id="search" class="vm1 container">
         <form action="{{ url_for('search') }}" method="post">
             <div class="row valign-wrapper center-align">
                 <div class="input-field col s10 m11">
@@ -19,9 +19,22 @@
         </form>
     </div>
 
+        
+        <!-- <div class="intro-text">
+            <h1>McTastic Ingredients</h1>
+            <h3>McTastic Flavours</h3>
+        </div> -->
+    <!-- <section>
+        <div class="parallax-container">
+            <div class="parallax">
+                <img class="responsive-img" src="https://i.imgur.com/hfShEgC.jpg" alt="fruit">
+            </div>
+        </div>
+    </section> -->
+
 <!--Recipe Cards-->
 {% if recipes|length > 0 %}
-<div class="row">
+<div class="row container">
         {% for recipe in recipes %}
             <div class="col s12 m6 xxl4">
                 <div class="card hoverable">

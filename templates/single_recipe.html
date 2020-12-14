@@ -59,22 +59,30 @@
                     </li>
                 </ul>
                 <div class="col s12" id="ingredients">
-                    <ul>
+                    <form action="#">
                         {% for line in recipe.recipe_ingredients.splitlines() %}
-                            <li>
-                            {{ line }}
-                            </li>
+                            <p>
+                                <label>
+                                    <input type="checkbox">
+                                    <span>{{ line }}</span>
+                                </label>
+                            </p>
                         {% endfor %}
-                    </ul>
+                    </form>
                 </div>
                 <div class="col s12" id="instructions">
-                    <ul>
+                    <form action="#">
+                        <ol>
                         {% for line in recipe.recipe_instructions.splitlines() %}
-                            <li>
-                                <p>{{ line }}</p>
-                            </li>
+                            <p>
+                                <label>
+                                    <input type="checkbox">
+                                    <span> {{ line }} </span>
+                                </label>
+                            </p> 
                         {% endfor %}
-                    </ul>
+                        </ol>
+                    </form>
                 </div>
                 {% if session.user|lower == recipe.created_by|lower %}
                     <div class="edit-btns">

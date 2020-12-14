@@ -23,7 +23,7 @@ h1,h2,h3,h4,h5,h6 {
 .large-icon {
     font-size: 1.5rem;
 }
-/* Font Rules  */
+/* Font Rules */
 .bold {
     font-weight: 500;
 }
@@ -48,6 +48,11 @@ h1,h2,h3,h4,h5,h6 {
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #263238;
   opacity: 1; /* Firefox */
+}
+
+label {
+    font-size: .8rem;
+    color: #263238;
 }
 
 /* BASE */
@@ -103,11 +108,8 @@ nav ul a {
     width: 90% !important;
     border-bottom: 1px solid #263238;
 }
-/* .instruction-input, */
+
 .instruction-button {
-    /* padding: 0.5rem !important; */
-    /* !important to override materialize rules */
-    /* border: none !important; */
     background-color: white !important;
     font-size: 2rem;
     border: none;
@@ -120,32 +122,17 @@ form button {
     transition: all 0.3s ease;
 }
 
-/* .instruction-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: solid 2px #263238;
-} */
-
 ul .instruction-list {
     min-width: 30%;
 }
 
-
-
 .instruction li {
     flex: 1;
 }
-
 .instruction button {
-    /* background: #263238 !important; */
-    /* color: white !important; */
     border: none !important;
     cursor: pointer !important;
 }
-/* .instruction-item {
-    padding: 0 0.5rem;
-} */
 .fa-trash {
     pointer-events: none;
 }
@@ -153,7 +140,7 @@ ul .instruction-list {
     background-color: white;
     font-size: 1.3rem;
     color: #263238;
-}
+} */
 
 
 .btn-add{
@@ -248,6 +235,28 @@ input:-internal-autofill-selected {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+#ingredients form p,
+#instructions form p {
+    margin: 0.5rem 0;
+}
+
+[type="checkbox"]:checked+span:not(.lever):before {
+    top: -4px;
+    left: -5px;
+    width: 12px;
+    height: 22px;
+    border-top: 2px solid transparent;
+    border-left: 2px solid transparent;
+    border-right: 2px solid #263238;
+    border-bottom: 2px solid #263238;
+    -webkit-transform: rotate(40deg);
+    transform: rotate(40deg);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
 }
 
 

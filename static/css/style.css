@@ -54,6 +54,13 @@ label {
     font-size: .8rem;
     color: #263238;
 }
+input {
+    color: #263238;
+}
+.input-field>label {
+    color: #263238;
+    font-weight: 500;
+}
 
 /* BASE */
 .nav-wrapper {

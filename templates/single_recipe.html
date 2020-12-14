@@ -79,7 +79,7 @@
                 {% if session.user|lower == recipe.created_by|lower %}
                     <div class="edit-btns">
                         <!-- Modal Trigger -->
-                        <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline right" href="#modal1">Delete</a>
+                        <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline" href="#modal1">Delete</a>
 
                         <!-- Modal Structure -->
                         <div id="modal1" class="modal  card-outline">
@@ -93,7 +93,7 @@
                                 class="modal-close waves-effect waves-green btn-flat  btn-outline">Delete</a>
                             </div>
                         </div>
-                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small right hm1 transparent btn-outline">Edit</a>
+                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small hm1 transparent btn-outline">Edit</a>
                     </div>
                 {% endif %}
             </div>

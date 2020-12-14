@@ -1,3 +1,6 @@
+/* *{
+    border: 1px solid pink;
+} */
 body {
     margin: 0;
     padding: 0;
@@ -42,6 +45,11 @@ h1,h2,h3,h4,h5,h6 {
     border:2px solid #263238;
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #263238;
+  opacity: 1; /* Firefox */
+}
+
 /* BASE */
 .nav-wrapper {
     margin: 0 2rem;
@@ -77,6 +85,113 @@ nav ul a {
 #search-button {
     border: none;
 }
+
+/* ADD RECIPE */
+.instruction {
+    background: white;
+    color: #263238;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0rem 2rem;
+    padding: 1rem .75rem 0rem .75rem;
+    border-bottom: 1px solid #263238;
+    width: 60%;
+}
+.instruction-input {
+    padding-top: 0.75rem;
+    width: 90% !important;
+    border-bottom: 1px solid #263238;
+}
+/* .instruction-input, */
+.instruction-button {
+    /* padding: 0.5rem !important; */
+    /* !important to override materialize rules */
+    /* border: none !important; */
+    background-color: white !important;
+    font-size: 2rem;
+    border: none;
+    color: #263238;
+}
+form button {
+    color: #263238;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* .instruction-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px #263238;
+} */
+
+ul .instruction-list {
+    min-width: 30%;
+}
+
+
+
+.instruction li {
+    flex: 1;
+}
+
+.instruction button {
+    /* background: #263238 !important; */
+    /* color: white !important; */
+    border: none !important;
+    cursor: pointer !important;
+}
+/* .instruction-item {
+    padding: 0 0.5rem;
+} */
+.fa-trash {
+    pointer-events: none;
+}
+.trash-btn {
+    background-color: white;
+    font-size: 1.3rem;
+    color: #263238;
+}
+
+
+.btn-add{
+  background-color: rgb(12, 187, 50);
+  color: white;
+  padding: 0px 10px;
+}
+
+.btn-remove{
+
+  background-color: rgb(187, 12, 12);
+  color: white;
+  padding: 0px 10px;
+}
+
+/* #dynamic-list ul{
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+
+  
+}
+#dynamic-list li{
+  position: relative;
+  display: block;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  background-color:
+  #fff;
+  border: 1px solid
+  rgba(0,0,0,.125);
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+  border-bottom-left-radius: .25rem;
+  border-bottom-right-radius: .25rem;
+} */
 
 /* LOGIN */
 .login .row {

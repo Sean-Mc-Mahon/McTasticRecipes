@@ -37,3 +37,46 @@ $(document).ready(function(){
                 });
             }
         });
+
+
+//SELECTORS
+const instructionInput = document.querySelector('.instruction-input');
+const instructionButton = document.querySelector('.instruction-button');
+const instructionList = document.querySelector('.instruction-list');
+
+//EVENT LISTENERS
+instructionButton.addEventListener('click', addInstruction);
+instructionList.addEventListener('click', deletebtn);
+
+//FUNCTIONS
+
+function addInstruction(event){
+    //instruction div
+    const instructionDiv = document.createElement('div');
+    instructionDiv.classList.add('instruction');
+    //create li
+    const newInstruction = document.createElement('li');
+    newInstruction.innerText = instructionInput.value;
+    newInstruction.classList.add('instruction-item');
+    newInstruction.setAttribute ('name', 'recipe_instructions');
+    instructionDiv.appendChild(newInstruction);
+    //delete button
+    const trashButton = document.createElement('button');
+    trashButton.innerHTML = '<i class="fas fa-trash"></i>';
+    trashButton.classList.add("trash-btn");
+    instructionDiv.appendChild(trashButton);
+    //append to list
+    instructionList.appendChild(instructionDiv);
+    //clear instruction input value
+    instructionInput.value = "";
+}
+
+function deletebtn(e){
+    const item = e.target;
+    //delete instruction
+    if(item.classList[0] === "trash-btn") {
+        console.log('hello');
+        const instruction = item.parentElement;
+        instruction.remove();
+    }
+}

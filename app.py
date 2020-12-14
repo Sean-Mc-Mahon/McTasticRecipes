@@ -8,6 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
 
+# --CONFIGURATION-- #
 
 app = Flask(__name__)
 
@@ -16,6 +17,8 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
+
+# --ALL RECIPES -- #
 
 
 @app.route("/")
@@ -27,13 +30,21 @@ def get_recipes():
     recipes = list(mongo.db.recipes.find().limit(limit))
     return render_template("index.html", recipes=recipes)
 
+# -- CATEGORIES -- #
+
 
 @app.route("/filter_recipes/<category_name>")
 def filter_recipes(category_name):
-    recipes = list(mongo.db.recipes.find())
-    categories = mongo.db.categories.find().sort("category_name", 1)
+    if category_name == "cooking":
+        recipes = list(mongo.db.recipes.find({"category_name": "cooking"}))
+    elif category_name == "baking":
+        recipes = list(mongo.db.recipes.find({"category_name": "baking"}))
+    elif category_name == "snacks":
+        recipes = list(mongo.db.recipes.find({"category_name": "snacks"}))
     return render_template(
-        "index.html", recipes=recipes, categories=categories)
+        "index.html", recipes=recipes, page_title=category_name)
+
+# -- INDIVIDUAL RECIPES -- #
 
 
 @app.route("/single_recipe/<recipe_id>")
@@ -45,12 +56,16 @@ def single_recipe(recipe_id):
     return render_template(
         "single_recipe.html", recipe=recipe, categories=categories)
 
+# -- SEARCH -- #
+
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
     recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
     return render_template("index.html", recipes=recipes)
+
+# -- REGISTRATION -- #
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -75,6 +90,8 @@ def register():
         flash("Registration Successful!")
         return redirect(url_for("profile", username=session["user"]))
     return render_template("register.html")
+
+# -- LOGIN -- #
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -105,6 +122,8 @@ def login():
 
     return render_template("login.html")
 
+# -- PROFILE -- #
+
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
@@ -117,6 +136,8 @@ def profile(username):
 
     return redirect(url_for("login"))
 
+# -- LOGOUT -- #
+
 
 @app.route("/logout")
 def logout():
@@ -124,6 +145,8 @@ def logout():
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("login"))
+
+# -- ADD RECIPE -- #
 
 
 @app.route("/add_recipe", methods=["GET", "POST"])
@@ -153,6 +176,8 @@ def add_recipe():
 
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("add_recipe.html", categories=categories)
+
+# -- EDIT RECIPE -- #
 
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
@@ -184,17 +209,14 @@ def edit_recipe(recipe_id):
     return render_template(
         "edit_recipe.html", recipe=recipe, categories=categories)
 
+# -- DELETE RECIPE -- #
+
 
 @app.route("/delete_recipe/<recipe_id>")
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
     flash("Recipe Successfully Deleted")
     return redirect(url_for("get_recipes"))
-
-
-@app.route("/cooking")
-def cooking():
-    return render_template("cooking.html")
 
 
 if __name__ == "__main__":

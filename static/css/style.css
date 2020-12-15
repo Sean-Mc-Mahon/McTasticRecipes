@@ -64,7 +64,7 @@ input {
 
 /* BASE */
 .nav-wrapper {
-    margin: 0 2rem;
+    margin: 0 1rem;
 }
 .logo{
     display: flex;
@@ -89,6 +89,35 @@ nav ul a {
     border: 2px solid #263238;
     border-radius: 20px;
 }
+
+/* newsletter signup */
+#formContact {
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+    overflow: hidden;
+}
+#formContact input {
+    background-color: white;
+    color: #37474F;
+}
+#submit {
+    background-color: white;
+    border: none;
+    color: #37474F;
+    border: none;
+}
+#emailaddress {
+    padding: 0rem;
+    margin: 0 0 1rem 1rem;
+}
+
+/* footer */
+.footer-copyright {
+    display: flex;
+    flex-direction: column;
+}
+
 
 /* INDEX */
 #search {
@@ -295,29 +324,35 @@ input:-internal-autofill-selected {
 
 
 /* MEDIA QUERIES */
-/*s phone*/
-@media screen and (max-width: 600px) {
+/*m tablet*/
+@media screen and (min-width: 600px) {
   .nav-wrapper {
-    margin: 0 1rem;
-}
-}
-.row.col.info-icon{
+    margin: 0 2rem;
+    }
+    .row.col.info-icon{
     padding: 0;
-}
-
-/* m tablets */
-@media screen and (max-width: 992px) {
-    .card-outline {
-    padding: 1rem;
     }
     /* single recipe page */
     .tab-title {
-    letter-spacing: 1px;
+    letter-spacing: 4px;
     }
 }
 
+
 /* l desktop */
-@media screen and (max-width: 1200px) {
+@media screen and (min-width: 992px) {
+    .card-outline {
+    padding: 1rem;
+    }
+    
+    /* single recipe page */
+    .tab-title {
+    letter-spacing: 0px;
+    }
+}
+
+/* xl  large desktop */
+@media screen and (min-width: 1200px) {
     *{
         font-size: 1.05rem;
     }
@@ -325,11 +360,11 @@ input:-internal-autofill-selected {
     .tab-title {
     letter-spacing: 1px;
     }
-
-}
-
-/* xl desktop */
-@media screen and (max-width: 1499px) {
+    /* footer */
+    .footer-copyright {
+    display: flex;
+    flex-direction: row;
+    }
     /* single recipe page */
     .tab-title {
     letter-spacing: 2px;
@@ -337,9 +372,10 @@ input:-internal-autofill-selected {
     .tabs .tab a {
         font-size: 1.1rem;
     }
+
 }
 
-/*xxl desktop*/
+/*xxl  v large desktop*/
 @media screen and (min-width: 1500px) {
   .xxl-only {
     display: inline-block

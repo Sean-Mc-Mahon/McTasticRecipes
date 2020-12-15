@@ -26,8 +26,10 @@ mongo = PyMongo(app)
 def get_recipes():
 
     limit = 20
+    recipe_name = lambda recipes: recipes[1]
 
-    recipes = list(mongo.db.recipes.find().limit(limit))
+    recipes = list(
+        mongo.db.recipes.find().sort("recipe_name", -1).limit(limit))
     return render_template("index.html", recipes=recipes)
 
 # -- CATEGORIES -- #
@@ -43,6 +45,21 @@ def filter_recipes(category_name):
         recipes = list(mongo.db.recipes.find({"category_name": "snacks"}))
     return render_template(
         "index.html", recipes=recipes, page_title=category_name)
+
+# -- PROFILE -- #
+
+
+@app.route("/profile/<username>", methods=["GET", "POST"])
+def profile(username):
+    # grab the session user's username from db
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+
+    if session["user"]:
+        recipes = mongo.db.recipes.find({"created_by": session["user"]})
+        return render_template("profile.html", username=username, recipes=recipes)
+
+    return redirect(url_for("login"))
 
 # -- INDIVIDUAL RECIPES -- #
 
@@ -122,19 +139,7 @@ def login():
 
     return render_template("login.html")
 
-# -- PROFILE -- #
 
-
-@app.route("/profile/<username>", methods=["GET", "POST"])
-def profile(username):
-    # grab the session user's username from db
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-
-    if session["user"]:
-        return render_template("profile.html", username=username)
-
-    return redirect(url_for("login"))
 
 # -- LOGOUT -- #
 

@@ -80,3 +80,31 @@ function deletebtn(e){
         instruction.remove();
     }
 }
+
+function sendMail(contactForm) {
+    emailjs.send("gmail", "mctastic", {
+        "from_email": contactForm.emailaddress.value
+    })
+    //custom alert from https://sweetalert.js.org/
+    .then(
+        function response (response) {
+          swal({
+      title: "Thanks for signing up!",
+      text: "You'll recieve the newsletter every sunday",
+      icon: "success",
+      button: "All Done",
+    });
+      },
+      function (error) {
+        swal({
+          title: "Sorry, looks like something went wrong...",
+          text: "Please try again",
+          icon: "error",
+          button: "OK",
+        });
+    }
+    );
+    //clear form when submitting
+    $("#formContact").val("");
+    return false;  // To block from loading a new page
+}

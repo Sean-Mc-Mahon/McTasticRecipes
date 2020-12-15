@@ -122,22 +122,54 @@
                     </form>
                 </div>
                 <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Links</h5>
-                    <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                    </ul>
+                    <h5 class="white-text">Directory</h5>
+                    <!-- LINKS -->
+                    <div>
+                        <ul class="directory">
+                            <li><a href="{{ url_for('get_recipes')}}">Home</a></li>
+                            <li><a href="{{ url_for('filter_recipes', category_name='cooking')}}">Cooking</a></li>
+                            <li><a href="{{ url_for('filter_recipes', category_name='baking')}}">Baking</a></li>
+                            <li><a href="{{ url_for('filter_recipes', category_name='snacks')}}">Snacks</a></li>
+                            <!-- LOGGED IN USERS -->
+                            {% if session.user %}
+                                <li><a href="{{ url_for('logout')}}">Log Out</a></li>
+                                <li><a href="{{ url_for('add_recipe')}}">Add Recipe</a></li>
+                                <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                            <!-- NOT LOGGED IN USERS -->
+                            {% else %}
+                                <li><a href="{{ url_for('login')}}">Log In</a></li>
+                                <li><a href="{{ url_for('register')}}">Register</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="footer-copyright container center-align">
-            <div>
-            © 2014 Copyright Text
-            </div>
-            <div>
-            <a class="grey-text text-lighten-4" href="#!">More Links</a>
+        <div class="footer-copyright center-align">
+            <div class="container bottom-footer">
+                <div class="copyright valign-wrapper">
+                © 2020 Copyright: Sean McMahon
+                </div>
+                <div>
+                    <ul class="social-links">
+                        <li>
+                            <a
+                            rel="noopener"
+                            target="_blank"
+                            href="https://www.linkedin.com/in/sean-mcmahon-profile/"
+                            ><i class="fab fa-linkedin-in"></i
+                            ></a>
+                        </li>
+                        <li>
+                            <a
+                            rel="noopener"
+                            target="_blank"
+                            href="https://github.com/Sean-Mc-Mahon"
+                            ><i class="fab fa-github"></i
+                            ></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </footer>

@@ -133,13 +133,13 @@ A standard layout is fully responsive on mobile devices and larger screens.
 
 Colors are kept to a minimum in order to keep focus on the imagery of the recipes, chosen colousr are various shades of grey. Color scheme can be found on my Coolors profile: [Coolors](https://coolors.co/u/sean_mcmahon)
 
-![Color Palette]()
+![Color Palette](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/coolors.JPG)
 
 #### Typography
 
 2 [Google Fonts](https://fonts.google.com/) were used across the site:
 
-- [Lily Script One](https://fonts.google.com/specimen/Lily+Script+One?query=lily) : Logo & Headings, used for it's bold style.
+- [Pattaya](https://fonts.google.com/specimen/Pattaya?query=patt) : Logo & Headings, used for it's flowing relaxed style.
 - [Montserrat](https://fonts.google.com/specimen/Montserrat?query=montse) : Body, used for it's excellent readability.
 
 Font sizes for the headings are mostly responsive using the calc() function.
@@ -150,11 +150,12 @@ All images, models and featured products are the authors own. Logos are also pro
 
 #### Wireframes
 
-I used Balsamiq and figma to create the wireframes. The layout has altered since I created the wireframes as I decided against displaying all pages along side each other on the home page.
+I used Balsamiq and figma to create the wireframes. The layout has altered since I created the wireframes as I decided to replace the contact page with a newsletter sign up in the footer. The parallax felt too distracting and so that has been omitted.
+I used affinity designer to design the logo, I went through many iterations of the design until I was happy with two final logos, one for the navigation bar on the site and the other for the browser tab icon.
 
-- [Balsamiq Wireframe]()
+- [Balsamiq Wireframe](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/mctastic-wire.pdf)
 
-- [Figma Wireframe]()
+- [Affinity Designer Logo Process](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/logo-design.jpg)
 
 ##### back to [top](#table-of-contents)
 

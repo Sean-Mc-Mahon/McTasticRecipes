@@ -69,9 +69,8 @@ def single_recipe(recipe_id):
     recipes = list(mongo.db.recipes.find())
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template(
-        "single_recipe.html", recipe=recipe, categories=categories)
+        "single_recipe.html", recipe=recipe)
 
 # -- SEARCH -- #
 
@@ -188,6 +187,7 @@ def add_recipe():
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
     if request.method == "POST":
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
         recipe_is_vegetarian = "on" if request.form.get(
             "recipe_is_vegetarian") else "off"
         recipe_is_vegan = "on" if request.form.get(
@@ -208,6 +208,7 @@ def edit_recipe(recipe_id):
         }
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
         flash("Recipe Successfully Updated")
+        return render_template("single_recipe.html", recipe=recipe)
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)

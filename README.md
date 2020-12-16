@@ -4,7 +4,7 @@
 
 ### [GitHub](https://github.com/Sean-Mc-Mahon/McTasticRecipes)
 
-![Various Devices]()
+![Various Devices](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/resposiveness.JPG)
 
 McTastic Recipes is a Milestone 3 project, it is part of the Fullstack Software Development Course of [Code Institute](https://codeinstitute.net/).
 
@@ -131,7 +131,7 @@ A standard layout is fully responsive on mobile devices and larger screens.
 
 #### Color Scheme
 
-Color scheme can be found on my Coolors profile: [Coolors](https://coolors.co/u/sean_mcmahon)
+Colors are kept to a minimum in order to keep focus on the imagery of the recipes, chosen colousr are various shades of grey. Color scheme can be found on my Coolors profile: [Coolors](https://coolors.co/u/sean_mcmahon)
 
 ![Color Palette]()
 

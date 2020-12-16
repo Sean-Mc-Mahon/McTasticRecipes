@@ -1,17 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div id="search" class="vm1 container">
+    <div class="vm1 container mt1">
         <form action="{{ url_for('search') }}" method="post">
             <div class="row valign-wrapper center-align">
                 <div class="input-field col s10 m11">
-                    <!-- <i class="fas fa-search prefix blue-grey-text text-darken-3"></i> -->
                     <input type="text" name="query" id="query" minlength="3" class="validate" required>
                     <label for="query">Search Recipes</label>
                 </div>
                 <div class="col s2 m1">
-                    <!-- <a href="{{ url_for('get_recipes') }}" class="border transparent blue-grey-text text-darken-3 btn">Reset</a> -->
-                    <button id="search-button"  type="submit" class="transparent blue-grey-text text-darken-3">
+                    <button id="search-button"  type="submit" class="transparent blue-grey-text text-darken-3 no-border">
                         <i class="fas fa-search left"></i>
                     </button>
                 </div>
@@ -40,29 +38,31 @@
                 <div class="card hoverable">
                     <!--Image square and centered at any screen size-->
                     <div class="square">
-                        <!-- <a href="{{ url_for('single_recipe', recipe_id=recipe._id) }}"> -->
                             <img class="content activator" src="{{ recipe.recipe_image }}">
-                        <!-- </a> -->
                     </div>
                     <div class="card-content">
                         <!--Displayed under image-->
                         <span class="bold activator">{{recipe.recipe_name}}<i class="material-icons right">more_vert</i></span>
-                        <p><a href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">View Recipe</a></p>
+                        <p><a class="bold" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">View Recipe</a></p>
                     </div>
                     <!--Revelaed when card is clicked-->
                     <div class="card-reveal flex-vert-between">
-                        <span class="card-title   margin-b1">{{recipe.recipe_name}}<i class="material-icons right">close</i></span>
+                        <span class="card-title mb2">{{recipe.recipe_name}}<i class="material-icons right">close</i></span>
                         <!--Icon info: Servings,Calories,Vegetarian,Vegan-->
                         <div class="row">
+                            <!--Time-->
                             <div class="col info-icon s3 xxl4 xxl-only">
                                 <i class="fas fa-clock large-icon tooltipped" data-position="bottom" data-tooltip="Prep Time"></i> {{recipe.recipe_time}}
                             </div>
+                            <!--Serves-->
                             <div class="col s6 xxl2">
                                 <i class="fas fa-utensils large-icon tooltipped" data-position="bottom" data-tooltip="Serves"></i> {{recipe.recipe_serves}}
                             </div>
+                            <!--Calories-->
                             <div class="col s4 xxl3 xxl-only">
                                 <span class="tooltipped" data-position="bottom" data-tooltip="Per Serving"><strong>Cals:</strong>{{recipe.recipe_cals}}</span>
                             </div>
+                            <!--Vegetarian/Vegan-->
                             <div class="col s6 xxl3">
                                 {% if recipe.recipe_is_vegetarian == "on" %}
                                     <i class="fas fa-seedling orange-text text-accent-4 large-icon tooltipped"
@@ -79,8 +79,8 @@
                             <div class="col s12">
                                 <p>{{ recipe.recipe_description }}</p>
                                 <div>
-                                    <p><em>by:{{ recipe.created_by }}</em></p>
-                                    <p><a href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">View Recipe</a></p>
+                                    <p><em>By:{{ recipe.created_by }}</em></p>
+                                    <p><a class="bold" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">View Recipe</a></p>
                                 </div>
                             </div>
                         </div>

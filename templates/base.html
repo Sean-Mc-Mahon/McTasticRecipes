@@ -91,12 +91,12 @@
             {% endif %}
         </ul>
     </header>
-    <section>
+    <section class="mh1">
         <!-- Flash Messages -->
         {% with messages = get_flashed_messages() %}
             {% for message in messages %}
-                <div class="row flashes">
-                    <h4 class="center-align">{{ message }}</h4>
+                <div class="row flashes mt1">
+                    <h4 class="center-align m0">{{ message }}</h4>
                 </div>
             {% endfor %}
         {% endwith %}
@@ -122,10 +122,10 @@
                     </form>
                 </div>
                 <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Directory</h5>
+                    <h5>Directory</h5>
                     <!-- LINKS -->
                     <div>
-                        <ul class="directory">
+                        <ul class="m0 directory">
                             <li><a href="{{ url_for('get_recipes')}}">Home</a></li>
                             <li><a href="{{ url_for('filter_recipes', category_name='cooking')}}">Cooking</a></li>
                             <li><a href="{{ url_for('filter_recipes', category_name='baking')}}">Baking</a></li>
@@ -151,7 +151,7 @@
                 © 2020 Copyright: Sean McMahon
                 </div>
                 <div>
-                    <ul class="social-links">
+                    <ul class="social-links m0">
                         <li>
                             <a
                             rel="noopener"

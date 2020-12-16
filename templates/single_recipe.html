@@ -2,10 +2,10 @@
 {% block content %}
 
     <!-- RECIPE TITLE AND CREATER-->
-    <div class="row s12 container">
+    <div class="row s12 container mt1 mb0">
         <div class="recipe-title center-align blue-grey-text text-darken-3 mb1">
-            <h2 id="name">{{ recipe.recipe_name }}</h2>
-            <h5 id="created-by">Created by: {{ recipe.created_by }}</h5>
+            <h2 class="mt0 mb0" id="name">{{ recipe.recipe_name }}</h2>
+            <h5 class="mt0 mb1" id="created-by">Created by: {{ recipe.created_by }}</h5>
         </div>
     </div>
 
@@ -64,7 +64,7 @@
                             <p>
                                 <label>
                                     <input type="checkbox">
-                                    <span>{{ line }}</span>
+                                    <span class="checkbox-text">{{ line }}</span>
                                 </label>
                             </p>
                         {% endfor %}
@@ -77,7 +77,7 @@
                             <p>
                                 <label>
                                     <input type="checkbox">
-                                    <span> {{ line }} </span>
+                                    <span class="checkbox-text"> {{ line }} </span>
                                 </label>
                             </p> 
                         {% endfor %}
@@ -87,7 +87,8 @@
                 {% if session.user|lower == recipe.created_by|lower %}
                     <div class="edit-btns">
                         <!-- Modal Trigger -->
-                        <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline" href="#modal1">Delete</a>
+                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small m-all transparent btn-outline flat hoverable">Edit</a>
+                        <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Delete</a>
 
                         <!-- Modal Structure -->
                         <div id="modal1" class="modal  card-outline">
@@ -96,12 +97,11 @@
                                 <p>You could always edit instead</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="#!" class="modal-close waves-effect waves-green btn-flat btn-outline">Cancel</a>
+                                <a href="#!" class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Cancel</a>
                                 <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" 
-                                class="modal-close waves-effect waves-green btn-flat  btn-outline">Delete</a>
+                                class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Delete</a>
                             </div>
                         </div>
-                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small hm1 transparent btn-outline">Edit</a>
                     </div>
                 {% endif %}
             </div>

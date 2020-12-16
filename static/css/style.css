@@ -1,13 +1,46 @@
 /* *{
     border: 1px solid pink;
 } */
+
+/**** GLOBAL STYLES ****/
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     color: #121212;
     font-family: 'Montserrat', sans-serif;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
+/* used to make footer sticky */
+main {
+    flex: 1 0 auto;
+}
+.activator {
+    cursor: pointer;
+}
+/* .card-panel {
+    padding: 0.5rem;
+} */
+/*perfect square code from: https://codepen.io/Tyler_Potts_/pen/qBBXoVQ*/
+.square {
+    position: relative;
+    overflow: hidden;
+}
+.square:after {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+.content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Font Rules */
 h1,h2,h3,h4,h5,h6 {
     font-family: 'Pattaya', sans-serif;
 }
@@ -17,39 +50,91 @@ h1,h2,h3,h4,h5,h6 {
 .text-shadow-2 {
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7)
 }
-.flashes h4 {
-    line-height: 2;
-}
-.large-icon {
-    font-size: 1.5rem;
-}
-/* Font Rules */
 .bold {
     font-weight: 500;
 }
+
+/* Hide */
+.xxl-only{
+    display: none;
+}
+
+/* Flashes */
+/* .flashes h4 {
+    line-height: 2;
+} */
+
+/* Icons */
+.large-icon {
+    font-size: 1.5rem;
+}
+
 /* Margin Rules */
-.hm1 {
-    margin: 0 0.2rem;
+.m0 {
+    margin: 0;
+}
+.m-all{
+    margin: 1rem;
+}
+.mh1 {
+    margin: 0 1rem;
+}
+.mt0 {
+    margin-top: 0;
 }
 .mt1 {
     margin-top: 1rem;
 }
+.mt2 {
+    margin-top: 2rem;
+}
+.mb0 {
+    margin-bottom: 0;
+}
 .mb1 {
     margin-bottom: 1rem;
+}
+.mb2 {
+    margin-bottom: 2rem;
 }
 .ml1 {
     margin-left: 1rem;
 }
 
+/* Padding */
+.p-half {
+    padding: 0.5rem;
+}
+
+/* Widths */
+.w-80 {
+    width: 80%;
+    margin: auto;
+}
+
+/* Cards and Buttons */
 .border {
     border:2px solid #263238;
 }
+.no-border {
+    border: none;
+}
+.card-outline {
+    border: 3px solid #263238;
+    border-radius: 20px;
+    margin-top: 1rem;
+}
+.btn-outline {
+    color: #263238;
+    border: 2px solid #263238;
+    border-radius: 20px;
+}
 
+/* Labels and Inputs */
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #263238;
   opacity: 1; /* Firefox */
 }
-
 label {
     font-size: .8rem;
     color: #263238;
@@ -62,7 +147,15 @@ input {
     font-weight: 500;
 }
 
-/* BASE */
+/*** PAGES ***/
+/** Sections **/
+/* Sub Sections */
+
+/*** BASE ***/
+/** Nav **/
+.log h5 {
+    color: white;
+}
 .nav-wrapper {
     margin: 0 1rem;
 }
@@ -79,64 +172,7 @@ nav ul a {
     padding: 0 5px;
 }
 
-/* .card {
-    border: 50px;
-    overflow: hidden;
-} */
-
-.card-outline {
-    border: 3px solid #263238;
-    border-radius: 20px;
-    margin-top: 1rem;
-}
-.btn-outline {
-    color: #263238;
-    border: 2px solid #263238;
-    border-radius: 20px;
-}
-
-
-/* footer */
-.bottom-footer {
-    display: flex !important;
-    flex-direction: column;
-    padding: .5rem 0;
-}
-
-.directory {
-    margin: 0;
-}
-
-.directory li a {
-    color: white;
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-}
-
-.social-links li i:hover {
-  color: #449bff;
-}
-
-.fab {
-    font-size: 2rem;
-    margin: 0 1rem;
-    color: white;
-}
-
-.bottom-footer {
-    display: flex;
-    justify-content: space-between;
-}
-
-.copyright {
-    justify-content: center;
-    padding: .5rem;
-}
-
+/** Footer **/
 /* newsletter signup */
 #formContact {
     display: flex;
@@ -159,16 +195,39 @@ nav ul a {
     padding: 0rem;
     margin: 0 0 1rem 1rem;
 }
-
-/* INDEX */
-#search {
-    margin-top: 2rem;
+/* Directory */
+.directory li a {
+    color: white;
 }
-#search-button {
-    border: none;
+/* Bottom Footer */
+.bottom-footer {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: .5rem 0;
+}
+.copyright {
+    justify-content: center;
+    padding: .5rem;
+}
+/* Social Icons */
+.social-links {
+    display: flex;
+    justify-content: center;
+}
+.social-links li i:hover {
+  color: #449bff;
+}
+.fab {
+    font-size: 2rem;
+    margin: 0 1rem;
+    color: white;
 }
 
-/* ADD RECIPE */
+/*** INDEX ***/
+
+/*** ADD RECIPE ***/
+/* Instruction Field */
 .instruction {
     background: white;
     color: #263238;
@@ -185,7 +244,6 @@ nav ul a {
     width: 90% !important;
     border-bottom: 1px solid #263238;
 }
-
 .instruction-button {
     background-color: white !important;
     font-size: 2rem;
@@ -198,11 +256,9 @@ form button {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-
 ul .instruction-list {
     min-width: 30%;
 }
-
 .instruction li {
     flex: 1;
 }
@@ -217,71 +273,11 @@ ul .instruction-list {
     background-color: white;
     font-size: 1.3rem;
     color: #263238;
-} */
-
-
-.btn-add{
-  background-color: rgb(12, 187, 50);
-  color: white;
-  padding: 0px 10px;
 }
 
-.btn-remove{
-
-  background-color: rgb(187, 12, 12);
-  color: white;
-  padding: 0px 10px;
-}
-
-/* #dynamic-list ul{
-  display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  padding-left: 0;
-  margin-bottom: 0;
-
-  
-}
-#dynamic-list li{
-  position: relative;
-  display: block;
-  padding: 10px 20px;
-  margin-bottom: 10px;
-  background-color:
-  #fff;
-  border: 1px solid
-  rgba(0,0,0,.125);
-  border-top-left-radius: .25rem;
-  border-top-right-radius: .25rem;
-  border-bottom-left-radius: .25rem;
-  border-bottom-right-radius: .25rem;
-} */
-
-/* LOGIN */
-.login .row {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-input:-internal-autofill-selected {
-    background-color: white;
-}
-#password {
-    background-color: white !important;
-}
-.password {
-    color: red;
-    background-color: white !important;
-}
+/*** LOGIN ***/
 
 /* SINGLE RECIPE PAGE */
-#name {
-    margin-top: 1rem;
-    margin-bottom: 0.1rem;
-}
-#created-by {
-    margin-top: 0.1rem;
-    margin-bottom: 1.5rem;
-}
 /* left hand side*/
 #description {
     margin-top: 0.2rem;
@@ -292,7 +288,6 @@ input:-internal-autofill-selected {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    line-height: 2;
     padding: 0.5rem 0;
     margin: 0.5rem 0;
     border-radius: 100px;
@@ -318,51 +313,15 @@ input:-internal-autofill-selected {
 #instructions form p {
     margin: 0.5rem 0;
 }
+.checkbox-text {
+    color: #121212;
+}
 
+/* change color of ticks to dark blue */
 [type="checkbox"]:checked+span:not(.lever):before {
-    top: -4px;
-    left: -5px;
-    width: 12px;
-    height: 22px;
-    border-top: 2px solid transparent;
-    border-left: 2px solid transparent;
     border-right: 2px solid #263238;
     border-bottom: 2px solid #263238;
-    -webkit-transform: rotate(40deg);
-    transform: rotate(40deg);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform-origin: 100% 100%;
-    transform-origin: 100% 100%;
 }
-
-
-
-.xxl-only{
-    display: none;
-}
-
-/*perfect square code from: https://codepen.io/Tyler_Potts_/pen/qBBXoVQ*/
-.square {
-    position: relative;
-    overflow: hidden;
-}
-.square:after {
-    content: "";
-    display: block;
-    padding-top: 100%;
-}
-.content {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.margin-b1{
-    margin-bottom: 2rem;
-}
-
-
 
 /* MEDIA QUERIES */
 /*m tablet*/
@@ -377,6 +336,9 @@ input:-internal-autofill-selected {
     .tab-title {
     letter-spacing: 4px;
     }
+    .card-outline {
+    padding: 1rem;
+}
 }
 
 

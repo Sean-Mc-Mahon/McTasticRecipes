@@ -64,7 +64,7 @@
                             <p>
                                 <label>
                                     <input type="checkbox">
-                                    <span class="checkbox-text">{{ line }}</span>
+                                    <span class="checkbox-text flow-text">{{ line }}</span>
                                 </label>
                             </p>
                         {% endfor %}
@@ -72,7 +72,6 @@
                 </div>
                 <div class="col s12" id="instructions">
                     <form action="#">
-                        <ol>
                         {% for line in recipe.recipe_instructions.splitlines() %}
                             <p>
                                 <label>
@@ -81,10 +80,9 @@
                                 </label>
                             </p> 
                         {% endfor %}
-                        </ol>
                     </form>
                 </div>
-                {% if session.user|lower == recipe.created_by|lower %}
+                {% if session.user|lower == recipe.created_by|lower or session.user|lower == 'admin' %}
                     <div class="edit-btns">
                         <!-- Modal Trigger -->
                         <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small m-all transparent btn-outline flat hoverable">Edit</a>

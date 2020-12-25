@@ -13,6 +13,10 @@ body {
     min-height: 100vh;
     flex-direction: column;
 }
+/* pagination */
+.pagination li.active {
+    background-color: #4c809b;
+}
 /* used to make footer sticky */
 main {
     flex: 1 0 auto;
@@ -200,7 +204,7 @@ nav ul a {
     color: white;
 }
 /* Bottom Footer */
-.bottom-footer {
+.contact-footer {
     display: flex !important;
     flex-direction: column;
     justify-content: space-between;
@@ -315,6 +319,7 @@ ul .instruction-list {
 }
 .checkbox-text {
     color: #121212;
+    font-size: 1.1rem !important;
 }
 
 /* change color of ticks to dark blue */
@@ -356,9 +361,9 @@ ul .instruction-list {
 
 /* xl  large desktop */
 @media screen and (min-width: 1200px) {
-    *{
+    /* *{
         font-size: 1.05rem;
-    }
+    } */
     /* single recipe page */
     .tab-title {
     letter-spacing: 1px;

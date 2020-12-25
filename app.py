@@ -2,7 +2,8 @@ import os
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, pymongo
+from flask_paginate import Pagination, get_page_args
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
@@ -22,15 +23,18 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-@app.route("/get_recipes")
-def get_recipes():
+@app.route("/recipes")
+def recipes():
 
-    limit = 20
-    recipe_name = lambda recipes: recipes[1]
-
-    recipes = list(
-        mongo.db.recipes.find().sort("recipe_name", -1).limit(limit))
-    return render_template("index.html", recipes=recipes)
+    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page')
+    total = mongo.db.recipes.count()
+    therecipes = mongo.db.recipes.find().sort('_id', -1)
+    paginated_recipes = therecipes[offset: offset + per_page]
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='materialize')
+    return render_template("index.html",
+                        recipes=paginated_recipes, page=page,
+                        per_page=per_page, pagination=pagination)
 
 # -- CATEGORIES -- #
 
@@ -176,7 +180,7 @@ def add_recipe():
         }
         mongo.db.recipes.insert_one(recipe)
         flash("Recipe Successfully Added")
-        return redirect(url_for("get_recipes"))
+        return redirect(url_for("recipes"))
 
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("add_recipe.html", categories=categories)
@@ -222,7 +226,7 @@ def edit_recipe(recipe_id):
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
     flash("Recipe Successfully Deleted")
-    return redirect(url_for("get_recipes"))
+    return redirect(url_for("recipes"))
 
 
 if __name__ == "__main__":

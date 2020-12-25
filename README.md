@@ -173,18 +173,16 @@ I used affinity designer to design the logo, I went through many iterations of t
         1. Cooking
         2. Baking
         3. Snacks
-        4. Contact
-        5. Login
-        6. Register
+        4. Login
+        5. Register
 
     - For users who are logged in, the list items are as follows: 
         1. Cooking
         2. Baking
         3. Snacks
-        4. Contact
-        5. Logout
-        6. Profile
-        7. Add Recipe
+        4. Logout
+        5. Profile
+        6. Add Recipe
 
     - Python determines if the user is logged in or not by checking `if 'user' in session` and passes this data to Jinja to display the correct navbar for the user.
 
@@ -192,8 +190,10 @@ I used affinity designer to design the logo, I went through many iterations of t
 
 - Footer
     - The footer features:
+        - Newsletter signup
+        - Directory
         - Copyright Information
-        - Links to existing social media platforms.
+        - Links to social media platforms.
 
 - All Pages - 
 

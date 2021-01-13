@@ -54,9 +54,9 @@
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger right  ">
                     <i class="material-icons  right">menu</i></a>
                     <ul class="right hide-on-med-and-down  ">
-                        <li><a href="{{ url_for('filter_recipes', category_name='cooking')}}">Cooking</a></li>
-                        <li><a href="{{ url_for('filter_recipes', category_name='baking')}}">Baking</a></li>
-                        <li><a href="{{ url_for('filter_recipes', category_name='snacks')}}">Snacks</a></li>
+                        <li><a href="{{ url_for('cooking')}}">Cooking</a></li>
+                        <li><a href="{{ url_for('baking')}}">Baking</a></li>
+                        <li><a href="{{ url_for('snacks')}}">Snacks</a></li>
                         <!-- LOGGED IN USERS -->
                         {% if session.user %}
                             <li><a href="{{ url_for('logout')}}">Log Out</a></li>
@@ -76,9 +76,9 @@
         <ul class="sidenav" id="mobile-demo">
             <li><h4 class="center-align">Menu</h4></li>
             <li><a href="{{ url_for('recipes')}}">Home</a></li>
-            <li><a href="{{ url_for('filter_recipes', category_name='cooking')}}">Cooking</a></li>
-            <li><a href="{{ url_for('filter_recipes', category_name='baking')}}">Baking</a></li>
-            <li><a href="{{ url_for('filter_recipes', category_name='snacks')}}">Snacks</a></li>
+            <li><a href="{{ url_for('cooking')}}">Cooking</a></li>
+            <li><a href="{{ url_for('baking')}}">Baking</a></li>
+            <li><a href="{{ url_for('snacks')}}">Snacks</a></li>
             <!-- LOGGED IN USERS -->
             {% if session.user %}
                 <li><a href="{{ url_for('logout')}}">Log Out</a></li>

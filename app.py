@@ -1,8 +1,8 @@
-import os
+import os, math
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, pymongo
 from flask_paginate import Pagination, get_page_args
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -19,6 +19,10 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+
+# --GLOBAL -- #
+recipes_coll = mongo.db.recipes
+
 # --ALL RECIPES -- #
 
 
@@ -26,29 +30,121 @@ mongo = PyMongo(app)
 @app.route("/recipes")
 def recipes():
 
-    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page')
-    total = mongo.db.recipes.count()
-    therecipes = mongo.db.recipes.find().sort('_id', -1)
-    paginated_recipes = therecipes[offset: offset + per_page]
-    pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='materialize')
+    # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    limit_per_page = 4
+    current_page = int(request.args.get('current_page', 1))
+    # total of recipes in database
+    number_of_all_rec = recipes_coll.count()
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
+    recipes = recipes_coll.find().sort('_id', pymongo.ASCENDING).skip(
+        (current_page -1)*limit_per_page).limit(limit_per_page)
+
     return render_template("index.html",
-                        recipes=paginated_recipes, page=page,
-                        per_page=per_page, pagination=pagination)
+                        recipes=recipes,
+                        current_page=current_page,
+                        pages=pages,
+                        number_of_all_rec=number_of_all_rec)
+
+# --COOKING -- #
+
+
+@app.route("/cooking")
+def cooking():
+
+    # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    limit_per_page = 4
+    current_page = int(request.args.get('current_page', 1))
+    # total of recipes in database
+    recipes = recipes_coll.find(
+            {"category_name": "cooking"}).sort('_id', pymongo.ASCENDING).skip(
+            (current_page -1)*limit_per_page).limit(limit_per_page)
+    number_of_all_rec = recipes.count()
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
+
+    return render_template("cooking.html",
+                        recipes=recipes,
+                        current_page=current_page,
+                        pages=pages,
+                        number_of_all_rec=number_of_all_rec)
+
+# --BAKING -- #
+
+
+@app.route("/baking")
+def baking():
+
+    # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    limit_per_page = 4
+    current_page = int(request.args.get('current_page', 1))
+    # total of recipes in database
+    recipes = recipes_coll.find(
+            {"category_name": "baking"}).sort('_id', pymongo.ASCENDING).skip(
+            (current_page -1)*limit_per_page).limit(limit_per_page)
+    number_of_all_rec = recipes.count()
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
+
+    return render_template("baking.html",
+                        recipes=recipes,
+                        current_page=current_page,
+                        pages=pages,
+                        number_of_all_rec=number_of_all_rec)
+
+# --SNACKS -- #
+
+
+@app.route("/snacks")
+def snacks():
+
+    # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    limit_per_page = 4
+    current_page = int(request.args.get('current_page', 1))
+    # total of recipes in database
+    recipes = recipes_coll.find(
+            {"category_name": "snacks"}).sort('_id', pymongo.ASCENDING).skip(
+            (current_page -1)*limit_per_page).limit(limit_per_page)
+    number_of_all_rec = recipes.count()
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
+
+    return render_template("snacks.html",
+                        recipes=recipes,
+                        current_page=current_page,
+                        pages=pages,
+                        number_of_all_rec=number_of_all_rec)
+
 
 # -- CATEGORIES -- #
 
 
+
 @app.route("/filter_recipes/<category_name>")
 def filter_recipes(category_name):
+
+    limit_per_page = 4
+    current_page = int(request.args.get('current_page', 1))
+
     if category_name == "cooking":
-        recipes = list(mongo.db.recipes.find({"category_name": "cooking"}))
+        recipes = recipes_coll.find(
+            {"category_name": "cooking"}).sort('_id', pymongo.ASCENDING).skip(
+            (current_page -1)*limit_per_page).limit(limit_per_page)
     elif category_name == "baking":
-        recipes = list(mongo.db.recipes.find({"category_name": "baking"}))
+        recipes = recipes_coll.find(
+            {"category_name": "baking"}).sort('_id', pymongo.ASCENDING).skip(
+            (current_page -1)*limit_per_page).limit(limit_per_page)
     elif category_name == "snacks":
-        recipes = list(mongo.db.recipes.find({"category_name": "snacks"}))
+        recipes = recipes_coll.find(
+            {"category_name": "snacks"}).sort('_id', pymongo.ASCENDING).skip(
+            (current_page -1)*limit_per_page).limit(limit_per_page)
+
+    # total of recipes in database
+    number_of_all_rec = recipes.count()
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
+
     return render_template(
-        "index.html", recipes=recipes, page_title=category_name)
+        "index.html", recipes=recipes,
+        page_title=category_name,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_rec=number_of_all_rec)
 
 # -- PROFILE -- #
 

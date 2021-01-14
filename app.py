@@ -31,7 +31,7 @@ recipes_coll = mongo.db.recipes
 def recipes():
 
     # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
-    limit_per_page = 4
+    limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # total of recipes in database
     number_of_all_rec = recipes_coll.count()
@@ -52,7 +52,7 @@ def recipes():
 def cooking():
 
     # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
-    limit_per_page = 4
+    limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # total of recipes in database
     recipes = recipes_coll.find(
@@ -74,7 +74,7 @@ def cooking():
 def baking():
 
     # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
-    limit_per_page = 4
+    limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # total of recipes in database
     recipes = recipes_coll.find(
@@ -96,7 +96,7 @@ def baking():
 def snacks():
 
     # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
-    limit_per_page = 4
+    limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # total of recipes in database
     recipes = recipes_coll.find(
@@ -119,7 +119,7 @@ def snacks():
 @app.route("/filter_recipes/<category_name>")
 def filter_recipes(category_name):
 
-    limit_per_page = 4
+    limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
 
     if category_name == "cooking":

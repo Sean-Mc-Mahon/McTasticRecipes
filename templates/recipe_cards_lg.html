@@ -1,0 +1,38 @@
+<!--Recipe Cards-->
+<div class="col xl4 recipe_cards_lg">
+    <div class="gallery-item">
+        <div class="gallery-image square">
+                <img class="content gallery-image" src="{{ recipe.recipe_image }}">
+        </div>
+        <a class="bold" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">
+            <div class="overlay overlay-fade">
+                <div class="gallery-text">
+                    <h5>{{recipe.recipe_name}}</h5>
+                    <p class="xxl-only light small-font"><em>{{ recipe.recipe_description }}</em></p>
+                    <p><em>By:{{ recipe.created_by }}</em></p>
+                    <!--Icon info: Servings,Calories,Vegetarian,Vegan-->
+                        <div class="row">
+                            <!--Time/Serves-->
+                            <div class="icon mv-half">
+                                <i class="fas fa-clock large-icon tooltipped" data-position="bottom" data-tooltip="Prep Time"></i> {{recipe.recipe_time}}
+                                <i class="fas fa-utensils large-icon tooltipped ml1" data-position="bottom" data-tooltip="Serves"></i> {{recipe.recipe_serves}}
+                            </div>
+                            <!--Calories-->
+                            <div class="icon mv-half">
+                                <span class="tooltipped mr1" data-position="bottom" data-tooltip="Per Serving"><strong>Cals:</strong>{{recipe.recipe_cals}}</span>
+                                {% if recipe.recipe_is_vegetarian == "on" %}
+                                    <i class="fas fa-seedling orange-text text-accent-4 large-icon tooltipped"
+                                    data-position="bottom" data-tooltip="Vegetarian"></i>   
+                                {% endif %}
+                                {% if recipe.recipe_is_vegan == "on" %}
+                                    <i class="fas fa-seedling light-green-text accent-4 large-icon tooltipped"
+                                    data-position="bottom" data-tooltip="Vegan"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

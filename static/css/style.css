@@ -80,6 +80,12 @@ h1,h2,h3,h4,h5,h6 {
 .m-all{
     margin: 1rem;
 }
+.mt-small {
+    margin-top: 0.2rem;
+}
+.mv-half {
+    margin: 0.5rem 0;
+}
 .mh1 {
     margin: 0 1rem;
 }
@@ -177,6 +183,11 @@ nav ul a {
 }
 
 /** Footer **/
+.page-footer .row .col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 /* newsletter signup */
 #formContact {
     display: flex;
@@ -199,25 +210,9 @@ nav ul a {
     padding: 0rem;
     margin: 0 0 1rem 1rem;
 }
-/* Directory */
-.directory li a {
-    color: white;
-}
-/* Bottom Footer */
-.contact-footer {
-    display: flex !important;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: .5rem 0;
-}
-.copyright {
-    justify-content: center;
-    padding: .5rem;
-}
 /* Social Icons */
 .social-links {
     display: flex;
-    justify-content: center;
 }
 .social-links li i:hover {
   color: #449bff;
@@ -331,12 +326,16 @@ ul .instruction-list {
 /* MEDIA QUERIES */
 /*m tablet*/
 @media screen and (min-width: 600px) {
-  .nav-wrapper {
+    .nav-wrapper {
     margin: 0 2rem;
     }
     .row.col.info-icon{
     padding: 0;
     }
+    /** Footer **/
+    .page-footer .row .col {
+    align-items: flex-start;
+}
     /* single recipe page */
     .tab-title {
     letter-spacing: 4px;

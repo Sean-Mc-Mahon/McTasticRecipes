@@ -108,71 +108,68 @@
     </main>
 
     <footer class="page-footer blue-grey darken-3">
-        <div class="container valign-wrapper">
-            <div class="row">
-                <div class="col s12 m6 ">
-                    <h5 class="white-text">Newsletter Sign-up</h5>
-                    <p class="grey-text text-lighten-4">Enter your email address to recieve out weekly newsletter</p>    <form  id="formContact" onsubmit="return sendMail(this);">
-                        <input type="email" name="emailaddress" id="emailaddress" placeholder="email" required>
-                        <button id="submit"  type="submit">
-                        <i class="far fa-paper-plane large-icon"></i>
-                        </button>
-                    </form>
+        <div class="row container">
+            <div class="col s12 m6 mb1">
+                <h5 class="white-text">Newsletter Sign-up</h5>
+                <p class="grey-text text-lighten-4 mv-half">Enter your email address to recieve out weekly newsletter</p>    
+                <form  id="formContact" onsubmit="return sendMail(this);">
+                    <input type="email" name="emailaddress" id="emailaddress" placeholder="email" required>
+                    <button id="submit"  type="submit">
+                    <i class="far fa-paper-plane large-icon"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="col s12 m3 mb1">
+                <h5 class="white-text">Key Guide</h5>
+                <!--Icon info: Servings,Calories,Vegetarian,Vegan-->
+                <!--Time-->
+                <div class="icon mt-small">
+                    <i class="fas fa-clock large-icon"></i>  : Prep Time
                 </div>
-                <div class="col s12 m6 contact-footer">
-                    <div class="copyright valign-wrappe
-                    <div class="copyright">
-                    © 2020 Copyright: Sean McMahon
-                    </div>
-                    <div>   <li>
-                                <a
-                                rel="noopener"
-                                target="_blank"
-                                href="https://www.linkedin.com/in/sean-mcmahon-profile/"
-                                ><i class="fab fa-linkedin-in"></i
-                                ></a>
-                                >
-                                
-
-                                                                                                                            <a
-                                rel="noopener"
-                                target="_blank"
-                                href="https://github.com/Sean-Mc-Mahon"
-                                ><i class="fab fa-github"></i
-                                ></a>
-
-
-                                                             
-                                   >
-                             
-                    </div>                           </div>
-
-        <!-- <div class="footer-copyright center-align">
-            <d                <div class="copyright valign-wrapper">
-                © 2020 Copyright: Sean McMahon
+                <!--Serves-->
+                <div class="icon mt-small">
+                    <i class="fas fa-utensils large-icon"></i>  : Servings
                 </div>
-                <div>
-                    <ul class="social-links m0">
-                        <li>
-                            <a
+                <!--Vegetarian-->
+                <div class="icon mt-small">
+                    <i class="fas fa-seedling orange-text text-accent-4 large-icon"></i>  : Vegetarian
+                </div>
+                <!--Vegan-->
+                <div class="icon mt-small">
+                    <i class="fas fa-seedling light-green-text accent-4 large-icon"></i>  : Vegan
+                </div>
+                <!--Calories-->
+                <div class="icon mt-small">
+                    <span><strong>Cals</strong>  : Calories</span>
+                </div>
+            </div>
+            <div class="col s12 m3 mb1">
+                <h5 class="white-text">Social Links</h5>
+                <ul class="social-links">
+                    <li>
+                        <a
                             rel="noopener"
                             target="_blank"
                             href="https://www.linkedin.com/in/sean-mcmahon-profile/"
-                            ><i class="fab fa-linkedin-in"></i
-                            ></a>
-                        </li>
-                        <li>
-                            <a
+                            >
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a
                             rel="noopener"
                             target="_blank"
                             href="https://github.com/Sean-Mc-Mahon"
-                            ><i class="fab fa-github"></i
-                            ></a>
-                        </li>
-                    </ul>
-                </div>
+                            >
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p>
+                    © 2020 Copyright: Sean McMahon
+                </p>                     
             </div>
-        </div> -->
+        </div>
     </footer>
 
 <!--Sweet alert used for alerts upon form submission https://sweetalert.js.org/-->

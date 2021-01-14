@@ -1,0 +1,54 @@
+<!--Recipe Cards-->
+<div class="col s12 m6 xxl4">
+                <div class="card hoverable">
+                    <!--Image square and centered at any screen size-->
+                    <div class="square">
+                            <img class="content activator" src="{{ recipe.recipe_image }}">
+                    </div>
+                    <div class="card-content">
+                        <!--Displayed under image-->
+                        <span class="bold activator">{{recipe.recipe_name}}<i class="material-icons right">more_vert</i></span>
+                        <p><a class="bold" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">View Recipe</a></p>
+                    </div>
+                    <!--Revelaed when card is clicked-->
+                    <div class="card-reveal flex-vert-between">
+                        <span class="card-title mb2">{{recipe.recipe_name}}<i class="material-icons right">close</i></span>
+                        <!--Icon info: Servings,Calories,Vegetarian,Vegan-->
+                        <div class="row">
+                            <!--Time-->
+                            <div class="col info-icon s3 xxl4 xxl-only">
+                                <i class="fas fa-clock large-icon tooltipped" data-position="bottom" data-tooltip="Prep Time"></i> {{recipe.recipe_time}}
+                            </div>
+                            <!--Serves-->
+                            <div class="col s6 xxl2">
+                                <i class="fas fa-utensils large-icon tooltipped" data-position="bottom" data-tooltip="Serves"></i> {{recipe.recipe_serves}}
+                            </div>
+                            <!--Calories-->
+                            <div class="col s4 xxl3 xxl-only">
+                                <span class="tooltipped" data-position="bottom" data-tooltip="Per Serving"><strong>Cals:</strong>{{recipe.recipe_cals}}</span>
+                            </div>
+                            <!--Vegetarian/Vegan-->
+                            <div class="col s6 xxl3">
+                                {% if recipe.recipe_is_vegetarian == "on" %}
+                                    <i class="fas fa-seedling orange-text text-accent-4 large-icon tooltipped"
+                                    data-position="bottom" data-tooltip="Vegetarian"></i>   
+                                {% endif %}
+                                {% if recipe.recipe_is_vegan == "on" %}
+                                    <i class="fas fa-seedling light-green-text accent-4 large-icon tooltipped"
+                                    data-position="bottom" data-tooltip="Vegan"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!--Description,Creator,link-->
+                        <div class="row">
+                            <div class="col s12">
+                                <p>{{ recipe.recipe_description }}</p>
+                                <div>
+                                    <p><em>By:{{ recipe.created_by }}</em></p>
+                                    <p><a class="bold" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">View Recipe</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

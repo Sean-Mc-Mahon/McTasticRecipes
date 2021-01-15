@@ -45,6 +45,31 @@ def recipes():
                         pages=pages,
                         number_of_all_rec=number_of_all_rec)
 
+# -- SEARCH -- #
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    limit_per_page = 1
+    current_page = int(request.args.get('current_page', 1))
+
+    query = request.args.get('query')
+
+    #  Search results
+    query = request.form.get("query")
+    recipes = recipes_coll.find({"$text": {"$search": query}}).sort('_id', pymongo.ASCENDING).skip(
+            (current_page -1)*limit_per_page).limit(limit_per_page)
+    number_of_all_rec = recipes.count()
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
+
+    return render_template("search.html",
+                        recipes=recipes,
+                        current_page=current_page,
+                        pages=pages,
+                        number_of_all_rec=number_of_all_rec,
+                        query=query)
+
 # --COOKING -- #
 
 
@@ -172,14 +197,6 @@ def single_recipe(recipe_id):
     return render_template(
         "single_recipe.html", recipe=recipe)
 
-# -- SEARCH -- #
-
-
-@app.route("/search", methods=["GET", "POST"])
-def search():
-    query = request.form.get("query")
-    recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
-    return render_template("index.html", recipes=recipes)
 
 # -- REGISTRATION -- #
 

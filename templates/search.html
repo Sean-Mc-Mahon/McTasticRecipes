@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <!--SEARCH-->
+<!--SEARCH-->
     <div class="vm1 container mt1">
         <form action="{{ url_for('search') }}" method="post">
             <div class="row valign-wrapper center-align">
@@ -18,39 +18,25 @@
         </form>
     </div>
 
-        
-        <!-- <div class="intro-text">
-            <h1>McTastic Ingredients</h1>
-            <h3>McTastic Flavours</h3>
-        </div> -->
-    <!-- <section>
-        <div class="parallax-container">
-            <div class="parallax">
-                <img class="responsive-img" src="https://i.imgur.com/hfShEgC.jpg" alt="fruit">
-            </div>
-        </div>
-    </section> -->
-
-<!--Recipe Cards-->
-<div class="row container">
+<div class="container-recipes">
+  <div class="row container">
     {% for recipe in recipes %}
         {% include "recipe_cards.html" %}
         {% include "recipe_cards_lg.html" %}
     {% endfor %}
 </div>
-
-    <!--PAGINATION-->
+<!--PAGINATION-->
     <ul class="pagination center-align margin-bottom-large">
         {% for page_num in pages %} 
             {% if page_num == current_page %}
             <li class="active"><a>{{ page_num }}</a></li>
             {% else %}
             <li class="waves-effect">
-            <a href="{{ url_for('recipes', current_page=page_num) }}">{{ page_num }}</a>
+            <a href="{{ url_for('search', query=query, current_page=page_num) }}">{{ page_num }}</a>
             </li>
             {% endif %} 
         {% endfor %}
     </ul>
-
+</div>   
 
 {% endblock %}

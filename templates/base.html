@@ -57,6 +57,10 @@
                         <li><a href="{{ url_for('cooking')}}">Cooking</a></li>
                         <li><a href="{{ url_for('baking')}}">Baking</a></li>
                         <li><a href="{{ url_for('snacks')}}">Snacks</a></li>
+                        <!-- USERS -->
+                        {% if session.user|lower == 'admin' %}
+                        <li><a href="{{ url_for('users')}}">Users</a></li>
+                        {% endif %}
                         <!-- LOGGED IN USERS -->
                         {% if session.user %}
                             <li><a href="{{ url_for('logout')}}">Log Out</a></li>
@@ -79,6 +83,10 @@
             <li><a href="{{ url_for('cooking')}}">Cooking</a></li>
             <li><a href="{{ url_for('baking')}}">Baking</a></li>
             <li><a href="{{ url_for('snacks')}}">Snacks</a></li>
+            <!-- USERS -->
+                        {% if session.user|lower == 'admin' %}
+                        <li><a href="{{ url_for('users')}}">Users</a></li>
+                        {% endif %}
             <!-- LOGGED IN USERS -->
             {% if session.user %}
                 <li><a href="{{ url_for('logout')}}">Log Out</a></li>

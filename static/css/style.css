@@ -358,8 +358,25 @@ ul .instruction-list {
     color: #263238;
 }
 
-/*** LOGIN ***/
-
+/*** USERS ***/
+.users-cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.users-cards .col {
+    margin-left: auto;
+    margin-right: auto;
+}
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.delete-user {
+    margin: 1.0933333333rem 0 0.656rem 1rem;
+}
 /* SINGLE RECIPE PAGE */
 /* left hand side*/
 #description {

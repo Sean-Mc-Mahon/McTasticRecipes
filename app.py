@@ -22,6 +22,7 @@ mongo = PyMongo(app)
 
 # --GLOBAL -- #
 recipes_coll = mongo.db.recipes
+users_coll = mongo.db.users
 
 # --ALL RECIPES -- #
 
@@ -29,7 +30,12 @@ recipes_coll = mongo.db.recipes
 @app.route("/")
 @app.route("/recipes")
 def recipes():
-
+    """
+    READ
+    Displays all recipes in the order they were
+    created with the latest being shown first
+    pagination limits the number of recipes displayed.
+    """
     # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
@@ -45,11 +51,42 @@ def recipes():
                         pages=pages,
                         number_of_all_rec=number_of_all_rec)
 
+# --ALL USERS -- #
+
+
+@app.route("/")
+@app.route("/users")
+def users():
+    """
+    READ
+    Displays all users. This feature 
+    is only available to the admin.
+    """
+    # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    limit_per_page = 6
+    current_page = int(request.args.get('current_page', 1))
+    # total of users in database
+    number_of_all_users = users_coll.count()
+    pages = range(1, int(math.ceil(number_of_all_users / limit_per_page)) +1)
+    users = users_coll.find().sort('_id', pymongo.ASCENDING).skip(
+        (current_page -1)*limit_per_page).limit(limit_per_page)
+
+    return render_template("users.html",
+                        users=users,
+                        current_page=current_page,
+                        pages=pages,
+                        number_of_all_users=number_of_all_users)
+
 # -- SEARCH -- #
 
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
+    """
+    READ
+    Searches recipes using the 
+    title and ingredients.
+    """
     # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
     limit_per_page = 1
     current_page = int(request.args.get('current_page', 1))
@@ -75,7 +112,11 @@ def search():
 
 @app.route("/cooking")
 def cooking():
-
+    """
+    READ
+    Searches recipes with a category
+    of cooking.
+    """
     # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
@@ -97,7 +138,11 @@ def cooking():
 
 @app.route("/baking")
 def baking():
-
+    """
+    READ
+    Searches recipes with a category
+    of baking.
+    """
     # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
@@ -119,7 +164,11 @@ def baking():
 
 @app.route("/snacks")
 def snacks():
-
+    """
+    READ
+    Searches recipes with a category
+    of snacks.
+    """
     # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
@@ -137,45 +186,16 @@ def snacks():
                         number_of_all_rec=number_of_all_rec)
 
 
-# -- CATEGORIES -- #
-
-
-
-@app.route("/filter_recipes/<category_name>")
-def filter_recipes(category_name):
-
-    limit_per_page = 6
-    current_page = int(request.args.get('current_page', 1))
-
-    if category_name == "cooking":
-        recipes = recipes_coll.find(
-            {"category_name": "cooking"}).sort('_id', pymongo.ASCENDING).skip(
-            (current_page -1)*limit_per_page).limit(limit_per_page)
-    elif category_name == "baking":
-        recipes = recipes_coll.find(
-            {"category_name": "baking"}).sort('_id', pymongo.ASCENDING).skip(
-            (current_page -1)*limit_per_page).limit(limit_per_page)
-    elif category_name == "snacks":
-        recipes = recipes_coll.find(
-            {"category_name": "snacks"}).sort('_id', pymongo.ASCENDING).skip(
-            (current_page -1)*limit_per_page).limit(limit_per_page)
-
-    # total of recipes in database
-    number_of_all_rec = recipes.count()
-    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
-
-    return render_template(
-        "index.html", recipes=recipes,
-        page_title=category_name,
-        current_page=current_page,
-        pages=pages,
-        number_of_all_rec=number_of_all_rec)
-
 # -- PROFILE -- #
 
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
+    """
+    READ
+    Displays the username and recipes
+    of the session user.
+    """
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -186,11 +206,34 @@ def profile(username):
 
     return redirect(url_for("login"))
 
+# -- ADMIN VIEW PROFILE -- #
+
+
+@app.route("/admin_profile/<user_id>", methods=["GET", "POST"])
+def admin_profile(user_id):
+    """
+    READ
+    Displays the username and recipes
+    of the session selected by the admin.
+    """
+    # grab the session user's username from db
+    users = list(mongo.db.users.find())
+
+    user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+    return render_template("profile.html", 
+    users=users,
+    user=user,
+    recipes=recipes)
+
 # -- INDIVIDUAL RECIPES -- #
 
 
 @app.route("/single_recipe/<recipe_id>")
 def single_recipe(recipe_id):
+    """
+    READ
+    Displays a single recipe.
+    """
     recipes = list(mongo.db.recipes.find())
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -203,6 +246,15 @@ def single_recipe(recipe_id):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """
+    READ
+    Registers a user providing there
+    is not already an existing user
+    using the name provided. If successful
+    the user is logged in and is directed 
+    to their page, if not they are prompted
+    to try again.
+    """
     if request.method == "POST":
         # check if username already exists in db
         existing_user = mongo.db.users.find_one(
@@ -229,6 +281,14 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """
+    READ
+    Logs in user provided they provide
+    correct username and password, if not 
+    they are prompted to try again. If 
+    successful the user is directed to 
+    their profile.
+    """
     if request.method == "POST":
         # check if username exists
         existing_user = mongo.db.users.find_one(
@@ -262,6 +322,11 @@ def login():
 
 @app.route("/logout")
 def logout():
+    """
+    READ
+    Logs out user and redirects them 
+    to the login page.
+    """
     # remove user from session cookies
     flash("You have been logged out")
     session.pop("user")
@@ -272,6 +337,12 @@ def logout():
 
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
+    """
+    READ
+    Inserts new recipe to the database
+    and redirects user to homepage with
+    a message to say recipe has been added.
+    """
     if request.method == "POST":
         recipe_is_vegetarian = "on" if request.form.get(
             "recipe_is_vegetarian") else "off"
@@ -303,6 +374,12 @@ def add_recipe():
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
+    """
+    READ
+    Edits a recipe and redirects user to
+    the recipe with a message to say edit 
+    has been successful.
+    """
     if request.method == "POST":
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
         recipe_is_vegetarian = "on" if request.form.get(
@@ -337,9 +414,31 @@ def edit_recipe(recipe_id):
 
 @app.route("/delete_recipe/<recipe_id>")
 def delete_recipe(recipe_id):
+    """
+    READ
+    Deletes a recipe and redirects user to
+    the homepage with a message to say recipe
+    has been deleted.
+    """
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
     flash("Recipe Successfully Deleted")
     return redirect(url_for("recipes"))
+
+# -- DELETE USER -- #
+
+
+@app.route("/delete_user/<user_id>")
+def delete_user(user_id):
+    """
+    READ
+    Deletes a user and redirects user to
+    the users page with a message to say 
+    user has been deleted. Only available
+    to admin.
+    """
+    mongo.db.users.remove({"_id": ObjectId(user_id)})
+    flash("User Successfully Deleted")
+    return redirect(url_for("users"))
 
 
 if __name__ == "__main__":

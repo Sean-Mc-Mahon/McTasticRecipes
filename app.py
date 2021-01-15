@@ -20,13 +20,12 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-# --GLOBAL -- #
+# GLOBAL
 recipes_coll = mongo.db.recipes
 users_coll = mongo.db.users
 
-# --ALL RECIPES -- #
 
-
+# ALL RECIPES
 @app.route("/")
 @app.route("/recipes")
 def recipes():
@@ -36,7 +35,7 @@ def recipes():
     created with the latest being shown first
     pagination limits the number of recipes displayed.
     """
-    # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    # code for pagination modified from irinatu17: https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # total of recipes in database
@@ -51,9 +50,8 @@ def recipes():
                         pages=pages,
                         number_of_all_rec=number_of_all_rec)
 
-# --ALL USERS -- #
 
-
+# ALL USERS
 @app.route("/")
 @app.route("/users")
 def users():
@@ -62,7 +60,7 @@ def users():
     Displays all users. This feature 
     is only available to the admin.
     """
-    # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    # code for pagination modified from irinatu17: https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # total of users in database
@@ -77,9 +75,8 @@ def users():
                         pages=pages,
                         number_of_all_users=number_of_all_users)
 
-# -- SEARCH -- #
 
-
+# SEARCH
 @app.route("/search", methods=["GET", "POST"])
 def search():
     """
@@ -87,7 +84,7 @@ def search():
     Searches recipes using the 
     title and ingredients.
     """
-    # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    # code for pagination modified from irinatu17: https://github.com/irinatu17/MyCookBook
     limit_per_page = 1
     current_page = int(request.args.get('current_page', 1))
 
@@ -107,9 +104,8 @@ def search():
                         number_of_all_rec=number_of_all_rec,
                         query=query)
 
-# --COOKING -- #
 
-
+# COOKING
 @app.route("/cooking")
 def cooking():
     """
@@ -117,7 +113,7 @@ def cooking():
     Searches recipes with a category
     of cooking.
     """
-    # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    # code for pagination modified from irinatu17: https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # total of recipes in database
@@ -133,9 +129,8 @@ def cooking():
                         pages=pages,
                         number_of_all_rec=number_of_all_rec)
 
-# --BAKING -- #
 
-
+# BAKING
 @app.route("/baking")
 def baking():
     """
@@ -143,7 +138,7 @@ def baking():
     Searches recipes with a category
     of baking.
     """
-    # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    # code for pagination modified from irinatu17: https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # total of recipes in database
@@ -159,9 +154,8 @@ def baking():
                         pages=pages,
                         number_of_all_rec=number_of_all_rec)
 
-# --SNACKS -- #
 
-
+# SNACKS
 @app.route("/snacks")
 def snacks():
     """
@@ -169,7 +163,7 @@ def snacks():
     Searches recipes with a category
     of snacks.
     """
-    # code modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    # code for pagination modified from irinatu17: https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # total of recipes in database
@@ -186,9 +180,7 @@ def snacks():
                         number_of_all_rec=number_of_all_rec)
 
 
-# -- PROFILE -- #
-
-
+# PROFILE
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     """
@@ -201,14 +193,25 @@ def profile(username):
         {"username": session["user"]})["username"]
 
     if session["user"]:
-        recipes = mongo.db.recipes.find({"created_by": session["user"]})
-        return render_template("profile.html", username=username, recipes=recipes)
+        user_recipes = recipes_coll.find({"created_by": session["user"]})
+        number_of_user_rec = user_recipes.count()
+        limit_per_page = 6
+        current_page = int(request.args.get('current_page', 1))
+        pages = range(1, int(math.ceil(number_of_user_rec / limit_per_page)) + 1)
+        recipes = user_recipes.sort('_id', pymongo.ASCENDING).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+
+        return render_template("profile.html",
+            username=username,
+            recipes=recipes,
+            user_recipes=user_recipes,
+            current_page=current_page,
+            pages=pages)
 
     return redirect(url_for("login"))
 
-# -- ADMIN VIEW PROFILE -- #
 
-
+# ADMIN VIEW PROFILE
 @app.route("/admin_profile/<user_id>", methods=["GET", "POST"])
 def admin_profile(user_id):
     """
@@ -225,9 +228,8 @@ def admin_profile(user_id):
     user=user,
     recipes=recipes)
 
-# -- INDIVIDUAL RECIPES -- #
 
-
+# INDIVIDUAL RECIPES
 @app.route("/single_recipe/<recipe_id>")
 def single_recipe(recipe_id):
     """
@@ -241,9 +243,7 @@ def single_recipe(recipe_id):
         "single_recipe.html", recipe=recipe)
 
 
-# -- REGISTRATION -- #
-
-
+# REGISTRATION
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """
@@ -276,9 +276,8 @@ def register():
         return redirect(url_for("profile", username=session["user"]))
     return render_template("register.html")
 
-# -- LOGIN -- #
 
-
+# LOGIN
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """
@@ -316,10 +315,7 @@ def login():
     return render_template("login.html")
 
 
-
-# -- LOGOUT -- #
-
-
+# LOGOUT
 @app.route("/logout")
 def logout():
     """
@@ -332,9 +328,8 @@ def logout():
     session.pop("user")
     return redirect(url_for("login"))
 
-# -- ADD RECIPE -- #
 
-
+# ADD RECIPE
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
     """
@@ -369,9 +364,8 @@ def add_recipe():
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("add_recipe.html", categories=categories)
 
-# -- EDIT RECIPE -- #
 
-
+# EDIT RECIPE
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
     """
@@ -409,9 +403,8 @@ def edit_recipe(recipe_id):
     return render_template(
         "edit_recipe.html", recipe=recipe, categories=categories)
 
-# -- DELETE RECIPE -- #
 
-
+# DELETE RECIPE
 @app.route("/delete_recipe/<recipe_id>")
 def delete_recipe(recipe_id):
     """
@@ -424,9 +417,8 @@ def delete_recipe(recipe_id):
     flash("Recipe Successfully Deleted")
     return redirect(url_for("recipes"))
 
-# -- DELETE USER -- #
 
-
+# DELETE USER
 @app.route("/delete_user/<user_id>")
 def delete_user(user_id):
     """

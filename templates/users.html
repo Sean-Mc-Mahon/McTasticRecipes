@@ -6,7 +6,7 @@
     {% for user in users %}
     <div class="col s12 m7">
     <div class="card horizontal">
-        <div class="card-content">
+        <div class="card-content user-card">
             <a class="grey-text text-darken-4" href="{{ url_for('admin_profile', user_id=user._id) }}">
                 <h5>{{user.username}}</h5>
             </a>

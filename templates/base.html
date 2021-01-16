@@ -119,7 +119,7 @@
         <div class="row container">
             <div class="col s12 m6 mb1">
                 <h5 class="white-text">Newsletter Sign-up</h5>
-                <p class="grey-text text-lighten-4 mv-half">Enter your email address to recieve out weekly newsletter</p>    
+                <p class="grey-text text-lighten-4 mv-half text-newsletter">Enter your email address to recieve out weekly newsletter</p>    
                 <form  id="formContact" onsubmit="return sendMail(this);">
                     <input type="email" name="emailaddress" id="emailaddress" placeholder="email" required>
                     <button id="submit"  type="submit">
@@ -130,25 +130,27 @@
             <div class="col s12 m3 mb1">
                 <h5 class="white-text">Key Guide</h5>
                 <!--Icon info: Servings,Calories,Vegetarian,Vegan-->
-                <!--Time-->
-                <div class="icon mt-small">
-                    <i class="fas fa-clock large-icon"></i>  : Prep Time
-                </div>
-                <!--Serves-->
-                <div class="icon mt-small">
-                    <i class="fas fa-utensils large-icon"></i>  : Servings
-                </div>
-                <!--Vegetarian-->
-                <div class="icon mt-small">
-                    <i class="fas fa-seedling orange-text text-accent-4 large-icon"></i>  : Vegetarian
-                </div>
-                <!--Vegan-->
-                <div class="icon mt-small">
-                    <i class="fas fa-seedling light-green-text accent-4 large-icon"></i>  : Vegan
-                </div>
-                <!--Calories-->
-                <div class="icon mt-small">
-                    <span><strong>Cals</strong>  : Calories</span>
+                    <div class="all-icons">
+                    <!--Time-->
+                    <div class="flex mt-small">
+                        <img class="mr-half" src="../static/img/time-white.png" alt="Time"><span class="icon-text">Prep Time</span>
+                    </div>
+                    <!--Serves-->
+                    <div class="flex mt-small">
+                        <img class="mr-half" src="../static/img/servings-white.png" alt="Servings"><span class="icon-text">Servings</span>
+                    </div>
+                    <!--Calories-->
+                    <div class="flex mt-small">
+                        <img class="mr-half" src="../static/img/calories-white.png" alt="Calories"><span class="icon-text">Calories</span>
+                    </div>
+                    <!--Vegetarian-->
+                    <div class="flex mt-small">
+                        <img class="mr-half" src="../static/img/vegetarian.png" alt="Vegetarian"><span class="icon-text">Vegetarian</span>
+                    </div>
+                    <!--Vegan-->
+                    <div class="flex mt-small">
+                        <img class="mr-half" src="../static/img/vegan.png" alt="Vegan"><span class="icon-text">Vegan</span> 
+                    </div>
                 </div>
             </div>
             <div class="col s12 m3 mb1">

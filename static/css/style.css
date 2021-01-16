@@ -24,9 +24,6 @@ main {
 .activator {
     cursor: pointer;
 }
-/* .card-panel {
-    padding: 0.5rem;
-} */
 /*perfect square code from: https://codepen.io/Tyler_Potts_/pen/qBBXoVQ*/
 .square {
     position: relative;
@@ -63,20 +60,27 @@ h1,h2,h3,h4,h5,h6 {
 .small-font {
     font-size: 0.9rem;
 }
+.icon-text {
+    font-size: 1.2rem;
+}
+.text-newsletter {
+    text-align: center;
+}
 
 /* Hide */
 .xxl-only{
     display: none;
 }
 
-/* Flashes */
-/* .flashes h4 {
-    line-height: 2;
-} */
-
 /* Icons */
 .large-icon {
     font-size: 1.5rem;
+}
+
+/* Flex Rules */
+.flex {
+    display: flex;
+    align-items: center;
 }
 
 /* Margin Rules */
@@ -95,8 +99,11 @@ h1,h2,h3,h4,h5,h6 {
 .mh1 {
     margin: 0 1rem;
 }
-.mv-half {
-    margin: 0.5rem 0;
+.mh-half {
+    margin: 0 0.5rem;
+}
+.mh-icon {
+    margin: 0 0.2rem 0 0.5rem;
 }
 .mt0 {
     margin-top: 0;
@@ -116,8 +123,14 @@ h1,h2,h3,h4,h5,h6 {
 .mb2 {
     margin-bottom: 2rem;
 }
+.ml-half {
+    margin-left: 0.5rem;
+}
 .ml1 {
     margin-left: 1rem;
+}
+.mr-half {
+    margin-right: 0.5rem;
 }
 .mr1 {
     margin-right: 1rem;
@@ -237,6 +250,9 @@ nav ul a {
 }
 
 /*** INDEX ***/
+.card-icons {
+    display: flex;
+}
 /* large recipes */
 .recipe_cards_lg {
     display: none;
@@ -369,7 +385,7 @@ ul .instruction-list {
     margin-left: auto;
     margin-right: auto;
 }
-.card-content {
+.user-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -437,14 +453,17 @@ ul .instruction-list {
     /** Footer **/
     .page-footer .row .col {
     align-items: flex-start;
-}
+    }
+    .text-newsletter {
+        text-align: start;
+    }
     /* single recipe page */
     .tab-title {
     letter-spacing: 4px;
     }
     .card-outline {
     padding: 1rem;
-}
+    }
 }
 
 

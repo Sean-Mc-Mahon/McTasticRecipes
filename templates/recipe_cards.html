@@ -14,28 +14,28 @@
                     <div class="card-reveal flex-vert-between">
                         <span class="card-title mb2">{{recipe.recipe_name}}<i class="material-icons right">close</i></span>
                         <!--Icon info: Servings,Calories,Vegetarian,Vegan-->
-                        <div class="row">
+                        <div class="card-icons">
                             <!--Time-->
-                            <div class="col info-icon s3 xxl4 xxl-only">
-                                <i class="fas fa-clock large-icon tooltipped" data-position="bottom" data-tooltip="Prep Time"></i> {{recipe.recipe_time}}
+                            <div class=" flex">
+                                <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Prep Time" src="../static/img/time.png" alt="Time"><span class="icon-text">{{recipe.recipe_time}}</span>
                             </div>
                             <!--Serves-->
-                            <div class="col s6 xxl2">
-                                <i class="fas fa-utensils large-icon tooltipped" data-position="bottom" data-tooltip="Serves"></i> {{recipe.recipe_serves}}
+                            <div class="mh-icon flex">
+                                <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Serves" src="../static/img/servings.png" alt="Servings"><span class="icon-text">{{recipe.recipe_serves}}</span>
                             </div>
                             <!--Calories-->
-                            <div class="col s4 xxl3 xxl-only">
-                                <span class="tooltipped" data-position="bottom" data-tooltip="Per Serving"><strong>Cals:</strong>{{recipe.recipe_cals}}</span>
+                            <div class="mh-icon flex">
+                                {% if recipe.recipe_cals != "" %}
+                                <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Per Serving" src="../static/img/calories.png" alt="Calories"><span class="icon-text">{{recipe.recipe_cals}}</span>
+                                {% endif %}
                             </div>
                             <!--Vegetarian/Vegan-->
-                            <div class="col s6 xxl3">
+                            <div class="mh-icon flex">
                                 {% if recipe.recipe_is_vegetarian == "on" %}
-                                    <i class="fas fa-seedling orange-text text-accent-4 large-icon tooltipped"
-                                    data-position="bottom" data-tooltip="Vegetarian"></i>   
+                                    <img class="tooltipped" data-position="bottom" data-tooltip="Vegetarian" src="../static/img/vegetarian.png" alt="Vegetarian"> 
                                 {% endif %}
                                 {% if recipe.recipe_is_vegan == "on" %}
-                                    <i class="fas fa-seedling light-green-text accent-4 large-icon tooltipped"
-                                    data-position="bottom" data-tooltip="Vegan"></i>
+                                    <img class="tooltipped" data-position="bottom" data-tooltip="Vegan" src="../static/img/vegan.png" alt="Vegan">
                                 {% endif %}
                             </div>
                         </div>

@@ -395,6 +395,23 @@ ul .instruction-list {
     margin: 1.0933333333rem 0 0.656rem 1rem;
 }
 /* SINGLE RECIPE PAGE */
+/* Reveals */
+.text-wrapper,
+.image-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+/*overlay to be removed upon loading*/
+.reveal-text,
+.reveal-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  left: 0;
+  top: 0;
+  z-index: 3;
+}
 /* left hand side*/
 #description {
     margin-top: 0.2rem;
@@ -429,7 +446,6 @@ ul .instruction-list {
 }
 .checkbox-text {
     color: #121212;
-    font-size: 1.1rem !important;
 }
 
 /* change color of ticks to dark blue */

@@ -10,9 +10,10 @@
     </div>
 
         <!-- MAIN CONTENT -->
-        <div class="row container">
+        <div class="row container slide">
             <!-- LEFT HAND SIDE -->
-            <div class="col s12 l6">
+            <div class="col s12 l6 image-wrapper">
+                <div class="reveal-img"></div>
                 <!-- IMAGE: images are displayed as square regardless of aspect ratio-->
                 <div class="square">
                     <img src="{{ recipe.recipe_image }}" alt="Recipe Image" class="content materialboxed">
@@ -46,7 +47,8 @@
             </div>
 
             <!-- RIGHT HAND SIDE -->
-            <div class="col s12 l6 method">
+            <div class="col s12 l6 method text-wrapper">
+                <div class="reveal-text"></div>
                 <!-- INGREDIENTS AND INSTRUCTIONS -->
                 <ul class="tabs">
                     <li class="tab col s6">
@@ -102,4 +104,24 @@
                 {% endif %}
             </div>
         </div>
+{% block scripts %}
+<!--GSAP used to animate divs in single_recipe-->
+<script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js" 
+    integrity="sha512-1dalHDkG9EtcOmCnoCjiwQ/HEB5SDNqw8d4G2MKoNwjiwMNeBAkudsBCmSlMnXdsH8Bm0mOd3tl/6nL5y0bMaQ==" 
+    crossorigin="anonymous">
+</script>
+<script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js" 
+    integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg==" 
+    crossorigin="anonymous">
+</script>
+<script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.js" 
+    integrity="sha512-judXDFLnOTJsUwd55lhbrX3uSoSQSOZR6vNrsll+4ViUFv+XOIr/xaIK96soMj6s5jVszd7I97a0H+WhgFwTEg==" 
+    crossorigin="anonymous">
+</script>
 {% endblock %}
+{% endblock %}
+
+

@@ -38,49 +38,53 @@ $(document).ready(function(){
             }
         });
 
+//ADD INSTRUCTIONS FOR ADD_RECIPE
+if (window.location.pathname=='/add_recipe') {
+    //SELECTORS
+    const instructionInput = document.querySelector('.instruction-input');
+    const instructionButton = document.querySelector('.instruction-button');
+    const instructionList = document.querySelector('.instruction-list');
 
-//SELECTORS
-const instructionInput = document.querySelector('.instruction-input');
-const instructionButton = document.querySelector('.instruction-button');
-const instructionList = document.querySelector('.instruction-list');
+    //EVENT LISTENERS
+    instructionButton.addEventListener('click', addInstruction);
+    instructionList.addEventListener('click', deletebtn);
 
-//EVENT LISTENERS
-instructionButton.addEventListener('click', addInstruction);
-instructionList.addEventListener('click', deletebtn);
+    //FUNCTIONS
 
-//FUNCTIONS
+    function addInstruction(event){
+        //instruction div
+        const instructionDiv = document.createElement('div');
+        instructionDiv.classList.add('instruction');
+        //create li
+        const newInstruction = document.createElement('li');
+        newInstruction.innerText = instructionInput.value;
+        newInstruction.classList.add('instruction-item');
+        newInstruction.setAttribute ('name', 'recipe_instructions');
+        instructionDiv.appendChild(newInstruction);
+        //delete button
+        const trashButton = document.createElement('button');
+        trashButton.innerHTML = '<i class="fas fa-trash"></i>';
+        trashButton.classList.add("trash-btn");
+        instructionDiv.appendChild(trashButton);
+        //append to list
+        instructionList.appendChild(instructionDiv);
+        //clear instruction input value
+        instructionInput.value = "";
+    }
 
-function addInstruction(event){
-    //instruction div
-    const instructionDiv = document.createElement('div');
-    instructionDiv.classList.add('instruction');
-    //create li
-    const newInstruction = document.createElement('li');
-    newInstruction.innerText = instructionInput.value;
-    newInstruction.classList.add('instruction-item');
-    newInstruction.setAttribute ('name', 'recipe_instructions');
-    instructionDiv.appendChild(newInstruction);
-    //delete button
-    const trashButton = document.createElement('button');
-    trashButton.innerHTML = '<i class="fas fa-trash"></i>';
-    trashButton.classList.add("trash-btn");
-    instructionDiv.appendChild(trashButton);
-    //append to list
-    instructionList.appendChild(instructionDiv);
-    //clear instruction input value
-    instructionInput.value = "";
-}
-
-function deletebtn(e){
-    const item = e.target;
-    //delete instruction
-    if(item.classList[0] === "trash-btn") {
-        console.log('hello');
-        const instruction = item.parentElement;
-        instruction.remove();
+    function deletebtn(e){
+        const item = e.target;
+        //delete instruction
+        if(item.classList[0] === "trash-btn") {
+            console.log('hello');
+            const instruction = item.parentElement;
+            instruction.remove();
+        }
     }
 }
 
+
+//SEND MAIL AND ALERT FOR NEWSLETTER SIGNUP
 function sendMail(contactForm) {
     emailjs.send("gmail", "mctastic", {
         "from_email": contactForm.emailaddress.value
@@ -108,3 +112,29 @@ function sendMail(contactForm) {
     $("#formContact").val("");
     return false;  // To block from loading a new page
 }
+
+//IMAGE AND TEXT REVEALS FOR SINGLE_RECIPE
+//code used to suppress unnecessary warnings found on https://greensock.com/forums/topic/22491-gsap3-target-object-not-found/
+gsap.config({
+  nullTargetWarn: false,
+});
+//code modified from tutorial as part of Creative Javascript Course @ https://developedbyed.com/
+function animateSlides() {
+    //Select Slides
+    const sliders = document.querySelectorAll(".slide");
+    //loop over each slide
+    sliders.forEach((slide) => {
+    const revealImg = slide.querySelector(".reveal-img");
+    const img = slide.querySelector("img");
+    const revealText = slide.querySelectorAll(".reveal-text");
+    //gsap
+    const slideTl = gsap.timeline({
+      defaults: { duration: 1.5, ease: "power1.inOut" },
+    });
+    slideTl.fromTo(revealText, { y: "0%" }, { y: "100%" });
+    slideTl.fromTo(revealImg, { x: "0%" }, { x: "-100%" }, "-=1.3");
+    slideTl.fromTo(img, { scale: 2.5 }, { scale: 1 }, "-=1.5");
+  });
+}
+
+animateSlides();

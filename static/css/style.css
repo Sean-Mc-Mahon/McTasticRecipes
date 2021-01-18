@@ -90,9 +90,6 @@ h1,h2,h3,h4,h5,h6 {
 .m-all{
     margin: 1rem;
 }
-.mt-small {
-    margin-top: 0.2rem;
-}
 .mv-half {
     margin: 0.5rem 0;
 }
@@ -107,6 +104,9 @@ h1,h2,h3,h4,h5,h6 {
 }
 .mt0 {
     margin-top: 0;
+}
+.mt-half {
+    margin-top: 0.5rem;
 }
 .mt1 {
     margin-top: 1rem;
@@ -408,9 +408,6 @@ ul .instruction-list {
     padding: 0.5rem 0;
     margin: 0.5rem 0;
     border-radius: 100px;
-}
-.icon {
-    margin-left: 0.5rem;
 }
 /* right hand side*/
 /*Tab styles on single_ingredients modified from The Net Ninja tutorial: https://www.youtube.com/playlist?list=PL4cUxeGkcC9gGrbtvASEZSlFEYBnPkmff */

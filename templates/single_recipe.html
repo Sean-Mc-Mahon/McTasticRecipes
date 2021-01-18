@@ -22,26 +22,24 @@
                 <!-- ICONS -->
                 <div class="icons grey lighten-2">
                     <!-- TIME -->
-                    <div class="icon">
-                        <i class="fas fa-clock large-icon tooltipped" data-position="bottom" data-tooltip="Prep Time"></i>{{recipe.recipe_time}}
+                    <div class="flex">
+                        <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Prep Time" src="../static/img/time.png" alt="Time"><span class="icon-text">{{recipe.recipe_time}}</span>
                     </div>
                     <!-- SERVES -->
-                    <div class="icon">
-                        <i class="fas fa-utensils large-icon tooltipped" data-position="bottom" data-tooltip="Serves"></i>  {{recipe.recipe_serves}}
+                    <div class="mh-icon flex">
+                        <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Serves" src="../static/img/servings.png" alt="Servings"><span class="icon-text">{{recipe.recipe_serves}}</span>
                     </div>
                     <!-- CALORIES -->
-                    <div class="icon">
-                        <span class="tooltipped" data-position="bottom" data-tooltip="Per Serving"><strong>Cals:  </strong>{{recipe.recipe_cals}}</span>
+                    <div class="mh-icon flex">
+                        <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Per Serving" src="../static/img/calories.png" alt="Calories"><span class="icon-text">{{recipe.recipe_cals}}</span>
                     </div>
                     <!-- VEGETARIAN AND VEGAN -->
-                    <div class="icon">
+                    <div class="mh-icon flex">
                         {% if recipe.recipe_is_vegetarian == "on" %}
-                            <i class="fas fa-seedling orange-text text-accent-4 large-icon tooltipped"
-                            data-position="bottom" data-tooltip="Vegetarian"></i>   
+                            <img class="tooltipped" data-position="bottom" data-tooltip="Vegetarian" src="../static/img/vegetarian.png" alt="Vegetarian">   
                         {% endif %}
                         {% if recipe.recipe_is_vegan == "on" %}
-                            <i class="fas fa-seedling light-green-text accent-4 large-icon tooltipped"
-                            data-position="bottom" data-tooltip="Vegan"></i>
+                            <img class="tooltipped" data-position="bottom" data-tooltip="Vegan" src="../static/img/vegan.png" alt="Vegan">
                         {% endif %}
                     </div>
                 </div>

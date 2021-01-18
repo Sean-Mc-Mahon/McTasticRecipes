@@ -42,7 +42,8 @@ def recipes():
     # total of recipes in database
     number_of_all_rec = recipes_coll.count()
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
-    recipes = recipes_coll.find().sort('_id', pymongo.ASCENDING).skip(
+    # recipes to display in order of latest created
+    recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
         (current_page -1)*limit_per_page).limit(limit_per_page)
 
     return render_template("index.html",

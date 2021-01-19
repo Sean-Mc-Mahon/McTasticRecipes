@@ -118,10 +118,11 @@ def cooking():
     # code for pagination modified from irinatu17: https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
-    # total of recipes in database
+    # recipes to display in order of latest created
     recipes = recipes_coll.find(
-            {"category_name": "cooking"}).sort('_id', pymongo.ASCENDING).skip(
+            {"category_name": "cooking"}).sort('_id', pymongo.DESCENDING).skip(
             (current_page -1)*limit_per_page).limit(limit_per_page)
+    # total of recipes in database
     number_of_all_rec = recipes.count()
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
 
@@ -143,10 +144,11 @@ def baking():
     # code for pagination modified from irinatu17: https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
-    # total of recipes in database
+    # recipes to display in order of latest created
     recipes = recipes_coll.find(
-            {"category_name": "baking"}).sort('_id', pymongo.ASCENDING).skip(
+            {"category_name": "baking"}).sort('_id', pymongo.DESCENDING).skip(
             (current_page -1)*limit_per_page).limit(limit_per_page)
+    # total of recipes in database
     number_of_all_rec = recipes.count()
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
 
@@ -168,10 +170,11 @@ def snacks():
     # code for pagination modified from irinatu17: https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
-    # total of recipes in database
+    # recipes to display in order of latest created
     recipes = recipes_coll.find(
-            {"category_name": "snacks"}).sort('_id', pymongo.ASCENDING).skip(
+            {"category_name": "snacks"}).sort('_id', pymongo.DESCENDING).skip(
             (current_page -1)*limit_per_page).limit(limit_per_page)
+    # total of recipes in database
     number_of_all_rec = recipes.count()
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
 

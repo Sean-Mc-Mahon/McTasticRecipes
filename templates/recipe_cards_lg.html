@@ -2,7 +2,7 @@
 <div class="col xl4 recipe_cards_lg">
     <div class="gallery-item">
         <div class="gallery-image square">
-                <img class="content gallery-image" src="{{ recipe.recipe_image }}">
+            <img class="content gallery-image" src="{{ recipe.recipe_image }}">
         </div>
         <a class="bold" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">
             <div class="overlay overlay-fade">
@@ -11,26 +11,26 @@
                     <p class="xxl-only light small-font"><em>{{ recipe.recipe_description }}</em></p>
                     <p><em>By:{{ recipe.created_by }}</em></p>
                     <!--Icon info: Servings,Calories,Vegetarian,Vegan-->
-                        <div class="row">
-                            <!--Time/Serves-->
-                            <div class="flex icon mv-half">
-                                <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Prep Time" src="../static/img/time-white.png" alt="Time"><span class="icon-text">{{recipe.recipe_time}}</span>
-                                <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Serves" src="../static/img/servings-white.png" alt="Servings"><span class="icon-text">{{recipe.recipe_serves}}</span>
-                            </div>
-                            <!--Calories-->
-                            <div class="flex icon mv-half">
-                                {% if recipe.recipe_cals != "" %}
-                                <img class="tooltipped mh-icon mh-icon" data-position="bottom" data-tooltip="Per Serving" src="../static/img/calories-white.png" alt="Calories"><span class="icon-text">{{recipe.recipe_cals}}</span>
-                                {% endif %}
-                                {% if recipe.recipe_is_vegetarian == "on" %}
-                                    <img class="tooltipped ml-half" data-position="bottom" data-tooltip="Vegetarian" src="../static/img/vegetarian.png" alt="Vegetarian">    
-                                {% endif %}
-                                {% if recipe.recipe_is_vegan == "on" %}
-                                    <img class="tooltipped ml-half" data-position="bottom" data-tooltip="Vegan" src="../static/img/vegan.png" alt="Vegan">
-                                {% endif %}
-                            </div>
+                    <div class="row flex-col">
+                        <!--Time/Serves-->
+                        <div class="flex icon mv-half">
+                            <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Prep Time" src="../static/img/time-white.png" alt="Time"><span class="icon-text">{{recipe.recipe_time}}</span>
+                            <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Serves" src="../static/img/servings-white.png" alt="Servings"><span class="icon-text">{{recipe.recipe_serves}}</span>
                         </div>
-                    
+                        <!--Calories/Vegetarian/Vegan-->
+                        <div class="flex icon mv-half">
+                            <!--Calories Displayed only if calory info is present-->
+                            {% if recipe.recipe_cals != "" %}
+                            <img class="tooltipped mh-icon mh-icon" data-position="bottom" data-tooltip="Per Serving" src="../static/img/calories-white.png" alt="Calories"><span class="icon-text">{{recipe.recipe_cals}}</span>
+                            {% endif %}
+                            {% if recipe.recipe_is_vegetarian == "on" %}
+                                <img class="tooltipped ml-half" data-position="bottom" data-tooltip="Vegetarian" src="../static/img/vegetarian.png" alt="Vegetarian">    
+                            {% endif %}
+                            {% if recipe.recipe_is_vegan == "on" %}
+                                <img class="tooltipped ml-half" data-position="bottom" data-tooltip="Vegan" src="../static/img/vegan.png" alt="Vegan">
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </a>

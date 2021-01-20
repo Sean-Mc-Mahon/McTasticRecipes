@@ -220,6 +220,12 @@ nav .brand-logo {
 nav ul a {
     padding: 0 5px;
 }
+.active-link{
+    font-weight: 600;
+    font-size: 1.1em;
+    text-decoration: underline;
+    background-color: rgba(0,0,0,0.1);
+}
 
 /** Footer **/
 .page-footer .row .col {

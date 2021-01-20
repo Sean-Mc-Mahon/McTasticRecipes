@@ -69,9 +69,9 @@ function sendMail(contactForm) {
 
 //IMAGE AND TEXT REVEALS FOR SINGLE_RECIPE
 //code used to suppress unnecessary warnings found on https://greensock.com/forums/topic/22491-gsap3-target-object-not-found/
-gsap.config({
-  nullTargetWarn: false,
-});
+// gsap.config({
+//   nullTargetWarn: false,
+// });
 //code modified from tutorial as part of Creative Javascript Course @ https://developedbyed.com/
 function animateSlides() {
     //Select Slides
@@ -92,3 +92,30 @@ function animateSlides() {
 }
 
 animateSlides();
+
+//Active class for navigation links
+if (window.location.pathname=='/cooking') {
+    const cook = document.getElementById('cooking');
+    cook.classList.add('active-link');
+}
+if (window.location.pathname=='/baking') {
+    const bake = document.getElementById('baking');
+    bake.classList.add('active-link');
+}
+if (window.location.pathname=='/snacks') {
+    const snack = document.getElementById('snacks');
+    snack.classList.add('active-link');
+}
+if (window.location.pathname=='/users') {
+    const users = document.getElementById('users');
+    users.classList.add('active-link');
+}
+if (window.location.pathname=='/logout') {
+    const logout = document.getElementById('logout');
+    logout.classList.add('active-link');
+}
+if (window.location.pathname=='/add_recipe') {
+    const add = document.getElementById('add');
+    add.classList.add('active-link');
+}
+

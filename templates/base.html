@@ -62,22 +62,22 @@
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger right  ">
                     <i class="material-icons  right">menu</i></a>
                     <ul class="right hide-on-med-and-down  ">
-                        <li><a href="{{ url_for('cooking')}}">Cooking</a></li>
-                        <li><a href="{{ url_for('baking')}}">Baking</a></li>
-                        <li><a href="{{ url_for('snacks')}}">Snacks</a></li>
+                        <li><a id="cooking" href="{{ url_for('cooking')}}">Cooking</a></li>
+                        <li><a id="baking" href="{{ url_for('baking')}}">Baking</a></li>
+                        <li><a id="snacks" href="{{ url_for('snacks')}}">Snacks</a></li>
                         <!-- USERS -->
                         {% if session.user|lower == 'admin' %}
-                        <li><a href="{{ url_for('users')}}">Users</a></li>
+                        <li><a id="users" href="{{ url_for('users')}}">Users</a></li>
                         {% endif %}
                         <!-- LOGGED IN USERS -->
                         {% if session.user %}
-                            <li><a href="{{ url_for('logout')}}">Log Out</a></li>
-                            <li><a href="{{ url_for('add_recipe')}}">Add Recipe</a></li>
-                            <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                            <li><a id="logout" href="{{ url_for('logout')}}">Log Out</a></li>
+                            <li><a id="add" href="{{ url_for('add_recipe')}}">Add Recipe</a></li>
+                            <li><a id="profile" href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                         <!-- NOT LOGGED IN USERS -->
                         {% else %}
-                            <li><a href="{{ url_for('login')}}">Log In</a></li>
-                            <li><a href="{{ url_for('register')}}">Register</a></li>
+                            <li><a id="login" href="{{ url_for('login')}}">Log In</a></li>
+                            <li><a id="register" href="{{ url_for('register')}}">Register</a></li>
                         {% endif %}
                     </ul>
                 </div>

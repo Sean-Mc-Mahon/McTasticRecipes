@@ -5,29 +5,17 @@
 <div class="row container users-cards mt1">
     {% for user in users %}
     <div class="col s12 m7">
-    <div class="card horizontal">
-        <div class="card-content user-card">
-            <a class="grey-text text-darken-4" href="{{ url_for('admin_profile', user_id=user._id) }}">
+        <div class="card horizontal">
+            <div class="card-content user-card">
                 <h5>{{user.username}}</h5>
-            </a>
-            <div class="edit-btns">
-                <!-- Modal Trigger -->
-                <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-user" href="#modal1">Delete</a>
-                <!-- Modal Structure -->
-                <div id="modal1" class="modal  card-outline">
-                    <div class="modal-content">
-                        <h4>Are you sure?</h4>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#!" class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Cancel</a>
-                        <a href="{{ url_for('delete_user', user_id=user._id) }}" 
-                        class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Delete</a>
-                    </div>
+                <div class="edit-btns">
+                    <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('admin_profile', username_view=user.username) }}">
+                        view
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-  </div>
     {% endfor %}
 </div>
 

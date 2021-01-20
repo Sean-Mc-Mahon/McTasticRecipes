@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+    
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <div class="card-outline card-panel transparent p-half">
+                <h3 class="center-align m0">
+                    {{ username }}'s Recipes
+                </h3>
+                <div class="edit-btns flex-center">
+                    <h5 class="center-align">Recipes: {{ number_of_user_rec }}</h5>
+                    <!-- Modal Trigger -->
+                    <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-user" href="#modal1">Delete</a>
+                    <!-- Modal Structure -->
+                    <div id="modal1" class="modal  card-outline">
+                        <div class="modal-content">
+                            <h4>Are you sure?</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Cancel</a>
+                            <a href="{{ url_for('delete_user', user_id=user._id) }}" 
+                            class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="row container">
+        {% for recipe in recipes %}
+            {% include "recipe_cards.html" %}
+            {% include "recipe_cards_lg.html" %}
+        {% endfor %}
+    </div>
+
+    <!--PAGINATION-->
+        <ul class="pagination center-align margin-bottom-large">
+            {% for page_num in pages %} 
+                {% if page_num == current_page %}
+                <li class="active"><a>{{ page_num }}</a></li>
+                {% else %}
+                <li class="waves-effect">
+                <a href="{{ url_for('profile', username=session.user, current_page=page_num) }}">{{ page_num }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+{% endblock %}

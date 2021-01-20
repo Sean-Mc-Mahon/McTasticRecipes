@@ -1,4 +1,5 @@
-import os, math
+import os
+import math
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -41,16 +42,17 @@ def recipes():
     current_page = int(request.args.get('current_page', 1))
     # total of recipes in database
     number_of_all_rec = recipes_coll.count()
-    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
     # recipes to display in order of latest created
     recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
-        (current_page -1)*limit_per_page).limit(limit_per_page)
+        (current_page - 1)*limit_per_page).limit(limit_per_page)
 
-    return render_template("index.html",
-                        recipes=recipes,
-                        current_page=current_page,
-                        pages=pages,
-                        number_of_all_rec=number_of_all_rec)
+    return render_template(
+        "index.html",
+        recipes=recipes,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_rec=number_of_all_rec)
 
 
 # ALL USERS
@@ -59,23 +61,25 @@ def recipes():
 def users():
     """
     READ
-    Displays all users. This feature 
+    Displays all users. This feature
     is only available to the admin.
     """
-    # code for pagination modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    # code for pagination modified from irinatu17:
+    # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # total of users in database
     number_of_all_users = users_coll.count()
-    pages = range(1, int(math.ceil(number_of_all_users / limit_per_page)) +1)
-    users = users_coll.find().sort('_id', pymongo.ASCENDING).skip(
-        (current_page -1)*limit_per_page).limit(limit_per_page)
+    pages = range(1, int(math.ceil(number_of_all_users / limit_per_page)) + 1)
+    users = users_coll.find().sort('_id', pymongo.DESCENDING).skip(
+        (current_page - 1)*limit_per_page).limit(limit_per_page)
 
-    return render_template("users.html",
-                        users=users,
-                        current_page=current_page,
-                        pages=pages,
-                        number_of_all_users=number_of_all_users)
+    return render_template(
+        "users.html",
+        users=users,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_users=number_of_all_users)
 
 
 # SEARCH
@@ -83,10 +87,11 @@ def users():
 def search():
     """
     READ
-    Searches recipes using the 
+    Searches recipes using the
     title and ingredients.
     """
-    # code for pagination modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    # code for pagination modified from irinatu17:
+    # https://github.com/irinatu17/MyCookBook
     limit_per_page = 1
     current_page = int(request.args.get('current_page', 1))
 
@@ -94,17 +99,19 @@ def search():
 
     #  Search results
     query = request.form.get("query")
-    recipes = recipes_coll.find({"$text": {"$search": query}}).sort('_id', pymongo.ASCENDING).skip(
-            (current_page -1)*limit_per_page).limit(limit_per_page)
+    recipes = recipes_coll.find(
+        {"$text": {"$search": query}}).sort('_id', pymongo.ASCENDING).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
     number_of_all_rec = recipes.count()
-    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
 
-    return render_template("search.html",
-                        recipes=recipes,
-                        current_page=current_page,
-                        pages=pages,
-                        number_of_all_rec=number_of_all_rec,
-                        query=query)
+    return render_template(
+        "search.html",
+        recipes=recipes,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_rec=number_of_all_rec,
+        query=query)
 
 
 # COOKING
@@ -115,22 +122,24 @@ def cooking():
     Searches recipes with a category
     of cooking.
     """
-    # code for pagination modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    # code for pagination modified from irinatu17:
+    # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # recipes to display in order of latest created
     recipes = recipes_coll.find(
             {"category_name": "cooking"}).sort('_id', pymongo.DESCENDING).skip(
-            (current_page -1)*limit_per_page).limit(limit_per_page)
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
     # total of recipes in database
     number_of_all_rec = recipes.count()
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
 
-    return render_template("cooking.html",
-                        recipes=recipes,
-                        current_page=current_page,
-                        pages=pages,
-                        number_of_all_rec=number_of_all_rec)
+    return render_template(
+        "cooking.html",
+        recipes=recipes,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_rec=number_of_all_rec)
 
 
 # BAKING
@@ -141,22 +150,24 @@ def baking():
     Searches recipes with a category
     of baking.
     """
-    # code for pagination modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    # code for pagination modified from irinatu17:
+    # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # recipes to display in order of latest created
     recipes = recipes_coll.find(
             {"category_name": "baking"}).sort('_id', pymongo.DESCENDING).skip(
-            (current_page -1)*limit_per_page).limit(limit_per_page)
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
     # total of recipes in database
     number_of_all_rec = recipes.count()
-    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
 
-    return render_template("baking.html",
-                        recipes=recipes,
-                        current_page=current_page,
-                        pages=pages,
-                        number_of_all_rec=number_of_all_rec)
+    return render_template(
+        "baking.html",
+        recipes=recipes,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_rec=number_of_all_rec)
 
 
 # SNACKS
@@ -167,22 +178,24 @@ def snacks():
     Searches recipes with a category
     of snacks.
     """
-    # code for pagination modified from irinatu17: https://github.com/irinatu17/MyCookBook
+    # code for pagination modified from irinatu17:
+    # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # recipes to display in order of latest created
     recipes = recipes_coll.find(
             {"category_name": "snacks"}).sort('_id', pymongo.DESCENDING).skip(
-            (current_page -1)*limit_per_page).limit(limit_per_page)
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
     # total of recipes in database
     number_of_all_rec = recipes.count()
-    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
 
-    return render_template("snacks.html",
-                        recipes=recipes,
-                        current_page=current_page,
-                        pages=pages,
-                        number_of_all_rec=number_of_all_rec)
+    return render_template(
+        "snacks.html",
+        recipes=recipes,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_rec=number_of_all_rec)
 
 
 # PROFILE
@@ -202,11 +215,13 @@ def profile(username):
         number_of_user_rec = user_recipes.count()
         limit_per_page = 6
         current_page = int(request.args.get('current_page', 1))
-        pages = range(1, int(math.ceil(number_of_user_rec / limit_per_page)) + 1)
-        recipes = user_recipes.sort('_id', pymongo.ASCENDING).skip(
+        pages = range(
+            1, int(math.ceil(number_of_user_rec / limit_per_page)) + 1)
+        recipes = user_recipes.sort('_id', pymongo.DESCENDING).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
 
-        return render_template("profile.html",
+        return render_template(
+            "profile.html",
             username=username,
             recipes=recipes,
             user_recipes=user_recipes,
@@ -217,21 +232,35 @@ def profile(username):
 
 
 # ADMIN VIEW PROFILE
-@app.route("/admin_profile/<user_id>", methods=["GET", "POST"])
-def admin_profile(user_id):
+@app.route("/admin_profile/<username_view>", methods=["GET", "POST"])
+def admin_profile(username_view):
     """
     READ
     Displays the username and recipes
-    of the session selected by the admin.
+    of the user selected by the admin.
     """
     # grab the session user's username from db
-    users = list(mongo.db.users.find())
-
-    user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
-    return render_template("profile.html", 
-    users=users,
-    user=user,
-    recipes=recipes)
+    user = users_coll.find_one(
+        {"username": username_view})
+    username = users_coll.find_one(
+        {"username": username_view})["username"]
+    user_recipes = recipes_coll.find({"created_by": username_view})
+    number_of_user_rec = user_recipes.count()
+    limit_per_page = 6
+    current_page = int(request.args.get('current_page', 1))
+    pages = range(1, int(math.ceil(number_of_user_rec / limit_per_page)) + 1)
+    # recipes to display in order of latest created
+    recipes = user_recipes.sort('_id', pymongo.DESCENDING).skip(
+            (current_page - 1) * limit_per_page).limit(limit_per_page)
+    return render_template(
+        "admin_profile.html",
+        user=user,
+        recipes=recipes,
+        username=username,
+        number_of_user_rec=number_of_user_rec,
+        user_recipes=user_recipes,
+        current_page=current_page,
+        pages=pages)
 
 
 # INDIVIDUAL RECIPES
@@ -241,8 +270,6 @@ def single_recipe(recipe_id):
     READ
     Displays a single recipe.
     """
-    recipes = list(mongo.db.recipes.find())
-
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     return render_template(
         "single_recipe.html", recipe=recipe)
@@ -256,7 +283,7 @@ def register():
     Registers a user providing there
     is not already an existing user
     using the name provided. If successful
-    the user is logged in and is directed 
+    the user is logged in and is directed
     to their page, if not they are prompted
     to try again.
     """
@@ -288,9 +315,9 @@ def login():
     """
     READ
     Logs in user provided they provide
-    correct username and password, if not 
-    they are prompted to try again. If 
-    successful the user is directed to 
+    correct username and password, if not
+    they are prompted to try again. If
+    successful the user is directed to
     their profile.
     """
     if request.method == "POST":
@@ -325,7 +352,7 @@ def login():
 def logout():
     """
     READ
-    Logs out user and redirects them 
+    Logs out user and redirects them
     to the login page.
     """
     # remove user from session cookies
@@ -376,7 +403,7 @@ def edit_recipe(recipe_id):
     """
     READ
     Edits a recipe and redirects user to
-    the recipe with a message to say edit 
+    the recipe with a message to say edit
     has been successful.
     """
     if request.method == "POST":
@@ -429,7 +456,7 @@ def delete_user(user_id):
     """
     READ
     Deletes a user and redirects user to
-    the users page with a message to say 
+    the users page with a message to say
     user has been deleted. Only available
     to admin.
     """

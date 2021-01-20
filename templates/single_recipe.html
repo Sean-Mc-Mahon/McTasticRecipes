@@ -83,7 +83,7 @@
                     </form>
                 </div>
                 {% if session.user|lower == recipe.created_by|lower or session.user|lower == 'admin' %}
-                    <div class="edit-btns">
+                    <div class="edit-btns flex-center">
                         <!-- Modal Trigger -->
                         <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small m-all transparent btn-outline flat hoverable">Edit</a>
                         <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Delete</a>

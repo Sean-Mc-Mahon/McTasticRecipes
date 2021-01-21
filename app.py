@@ -465,6 +465,16 @@ def delete_user(user_id):
     return redirect(url_for("users"))
 
 
+# UNITS
+@app.route("/units")
+def units():
+    """
+    READ
+    Allows users to convert units
+    """
+    return render_template("units.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

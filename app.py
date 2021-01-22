@@ -24,11 +24,12 @@ mongo = PyMongo(app)
 # GLOBAL
 recipes_coll = mongo.db.recipes
 users_coll = mongo.db.users
+prep_coll = mongo.db.prep
 
 
 # ALL RECIPES
 @app.route("/")
-@app.route("/recipes")
+@app.route("/recipes", methods=['GET', 'POST'])
 def recipes():
     """
     READ
@@ -40,12 +41,24 @@ def recipes():
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
+    # sort recipes
+    sort_by = request.form.get('sort_by')
+    if sort_by == 'az':
+        recipes = recipes_coll.find().sort('recipe_name', 1).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'za':
+        recipes = recipes_coll.find().sort('recipe_name', -1).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'newest':
+        recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    else:
+        recipes = recipes_coll.find().sort('_id', pymongo.ASCENDING).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+
     # total of recipes in database
     number_of_all_rec = recipes_coll.count()
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
-    # recipes to display in order of latest created
-    recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
-        (current_page - 1)*limit_per_page).limit(limit_per_page)
 
     return render_template(
         "index.html",
@@ -70,9 +83,6 @@ def sort():
     # total of recipes in database
     number_of_all_rec = recipes_coll.count()
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
-    # recipes to display in order of latest created
-    recipes = recipes_coll.find().skip(
-        (current_page - 1)*limit_per_page).limit(limit_per_page)
     # sort recipes
     sort_by = request.form.get('sort_by')
     if sort_by == 'az':
@@ -83,10 +93,10 @@ def sort():
             (current_page - 1)*limit_per_page).limit(limit_per_page)
     elif sort_by == 'newest':
         recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
-        (current_page - 1)*limit_per_page).limit(limit_per_page)
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
     else:
         recipes = recipes_coll.find().sort('_id', pymongo.ASCENDING).skip(
-        (current_page - 1)*limit_per_page).limit(limit_per_page)
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
 
     return render_template(
         "index.html",
@@ -129,6 +139,37 @@ def users():
 # SEARCH
 @app.route("/search", methods=["GET", "POST"])
 def search():
+    """
+    READ
+    Searches recipes using the
+    title and ingredients.
+    """
+    # code for pagination modified from irinatu17:
+    # https://github.com/irinatu17/MyCookBook
+    limit_per_page = 6
+    current_page = int(request.args.get('current_page', 1))
+
+    query = request.form.get('query')
+
+    #  Search results
+    recipes = recipes_coll.find(
+        {"$text": {"$search": str(
+            query)}}).sort('_id', pymongo.ASCENDING).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    number_of_all_rec = recipes.count()
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
+
+    return render_template(
+        "search.html",
+        recipes=recipes,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_rec=number_of_all_rec,
+        query=query)
+
+# SEARCH PAGINATION
+@app.route("/searchp", methods=["GET", "POST"])
+def searchp():
     """
     READ
     Searches recipes using the
@@ -428,9 +469,9 @@ def logout():
     return redirect(url_for("login"))
 
 
-# ADD RECIPE
-@app.route("/add_recipe", methods=["GET", "POST"])
-def add_recipe():
+# INSERT RECIPE
+@app.route("/insert_recipe", methods=["GET", "POST"])
+def insert_recipe():
     """
     READ
     Inserts new recipe to the database
@@ -438,7 +479,7 @@ def add_recipe():
     a message to say recipe has been added.
     """
     # set active page to apply active-link to nav link
-    active_page = 'add'
+    active_page = 'insert'
     if request.method == "POST":
         recipe_is_vegetarian = "on" if request.form.get(
             "recipe_is_vegetarian") else "off"
@@ -463,9 +504,11 @@ def add_recipe():
         return redirect(url_for("recipes"))
 
     categories = mongo.db.categories.find().sort("category_name", 1)
+    prep = mongo.db.prep.find().sort("prep", 1)
     return render_template(
-        "add_recipe.html",
+        "insert_recipe.html",
         categories=categories,
+        prep=prep,
         active_page=active_page)
 
 
@@ -502,7 +545,8 @@ def edit_recipe(recipe_id):
         }
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
         flash("Recipe Successfully Updated")
-        return render_template("single_recipe.html", recipe=recipe)
+        username = session['user']
+        return redirect(url_for("profile", username=username))
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
@@ -524,7 +568,11 @@ def delete_recipe(recipe_id):
     """
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
     flash("Recipe Successfully Deleted")
-    return redirect(url_for("recipes"))
+    if session.user == 'admin':
+        return redirect(url_for("recipes"))
+
+    username = session['user']
+    return redirect(url_for("profile", username=username))
 
 
 # DELETE USER

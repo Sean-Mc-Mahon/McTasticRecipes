@@ -82,25 +82,28 @@
                         {% endfor %}
                     </form>
                 </div>
+                <!-- Admin may delete a recipe but only the creator may edit -->
+                <div class="edit-btns flex-center">
+                {% if session.user|lower == recipe.created_by|lower %}
+                    <!-- Modal Trigger -->
+                    <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small m-all transparent btn-outline flat hoverable">Edit</a>
+                {% endif %}
                 {% if session.user|lower == recipe.created_by|lower or session.user|lower == 'admin' %}
-                    <div class="edit-btns flex-center">
-                        <!-- Modal Trigger -->
-                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small m-all transparent btn-outline flat hoverable">Edit</a>
-                        <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Delete</a>
+                    <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Delete</a>
 
-                        <!-- Modal Structure -->
-                        <div id="modal1" class="modal  card-outline">
-                            <div class="modal-content">
-                                <h4>Are you sure?</h4>
-                                <p>You could always edit instead</p>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="#!" class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Cancel</a>
-                                <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" 
-                                class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Delete</a>
-                            </div>
+                    <!-- Modal Structure -->
+                    <div id="modal1" class="modal  card-outline">
+                        <div class="modal-content">
+                            <h4>Are you sure?</h4>
+                            <p>You could always edit instead</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Cancel</a>
+                            <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" 
+                            class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Delete</a>
                         </div>
                     </div>
+                </div>
                 {% endif %}
             </div>
         </div>

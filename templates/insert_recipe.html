@@ -4,7 +4,7 @@
     <h3 class="center-align container mt1">Add Recipe</h3>
 
     <div class="card-outline row container">
-        <form class="col l12" method="POST" action="{{ url_for('add_recipe') }}">
+        <form class="col l12" method="POST" action="{{ url_for('insert_recipe') }}">
             <div class="row">
                 <!-- Category Selection -->
                 <div class="input-field col s12 l5">
@@ -61,11 +61,22 @@
                 <div class="input-field col s12 m6 l3">
                     <select id="recipe_time" name="recipe_time" class="validate" required>
                         <option value="" disabled selected>Prep Time *</option>
+                            {% for prep in prep %}
+                            <option value="{{ prep.prep }}">{{ prep.prep }}</option>
+                            {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Prep Time -->
+                <!-- <div class="input-field col s12 m6 l3">
+                    <select id="recipe_time" name="recipe_time" class="validate" required>
+                        <option value="" disabled selected>Prep Time *</option>
                             <option value=" &lt;30m"> &lt;30m</option>
                             <option value=" &lt;60m"> &lt;60m</option>
                             <option value=" &gt;60m"> &gt;60m</option>
                     </select>
-                </div>
+                </div> -->
+
                 <!-- Calories. Not required to submit recipe -->
                 <div class="input-field col s12 m6 l3">
                         <input id="recipe_cals" name="recipe_cals" type="number" minlength="1" maxlength="4" pattern="^[0-9]$" class="validate">

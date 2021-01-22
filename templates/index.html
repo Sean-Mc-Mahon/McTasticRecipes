@@ -13,7 +13,7 @@
                 </div>
             </form>
             <div class="input-field col s4">
-                <form action="{{ url_for('sort') }}" method="POST" >
+                <form action="{{ url_for('recipes') }}" method="POST" >
                     <select id="sort_by" name="sort_by" onchange="this.form.submit()">
                         <option value="" disabled selected>Sort By</option>
                         <option value="az">A-Z</option>
@@ -41,7 +41,7 @@
             <li class="active"><a>{{ page_num }}</a></li>
             {% else %}
             <li class="waves-effect">
-            <a href="{{ url_for('recipes', current_page=page_num) }}">{{ page_num }}</a>
+            <a href="{{ url_for('recipes', current_page=page_num, recipes=recipes) }}">{{ page_num }}</a>
             </li>
             {% endif %} 
         {% endfor %}

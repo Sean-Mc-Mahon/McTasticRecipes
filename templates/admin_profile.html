@@ -18,7 +18,7 @@
                         </div>
                         <div class="modal-footer">
                             <a href="#!" class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Cancel</a>
-                            <a href="{{ url_for('delete_user', user_id=user._id) }}" 
+                            <a href="{{ url_for('delete_user', username=user.username) }}" 
                             class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Delete</a>
                         </div>
                     </div>
@@ -34,18 +34,5 @@
             {% include "recipe_cards_lg.html" %}
         {% endfor %}
     </div>
-
-    <!--PAGINATION-->
-        <ul class="pagination center-align margin-bottom-large">
-            {% for page_num in pages %} 
-                {% if page_num == current_page %}
-                <li class="active"><a>{{ page_num }}</a></li>
-                {% else %}
-                <li class="waves-effect">
-                <a href="{{ url_for('profile', username=session.user, current_page=page_num) }}">{{ page_num }}</a>
-                </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
 
 {% endblock %}

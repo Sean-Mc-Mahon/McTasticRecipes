@@ -142,9 +142,9 @@ def search():
     query = request.args.get('query')
 
     #  Search results
-    query = request.form.get("query")
     recipes = recipes_coll.find(
-        {"$text": {"$search": query}}).sort('_id', pymongo.ASCENDING).skip(
+        {"$text": {"$search": str(
+            query)}}).sort('_id', pymongo.ASCENDING).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
     number_of_all_rec = recipes.count()
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
@@ -528,8 +528,8 @@ def delete_recipe(recipe_id):
 
 
 # DELETE USER
-@app.route("/delete_user/<user_id>")
-def delete_user(user_id):
+@app.route("/delete_user/<username>")
+def delete_user(username):
     """
     READ
     Deletes a user and redirects user to
@@ -537,7 +537,8 @@ def delete_user(user_id):
     user has been deleted. Only available
     to admin.
     """
-    mongo.db.users.remove({"_id": ObjectId(user_id)})
+    mongo.db.users.remove({"username": username})
+    mongo.db.recipes.remove({"created_by": username})
     flash("User Successfully Deleted")
     return redirect(url_for("users"))
 

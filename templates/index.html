@@ -4,7 +4,7 @@
     <!--SEARCH-->
     <div class="vm1 container mt1">
         <div class="row">
-            <form class="col s10 offset-s1 m8" action="{{ url_for('search') }}" method="post">
+            <form class="col s8" action="{{ url_for('search') }}" method="post">
                 <div class="input-field flex">
                     <input type="text" name="query" id="query" minlength="3" class="validate" required>
                     <label class="flex-space" for="query">Search Recipes
@@ -14,7 +14,7 @@
                     </label>
                 </div>
             </form>
-            <div class="input-field col s10 offset-s1 m4">
+            <div class="input-field col s4">
                 <form action="{{ url_for('sort') }}" method="POST" >
                     <select id="sort_by" name="sort_by" onchange="this.form.submit()">
                         <option value="" disabled selected>Sort By</option>

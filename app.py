@@ -136,7 +136,7 @@ def search():
     """
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
-    limit_per_page = 1
+    limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
 
     query = request.args.get('query')

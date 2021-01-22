@@ -7,8 +7,7 @@
     <link
       rel="shortcut icon"
       type="image/png"
-      h
-      ref="{{ url_for('static', filename='img/favicon.png') }}"
+      href="{{ url_for('static', filename='img/favicon.png') }}"
     />
     <!-- Touch Icons designed by author -->
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/recipe-logo-120.png') }}">
@@ -62,24 +61,24 @@
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger right  ">
                     <i class="material-icons  right">menu</i></a>
                     <ul class="right hide-on-med-and-down  ">
-                        <li><a id="cooking" href="{{ url_for('cooking')}}">Cooking</a></li>
-                        <li><a id="baking" href="{{ url_for('baking')}}">Baking</a></li>
-                        <li><a id="snacks" href="{{ url_for('snacks')}}">Snacks</a></li>
+                        <li class="{{'active-link' if active_page == 'cooking'}}"><a id="cooking" href="{{ url_for('cooking')}}">Cooking</a></li>
+                        <li class="{{'active-link' if active_page == 'baking'}}"><a id="baking" href="{{ url_for('baking')}}">Baking</a></li>
+                        <li class="{{'active-link' if active_page == 'snacks'}}"><a id="snacks" href="{{ url_for('snacks')}}">Snacks</a></li>
                         <!-- USERS -->
                         {% if session.user|lower == 'admin' %}
-                        <li><a id="users" href="{{ url_for('users')}}">Users</a></li>
+                        <li class="{{'active-link' if active_page == 'users'}}"><a id="users" href="{{ url_for('users')}}">Users</a></li>
                         {% endif %}
                         <!-- LOGGED IN USERS -->
                         {% if session.user %}
                             <li><a id="logout" href="{{ url_for('logout')}}">Log Out</a></li>
-                            <li><a id="add" href="{{ url_for('add_recipe')}}">Add Recipe</a></li>
-                            <li><a id="profile" href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                            <li class="{{'active-link' if active_page == 'add'}}"><a id="add" href="{{ url_for('add_recipe')}}">Add Recipe</a></li>
+                            <li class="{{'active-link' if active_page == 'profile'}}"><a id="profile" href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                         <!-- NOT LOGGED IN USERS -->
                         {% else %}
-                            <li><a id="login" href="{{ url_for('login')}}">Log In</a></li>
-                            <li><a id="register" href="{{ url_for('register')}}">Register</a></li>
+                            <li class="{{'active-link' if active_page == 'login'}}"><a id="login" href="{{ url_for('login')}}">Log In</a></li>
+                            <li class="{{'active-link' if active_page == 'register'}}"><a id="register" href="{{ url_for('register')}}">Register</a></li>
                         {% endif %}
-                        <li><a id="units" href="{{ url_for('units')}}">Units</a></li>
+                        <li class="{{'active-link' if active_page == 'units'}}"><a id="units" href="{{ url_for('units')}}">Units</a></li>
                     </ul>
                 </div>
             </div>
@@ -156,11 +155,11 @@
                     </div>
                     <!--Vegetarian-->
                     <div class="flex mt-half">
-                        <img class="mr-half" src="../static/img/vegetarian.png" alt="Vegetarian"><span class="icon-text">Vegetarian</span>
+                        <img class="mr-half" src="../static/img/vegetarian-white.png" alt="Vegetarian"><span class="icon-text">Vegetarian</span>
                     </div>
                     <!--Vegan-->
                     <div class="flex mt-half">
-                        <img class="mr-half" src="../static/img/vegan.png" alt="Vegan"><span class="icon-text">Vegan</span> 
+                        <img class="mr-half" src="../static/img/vegan-white.png" alt="Vegan"><span class="icon-text">Vegan</span> 
                     </div>
                 </div>
             </div>

@@ -55,6 +55,47 @@ def recipes():
         number_of_all_rec=number_of_all_rec)
 
 
+# SORT
+@app.route("/sort", methods=['GET', 'POST'])
+def sort():
+    """
+    READ
+    Displays all recipes in the order of the
+    users preference.
+    """
+    # code for pagination modified from JDBennison:
+    # https://github.com/JDBennison/playparkpubs/blob/master/app.py
+    limit_per_page = 6
+    current_page = int(request.args.get('current_page', 1))
+    # total of recipes in database
+    number_of_all_rec = recipes_coll.count()
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
+    # recipes to display in order of latest created
+    recipes = recipes_coll.find().skip(
+        (current_page - 1)*limit_per_page).limit(limit_per_page)
+    # sort recipes
+    sort_by = request.form.get('sort_by')
+    if sort_by == 'az':
+        recipes = recipes_coll.find().sort('recipe_name', 1).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'za':
+        recipes = recipes_coll.find().sort('recipe_name', -1).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'newest':
+        recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
+        (current_page - 1)*limit_per_page).limit(limit_per_page)
+    else:
+        recipes = recipes_coll.find().sort('_id', pymongo.ASCENDING).skip(
+        (current_page - 1)*limit_per_page).limit(limit_per_page)
+
+    return render_template(
+        "index.html",
+        recipes=recipes,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_rec=number_of_all_rec)
+
+
 # ALL USERS
 @app.route("/")
 @app.route("/users")
@@ -64,6 +105,8 @@ def users():
     Displays all users. This feature
     is only available to the admin.
     """
+    # set active page to apply active-link to nav link
+    active_page = 'users'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -76,6 +119,7 @@ def users():
 
     return render_template(
         "users.html",
+        active_page=active_page,
         users=users,
         current_page=current_page,
         pages=pages,
@@ -122,6 +166,8 @@ def cooking():
     Searches recipes with a category
     of cooking.
     """
+    # set active page to apply active-link to nav link
+    active_page = 'cooking'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -136,6 +182,7 @@ def cooking():
 
     return render_template(
         "cooking.html",
+        active_page=active_page,
         recipes=recipes,
         current_page=current_page,
         pages=pages,
@@ -150,6 +197,8 @@ def baking():
     Searches recipes with a category
     of baking.
     """
+    # set active page to apply active-link to nav link
+    active_page = 'baking'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -164,6 +213,7 @@ def baking():
 
     return render_template(
         "baking.html",
+        active_page=active_page,
         recipes=recipes,
         current_page=current_page,
         pages=pages,
@@ -178,6 +228,8 @@ def snacks():
     Searches recipes with a category
     of snacks.
     """
+    # set active page to apply active-link to nav link
+    active_page = 'snacks'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -192,6 +244,7 @@ def snacks():
 
     return render_template(
         "snacks.html",
+        active_page=active_page,
         recipes=recipes,
         current_page=current_page,
         pages=pages,
@@ -206,6 +259,8 @@ def profile(username):
     Displays the username and recipes
     of the session user.
     """
+    # set active page to apply active-link to nav link
+    active_page = 'profile'
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -222,6 +277,7 @@ def profile(username):
 
         return render_template(
             "profile.html",
+            active_page=active_page,
             username=username,
             recipes=recipes,
             user_recipes=user_recipes,
@@ -239,6 +295,8 @@ def admin_profile(username_view):
     Displays the username and recipes
     of the user selected by the admin.
     """
+    # set active page to apply active-link to nav link
+    active_page = 'users'
     # grab the session user's username from db
     user = users_coll.find_one(
         {"username": username_view})
@@ -254,6 +312,7 @@ def admin_profile(username_view):
             (current_page - 1) * limit_per_page).limit(limit_per_page)
     return render_template(
         "admin_profile.html",
+        active_page=active_page,
         user=user,
         recipes=recipes,
         username=username,
@@ -287,6 +346,8 @@ def register():
     to their page, if not they are prompted
     to try again.
     """
+    # set active page to apply active-link to nav link
+    active_page = 'register'
     if request.method == "POST":
         # check if username already exists in db
         existing_user = mongo.db.users.find_one(
@@ -306,7 +367,9 @@ def register():
         session['user'] = request.form.get("username").lower()
         flash("Registration Successful!")
         return redirect(url_for("profile", username=session["user"]))
-    return render_template("register.html")
+    return render_template(
+        "register.html",
+        active_page=active_page)
 
 
 # LOGIN
@@ -320,6 +383,8 @@ def login():
     successful the user is directed to
     their profile.
     """
+    # set active page to apply active-link to nav link
+    active_page = 'login'
     if request.method == "POST":
         # check if username exists
         existing_user = mongo.db.users.find_one(
@@ -344,7 +409,9 @@ def login():
             flash("Incorrect Username and/or password")
             return redirect(url_for("login"))
 
-    return render_template("login.html")
+    return render_template(
+        "login.html",
+        active_page=active_page)
 
 
 # LOGOUT
@@ -370,6 +437,8 @@ def add_recipe():
     and redirects user to homepage with
     a message to say recipe has been added.
     """
+    # set active page to apply active-link to nav link
+    active_page = 'add'
     if request.method == "POST":
         recipe_is_vegetarian = "on" if request.form.get(
             "recipe_is_vegetarian") else "off"
@@ -394,7 +463,10 @@ def add_recipe():
         return redirect(url_for("recipes"))
 
     categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("add_recipe.html", categories=categories)
+    return render_template(
+        "add_recipe.html",
+        categories=categories,
+        active_page=active_page)
 
 
 # EDIT RECIPE
@@ -406,6 +478,8 @@ def edit_recipe(recipe_id):
     the recipe with a message to say edit
     has been successful.
     """
+    # set active page to apply active-link to nav link
+    active_page = 'edit'
     if request.method == "POST":
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
         recipe_is_vegetarian = "on" if request.form.get(
@@ -433,7 +507,10 @@ def edit_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template(
-        "edit_recipe.html", recipe=recipe, categories=categories)
+        "edit_recipe.html",
+        recipe=recipe,
+        categories=categories,
+        active_page=active_page)
 
 
 # DELETE RECIPE
@@ -472,7 +549,11 @@ def units():
     READ
     Allows users to convert units
     """
-    return render_template("units.html")
+    # set active page to apply active-link to nav link
+    active_page = 'units'
+    return render_template(
+        "units.html",
+        active_page=active_page)
 
 
 if __name__ == "__main__":

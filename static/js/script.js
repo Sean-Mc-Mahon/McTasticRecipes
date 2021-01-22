@@ -76,7 +76,6 @@ function animateSlides() {
     //loop over each slide
     sliders.forEach((slide) => {
     const revealImg = slide.querySelector(".reveal-img");
-    const img = slide.querySelector("img");
     const revealText = slide.querySelectorAll(".reveal-text");
     //gsap
     const slideTl = gsap.timeline({
@@ -84,49 +83,9 @@ function animateSlides() {
     });
     slideTl.fromTo(revealText, { y: "0%" }, { y: "100%" });
     slideTl.fromTo(revealImg, { x: "0%" }, { x: "-100%" }, "-=1.3");
-    slideTl.fromTo(img, { scale: 2.5 }, { scale: 1 }, "-=1.5");
   });
 }
-
 animateSlides();
-
-//ADD ACTIVE CLASS FOR NAV LINKS
-if (window.location.pathname=='/cooking') {
-    const cook = document.getElementById('cooking');
-    cook.classList.add('active-link');
-}
-if (window.location.pathname=='/baking') {
-    const bake = document.getElementById('baking');
-    bake.classList.add('active-link');
-}
-if (window.location.pathname=='/snacks') {
-    const snack = document.getElementById('snacks');
-    snack.classList.add('active-link');
-}
-if (window.location.pathname=='/users') {
-    const users = document.getElementById('users');
-    users.classList.add('active-link');
-}
-if (window.location.pathname=='/logout') {
-    const logout = document.getElementById('logout');
-    logout.classList.add('active-link');
-}
-if (window.location.pathname=='/add_recipe') {
-    const add = document.getElementById('add');
-    add.classList.add('active-link');
-}
-if (window.location.pathname=='/login') {
-    const login = document.getElementById('login');
-    login.classList.add('active-link');
-}
-if (window.location.pathname=='/profile') {
-    const profile = document.getElementById('profile');
-    profile.classList.add('active-link');
-}
-if (window.location.pathname=='/units') {
-    const units = document.getElementById('units');
-    units.classList.add('active-link');
-}
 
 //TEMPERATURE CONVERSION
 //Code modified from YouTube Tutorial by whatsdev: https://youtu.be/8mRGfLL1nzE
@@ -442,4 +401,3 @@ if (window.location.pathname=='/units') {
     fluidOuncesInput.addEventListener('input', fluidOuncesToOthers);
     cupInput.addEventListener('input', cupsToOthers);
 }
-

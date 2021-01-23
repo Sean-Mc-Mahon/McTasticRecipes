@@ -5,10 +5,10 @@
                     <div class="square">
                             <img class="content activator" src="{{ recipe.recipe_image }}">
                     </div>
-                    <div class="card-content">
+                    <div class="card-content flex-space">
                         <!--Displayed under image-->
-                        <span class="bold activator">{{recipe.recipe_name}}<i class="material-icons right">more_vert</i></span>
-                        <p><a class="bold" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">View Recipe</a></p>
+                        <p><a class="bolder blue-grey-text text-darken-4 card-anchor" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">{{recipe.recipe_name}}</a></p>
+                        <span class="bold activator"><i class="material-icons right">more_vert</i></span>
                     </div>
                     <!--Revelaed when card is clicked-->
                     <div class="card-reveal flex-vert-between">

@@ -51,11 +51,14 @@ h1,h2,h3,h4,h5,h6 {
 .text-shadow-2 {
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7)
 }
+.light {
+    font-weight: 300;
+}
 .bold {
     font-weight: 500;
 }
-.light {
-    font-weight: 300;
+.bolder {
+    font-weight: 600;
 }
 .small-font {
     font-size: 0.9rem;
@@ -283,6 +286,12 @@ nav ul a {
 /*** INDEX ***/
 .card-icons {
     display: flex;
+}
+.card-anchor:hover {
+    text-decoration: underline;
+    font-size: 1.05rem;
+    transition: 1s ease;
+    color: #449bff;
 }
 /* large recipes */
 .recipe_cards_lg {

@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <!--SEARCH-->
+    
     <div class="vm1 container mt1">
         <div class="row">
+            <!--SEARCH-->
             <form class="col s8" action="{{ url_for('search') }}" method="post">
                 <div class="input-field flex">
                     <input type="text" name="query" id="query" minlength="3" class="validate" required>
@@ -12,8 +13,9 @@
                     </button>
                 </div>
             </form>
+            <!--SORT-->
             <div class="input-field col s4">
-                <form action="{{ url_for('sort', sort_by=sort_by) }}" method="POST" >
+                <form action="{{ url_for('sort') }}" method="POST" >
                     <select id="sort_by" name="sort_by" onchange="this.form.submit()">
                         <option value="" disabled selected>Sort By</option>
                         <option value="az">A-Z</option>
@@ -41,7 +43,7 @@
             <li class="active"><a>{{ page_num }}</a></li>
             {% else %}
             <li class="waves-effect">
-            <a href="{{ url_for('recipes', current_page=page_num) }}">{{ page_num }}</a>
+            <a href="{{ url_for('sort_pag', sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
             </li>
             {% endif %} 
         {% endfor %}

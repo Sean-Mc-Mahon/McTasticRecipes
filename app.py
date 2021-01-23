@@ -41,19 +41,9 @@ def recipes():
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
+    print(current_page)
     # sort recipes
-    sort_by = request.form.get('sort_by')
-    if sort_by == 'az':
-        recipes = recipes_coll.find().sort('recipe_name', 1).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    elif sort_by == 'za':
-        recipes = recipes_coll.find().sort('recipe_name', -1).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    elif sort_by == 'newest':
-        recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    else:
-        recipes = recipes_coll.find().sort('_id', pymongo.ASCENDING).skip(
+    recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
 
     # total of recipes in database
@@ -76,13 +66,10 @@ def sort():
     Displays all recipes in the order of the
     users preference.
     """
-    # code for pagination modified from JDBennison:
-    # https://github.com/JDBennison/playparkpubs/blob/master/app.py
+    # code for pagination modified from irinatu17:
+    # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
-    # total of recipes in database
-    number_of_all_rec = recipes_coll.count()
-    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
     # sort recipes
     sort_by = request.form.get('sort_by')
     if sort_by == 'az':
@@ -98,8 +85,53 @@ def sort():
         recipes = recipes_coll.find().sort('_id', pymongo.ASCENDING).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
 
+    # total of recipes in database
+    number_of_all_rec = recipes_coll.count()
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
+
     return render_template(
-        "index.html",
+        "sorted.html",
+        sort_by=sort_by,
+        recipes=recipes,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_rec=number_of_all_rec)
+
+
+# SORT_PAG
+@app.route("/sort_pag", methods=['GET', 'POST'])
+def sort_pag():
+    """
+    READ
+    Displays all recipes in the order of the
+    users preference.
+    """
+    # code for pagination modified from irinatu17:
+    # https://github.com/irinatu17/MyCookBook
+    limit_per_page = 6
+    current_page = int(request.args.get('current_page', 1))
+    # sort recipes
+    sort_by = request.args.get('sort_by')
+    if sort_by == 'az':
+        recipes = recipes_coll.find().sort('recipe_name', 1).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'za':
+        recipes = recipes_coll.find().sort('recipe_name', -1).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'newest':
+        recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    else:
+        recipes = recipes_coll.find().sort('_id', pymongo.ASCENDING).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+
+    # total of recipes in database
+    number_of_all_rec = recipes_coll.count()
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
+
+    return render_template(
+        "sorted.html",
+        sort_by=sort_by,
         recipes=recipes,
         current_page=current_page,
         pages=pages,

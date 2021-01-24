@@ -1,136 +1,166 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!--Weight-->
-<div class="row container users-cards mt1">
-    <div class="col s12 m9">
-        <div class="card horizontal">
-            <div class="card-content user-card flex-col">
-                <h5>Weight</h5>
-                <form>
-                    <div class="row">
-                        <div class="input_field col s12 m3 flex mh1" id="grams">
-                            <input class="text-center" id="grams_value" type="number" placeholder="Grams">
-                            <label class="bold" for="grams_value">g</label>
+<!--UNIT CONVERSIONS-->
+<section class="container">
+    <!--Weight-->
+    <div class="row users-cards mt1">
+        <div class="col s12 m9">
+            <div class="card horizontal">
+                <div class="card-content user-card flex-col">
+                    <h5>Weight</h5>
+                    <form>
+                        <div class="row">
+                            <div class="input_field col s12 m3 flex mh1" id="grams">
+                                <input class="text-center" id="grams_value" type="number" placeholder="Grams">
+                                <label class="bold" for="grams_value">g</label>
+                            </div>
+                            <div class="input_field col s12 m3 flex mh1" id="ounces">
+                                <input class="text-center" id="ounces_value" type="number" placeholder="Ounces">
+                                <label class="bold" for="ounces_value">oz</label>
+                            </div>
+                            <div class="input_field col s12 m3 flex mh1"  id="tbsp">
+                                <input class="text-center" id="tbsp_value" type="number" placeholder="Tbsp">
+                                <label class="bold" for="tbsp_value">tbsp</label>
+                            </div>
+                            <div class="input_field col s12 m3 flex mh1"  id="tsp">
+                                <input class="text-center" id="tsp_value" type="number" placeholder="Tsp">
+                                <label class="bold" for="tsp_value">tsp</label>
+                            </div>
                         </div>
-                        <div class="input_field col s12 m3 flex mh1" id="ounces">
-                            <input class="text-center" id="ounces_value" type="number" placeholder="Ounces">
-                            <label class="bold" for="ounces_value">oz</label>
-                        </div>
-                        <div class="input_field col s12 m3 flex mh1"  id="tbsp">
-                            <input class="text-center" id="tbsp_value" type="number" placeholder="Tbsp">
-                            <label class="bold" for="tbsp_value">tbsp</label>
-                        </div>
-                        <div class="input_field col s12 m3 flex mh1"  id="tsp">
-                            <input class="text-center" id="tsp_value" type="number" placeholder="Tsp">
-                            <label class="bold" for="tsp_value">tsp</label>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!--Cups-->
-<div class="row container users-cards mt1">
-    <div class="col s12 m9">
-        <div class="card horizontal">
-            <div class="card-content user-card flex-col">
-                <h5>Cups</h5>
-                <form>
-                    <div class="row flex-center">
-                        <div class="input_field col s12 m4 flex mh1" id="grams2">
-                            <input class="text-center" id="grams_value2" type="number" placeholder="Grams">
-                            <label class="bold" for="grams_value2">g</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="input_field col s12 m4 flex mh1"  id="drycups">
-                                <input class="text-center" id="drycups_value" type="number" placeholder="Dry Goods Cups">
-                                <label class="bold" for="drycups_value">Dry</label>
-                            </div>
-                            <div class="input_field col s12 m4 flex mh1"  id="wetcups">
-                                <input class="text-center" id="wetcups_value" type="number" placeholder="Syrup Cups">
-                                <label class="bold" for="wetcups_value">Syrup</label>
-                            </div>
-                            <div class="input_field col s12 m4 flex mh1"  id="buttercups">
-                                <input class="text-center" id="buttercups_value" type="number" placeholder="Butter Cups">
-                                <label class="bold" for="buttercups_value">Butter</label>
-                            </div>
-                            <div class="input_field col s12 m4 flex mh1" id="breadcups">
-                                <input class="text-center" id="breadcups_value" type="number" placeholder="Bread Flour Cups">
-                                <label class="bold" for="breadcups_value">Bread</label>
-                            </div>
-                            <div class="input_field col s12 m4 flex mh1" id="oatcups">
-                                <input class="text-center" id="oatcups_value" type="number" placeholder="Rolled Oats Cups">
-                                <label class="bold" for="oatcups_value">Oats</label>
-                            </div>
-                            <div class="input_field col s12 m4 flex mh1" id="sugarcups">
-                                <input class="text-center" id="sugarcups_value" type="number" placeholder="White Sugar Cups">
-                                <label class="bold" for="sugarcups_value">Sugar</label>
+    <!--Cups-->
+    <div class="row users-cards mt1">
+        <div class="col s12 m9">
+            <div class="card horizontal">
+                <div class="card-content user-card flex-col">
+                    <h5>Cups</h5>
+                    <form>
+                        <div class="row flex-center">
+                            <div class="input_field col s12 m4 flex mh1" id="grams2">
+                                <input class="text-center" id="grams_value2" type="number" placeholder="Grams">
+                                <label class="bold" for="grams_value2">g</label>
                             </div>
                         </div>
-                    </div>
-                </form>
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="input_field col s12 m4 flex mh1"  id="drycups">
+                                    <input class="text-center" id="drycups_value" type="number" placeholder="Dry Goods Cups">
+                                    <label class="bold" for="drycups_value">Dry</label>
+                                </div>
+                                <div class="input_field col s12 m4 flex mh1"  id="wetcups">
+                                    <input class="text-center" id="wetcups_value" type="number" placeholder="Syrup Cups">
+                                    <label class="bold" for="wetcups_value">Syrup</label>
+                                </div>
+                                <div class="input_field col s12 m4 flex mh1"  id="buttercups">
+                                    <input class="text-center" id="buttercups_value" type="number" placeholder="Butter Cups">
+                                    <label class="bold" for="buttercups_value">Butter</label>
+                                </div>
+                                <div class="input_field col s12 m4 flex mh1" id="breadcups">
+                                    <input class="text-center" id="breadcups_value" type="number" placeholder="Bread Flour Cups">
+                                    <label class="bold" for="breadcups_value">Bread</label>
+                                </div>
+                                <div class="input_field col s12 m4 flex mh1" id="oatcups">
+                                    <input class="text-center" id="oatcups_value" type="number" placeholder="Rolled Oats Cups">
+                                    <label class="bold" for="oatcups_value">Oats</label>
+                                </div>
+                                <div class="input_field col s12 m4 flex mh1" id="sugarcups">
+                                    <input class="text-center" id="sugarcups_value" type="number" placeholder="White Sugar Cups">
+                                    <label class="bold" for="sugarcups_value">Sugar</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!--Volume-->
-<div class="row container users-cards mt1">
-    <div class="col s12 m9">
-        <div class="card horizontal">
-            <div class="card-content user-card flex-col">
-                <h5>Volume</h5>
-                <form>
-                    <div class="row">
-                        <div class="input_field col s12 m4 flex mh1" id="millilitres">
-                            <input class="text-center" id="ml_value" type="number" placeholder="Millilitres">
-                            <label class="bold" for="ml_value">ml</label>
+    <!--Volume-->
+    <div class="row users-cards mt1">
+        <div class="col s12 m9">
+            <div class="card horizontal">
+                <div class="card-content user-card flex-col">
+                    <h5>Volume</h5>
+                    <form>
+                        <div class="row">
+                            <div class="input_field col s12 m4 flex mh1" id="millilitres">
+                                <input class="text-center" id="ml_value" type="number" placeholder="Millilitres">
+                                <label class="bold" for="ml_value">ml</label>
+                            </div>
+                            <div class="input_field col s12 m4 flex mh1" id="fl_ounces">
+                                <input class="text-center" id="ouncesfl_value" type="number" placeholder="Fluid Ounces">
+                                <label class="bold" for="ouncesfl_value">floz</label>
+                            </div>
+                            <div class="input_field col s12 m4 flex mh1" id="cup_vol">
+                                <input class="text-center" id="cup_vol_value" type="number" placeholder="Cup">
+                                <label class="bold" for="cup_vol_value">Cup</label>
+                            </div>
                         </div>
-                        <div class="input_field col s12 m4 flex mh1" id="fl_ounces">
-                            <input class="text-center" id="ouncesfl_value" type="number" placeholder="Fluid Ounces">
-                            <label class="bold" for="ouncesfl_value">floz</label>
-                        </div>
-                        <div class="input_field col s12 m4 flex mh1" id="cup_vol">
-                            <input class="text-center" id="cup_vol_value" type="number" placeholder="Cup">
-                            <label class="bold" for="cup_vol_value">Cup</label>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!--Temperature-->
-<div class="row container users-cards mt1">
-    <div class="col s12 m9">
-        <div class="card horizontal">
-            <div class="card-content user-card flex-col">
-                <h5>Temperature</h5>
-                <form>
-                    <div class="row">
-                        <div class="input_field col s12 m4 flex mh1" id="celcius">
-                            <input class="text-center" id="celcius_value" type="number" placeholder="Celcius">
-                            <label class="bold" for="celcius_value">C</label>
+    <!--Temperature-->
+    <div class="row users-cards mt1">
+        <div class="col s12 m9">
+            <div class="card horizontal">
+                <div class="card-content user-card flex-col">
+                    <h5>Temperature</h5>
+                    <form>
+                        <div class="row">
+                            <div class="input_field col s12 m4 flex mh1" id="celcius">
+                                <input class="text-center" id="celcius_value" type="number" placeholder="Celcius">
+                                <label class="bold" for="celcius_value">C</label>
+                            </div>
+                            <div class="input_field col s12 m4 flex mh1" id="fahrenheit">
+                                <input class="text-center" id="fahrenheit_value" type="number" placeholder="Fahrenheit">
+                                <label class="bold" for="fahrenheit_value">F</label>
+                            </div>
+                            <div class="input_field col s12 m4 flex mh1"  id="kelvin">
+                                <input class="text-center" id="kelvin_value" type="number" placeholder="Kelvin">
+                                <label class="bold" for="kelvin_value">K</label>
+                            </div>
                         </div>
-                        <div class="input_field col s12 m4 flex mh1" id="fahrenheit">
-                            <input class="text-center" id="fahrenheit_value" type="number" placeholder="Fahrenheit">
-                            <label class="bold" for="fahrenheit_value">F</label>
-                        </div>
-                        <div class="input_field col s12 m4 flex mh1"  id="kelvin">
-                            <input class="text-center" id="kelvin_value" type="number" placeholder="Kelvin">
-                            <label class="bold" for="kelvin_value">K</label>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<!--Ingredients-->
+<section class=" container">
+    <div class="row users-cards mt1">
+        <div class="col s12 m9">
+            <div class="card horizontal">
+                <div class="card-content user-card flex-col">
+                    <h5>Ingredients</h5>
+                    {% for ingedient in ingredients %}
+                        <div class="col s12 m7">
+                            <div class="card horizontal">
+                                <div class="card-content user-card">
+                                    <p>{{ ingredients.ingredient_names}}</p>
+                                    <div class="edit-btns">
+                                        <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="#">
+                                            view
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 {% endblock %}

@@ -26,13 +26,13 @@
         </div>
     </div>
 
-<!--Recipe Cards-->
-<div class="row container">
-    {% for recipe in recipes %}
-        {% include "recipe_cards.html" %}
-        {% include "recipe_cards_lg.html" %}
-    {% endfor %}
-</div>
+    <!--Recipe Cards-->
+    <div class="row container">
+        {% for recipe in recipes %}
+            {% include "recipe_cards.html" %}
+            {% include "recipe_cards_lg.html" %}
+        {% endfor %}
+    </div>
 
     <!--PAGINATION-->
     <ul class="pagination center-align margin-bottom-large">

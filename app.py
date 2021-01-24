@@ -25,6 +25,7 @@ mongo = PyMongo(app)
 recipes_coll = mongo.db.recipes
 users_coll = mongo.db.users
 prep_coll = mongo.db.prep
+ingredients_coll = mongo.db.ingredients
 
 
 # ALL RECIPES
@@ -37,6 +38,8 @@ def recipes():
     created with the latest being shown first
     pagination limits the number of recipes displayed.
     """
+    # set title to display in browser tab
+    title = 'McTastic Recipes'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -52,6 +55,7 @@ def recipes():
 
     return render_template(
         "index.html",
+        title=title,
         recipes=recipes,
         current_page=current_page,
         pages=pages,
@@ -66,6 +70,8 @@ def sort():
     Displays all recipes in the order of the
     users preference.
     """
+    # set title to display in browser tab
+    title = 'McTastic Recipes'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -91,6 +97,7 @@ def sort():
 
     return render_template(
         "sorted.html",
+        title=title,
         sort_by=sort_by,
         recipes=recipes,
         current_page=current_page,
@@ -106,6 +113,8 @@ def sort_pag():
     Displays all recipes in the order of the
     users preference.
     """
+    # set title to display in browser tab
+    title = 'McTastic Recipes'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -131,6 +140,7 @@ def sort_pag():
 
     return render_template(
         "sorted.html",
+        title=title,
         sort_by=sort_by,
         recipes=recipes,
         current_page=current_page,
@@ -147,6 +157,8 @@ def users():
     Displays all users. This feature
     is only available to the admin.
     """
+    # set title to display in browser tab
+    title = 'McTastic Users'
     # set active page to apply active-link to nav link
     active_page = 'users'
     # code for pagination modified from irinatu17:
@@ -161,6 +173,7 @@ def users():
 
     return render_template(
         "users.html",
+        title=title,
         active_page=active_page,
         users=users,
         current_page=current_page,
@@ -176,6 +189,8 @@ def search():
     Searches recipes using the
     title and ingredients.
     """
+    # set title to display in browser tab
+    title = 'McTastic Recipes'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -193,11 +208,13 @@ def search():
 
     return render_template(
         "search.html",
+        title=title,
         recipes=recipes,
         current_page=current_page,
         pages=pages,
         number_of_all_rec=number_of_all_rec,
         query=query)
+
 
 # SEARCH PAGINATION
 @app.route("/searchp", methods=["GET", "POST"])
@@ -207,6 +224,8 @@ def searchp():
     Searches recipes using the
     title and ingredients.
     """
+    # set title to display in browser tab
+    title = 'McTastic Recipes'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -224,6 +243,7 @@ def searchp():
 
     return render_template(
         "search.html",
+        title=title,
         recipes=recipes,
         current_page=current_page,
         pages=pages,
@@ -239,6 +259,8 @@ def cooking():
     Searches recipes with a category
     of cooking.
     """
+    # set title to display in browser tab
+    title = 'McTastic Cooking'
     # set active page to apply active-link to nav link
     active_page = 'cooking'
     # code for pagination modified from irinatu17:
@@ -251,10 +273,11 @@ def cooking():
             (current_page - 1)*limit_per_page).limit(limit_per_page)
     # total of recipes in database
     number_of_all_rec = recipes.count()
-    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) +1)
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
 
     return render_template(
         "cooking.html",
+        title=title,
         active_page=active_page,
         recipes=recipes,
         current_page=current_page,
@@ -270,6 +293,8 @@ def baking():
     Searches recipes with a category
     of baking.
     """
+    # set title to display in browser tab
+    title = 'McTastic Baking'
     # set active page to apply active-link to nav link
     active_page = 'baking'
     # code for pagination modified from irinatu17:
@@ -286,6 +311,7 @@ def baking():
 
     return render_template(
         "baking.html",
+        title=title,
         active_page=active_page,
         recipes=recipes,
         current_page=current_page,
@@ -301,6 +327,8 @@ def snacks():
     Searches recipes with a category
     of snacks.
     """
+    # set title to display in browser tab
+    title = 'McTastic Snacks'
     # set active page to apply active-link to nav link
     active_page = 'snacks'
     # code for pagination modified from irinatu17:
@@ -317,6 +345,7 @@ def snacks():
 
     return render_template(
         "snacks.html",
+        title=title,
         active_page=active_page,
         recipes=recipes,
         current_page=current_page,
@@ -332,6 +361,8 @@ def profile(username):
     Displays the username and recipes
     of the session user.
     """
+    # set title to display in browser tab
+    title = 'McTastic Profile'
     # set active page to apply active-link to nav link
     active_page = 'profile'
     # grab the session user's username from db
@@ -350,6 +381,7 @@ def profile(username):
 
         return render_template(
             "profile.html",
+            title=title,
             active_page=active_page,
             username=username,
             recipes=recipes,
@@ -368,6 +400,8 @@ def admin_profile(username_view):
     Displays the username and recipes
     of the user selected by the admin.
     """
+    # set title to display in browser tab
+    title = 'McTastic Users'
     # set active page to apply active-link to nav link
     active_page = 'users'
     # grab the session user's username from db
@@ -385,6 +419,7 @@ def admin_profile(username_view):
             (current_page - 1) * limit_per_page).limit(limit_per_page)
     return render_template(
         "admin_profile.html",
+        title=title,
         active_page=active_page,
         user=user,
         recipes=recipes,
@@ -402,9 +437,16 @@ def single_recipe(recipe_id):
     READ
     Displays a single recipe.
     """
+    # combine site name with recipe name
+    rec_name = 'McTastic ' + (mongo.db.recipes.find_one(
+        {"_id": ObjectId(recipe_id)})['recipe_name'])
+    # set title to display in browser tab
+    title = rec_name
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     return render_template(
-        "single_recipe.html", recipe=recipe)
+        "single_recipe.html",
+        title=title,
+        recipe=recipe)
 
 
 # REGISTRATION
@@ -419,6 +461,8 @@ def register():
     to their page, if not they are prompted
     to try again.
     """
+    # set title to display in browser tab
+    title = 'McTastic Registration'
     # set active page to apply active-link to nav link
     active_page = 'register'
     if request.method == "POST":
@@ -442,6 +486,7 @@ def register():
         return redirect(url_for("profile", username=session["user"]))
     return render_template(
         "register.html",
+        title=title,
         active_page=active_page)
 
 
@@ -456,6 +501,8 @@ def login():
     successful the user is directed to
     their profile.
     """
+    # set title to display in browser tab
+    title = 'McTastic Login'
     # set active page to apply active-link to nav link
     active_page = 'login'
     if request.method == "POST":
@@ -484,6 +531,7 @@ def login():
 
     return render_template(
         "login.html",
+        title=title,
         active_page=active_page)
 
 
@@ -498,7 +546,8 @@ def logout():
     # remove user from session cookies
     flash("You have been logged out")
     session.pop("user")
-    return redirect(url_for("login"))
+    return redirect(url_for(
+        "login"))
 
 
 # INSERT RECIPE
@@ -510,6 +559,8 @@ def insert_recipe():
     and redirects user to homepage with
     a message to say recipe has been added.
     """
+    # set title to display in browser tab
+    title = 'McTastic Add Recipe'
     # set active page to apply active-link to nav link
     active_page = 'insert'
     if request.method == "POST":
@@ -533,13 +584,16 @@ def insert_recipe():
         }
         mongo.db.recipes.insert_one(recipe)
         flash("Recipe Successfully Added")
-        return redirect(url_for("recipes"))
+        return redirect(url_for(
+            "recipes",
+            title=title,))
 
     categories = mongo.db.categories.find().sort("category_name", 1)
     prep = mongo.db.prep.find().sort("prep", 1)
     return render_template(
         "insert_recipe.html",
         categories=categories,
+        title=title,
         prep=prep,
         active_page=active_page)
 
@@ -553,6 +607,8 @@ def edit_recipe(recipe_id):
     the recipe with a message to say edit
     has been successful.
     """
+    # set title to display in browser tab
+    title = 'McTastic Edit Recipe'
     # set active page to apply active-link to nav link
     active_page = 'edit'
     if request.method == "POST":
@@ -584,6 +640,7 @@ def edit_recipe(recipe_id):
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template(
         "edit_recipe.html",
+        title=title,
         recipe=recipe,
         categories=categories,
         active_page=active_page)
@@ -604,7 +661,9 @@ def delete_recipe(recipe_id):
         return redirect(url_for("recipes"))
 
     username = session['user']
-    return redirect(url_for("profile", username=username))
+    return redirect(url_for(
+        "profile",
+        username=username))
 
 
 # DELETE USER
@@ -620,7 +679,8 @@ def delete_user(username):
     mongo.db.users.remove({"username": username})
     mongo.db.recipes.remove({"created_by": username})
     flash("User Successfully Deleted")
-    return redirect(url_for("users"))
+    return redirect(url_for(
+        "users"))
 
 
 # UNITS
@@ -630,10 +690,15 @@ def units():
     READ
     Allows users to convert units
     """
+    # set title to display in browser tab
+    title = 'McTastic Units'
+    ingredients = mongo.db.ingredients.find()
     # set active page to apply active-link to nav link
     active_page = 'units'
     return render_template(
         "units.html",
+        title=title,
+        ingredients=ingredients,
         active_page=active_page)
 
 

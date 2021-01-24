@@ -702,6 +702,28 @@ def units():
         active_page=active_page)
 
 
+# 404 ERROR
+@app.errorhandler(404)
+def error_404(error):
+    '''
+    READ
+    Handles 404 error (page not found)
+    '''
+    return render_template('404.html', error=True,
+                           title="Page not found"), 404
+
+
+# 500 ERROR
+@app.errorhandler(500)
+def error_500(error):
+    '''
+    READ
+    Handles 500 error (internal server error)
+    '''
+    return render_template('500.html', error=True,
+                           title="Internal Server Error"), 500
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

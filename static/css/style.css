@@ -494,6 +494,17 @@ ul .instruction-list {
     border-bottom: 2px solid #263238;
 }
 
+/* UNITS PAGE */
+/* .unit_input {
+    width: 135px !important;
+}
+.unit_input_sm {
+    width: 70px !important;
+} */
+.unit_label {
+    width: 40px !important;
+} */
+
 /* MEDIA QUERIES */
 /*m tablet*/
 @media screen and (min-width: 600px) {

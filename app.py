@@ -172,7 +172,7 @@ def search():
     #  Search results
     recipes = recipes_coll.find(
         {"$text": {"$search": str(
-            query)}}).sort('_id', pymongo.ASCENDING).skip(
+            query)}}).sort('_id', pymongo.DESCENDING).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
     number_of_all_rec = recipes.count()
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
@@ -207,7 +207,7 @@ def searchp():
     #  Search results
     recipes = recipes_coll.find(
         {"$text": {"$search": str(
-            query)}}).sort('_id', pymongo.ASCENDING).skip(
+            query)}}).sort('_id', pymongo.DESCENDING).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
     number_of_all_rec = recipes.count()
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
@@ -353,6 +353,7 @@ def profile(username):
         return render_template(
             "profile.html",
             title=title,
+            number_of_user_rec=number_of_user_rec,
             active_page=active_page,
             username=username,
             recipes=recipes,

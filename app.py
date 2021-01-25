@@ -561,13 +561,40 @@ def insert_recipe():
             title=title,))
 
     categories = mongo.db.categories.find().sort("category_name", 1)
+    ingredients = mongo.db.ingredients.find()
     prep = mongo.db.prep.find().sort("prep", 1)
     return render_template(
         "insert_recipe.html",
         categories=categories,
+        ingredients=ingredients,
         title=title,
         prep=prep,
         active_page=active_page)
+
+
+# INSERT INGREDIENT
+@app.route("/insert_ingredient", methods=["GET", "POST"])
+def insert_ingredient():
+    """
+    READ
+    Inserts new ingredient to the database.
+    """
+    # set title to display in browser tab
+    title = 'McTastic Units'
+    # set active page to apply active-link to nav link
+    active_page = 'units'
+    if request.method == "POST":
+        ingredient = {
+            "ingredient_name": request.form.get("ingredient_name"),
+            "ingredient_cals": request.form.get("ingredient_cals"),
+            "created_by": session["user"]
+        }
+        mongo.db.ingredients.insert_one(ingredient)
+        flash("Ingredient Successfully Added")
+        return redirect(url_for(
+            "units",
+            title=title,
+            active_page=active_page))
 
 
 # EDIT RECIPE

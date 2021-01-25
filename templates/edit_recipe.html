@@ -74,17 +74,17 @@
                     <select id="recipe_time" name="recipe_time" class="validate" required>
                         <option value="" disabled>Prep Time</option>
                         {% if recipe.recipe_time ==  "&lt;30m" %}
-                            <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}
+                            <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}</option>
                             <option value=" &lt;60m"> &lt;60m</option>
                             <option value=" &gt;60m"> &gt;60m</option>
                         {% elif recipe.recipe_time ==  "&lt;60m" %}
                             <option value=" &lt;30m"> &lt;30m</option>
-                            <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}
+                            <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}</option>
                             <option value=" &gt;60m"> &gt;60m</option>
                         {% else %}
                             <option value=" &lt;30m"> &lt;30m</option>
                             <option value=" &lt;60m"> &lt;60m</option>
-                            <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}
+                            <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}</option>
                         {% endif %}
 
 

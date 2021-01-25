@@ -35,8 +35,8 @@ def recipes():
     """
     READ
     Displays all recipes in the order they were
-    created with the latest being shown first
-    pagination limits the number of recipes displayed.
+    created with the latest being shown first.
+    Pagination limits the number of recipes displayed.
     """
     # set title to display in browser tab
     title = 'McTastic Recipes'
@@ -44,9 +44,20 @@ def recipes():
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
-    print(current_page)
     # sort recipes
-    recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
+    # By default newsest are shown first
+    sort_by = request.form.get('sort_by')
+    if sort_by == 'az':
+        recipes = recipes_coll.find().sort('recipe_name', 1).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'za':
+        recipes = recipes_coll.find().sort('recipe_name', -1).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'oldest':
+        recipes = recipes_coll.find().sort('_id', pymongo.ASCENDING).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    else:
+        recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
 
     # total of recipes in database
@@ -55,50 +66,8 @@ def recipes():
 
     return render_template(
         "index.html",
-        title=title,
-        recipes=recipes,
-        current_page=current_page,
-        pages=pages,
-        number_of_all_rec=number_of_all_rec)
-
-
-# SORT
-@app.route("/sort", methods=['GET', 'POST'])
-def sort():
-    """
-    READ
-    Displays all recipes in the order of the
-    users preference.
-    """
-    # set title to display in browser tab
-    title = 'McTastic Recipes'
-    # code for pagination modified from irinatu17:
-    # https://github.com/irinatu17/MyCookBook
-    limit_per_page = 6
-    current_page = int(request.args.get('current_page', 1))
-    # sort recipes
-    sort_by = request.form.get('sort_by')
-    if sort_by == 'az':
-        recipes = recipes_coll.find().sort('recipe_name', 1).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    elif sort_by == 'za':
-        recipes = recipes_coll.find().sort('recipe_name', -1).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    elif sort_by == 'newest':
-        recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    else:
-        recipes = recipes_coll.find().sort('_id', pymongo.ASCENDING).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-
-    # total of recipes in database
-    number_of_all_rec = recipes_coll.count()
-    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
-
-    return render_template(
-        "sorted.html",
-        title=title,
         sort_by=sort_by,
+        title=title,
         recipes=recipes,
         current_page=current_page,
         pages=pages,
@@ -112,6 +81,7 @@ def sort_pag():
     READ
     Displays all recipes in the order of the
     users preference.
+    Pagination limits the number of recipes displayed.
     """
     # set title to display in browser tab
     title = 'McTastic Recipes'
@@ -139,7 +109,7 @@ def sort_pag():
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
 
     return render_template(
-        "sorted.html",
+        "index.html",
         title=title,
         sort_by=sort_by,
         recipes=recipes,
@@ -156,6 +126,7 @@ def users():
     READ
     Displays all users. This feature
     is only available to the admin.
+    Pagination limits the number of recipes displayed.
     """
     # set title to display in browser tab
     title = 'McTastic Users'

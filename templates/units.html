@@ -160,7 +160,7 @@
                                         <!-- Calories Name -->
                                         <div class="input-field col s12 m6 l3">
                                             <input id="ingredient_cals" name="ingredient_cals" type="number" minlength="1" maxlength="4" pattern="^[0-9]$" class="validate">
-                                            <label for="ingredient_cals">Calories per 100g</label>
+                                            <label for="ingredient_cal">Calories per 100g</label>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -176,21 +176,28 @@
                         </div>
                     </div>
                     {% endif %}
-                    {% for ingredient in ingredients %}
-                        <div class="col s12 m7">
-                            <div class="card horizontal">
-                                <div class="card-content user-card">
-                                    <div class="edit-btns">
-                                        <h5>{{ ingredient.ingredient_name }}</h5>
-                                        <p>{{ ingredient.ingredient_cal }} kcal per 100g</p>
-                                        <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="#">
-                                            view
-                                        </a>
+                    <div class="row">
+                        {% for ingredient in ingredients %}
+                            <div class="col s12 m6 card horizontal">
+                                <div class="card-content ingredient-card">
+                                    <div class="ingredient flex-col">
+                                        <div class="flex-space ingredient">
+                                            <h6>{{ ingredient.ingredient_name }}</h6>
+                                            <p>{{ ingredient.ingredient_cal }} kcal per 100g</p>
+                                        </div>
+                                        {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
+                                        <div class="flex-space ingredient">
+                                            <em>{{ ingredient.created_by }}</em>
+                                            <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
+                                            Delete
+                                            </a>
+                                        </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

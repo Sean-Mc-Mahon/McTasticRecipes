@@ -504,6 +504,14 @@ ul .instruction-list {
 .unit_label {
     width: 40px !important;
 }
+.ingredient {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.ingredient h6 {
+    margin: 0 0.5rem 0 0;
+}
 
 /* MEDIA QUERIES */
 /*m tablet*/

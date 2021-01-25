@@ -586,7 +586,7 @@ def insert_ingredient():
     if request.method == "POST":
         ingredient = {
             "ingredient_name": request.form.get("ingredient_name"),
-            "ingredient_cals": request.form.get("ingredient_cals"),
+            "ingredient_cal": request.form.get("ingredient_cal"),
             "created_by": session["user"]
         }
         mongo.db.ingredients.insert_one(ingredient)
@@ -665,6 +665,20 @@ def delete_recipe(recipe_id):
         username=username))
 
 
+# DELETE INGREDIENT
+@app.route("/delete_ingredient/<ingredient_id>")
+def delete_ingredient(ingredient_id):
+    """
+    READ
+    Deletes an ingredient and redirects user to
+    the units page with a message to say recipe
+    has been deleted. Only for admin use.
+    """
+    mongo.db.ingredients.remove({"_id": ObjectId(ingredient_id)})
+    flash("Ingredient Successfully Deleted")
+    return redirect(url_for("units"))
+
+
 # DELETE USER
 @app.route("/delete_user/<username>")
 def delete_user(username):
@@ -677,6 +691,7 @@ def delete_user(username):
     """
     mongo.db.users.remove({"username": username})
     mongo.db.recipes.remove({"created_by": username})
+    mongo.db.ingredients.remove({"created_by": username})
     flash("User Successfully Deleted")
     return redirect(url_for(
         "users"))
@@ -691,7 +706,7 @@ def units():
     """
     # set title to display in browser tab
     title = 'McTastic Units'
-    ingredients = mongo.db.ingredients.find()
+    ingredients = mongo.db.ingredients.find().sort("ingredient_name", 1)
     # set active page to apply active-link to nav link
     active_page = 'units'
     return render_template(

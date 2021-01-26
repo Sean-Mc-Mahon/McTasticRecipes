@@ -48,37 +48,37 @@
     <header>
         <!-- Top Nav Bar -->
         <nav class="nav-extended blue-grey darken-3 text-shadow">
-            <div class="nav-wrapper">
+            <div class="nav-wrapper slide">
                 <!-- LOGO -->
                 <div class="left">
                     <a class="logo valign-wrapper" href="{{ url_for('recipes')}}">
-                        <img id="logo" src="https://i.imgur.com/hwREljI.png" alt="logo">
-                        <h5 class="ml1">McTastic Recipes</h5>
+                        <img class="logo-img" id="logo" src="https://i.imgur.com/hwREljI.png" alt="logo">
+                        <h5 class="ml1 logo-text">McTastic Recipes</h5>
                     </a>
                 </div>
                 <!-- LINKS -->
-                <div class="right-align">
+                <div class="nav-links right-align">
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger right  ">
                     <i class="material-icons  right">menu</i></a>
                     <ul class="right hide-on-med-and-down  ">
-                        <li class="{{'active-link' if active_page == 'cooking'}}"><a id="cooking" href="{{ url_for('cooking')}}">Cooking</a></li>
-                        <li class="{{'active-link' if active_page == 'baking'}}"><a id="baking" href="{{ url_for('baking')}}">Baking</a></li>
-                        <li class="{{'active-link' if active_page == 'snacks'}}"><a id="snacks" href="{{ url_for('snacks')}}">Snacks</a></li>
+                        <li class="{{'active-link' if title == 'McTastic Cooking'}}"><a id="cooking" href="{{ url_for('cooking')}}">Cooking</a></li>
+                        <li class="{{'active-link' if title == 'McTastic Baking'}}"><a id="baking" href="{{ url_for('baking')}}">Baking</a></li>
+                        <li class="{{'active-link' if title == 'McTastic Snacks'}}"><a id="snacks" href="{{ url_for('snacks')}}">Snacks</a></li>
                         <!-- USERS -->
                         {% if session.user|lower == 'admin' %}
-                        <li class="{{'active-link' if active_page == 'users'}}"><a id="users" href="{{ url_for('users')}}">Users</a></li>
+                        <li class="{{'active-link' if title == 'McTastic Users'}}"><a id="users" href="{{ url_for('users')}}">Users</a></li>
                         {% endif %}
                         <!-- LOGGED IN USERS -->
                         {% if session.user %}
                             <li><a id="logout" href="{{ url_for('logout')}}">Log Out</a></li>
-                            <li class="{{'active-link' if active_page == 'insert'}}"><a id="add" href="{{ url_for('insert_recipe')}}">Add Recipe</a></li>
-                            <li class="{{'active-link' if active_page == 'profile'}}"><a id="profile" href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                            <li class="{{'active-link' if title == 'McTastic Add Recipe'}}"><a id="add" href="{{ url_for('insert_recipe')}}">Add Recipe</a></li>
+                            <li class="{{'active-link' if title == (session['user'] + '&apos s McTastic Profile' ) }}"><a id="profile" href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                         <!-- NOT LOGGED IN USERS -->
                         {% else %}
-                            <li class="{{'active-link' if active_page == 'login'}}"><a id="login" href="{{ url_for('login')}}">Log In</a></li>
-                            <li class="{{'active-link' if active_page == 'register'}}"><a id="register" href="{{ url_for('register')}}">Register</a></li>
+                            <li class="{{'active-link' if title == 'McTastic Login'}}"><a id="login" href="{{ url_for('login')}}">Log In</a></li>
+                            <li class="{{'active-link' if title == 'McTastic Registration'}}"><a id="register" href="{{ url_for('register')}}">Register</a></li>
                         {% endif %}
-                        <li class="{{'active-link' if active_page == 'units'}}"><a id="units" href="{{ url_for('units')}}">Units</a></li>
+                        <li class="{{'active-link' if title == 'McTastic Units'}}"><a id="units" href="{{ url_for('units')}}">Units</a></li>
                     </ul>
                 </div>
             </div>
@@ -191,7 +191,22 @@
             </div>
         </div>
     </footer>
-
+<!--GSAP used to animate divs in single_recipe-->
+<script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js" 
+    integrity="sha512-1dalHDkG9EtcOmCnoCjiwQ/HEB5SDNqw8d4G2MKoNwjiwMNeBAkudsBCmSlMnXdsH8Bm0mOd3tl/6nL5y0bMaQ==" 
+    crossorigin="anonymous">
+</script>
+<script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js" 
+    integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg==" 
+    crossorigin="anonymous">
+</script>
+<script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.js" 
+    integrity="sha512-judXDFLnOTJsUwd55lhbrX3uSoSQSOZR6vNrsll+4ViUFv+XOIr/xaIK96soMj6s5jVszd7I97a0H+WhgFwTEg==" 
+    crossorigin="anonymous">
+</script>
 <!--Sweet alert used for alerts upon form submission https://sweetalert.js.org/-->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Minified JQuery script taken from http://code.jquery.com/-->

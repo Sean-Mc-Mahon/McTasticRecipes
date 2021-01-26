@@ -21,12 +21,13 @@
     <div class="row container">
         <h5 class="m-all center-align">{{ number_of_all_rec }} Results for {{ query }}</h5>
         {% for recipe in recipes %}
-            {% include "recipe_cards.html" %}
-            {% include "recipe_cards_lg.html" %}
+            {% include "partials/recipe_cards.html" %}
+            {% include "partials/recipe_cards_lg.html" %}
         {% endfor %}
     </div>
     <!--PAGINATION-->
     <ul class="pagination center-align margin-bottom-large">
+        <h5>{{ number_of_all_rec }} Recipes</h5>
         {% for page_num in pages %} 
             {% if page_num == current_page %}
             <li class="active"><a>{{ page_num }}</a></li>

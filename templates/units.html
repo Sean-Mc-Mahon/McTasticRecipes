@@ -3,6 +3,7 @@
 
 <!--UNIT CONVERSIONS-->
 <section class="container">
+    <h3 class="center">Conversions</h3>
     <!--Weight-->
     <div class="row users-cards mt1">
         <div class="col s12 m9">
@@ -135,74 +136,6 @@
     </div>
 </section>
 
-<!--Ingredients-->
-<section class=" container">
-    <div class="row users-cards mt1">
-        <div class="col s12 m9">
-            <div class="card horizontal">
-                <div class="card-content user-card flex-col">
-                    <h5>Ingredient Calories</h5>
-                    <div class="edit-btns flex-center">
-                    {% if session.user %}
-                        <!-- Modal Trigger -->
-                        <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Add</a>
-
-                        <!-- Modal Structure -->
-                        <div id="modal1" class="modal  card-outline">
-                            <div class="modal-content">
-                                <form class="col l12" method="POST" action="{{ url_for('insert_ingredient') }}">
-                                    <div class="row">
-                                        <!-- Ingredient Name -->
-                                        <div class="input-field col s12 l5">
-                                            <input id="ingredient_name" name="ingredient_name" type="text" minlength="1" maxlength="25" class="validate" required>
-                                            <label for="ingredient_name">Ingredient Name *</label>
-                                        </div>
-                                        <!-- Calories Name -->
-                                        <div class="input-field col s12 m6 l3">
-                                            <input id="ingredient_cals" name="ingredient_cals" type="number" minlength="1" maxlength="4" pattern="^[0-9]$" class="validate">
-                                            <label for="ingredient_cal">Calories per 100g</label>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                <a href="#!" class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Cancel</a>
-                                <button class="btn waves-effect waves-light transparent btn-outline" id="submit_ingredient" type="submit" name="action">
-                                    Add
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                                </form>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    {% endif %}
-                    <div class="row">
-                        {% for ingredient in ingredients %}
-                            <div class="col s12 m6 card horizontal">
-                                <div class="card-content ingredient-card">
-                                    <div class="ingredient flex-col">
-                                        <div class="flex-space ingredient">
-                                            <h6>{{ ingredient.ingredient_name }}</h6>
-                                            <p>{{ ingredient.ingredient_cal }} kcal per 100g</p>
-                                        </div>
-                                        {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
-                                        <div class="flex-space ingredient">
-                                            <em>{{ ingredient.created_by }}</em>
-                                            <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
-                                            Delete
-                                            </a>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
+{% include "partials/ingredient_cards.html" %}
 
 {% endblock %}

@@ -129,9 +129,8 @@ def users():
     Pagination limits the number of recipes displayed.
     """
     # set title to display in browser tab
+    # and apply active-link to nav link
     title = 'McTastic Users'
-    # set active page to apply active-link to nav link
-    active_page = 'users'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -145,7 +144,6 @@ def users():
     return render_template(
         "users.html",
         title=title,
-        active_page=active_page,
         users=users,
         current_page=current_page,
         pages=pages,
@@ -231,9 +229,8 @@ def cooking():
     of cooking.
     """
     # set title to display in browser tab
+    # and apply active-link to nav link
     title = 'McTastic Cooking'
-    # set active page to apply active-link to nav link
-    active_page = 'cooking'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -249,7 +246,6 @@ def cooking():
     return render_template(
         "cooking.html",
         title=title,
-        active_page=active_page,
         recipes=recipes,
         current_page=current_page,
         pages=pages,
@@ -265,9 +261,8 @@ def baking():
     of baking.
     """
     # set title to display in browser tab
+    # and apply active-link to nav link
     title = 'McTastic Baking'
-    # set active page to apply active-link to nav link
-    active_page = 'baking'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -283,7 +278,6 @@ def baking():
     return render_template(
         "baking.html",
         title=title,
-        active_page=active_page,
         recipes=recipes,
         current_page=current_page,
         pages=pages,
@@ -299,9 +293,8 @@ def snacks():
     of snacks.
     """
     # set title to display in browser tab
+    # and apply active-link to nav link
     title = 'McTastic Snacks'
-    # set active page to apply active-link to nav link
-    active_page = 'snacks'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -317,7 +310,6 @@ def snacks():
     return render_template(
         "snacks.html",
         title=title,
-        active_page=active_page,
         recipes=recipes,
         current_page=current_page,
         pages=pages,
@@ -332,13 +324,13 @@ def profile(username):
     Displays the username and recipes
     of the session user.
     """
-    # set title to display in browser tab
-    title = 'McTastic Profile'
-    # set active page to apply active-link to nav link
-    active_page = 'profile'
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
+    # combine site name with user name to
+    # set title to display in browser tab
+    # and apply active-link to nav link
+    title = username + ("s McTastic Profile")
 
     if session["user"]:
         user_recipes = recipes_coll.find({"created_by": session["user"]})
@@ -354,7 +346,6 @@ def profile(username):
             "profile.html",
             title=title,
             number_of_user_rec=number_of_user_rec,
-            active_page=active_page,
             username=username,
             recipes=recipes,
             user_recipes=user_recipes,
@@ -373,9 +364,8 @@ def admin_profile(username_view):
     of the user selected by the admin.
     """
     # set title to display in browser tab
+    # and apply active-link to nav link
     title = 'McTastic Users'
-    # set active page to apply active-link to nav link
-    active_page = 'users'
     # grab the session user's username from db
     user = users_coll.find_one(
         {"username": username_view})
@@ -392,7 +382,6 @@ def admin_profile(username_view):
     return render_template(
         "admin_profile.html",
         title=title,
-        active_page=active_page,
         user=user,
         recipes=recipes,
         username=username,
@@ -434,9 +423,8 @@ def register():
     to try again.
     """
     # set title to display in browser tab
+    # and apply active-link to nav link
     title = 'McTastic Registration'
-    # set active page to apply active-link to nav link
-    active_page = 'register'
     if request.method == "POST":
         # check if username already exists in db
         existing_user = mongo.db.users.find_one(
@@ -458,8 +446,7 @@ def register():
         return redirect(url_for("profile", username=session["user"]))
     return render_template(
         "register.html",
-        title=title,
-        active_page=active_page)
+        title=title,)
 
 
 # LOGIN
@@ -474,9 +461,8 @@ def login():
     their profile.
     """
     # set title to display in browser tab
+    # and apply active-link to nav link
     title = 'McTastic Login'
-    # set active page to apply active-link to nav link
-    active_page = 'login'
     if request.method == "POST":
         # check if username exists
         existing_user = mongo.db.users.find_one(
@@ -503,8 +489,7 @@ def login():
 
     return render_template(
         "login.html",
-        title=title,
-        active_page=active_page)
+        title=title,)
 
 
 # LOGOUT
@@ -532,9 +517,8 @@ def insert_recipe():
     a message to say recipe has been added.
     """
     # set title to display in browser tab
+    # and apply active-link to nav link
     title = 'McTastic Add Recipe'
-    # set active page to apply active-link to nav link
-    active_page = 'insert'
     if request.method == "POST":
         recipe_is_vegetarian = "on" if request.form.get(
             "recipe_is_vegetarian") else "off"
@@ -561,12 +545,30 @@ def insert_recipe():
             title=title,))
 
     categories = mongo.db.categories.find().sort("category_name", 1)
-    ingredients = mongo.db.ingredients.find()
+    dairy_ingredients = mongo.db.ingredients.find(
+        {"group_name": "Dairy"}).sort("ingredient_name", 1)
+    fruit_ingredients = mongo.db.ingredients.find(
+        {"group_name": "Fruit"}).sort("ingredient_name", 1)
+    grain_ingredients = mongo.db.ingredients.find(
+        {"group_name": "Grains"}).sort("ingredient_name", 1)
+    protein_ingredients = mongo.db.ingredients.find(
+        {"group_name": "Protein"}).sort("ingredient_name", 1)
+    spice_ingredients = mongo.db.ingredients.find(
+        {"group_name": "Oils & Spices"}).sort("ingredient_name", 1)
+    sweet_ingredients = mongo.db.ingredients.find(
+        {"group_name": "Sweet"}).sort("ingredient_name", 1)
+    veg_ingredients = mongo.db.ingredients.find(
+        {"group_name": "Veg"}).sort("ingredient_name", 1)
     prep = mongo.db.prep.find().sort("prep", 1)
     return render_template(
         "insert_recipe.html",
         categories=categories,
-        ingredients=ingredients,
+        dairy_ingredients=dairy_ingredients,
+        fruit_ingredients=fruit_ingredients,
+        grain_ingredients=grain_ingredients,
+        spice_ingredients=spice_ingredients,
+        sweet_ingredients=sweet_ingredients,
+        veg_ingredients=veg_ingredients,
         title=title,
         prep=prep,
         active_page=active_page)
@@ -580,21 +582,32 @@ def insert_ingredient():
     Inserts new ingredient to the database.
     """
     # set title to display in browser tab
+    # andset active page to apply active-link to nav link
     title = 'McTastic Units'
-    # set active page to apply active-link to nav link
-    active_page = 'units'
     if request.method == "POST":
+        # check if ingredient already exists in db
+        existing_ingredient = mongo.db.ingredients.find_one(
+            {"ingredient_name": request.form.get("ingredient_name")})
+        # If ingredient already exists then only Creator may edit it
+        if existing_ingredient:
+            if existing_ingredient["created_by"] == session['user']:
+                mongo.db.ingredients.remove(existing_ingredient)
+            else:
+                flash("Ingredient already exists")
+                return redirect(url_for("units"))
+
         ingredient = {
             "ingredient_name": request.form.get("ingredient_name"),
             "ingredient_cal": request.form.get("ingredient_cal"),
+            "group_name": request.form.get("group_name"),
+            "unit_name": request.form.get("unit_name"),
             "created_by": session["user"]
         }
         mongo.db.ingredients.insert_one(ingredient)
         flash("Ingredient Successfully Added")
         return redirect(url_for(
             "units",
-            title=title,
-            active_page=active_page))
+            title=title,))
 
 
 # EDIT RECIPE
@@ -705,15 +718,38 @@ def units():
     Allows users to convert units
     """
     # set title to display in browser tab
+    # and apply active-link to nav link
     title = 'McTastic Units'
     ingredients = mongo.db.ingredients.find().sort("ingredient_name", 1)
-    # set active page to apply active-link to nav link
-    active_page = 'units'
+    dairy_ingredients = mongo.db.ingredients.find(
+        {"group_name": "Dairy"}).sort("ingredient_name", 1)
+    fruit_ingredients = mongo.db.ingredients.find(
+        {"group_name": "Fruit"}).sort("ingredient_name", 1)
+    grain_ingredients = mongo.db.ingredients.find(
+        {"group_name": "Grains"}).sort("ingredient_name", 1)
+    protein_ingredients = mongo.db.ingredients.find(
+        {"group_name": "Protein"}).sort("ingredient_name", 1)
+    spice_ingredients = mongo.db.ingredients.find(
+        {"group_name": "Oils & Spices"}).sort("ingredient_name", 1)
+    sweet_ingredients = mongo.db.ingredients.find(
+        {"group_name": "Sweet"}).sort("ingredient_name", 1)
+    veg_ingredients = mongo.db.ingredients.find(
+        {"group_name": "Veg"}).sort("ingredient_name", 1)
+    food_groups = mongo.db.food_groups.find().sort("group_name", 1)
+    units = mongo.db.units.find().sort("unit_name", 1)
     return render_template(
         "units.html",
         title=title,
+        food_groups=food_groups,
+        units=units,
         ingredients=ingredients,
-        active_page=active_page)
+        dairy_ingredients=dairy_ingredients,
+        fruit_ingredients=fruit_ingredients,
+        grain_ingredients=grain_ingredients,
+        spice_ingredients=spice_ingredients,
+        sweet_ingredients=sweet_ingredients,
+        veg_ingredients=veg_ingredients,
+        protein_ingredients=protein_ingredients)
 
 
 # 404 ERROR

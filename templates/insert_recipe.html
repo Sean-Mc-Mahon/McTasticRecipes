@@ -118,20 +118,7 @@
             </div>
         </form>
     </div>
-    {% for ingredient in ingredients %}
-    <div class="row container">
-        <div class="col s12 m6">
-            <div class="card horizontal">
-                <div class="card-content user-card">
-                    <div class="edit-btns">
-                        <h5>{{ ingredient.ingredient_name }}</h5>
-                        <p>{{ ingredient.ingredient_cal }} kcal per 100g</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-    
+
+{% include "partials/ingredient_cards.html" %}
 
 {% endblock%}

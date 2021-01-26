@@ -94,6 +94,11 @@ h1,h2,h3,h4,h5,h6 {
     display: flex;
     align-items: center;
 }
+.flex-right {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
 .flex-space {
     display: flex;
     align-items: center;
@@ -109,6 +114,12 @@ h1,h2,h3,h4,h5,h6 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.flex-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 /* Margin Rules */
@@ -504,13 +515,23 @@ ul .instruction-list {
 .unit_label {
     width: 40px !important;
 }
-.ingredient {
+.w100 {
     width: 100%;
-    display: flex;
-    align-items: center;
 }
 .ingredient h6 {
     margin: 0 0.5rem 0 0;
+}
+.ingredient .flex {
+    min-width: 230px;
+}
+#modal1 {
+    min-height: 500px;
+}
+.sm-card .card .card-content {
+    padding: 0.5rem;
+}
+.sm-card .card {
+    margin: .5rem 0 .5rem 0;
 }
 
 /* MEDIA QUERIES */
@@ -540,9 +561,13 @@ ul .instruction-list {
 
 
 /* l desktop */
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 993px) {
     .card-outline {
     padding: 1rem;
+    }
+    /* ingredient card */
+    .sm-card .card {
+        min-height: 70px;
     }
     
     /* single recipe page */

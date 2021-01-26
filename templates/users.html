@@ -21,6 +21,7 @@
 
     <!--PAGINATION-->
     <ul class="pagination center-align margin-bottom-large">
+        <h5>{{ number_of_all_users }} Users</h5>
         {% for page_num in pages %} 
             {% if page_num == current_page %}
             <li class="active"><a>{{ page_num }}</a></li>

@@ -45,8 +45,11 @@ def recipes():
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # sort recipes
+    if request.method == "POST":
+        sort_by = request.form.get('sort_by')
+    else:
+        sort_by = request.args.get('sort_by')
     # By default newsest are shown first
-    sort_by = request.form.get('sort_by')
     if sort_by == 'az':
         recipes = recipes_coll.find().sort('recipe_name', 1).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
@@ -68,50 +71,6 @@ def recipes():
         "index.html",
         sort_by=sort_by,
         title=title,
-        recipes=recipes,
-        current_page=current_page,
-        pages=pages,
-        number_of_all_rec=number_of_all_rec)
-
-
-# SORT_PAG
-@app.route("/sort_pag", methods=['GET', 'POST'])
-def sort_pag():
-    """
-    READ
-    Displays all recipes in the order of the
-    users preference.
-    Pagination limits the number of recipes displayed.
-    """
-    # set title to display in browser tab
-    title = 'McTastic Recipes'
-    # code for pagination modified from irinatu17:
-    # https://github.com/irinatu17/MyCookBook
-    limit_per_page = 6
-    current_page = int(request.args.get('current_page', 1))
-    # sort recipes
-    sort_by = request.args.get('sort_by')
-    if sort_by == 'az':
-        recipes = recipes_coll.find().sort('recipe_name', 1).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    elif sort_by == 'za':
-        recipes = recipes_coll.find().sort('recipe_name', -1).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    elif sort_by == 'newest':
-        recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    else:
-        recipes = recipes_coll.find().sort('_id', pymongo.ASCENDING).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-
-    # total of recipes in database
-    number_of_all_rec = recipes_coll.count()
-    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
-
-    return render_template(
-        "index.html",
-        title=title,
-        sort_by=sort_by,
         recipes=recipes,
         current_page=current_page,
         pages=pages,
@@ -165,42 +124,10 @@ def search():
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
 
-    query = request.form.get('query')
-
-    #  Search results
-    recipes = recipes_coll.find(
-        {"$text": {"$search": str(
-            query)}}).sort('_id', pymongo.DESCENDING).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    number_of_all_rec = recipes.count()
-    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
-
-    return render_template(
-        "search.html",
-        title=title,
-        recipes=recipes,
-        current_page=current_page,
-        pages=pages,
-        number_of_all_rec=number_of_all_rec,
-        query=query)
-
-
-# SEARCH PAGINATION
-@app.route("/searchp", methods=["GET", "POST"])
-def searchp():
-    """
-    READ
-    Searches recipes using the
-    title and ingredients.
-    """
-    # set title to display in browser tab
-    title = 'McTastic Recipes'
-    # code for pagination modified from irinatu17:
-    # https://github.com/irinatu17/MyCookBook
-    limit_per_page = 6
-    current_page = int(request.args.get('current_page', 1))
-
-    query = request.args.get('query')
+    if request.method == "POST":
+        query = request.form.get('query')
+    else:
+        query = request.args.get('query')
 
     #  Search results
     recipes = recipes_coll.find(
@@ -570,8 +497,7 @@ def insert_recipe():
         sweet_ingredients=sweet_ingredients,
         veg_ingredients=veg_ingredients,
         title=title,
-        prep=prep,
-        active_page=active_page)
+        prep=prep)
 
 
 # INSERT INGREDIENT

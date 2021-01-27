@@ -42,11 +42,7 @@
             <li class="active"><a>{{ page_num }}</a></li>
             {% else %}
             <li class="waves-effect">
-                {% if sort_by == '' %}
-                <a href="{{ url_for('recipes', current_page=page_num) }}">{{ page_num }}</a>
-                {% else %}
-                <a href="{{ url_for('sort_pag', sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
-                {% endif %}
+                <a href="{{ url_for('recipes', sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
             </li>
             {% endif %} 
         {% endfor %}

@@ -19,6 +19,7 @@
         {% endfor %}
         
     </div>
+    {% if number_of_user_rec > 0 %}
     <!--PAGINATION-->
         <ul class="pagination center-align margin-bottom-large">
             <h5>{{ number_of_user_rec }} Recipes</h5>
@@ -32,5 +33,6 @@
                 {% endif %}
             {% endfor %}
         </ul>
+    {% endif %}
 
 {% endblock %}

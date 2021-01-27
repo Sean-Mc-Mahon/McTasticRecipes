@@ -47,8 +47,11 @@ def recipes():
     # sort recipes
     if request.method == "POST":
         sort_by = request.form.get('sort_by')
+        query = request.form.get('query')
     else:
         sort_by = request.args.get('sort_by')
+        query = request.args.get('query')
+
     # By default newsest are shown first
     if sort_by == 'az':
         recipes = recipes_coll.find().sort('recipe_name', 1).skip(
@@ -63,8 +66,14 @@ def recipes():
         recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
 
+    if query:
+        recipes = recipes_coll.find(
+            {"$text": {"$search": str(
+                query)}}).sort('_id', pymongo.DESCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+
     # total of recipes in database
-    number_of_all_rec = recipes_coll.count()
+    number_of_all_rec = recipes.count()
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
 
     return render_template(
@@ -74,7 +83,8 @@ def recipes():
         recipes=recipes,
         current_page=current_page,
         pages=pages,
-        number_of_all_rec=number_of_all_rec)
+        number_of_all_rec=number_of_all_rec,
+        query=query)
 
 
 # ALL USERS
@@ -118,7 +128,7 @@ def search():
     title and ingredients.
     """
     # set title to display in browser tab
-    title = 'McTastic Recipes'
+    title = 'McTastic Search'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -126,8 +136,10 @@ def search():
 
     if request.method == "POST":
         query = request.form.get('query')
+        sort_by = request.args.get('sort_by')
     else:
         query = request.args.get('query')
+        sort_by = request.args.get('sort_by')
 
     #  Search results
     recipes = recipes_coll.find(
@@ -138,13 +150,124 @@ def search():
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
 
     return render_template(
-        "search.html",
+        "index.html",
         title=title,
         recipes=recipes,
         current_page=current_page,
         pages=pages,
         number_of_all_rec=number_of_all_rec,
-        query=query)
+        query=query,
+        sort_by=sort_by)
+
+
+# SORT
+@app.route("/sort", methods=["GET", "POST"])
+def sort():
+    """
+    READ
+    Sorts ingredients by user preference
+    """
+    # set title to display in browser tab
+    title = 'McTastic Recipes Sort'
+    # code for pagination modified from irinatu17:
+    # https://github.com/irinatu17/MyCookBook
+    limit_per_page = 6
+    current_page = int(request.args.get('current_page', 1))
+
+    if request.method == "POST":
+        query = request.args.get('query')
+        sort_by = request.form.get('sort_by')
+        recipes = request.form.get('recipes')
+    else:
+        query = request.args.get('query')
+        sort_by = request.args.get('sort_by')
+        recipes = request.args.get('recipes')
+
+    if sort_by == 'az':
+        recipes = mongo.db.recipes.find().sort('recipe_name', 1).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'za':
+        recipes = mongo.db.recipes.find().sort('recipe_name', -1).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'oldest':
+        recipes = mongo.db.recipes.find().sort('_id', pymongo.ASCENDING).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    else:
+        recipes = mongo.db.recipes.find().sort('_id', pymongo.DESCENDING).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+
+    # total of recipes
+    number_of_all_rec = recipes.count()
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
+
+    return render_template(
+        "index.html",
+        title=title,
+        recipes=recipes,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_rec=number_of_all_rec,
+        query=query,
+        sort_by=sort_by)
+
+
+# SORT QUERY
+@app.route("/sort_query", methods=["GET", "POST"])
+def sort_query():
+    """
+    READ
+    Sorts ingredients by user preference
+    """
+    # set title to display in browser tab
+    title = 'McTastic Recipes Search Sort'
+    # code for pagination modified from irinatu17:
+    # https://github.com/irinatu17/MyCookBook
+    limit_per_page = 6
+    current_page = int(request.args.get('current_page', 1))
+
+    if request.method == "POST":
+        query = request.args.get('query')
+        sort_by = request.form.get('sort_by')
+        recipes = request.form.get('recipes')
+    else:
+        query = request.args.get('query')
+        sort_by = request.args.get('sort_by')
+        recipes = request.args.get('recipes')
+
+    if sort_by == 'az':
+        recipes = recipes_coll.find(
+            {"$text": {"$search": str(
+                query)}}).sort('recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'za':
+        recipes = recipes_coll.find(
+            {"$text": {"$search": str(
+                query)}}).sort('recipe_name', -1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'oldest':
+        recipes = recipes_coll.find(
+            {"$text": {"$search": str(
+                query)}}).sort('_id', pymongo.ASCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+    else:
+        recipes = recipes_coll.find(
+            {"$text": {"$search": str(
+                query)}}).sort('_id', pymongo.DESCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+
+    # total of recipes
+    number_of_all_rec = recipes.count()
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
+
+    return render_template(
+        "index.html",
+        title=title,
+        recipes=recipes,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_rec=number_of_all_rec,
+        query=query,
+        sort_by=sort_by)
 
 
 # COOKING

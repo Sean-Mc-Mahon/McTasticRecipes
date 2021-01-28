@@ -261,6 +261,7 @@ This section contains a form where users may provide details for their recipes.
 12. **Croppola** Used to crop images; https://croppola.com/
 13. **Randomkeygen/** Used to generate random keys; https://randomkeygen.com/
 14. **Kaffeine** Used to keep Heroku app from falling asleep; https://kaffeine.herokuapp.com/
+15. **Uptime Robot** Used to keep Heroku app from falling asleep; https://uptimerobot.com/
 
 ### Libraries
 

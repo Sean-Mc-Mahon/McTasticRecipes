@@ -70,7 +70,7 @@ function sendMail(contactForm) {
 
 //IMAGE AND TEXT REVEALS FOR SINGLE_RECIPE
 //code modified from tutorial as part of Creative Javascript Course @ https://developedbyed.com/
-if (window.location.pathname=='/recipes') {
+if (window.location.pathname=='/') {
     function animateNav() {
     //Select Slides
     const sliders = document.querySelectorAll(".slide");

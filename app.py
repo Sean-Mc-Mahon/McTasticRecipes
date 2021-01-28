@@ -30,7 +30,7 @@ ingredients_coll = mongo.db.ingredients
 
 # ALL RECIPES
 @app.route("/")
-@app.route("/recipes", methods=['GET', 'POST'])
+@app.route("/recipes")
 def recipes():
     """
     READ
@@ -44,33 +44,9 @@ def recipes():
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
-    # sort recipes
-    if request.method == "POST":
-        sort_by = request.form.get('sort_by')
-        query = request.form.get('query')
-    else:
-        sort_by = request.args.get('sort_by')
-        query = request.args.get('query')
-
-    # By default newsest are shown first
-    if sort_by == 'az':
-        recipes = recipes_coll.find().sort('recipe_name', 1).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    elif sort_by == 'za':
-        recipes = recipes_coll.find().sort('recipe_name', -1).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    elif sort_by == 'oldest':
-        recipes = recipes_coll.find().sort('_id', pymongo.ASCENDING).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    else:
-        recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-
-    if query:
-        recipes = recipes_coll.find(
-            {"$text": {"$search": str(
-                query)}}).sort('_id', pymongo.DESCENDING).skip(
-                (current_page - 1)*limit_per_page).limit(limit_per_page)
+    # sort recipes by newest first
+    recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
+        (current_page - 1)*limit_per_page).limit(limit_per_page)
 
     # total of recipes in database
     number_of_all_rec = recipes.count()
@@ -78,13 +54,11 @@ def recipes():
 
     return render_template(
         "index.html",
-        sort_by=sort_by,
         title=title,
         recipes=recipes,
         current_page=current_page,
         pages=pages,
-        number_of_all_rec=number_of_all_rec,
-        query=query)
+        number_of_all_rec=number_of_all_rec)
 
 
 # ALL USERS
@@ -106,8 +80,10 @@ def users():
     current_page = int(request.args.get('current_page', 1))
     # total of users in database
     number_of_all_users = users_coll.count()
+    #  Number of Pages
     pages = range(1, int(math.ceil(number_of_all_users / limit_per_page)) + 1)
-    users = users_coll.find().sort('_id', pymongo.DESCENDING).skip(
+    # sort users by alphabetical order
+    users = users_coll.find().sort('username', 1).skip(
         (current_page - 1)*limit_per_page).limit(limit_per_page)
 
     return render_template(
@@ -135,18 +111,21 @@ def search():
     current_page = int(request.args.get('current_page', 1))
 
     if request.method == "POST":
+        # used when a search is made
         query = request.form.get('query')
-        sort_by = request.args.get('sort_by')
     else:
+        # used when a pagination link is clicked
         query = request.args.get('query')
-        sort_by = request.args.get('sort_by')
 
+    sort_by = "Sort By"
     #  Search results
     recipes = recipes_coll.find(
         {"$text": {"$search": str(
             query)}}).sort('_id', pymongo.DESCENDING).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
+    #  Number of Search results
     number_of_all_rec = recipes.count()
+    #  Number of Pages
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
 
     return render_template(
@@ -165,7 +144,7 @@ def search():
 def sort():
     """
     READ
-    Sorts ingredients by user preference
+    Sorts recipes by user preference
     """
     # set title to display in browser tab
     title = 'McTastic Recipes Sort'
@@ -175,21 +154,23 @@ def sort():
     current_page = int(request.args.get('current_page', 1))
 
     if request.method == "POST":
+        # used when a sort parameter is selected
         query = request.args.get('query')
         sort_by = request.form.get('sort_by')
-        recipes = request.form.get('recipes')
     else:
+        # used when a pagination link is clicked
         query = request.args.get('query')
         sort_by = request.args.get('sort_by')
-        recipes = request.args.get('recipes')
 
-    if sort_by == 'az':
+    # sort recipes by user preference
+    # selected preference is displayed in the sort label
+    if sort_by == 'A-Z':
         recipes = mongo.db.recipes.find().sort('recipe_name', 1).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
-    elif sort_by == 'za':
+    elif sort_by == 'Z-A':
         recipes = mongo.db.recipes.find().sort('recipe_name', -1).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
-    elif sort_by == 'oldest':
+    elif sort_by == 'Oldest':
         recipes = mongo.db.recipes.find().sort('_id', pymongo.ASCENDING).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
     else:
@@ -198,6 +179,7 @@ def sort():
 
     # total of recipes
     number_of_all_rec = recipes.count()
+    # number of pages
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
 
     return render_template(
@@ -216,7 +198,8 @@ def sort():
 def sort_query():
     """
     READ
-    Sorts ingredients by user preference
+    Sorts ingredients by user preference.
+    Used following a search
     """
     # set title to display in browser tab
     title = 'McTastic Recipes Search Sort'
@@ -226,25 +209,26 @@ def sort_query():
     current_page = int(request.args.get('current_page', 1))
 
     if request.method == "POST":
+        # used when a sort parameter is selected following a search
         query = request.args.get('query')
         sort_by = request.form.get('sort_by')
-        recipes = request.form.get('recipes')
     else:
+        # used when a pagination link is clicked
         query = request.args.get('query')
         sort_by = request.args.get('sort_by')
-        recipes = request.args.get('recipes')
 
-    if sort_by == 'az':
+    # sort recipes by user preference
+    if sort_by == 'A-Z':
         recipes = recipes_coll.find(
             {"$text": {"$search": str(
                 query)}}).sort('recipe_name', 1).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
-    elif sort_by == 'za':
+    elif sort_by == 'Z-A':
         recipes = recipes_coll.find(
             {"$text": {"$search": str(
                 query)}}).sort('recipe_name', -1).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
-    elif sort_by == 'oldest':
+    elif sort_by == 'Oldest':
         recipes = recipes_coll.find(
             {"$text": {"$search": str(
                 query)}}).sort('_id', pymongo.ASCENDING).skip(
@@ -267,6 +251,272 @@ def sort_query():
         pages=pages,
         number_of_all_rec=number_of_all_rec,
         query=query,
+        sort_by=sort_by)
+
+
+# SORT FILTER
+@app.route("/sort_filter", methods=["GET", "POST"])
+def sort_filter():
+    """
+    READ
+    Sorts filter by user preference.
+    Used following a filter
+    """
+    # set title to display in browser tab
+    title = 'McTastic Recipes Sort Filter'
+    # code for pagination modified from irinatu17:
+    # https://github.com/irinatu17/MyCookBook
+    limit_per_page = 6
+    current_page = int(request.args.get('current_page', 1))
+
+    if request.method == "POST":
+        # used when a sort parameter is selected following a search
+        sort_by = request.form.get('sort_by')
+        filter_by = request.args.get('filter_by')
+    else:
+        # used when a pagination link is clicked
+        sort_by = request.args.get('sort_by')
+        filter_by = request.args.get('filter_by')
+
+    # sort recipes by user preference
+    if sort_by == 'A-Z':
+        if filter_by == "Cooking":
+            recipes = recipes_coll.find(
+                {"category_name": "cooking"}).sort(
+                    'recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        elif filter_by == "Baking":
+            recipes = recipes_coll.find(
+                {"category_name": "baking"}).sort(
+                    'recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find(
+                {"category_name": "snacks"}).sort(
+                    'recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'Z-A':
+        if filter_by == "Cooking":
+            recipes = recipes_coll.find(
+                {"category_name": "cooking"}).sort(
+                    'recipe_name', -1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        elif filter_by == "Baking":
+            recipes = recipes_coll.find(
+                {"category_name": "baking"}).sort(
+                    'recipe_name', -1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find(
+                {"category_name": "snacks"}).sort(
+                    'recipe_name', -1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'Oldest':
+        if filter_by == "Cooking":
+            recipes = recipes_coll.find(
+                {"category_name": "cooking"}).sort(
+                    '_id', pymongo.ASCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        elif filter_by == "Baking":
+            recipes = recipes_coll.find(
+                {"category_name": "baking"}).sort(
+                    '_id', pymongo.ASCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find(
+                {"category_name": "snacks"}).sort(
+                    '_id', pymongo.ASCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+    else:
+        if filter_by == "Cooking":
+            recipes = recipes_coll.find(
+                {"category_name": "cooking"}).sort(
+                    '_id', pymongo.DESCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        elif filter_by == "Baking":
+            recipes = recipes_coll.find(
+                {"category_name": "baking"}).sort(
+                    '_id', pymongo.DESCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find(
+                {"category_name": "snacks"}).sort(
+                    '_id', pymongo.DESCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+
+    # total of recipes
+    number_of_all_rec = recipes.count()
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
+
+    return render_template(
+        "index.html",
+        title=title,
+        recipes=recipes,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_rec=number_of_all_rec,
+        sort_by=sort_by,
+        filter_by=filter_by)
+
+
+# FILTER
+@app.route("/filter", methods=["GET", "POST"])
+def filter():
+    """
+    READ
+    filter recipes by user preference
+    """
+    # set title to display in browser tab
+    title = 'McTastic Recipes Filter'
+    # code for pagination modified from irinatu17:
+    # https://github.com/irinatu17/MyCookBook
+    limit_per_page = 6
+    current_page = int(request.args.get('current_page', 1))
+
+    if request.method == "POST":
+        # used when a filter parameter is selected
+        query = request.args.get('query')
+        sort_by = request.args.get('sort_by')
+        filter_by = request.form.get('filter_by')
+    else:
+        # used when a pagination link is clicked
+        query = request.args.get('query')
+        sort_by = request.args.get('sort_by')
+        filter_by = request.args.get('filter_by')
+
+    # filter recipes by user preference
+    # selected preference is displayed in the sort label
+    if filter_by == 'Baking':
+        recipes = recipes_coll.find(
+            {"category_name": "baking"}).sort('_id', pymongo.DESCENDING).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif filter_by == 'Snacks':
+        recipes = recipes_coll.find(
+            {"category_name": "snacks"}).sort('_id', pymongo.DESCENDING).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    else:
+        recipes = recipes_coll.find(
+            {"category_name": "cooking"}).sort('_id', pymongo.DESCENDING).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+
+    # total of recipes
+    number_of_all_rec = recipes.count()
+    # number of pages
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
+
+    return render_template(
+        "index.html",
+        title=title,
+        recipes=recipes,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_rec=number_of_all_rec,
+        query=query,
+        filter_by=filter_by)
+
+
+# FILTER SORT
+@app.route("/filter_sort", methods=["GET", "POST"])
+def filter_sort():
+    """
+    READ
+    Filters ingredients by user preference.
+    Used following a sort
+    """
+    # set title to display in browser tab
+    title = 'McTastic Recipes Filter Sort'
+    # code for pagination modified from irinatu17:
+    # https://github.com/irinatu17/MyCookBook
+    limit_per_page = 6
+    current_page = int(request.args.get('current_page', 1))
+
+    if request.method == "POST":
+        # used when a sort parameter is selected following a search
+        sort_by = request.args.get('sort_by')
+        filter_by = request.form.get('filter_by')
+    else:
+        # used when a pagination link is clicked
+        sort_by = request.args.get('sort_by')
+        filter_by = request.args.get('filter_by')
+
+    # sort recipes by user preference
+    if sort_by == 'A-Z':
+        if filter_by == "Cooking":
+            recipes = recipes_coll.find(
+                {"category_name": "cooking"}).sort(
+                    'recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        elif filter_by == "Baking":
+            recipes = recipes_coll.find(
+                {"category_name": "baking"}).sort(
+                    'recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find(
+                {"category_name": "snacks"}).sort(
+                    'recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'Z-A':
+        if filter_by == "Cooking":
+            recipes = recipes_coll.find(
+                {"category_name": "cooking"}).sort(
+                    'recipe_name', -1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        elif filter_by == "Baking":
+            recipes = recipes_coll.find(
+                {"category_name": "baking"}).sort(
+                    'recipe_name', -1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find(
+                {"category_name": "snacks"}).sort(
+                    'recipe_name', -1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+    elif sort_by == 'Oldest':
+        if filter_by == "Cooking":
+            recipes = recipes_coll.find(
+                {"category_name": "cooking"}).sort(
+                    '_id', pymongo.ASCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        elif filter_by == "Baking":
+            recipes = recipes_coll.find(
+                {"category_name": "baking"}).sort(
+                    '_id', pymongo.ASCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find(
+                {"category_name": "snacks"}).sort(
+                    '_id', pymongo.ASCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+    else:
+        if filter_by == "Cooking":
+            recipes = recipes_coll.find(
+                {"category_name": "cooking"}).sort(
+                    '_id', pymongo.DESCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        elif filter_by == "Baking":
+            recipes = recipes_coll.find(
+                {"category_name": "baking"}).sort(
+                    '_id', pymongo.DESCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find(
+                {"category_name": "snacks"}).sort(
+                    '_id', pymongo.DESCENDING).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+
+    # total of recipes
+    number_of_all_rec = recipes.count()
+    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
+
+    return render_template(
+        "index.html",
+        title=title,
+        recipes=recipes,
+        current_page=current_page,
+        pages=pages,
+        number_of_all_rec=number_of_all_rec,
+        filter_by=filter_by,
         sort_by=sort_by)
 
 

@@ -3,7 +3,13 @@
                 <div class="card hoverable">
                     <!--Image square and centered at any screen size-->
                     <div class="square">
-                            <img class="content activator" src="{{ recipe.recipe_image }}">
+                        {% if recipe.recipe_image.endswith('jpg') %}
+                            <img class="content gallery-image" src="{{ recipe.recipe_image }}">
+                        {% else %}
+                            <div class="flex-center blank_image">
+                                <h4 class="image_header center">{{recipe.recipe_name}}</h4>
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="card-content flex-space">
                         <!--Displayed under image-->
@@ -14,7 +20,7 @@
                     <div class="card-reveal flex-vert-between">
                         <span class="card-title mb2">{{recipe.recipe_name}}<i class="material-icons right">close</i></span>
                         <!--Icon info: Servings,Calories,Vegetarian,Vegan-->
-                        <div class="card-icons">
+                        <div class="card-icons flex-center-wrap">
                             <!--Time-->
                             <div class="flex">
                                 <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Prep Time" src="../static/img/time.png" alt="Time"><span class="icon-text">{{recipe.recipe_time}}</span>

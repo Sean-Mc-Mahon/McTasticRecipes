@@ -16,7 +16,13 @@
                 <div id="blank-header" class="reveal-img"></div>
                 <!-- IMAGE: images are displayed as square regardless of aspect ratio-->
                 <div class="square">
-                    <img src="{{ recipe.recipe_image }}" alt="Recipe Image" class="content materialboxed">
+                    {% if recipe.recipe_image.endswith('jpg') %}
+                        <img class="content gallery-image" src="{{ recipe.recipe_image }}">
+                    {% else %}
+                        <div class="flex-center blank_image">
+                            <h4 class="image_header center">{{recipe.recipe_name}}</h4>
+                        </div>
+                    {% endif %}
                 </div>
                 <!-- DESCRIPTION -->
                 <p id="description"><em>{{ recipe.recipe_description }}</em></p>

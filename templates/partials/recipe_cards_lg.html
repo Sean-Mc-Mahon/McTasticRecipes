@@ -4,11 +4,11 @@
         <!--Image-->
         <div class="gallery-image square">
             {% if recipe.recipe_image.endswith('jpg') %}
-            <img class="content gallery-image" src="{{ recipe.recipe_image }}">
+                <img class="content gallery-image" src="{{ recipe.recipe_image }}">
             {% else %}
-            <div class="flex-center blank_image">
-                <h4 class="image_header center">{{recipe.recipe_name}}</h4>
-            </div>
+                <div class="flex-center blank_image">
+                    <h4 class="image_header center">{{recipe.recipe_name}}</h4>
+                </div>
             {% endif %}
         </div>
         <a class="bold" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">

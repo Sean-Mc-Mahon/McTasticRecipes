@@ -39,6 +39,7 @@ $(document).ready(function(){
             }
         });
 
+
 //SEND MAIL AND ALERT FOR NEWSLETTER SIGNUP
 function sendMail(contactForm) {
     emailjs.send("gmail", "mctastic", {
@@ -67,6 +68,12 @@ function sendMail(contactForm) {
     $("#formContact").val("");
     return false;  // To block from loading a new page
 }
+
+//FADE BLANK IMAGE HEADER ON HOVER
+$('.overlay').hover(
+       function(){ $('.image_header').addClass('header_fade') },
+       function(){ $('.image_header').removeClass('header_fade') }
+);
 
 //IMAGE AND TEXT REVEALS FOR SINGLE_RECIPE
 //code modified from tutorial as part of Creative Javascript Course @ https://developedbyed.com/

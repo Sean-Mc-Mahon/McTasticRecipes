@@ -824,12 +824,29 @@ def insert_recipe():
             "recipe_is_vegetarian") else "off"
         recipe_is_vegan = "on" if request.form.get(
             "recipe_is_vegan") else "off"
+
+        # url validation code modified from paulloy:
+        # https://github.com/paulloy/whiskey_herald_msp3/blob/master/app.py
+        # image addresses must end with one of these extensions
+        allow_exten = ["jpg", "jpeg", "png"]
+        form_url = str(request.form.get("recipe_image"))
+        # split the inputted url and check the extension
+        x = form_url.split(".")
+        y = x[-1].lower()
+
+        #  url submitted if it ends with an acceptable suffix
+        if y == allow_exten[0] or y == allow_exten[1] or y == allow_exten[2]:
+            recipe_image = request.form.get("recipe_image")
+        # if not a blank string is submitted
+        else:
+            recipe_image = ""
+
         recipe = {
             "category_name": request.form.get("category_name"),
             "recipe_name": request.form.get("recipe_name"),
             "recipe_ingredients": request.form.get("recipe_ingredients"),
             "recipe_instructions": request.form.get("recipe_instructions"),
-            "recipe_image": request.form.get("recipe_image"),
+            "recipe_image": recipe_image,
             "recipe_serves": request.form.get("recipe_serves"),
             "recipe_time": request.form.get("recipe_time"),
             "recipe_cals": request.form.get("recipe_cals"),
@@ -869,6 +886,7 @@ def insert_recipe():
         spice_ingredients=spice_ingredients,
         sweet_ingredients=sweet_ingredients,
         veg_ingredients=veg_ingredients,
+        protein_ingredients=protein_ingredients,
         title=title,
         prep=prep)
 

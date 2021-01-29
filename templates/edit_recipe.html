@@ -9,7 +9,7 @@
                 <!-- Category Selection -->
                 <div class="input-field col s12 l5">
                     <select id="category_name" name="category_name" class="validate" required>
-                        <option value="" disabled>Choose Category</option>
+                        <option value="" disabled>Choose Category *</option>
                         {% for category in categories %}
                             {% if category.category_name == recipe.category_name %}
                                 <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
@@ -23,13 +23,13 @@
                 <div class="input-field col s12 l5">
                     <input id="recipe_name" name="recipe_name" type="text" minlength="1" maxlength="25"
                     value="{{ recipe.recipe_name }}" class="validate" required>
-                    <label for="recipe_name">Recipe Name</label>
+                    <label for="recipe_name">Recipe Name *</label>
                 </div>
                 <!-- Serves -->
                 <div class="input-field col s12 l2">
                     <input id="recipe_serves" name="recipe_serves" type="number" minlength="1" max="99"
                     value="{{ recipe.recipe_serves }}" class="validate" required>
-                    <label for="recipe_serves">Serves</label>
+                    <label for="recipe_serves">Serves *</label>
                 </div>
             </div>
             <div class="row">
@@ -38,41 +38,42 @@
                     <textarea id="recipe_description" name="recipe_description" maxlength="300" class="materialize-textarea">
                     {{- recipe.recipe_description -}}
                     </textarea>
-                    <label for="recipe_description">Recipe Description</label>
+                    <label for="recipe_description">Recipe Description *</label>
                 </div>
             </div>
 
             <div class="row">
                 <!-- Ingredients -->
                 <div class="input-field col s12">
-                    <textarea id="recipe_ingredients" name="recipe_ingredients" maxlength="1000" class="materialize-textarea">
+                    <textarea id="recipe_ingredients" name="recipe_ingredients" maxlength="2000" class="materialize-textarea">
                     {{- recipe.recipe_ingredients -}}
                     </textarea>
-                    <label for="recipe_ingredients">Recipe Ingredients</label>
+                    <label for="recipe_ingredients">Recipe Ingredients *</label>
                 </div>
             </div>
             <div class="row">
                 <!-- Instructions -->
                 <div class="input-field col s12">
-                    <textarea id="recipe_instructions" name="recipe_instructions" maxlength="1000" class="materialize-textarea">
+                    <textarea id="recipe_instructions" name="recipe_instructions" maxlength="2000" class="materialize-textarea">
                     {{- recipe.recipe_instructions -}}
                     </textarea>
-                    <label for="recipe_instructions">Recipe Instructions</label>
+                    <label for="recipe_instructions">Recipe Instructions *</label>
                 </div>
             </div>
             <div class="row">
                 <!-- Image -->
                 <div class="input-field col s12">
                     <input type="url" id="recipe_image" name="recipe_image" class="materialize-textarea"
-                    value="{{ recipe.recipe_image }}" minlength="1" maxlength="400" required>
+                    value="{{ recipe.recipe_image }}" minlength="1" maxlength="400">
                     <label for="recipe_image">Add Image URL</label>
+                    <em>Image address should end with .jpg, .jpeg, or .png</em>
                 </div>
             </div>
             <div class="row switch-line">
                 <!-- Prep Time -->
                 <div class="input-field col s12 m6 l3">
                     <select id="recipe_time" name="recipe_time" class="validate" required>
-                        <option value="" disabled>Prep Time</option>
+                        <option value="" disabled>Prep Time *</option>
                         {% if recipe.recipe_time ==  "&lt;30m" %}
                             <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}</option>
                             <option value=" &lt;60m"> &lt;60m</option>
@@ -86,21 +87,6 @@
                             <option value=" &lt;60m"> &lt;60m</option>
                             <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}</option>
                         {% endif %}
-
-
-
-
-
-                        <!-- {% for recipe in recipes %}
-                            {% if recipe.recipe_time == recipe.recipe_time %}
-                        <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}
-                        {% else %}
-                            <option value="{{ recipe.recipe_time }}">{{ recipe.recipe_time }}</option>
-                            {% endif %}
-                        {% endfor %} -->
-
-                            
-
                     </select>
                 </div>
                 <!-- Calories -->

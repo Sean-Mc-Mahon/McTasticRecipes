@@ -37,7 +37,7 @@
             <div class="row">
                 <!-- Ingredients -->
                 <div class="input-field col s12">
-                    <textarea id="recipe_ingredients" name="recipe_ingredients" maxlength="1000" class="materialize-textarea" required></textarea>
+                    <textarea id="recipe_ingredients" name="recipe_ingredients" maxlength="2000" class="materialize-textarea" required></textarea>
                     <label for="recipe_ingredients">Recipe Ingredients *</label>
                 </div>
             </div>
@@ -51,8 +51,8 @@
             <div class="row">
                 <!-- Image -->
                 <div class="input-field col s12">
-                    <input type="url" id="recipe_image" name="recipe_image" class="materialize-textarea" minlength="1" maxlength="400" required>
-                    <label for="recipe_image">Add Image URL *</label>
+                    <input type="url" id="recipe_image" name="recipe_image" class="materialize-textarea" minlength="1" maxlength="400">
+                    <label for="recipe_image">Add Image URL</label>
                     <em>Image address should end with .jpg, .jpeg, or .png</em>
                 </div>
             </div>
@@ -66,17 +66,6 @@
                             {% endfor %}
                     </select>
                 </div>
-
-                <!-- Prep Time -->
-                <!-- <div class="input-field col s12 m6 l3">
-                    <select id="recipe_time" name="recipe_time" class="validate" required>
-                        <option value="" disabled selected>Prep Time *</option>
-                            <option value=" &lt;30m"> &lt;30m</option>
-                            <option value=" &lt;60m"> &lt;60m</option>
-                            <option value=" &gt;60m"> &gt;60m</option>
-                    </select>
-                </div> -->
-
                 <!-- Calories. Not required to submit recipe -->
                 <div class="input-field col s12 m6 l3">
                         <input id="recipe_cals" name="recipe_cals" type="number" minlength="1" maxlength="4" pattern="^[0-9]$" class="validate">

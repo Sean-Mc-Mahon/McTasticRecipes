@@ -6,7 +6,7 @@
         <div class="row">
             <!--SEARCH-->
             {% if not query %}
-                <form class="col s12 l4" action="{{ url_for('search', sort_by=sort_by, query=query) }}" method="post">
+                <form class="col s12 m6 xl4" action="{{ url_for('search', sort_by=sort_by, query=query) }}" method="post">
             {% else %}
                 <form class="col s8" action="{{ url_for('search', sort_by=sort_by, query=query) }}" method="post">
             {% endif %}
@@ -19,7 +19,7 @@
                 </form>
             <!--SORT-->
             {% if not query %}
-                <div class="input-field col s6 l4">
+                <div class="input-field col s6 m3 xl4">
             {% else %}
                 <div class="input-field col s4">
             {% endif %}
@@ -50,7 +50,7 @@
                 <!--Option to filter category only if a search has not been made-->
                 {% if not query %}
                     <!--FILTER-->
-                    <div class="input-field col s6 l4">
+                    <div class="input-field col s6 m3 xl4">
                     {% if sort_by %}
                         <!--filter results of a query-->
                         <form action="{{ url_for('filter_sort', sort_by=sort_by) }}" method="POST" >

@@ -986,10 +986,10 @@ def delete_recipe(recipe_id):
     """
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
     flash("Recipe Successfully Deleted")
-    if session.user == 'admin':
-        return redirect(url_for("recipes"))
 
     username = session['user']
+    if username == 'admin':
+        return redirect(url_for("recipes"))
     return redirect(url_for(
         "profile",
         username=username))

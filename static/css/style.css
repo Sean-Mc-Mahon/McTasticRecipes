@@ -121,10 +121,22 @@ h1,h2,h3,h4,h5,h6 {
     align-items: center;
     justify-content: space-between;
 }
+.flex-evenly {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
 .flex-center {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.flex-center-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 .flex-col {
     display: flex;
@@ -140,6 +152,14 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 /* Margin Rules */
+/* .m-auto {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+} */
+.m-auto {
+    margin: 0 auto;
+}
 .m0 {
     margin: 0;
 }
@@ -441,6 +461,9 @@ ul .instruction-list {
     font-size: 1.3rem;
     color: #263238;
 }
+#placeholder {
+    max-width: 350px;
+}
 
 /*** USERS ***/
 .users-cards {
@@ -461,6 +484,7 @@ ul .instruction-list {
 .delete-user {
     margin: 1.0933333333rem 0 0.656rem 1rem;
 }
+
 /* SINGLE RECIPE PAGE */
 /* Reveals */
 .text-wrapper,
@@ -574,6 +598,7 @@ ul .instruction-list {
     padding: 1rem;
     }
 }
+}
 
 
 /* l desktop */
@@ -620,7 +645,9 @@ ul .instruction-list {
     .recipe_cards {
         display: none;
     }
-
+    /* Add/EDIT RECIPE */
+    /* #placeholder {
+    width: 300px; */
 }
 
 /*xxl  v large desktop*/
@@ -653,4 +680,9 @@ ul .instruction-list {
     .tabs .tab a {
         font-size: 1.2rem;
     }
+    /* Add/EDIT RECIPE */
+    /* #placeholder {
+    width: 400px;
+} */
+
 }

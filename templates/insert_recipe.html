@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="row">
-                <!-- Recipe Name -->
+                <!-- Recipe Description -->
                 <div class="input-field col s12">
                     <textarea id="recipe_description" name="recipe_description" maxlength="300" class="materialize-textarea" required></textarea>
                     <label for="recipe_description">Recipe Description *</label>
@@ -48,53 +48,59 @@
                     <label for="recipe_instructions">Recipe Instructions *</label>
                 </div>
             </div>
-            <div class="row">
-                <!-- Image -->
-                <div class="input-field col s12">
-                    <input type="url" id="recipe_image" name="recipe_image" class="materialize-textarea" minlength="1" maxlength="400">
-                    <label for="recipe_image">Add Image URL</label>
-                    <em>Image address should end with .jpg, .jpeg, or .png</em>
+            <div class="row flex-center-wrap">
+                <!-- Placeholder Image -->
+                <div id="placeholder" class="col s12 m5 gallery-image square m-auto mh1">
+                        <img id="img" class="content gallery-image" src="{{ url_for('static', filename='img/placeholder.jpg') }}" alt="Plate">
                 </div>
-            </div>
-            <div class="row switch-line">
-                <!-- Prep Time -->
-                <div class="input-field col s12 m6 l3">
-                    <select id="recipe_time" name="recipe_time" class="validate" required>
-                        <option value="" disabled selected>Prep Time *</option>
-                            {% for prep in prep %}
-                            <option value="{{ prep.prep }}">{{ prep.prep }}</option>
-                            {% endfor %}
-                    </select>
-                </div>
-                <!-- Calories. Not required to submit recipe -->
-                <div class="input-field col s12 m6 l3">
-                        <input id="recipe_cals" name="recipe_cals" type="number" minlength="1" maxlength="4" pattern="^[0-9]$" class="validate">
-                        <label for="recipe_cals">Calories per Serving</label>
+                <!-- Image URL -->
+                <div class="col s12 m6">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input type="url" id="recipe_image" name="recipe_image" class="materialize-textarea" minlength="1" maxlength="400">
+                            <label for="recipe_image">Add Image URL</label>
+                            <em>Image address should end with .jpg, .jpeg, or .png</em>
+                        </div>
+                        <!-- Prep Time -->
+                        <div class="input-field col s12 m12 l6">
+                            <select id="recipe_time" name="recipe_time" class="validate" required>
+                                <option value="" disabled selected>Prep Time *</option>
+                                    {% for prep in prep %}
+                                    <option value="{{ prep.prep }}">{{ prep.prep }}</option>
+                                    {% endfor %}
+                            </select>
+                        </div>
+                        <!-- Calories. Not required to submit recipe -->
+                        <div class="input-field col s12 m12 l6">
+                                <input id="recipe_cals" name="recipe_cals" type="number" minlength="1" maxlength="4" pattern="^[0-9]$" class="validate">
+                                <label for="recipe_cals">Calories per Serving</label>
+                            </div>
+                        <!-- Vegetarian Switch -->
+                        <div class="input-field col s12 m6">
+                            <div class="switch">
+                                <label for="recipe_is_vegetarian">
+                                    <i class="fas fa-seedling lime-text accent-2 tooltipped large-icon"
+                                        data-position="bottom" data-tooltip="Vegetarian"></i>
+                                    <input type="checkbox" id="recipe_is_vegetarian" name="recipe_is_vegetarian">
+                                    <span class="lever"></span>
+                                    Vegetarian
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Vegan Switch -->
+                        <div class="input-field col s12 m6">
+                            <div class="switch">
+                                <label for="recipe_is_vegan">
+                                    <i class="fas fa-seedling light-green-text accent-4 tooltipped  large-icon"
+                                        data-position="bottom" data-tooltip="Vegan"></i>
+                                    <input type="checkbox" id="recipe_is_vegan" name="recipe_is_vegan">
+                                    <span class="lever"></span>
+                                    Vegan
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                <!-- Vegetarian Switch -->
-                <div class="input-field col s6 l3">
-                    <div class="switch">
-                        <label for="recipe_is_vegetarian">
-                            <i class="fas fa-seedling lime-text accent-2 tooltipped large-icon"
-                                data-position="bottom" data-tooltip="Vegetarian"></i>
-                            <input type="checkbox" id="recipe_is_vegetarian" name="recipe_is_vegetarian">
-                            <span class="lever"></span>
-                            Vegetarian
-                        </label>
-                    </div>
-                </div>
-                <!-- Vegan Switch -->
-                <div class="input-field col s6 l3">
-                    <div class="switch">
-                        <label for="recipe_is_vegan">
-                            <i class="fas fa-seedling light-green-text accent-4 tooltipped  large-icon"
-                                data-position="bottom" data-tooltip="Vegan"></i>
-                            <input type="checkbox" id="recipe_is_vegan" name="recipe_is_vegan">
-                            <span class="lever"></span>
-                            Vegan
-                        </label>
-                    </div>
-                </div>
+                </div>   
             </div>
             <div class="row">
                 <!-- Submit Button -->

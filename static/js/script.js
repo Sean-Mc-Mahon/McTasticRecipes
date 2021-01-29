@@ -39,7 +39,6 @@ $(document).ready(function(){
             }
         });
 
-
 //SEND MAIL AND ALERT FOR NEWSLETTER SIGNUP
 function sendMail(contactForm) {
     emailjs.send("gmail", "mctastic", {
@@ -434,3 +433,20 @@ if (window.location.pathname=='/units') {
     fluidOuncesInput.addEventListener('input', fluidOuncesToOthers);
     cupInput.addEventListener('input', cupsToOthers);
 }
+
+//REPLACE PLACEHOLDER IMAGE WITH USER INPUT
+// code taken from paulloy:https://github.com/paulloy/whiskey_herald_msp3/blob/master/app.py
+
+// Allowed extensions to image address
+let url_types = ["jpg", "jpeg", "png"];
+
+// If the image address is valid, update src attr of #img
+document.getElementById("recipe_image").addEventListener("input", function() {
+    let arr = document.getElementById("recipe_image").value.split(".");
+    let pop = arr.pop().toLowerCase();
+    if (pop === url_types[0] || pop === url_types[1] || pop === url_types[2]) {
+        console.log(pop);
+        document.getElementById("img").setAttribute("src", document.getElementById("recipe_image").value);
+        document.getElementById("img").setAttribute("alt", `Image of ${document.getElementById("recipe_name").value}`);
+    }
+});

@@ -3,12 +3,12 @@
     <div class="gallery-item">
         <!--Image-->
         <div class="gallery-image square">
-            {% if recipe.recipe_image.endswith('jpg') %}
-                <img class="content gallery-image" src="{{ recipe.recipe_image }}">
-            {% else %}
+            {% if recipe.recipe_image == '' %}
                 <div class="flex-center blank_image">
                     <h4 class="image_header center">{{recipe.recipe_name}}</h4>
                 </div>
+            {% else %}
+                <img class="content gallery-image" src="{{ recipe.recipe_image }}">
             {% endif %}
         </div>
         <a class="bold" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">
@@ -21,20 +21,20 @@
                     <div class="row flex-col">
                         <!--Time/Serves-->
                         <div class="flex icon mv-half">
-                            <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Prep Time" src="../static/img/time-white.png" alt="Time"><span class="icon-text">{{recipe.recipe_time}}</span>
-                            <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Serves" src="../static/img/servings-white.png" alt="Servings"><span class="icon-text">{{recipe.recipe_serves}}</span>
+                            <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Prep Time" src="../static/img/icons/time-white.png" alt="Time"><span class="icon-text">{{recipe.recipe_time}}</span>
+                            <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Serves" src="../static/img/icons/servings-white.png" alt="Servings"><span class="icon-text">{{recipe.recipe_serves}}</span>
                         </div>
                         <!--Calories/Vegetarian/Vegan-->
                         <div class="flex icon mv-half">
                             <!--Calories Displayed only if calory info is present-->
                             {% if recipe.recipe_cals != "" %}
-                            <img class="tooltipped mh-icon mh-icon" data-position="bottom" data-tooltip="Per Serving" src="../static/img/calories-white.png" alt="Calories"><span class="icon-text">{{recipe.recipe_cals}}</span>
+                            <img class="tooltipped mh-icon mh-icon" data-position="bottom" data-tooltip="Per Serving" src="../static/img/icons/calories-white.png" alt="Calories"><span class="icon-text">{{recipe.recipe_cals}}</span>
                             {% endif %}
                             {% if recipe.recipe_is_vegetarian == "on" %}
-                                <img class="tooltipped ml-half" data-position="bottom" data-tooltip="Vegetarian" src="../static/img/vegetarian-white.png" alt="Vegetarian">    
+                                <img class="tooltipped ml-half" data-position="bottom" data-tooltip="Vegetarian" src="../static/img/icons/vegetarian-white.png" alt="Vegetarian">    
                             {% endif %}
                             {% if recipe.recipe_is_vegan == "on" %}
-                                <img class="tooltipped ml-half" data-position="bottom" data-tooltip="Vegan" src="../static/img/vegan-white.png" alt="Vegan">
+                                <img class="tooltipped ml-half" data-position="bottom" data-tooltip="Vegan" src="../static/img/icons/vegan-white.png" alt="Vegan">
                             {% endif %}
                         </div>
                     </div>

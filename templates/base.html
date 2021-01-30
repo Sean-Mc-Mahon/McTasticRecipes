@@ -7,13 +7,13 @@
     <link
       rel="shortcut icon"
       type="image/png"
-      href="{{ url_for('static', filename='img/favicon.png') }}"
+      href="{{ url_for('static', filename='img/logos/favicon.png') }}"
     />
     <!-- Touch Icons designed by author -->
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/recipe-logo-120.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/recipe-logo-180.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='img/recipe-logo-152.png') }}">
-    <link rel="apple-touch-icon" sizes="167x167" href="{{ url_for('static', filename='img/recipe-logo-167.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/logos/recipe-logo-120.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/logos/recipe-logo-180.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='img/logos/recipe-logo-152.png') }}">
+    <link rel="apple-touch-icon" sizes="167x167" href="{{ url_for('static', filename='img/logos/recipe-logo-167.png') }}">
     <!-- Font Awesome: Minified CSS taken from https://cdnjs.com/libraries/font-awesome -->
     <link 
     rel="stylesheet" 
@@ -130,7 +130,7 @@
             <div class="col s12 m6 mb1">
                 <h5 class="white-text">Newsletter Sign-up</h5>
                 <p class="grey-text text-lighten-4 mv-half text-newsletter">Enter your email address to recieve out weekly newsletter</p>    
-                <form  id="formContact" onsubmit="return sendMail(this);">
+                <form  id="form_contact" onsubmit="return sendMail(this);">
                     <input type="email" name="emailaddress" id="emailaddress" placeholder="email" required>
                     <button id="submit"  type="submit">
                     <i class="far fa-paper-plane large-icon"></i>
@@ -143,23 +143,23 @@
                     <div class="all-icons">
                     <!--Time-->
                     <div class="flex mt-half">
-                        <img class="mr-half" src="../static/img/time-white.png" alt="Time"><span class="icon-text">Prep Time</span>
+                        <img class="mr-half" src="../static/img/icons/time-white.png" alt="Time"><span class="icon-text">Prep Time</span>
                     </div>
                     <!--Serves-->
                     <div class="flex mt-half">
-                        <img class="mr-half" src="../static/img/servings-white.png" alt="Servings"><span class="icon-text">Servings</span>
+                        <img class="mr-half" src="../static/img/icons/servings-white.png" alt="Servings"><span class="icon-text">Servings</span>
                     </div>
                     <!--Calories-->
                     <div class="flex mt-half">
-                        <img class="mr-half" src="../static/img/calories-white.png" alt="Calories"><span class="icon-text">Calories</span>
+                        <img class="mr-half" src="../static/img/icons/calories-white.png" alt="Calories"><span class="icon-text">Calories</span>
                     </div>
                     <!--Vegetarian-->
                     <div class="flex mt-half">
-                        <img class="mr-half" src="../static/img/vegetarian-white.png" alt="Vegetarian"><span class="icon-text">Vegetarian</span>
+                        <img class="mr-half" src="../static/img/icons/vegetarian-white.png" alt="Vegetarian"><span class="icon-text">Vegetarian</span>
                     </div>
                     <!--Vegan-->
                     <div class="flex mt-half">
-                        <img class="mr-half" src="../static/img/vegan-white.png" alt="Vegan"><span class="icon-text">Vegan</span> 
+                        <img class="mr-half" src="../static/img/icons/vegan-white.png" alt="Vegan"><span class="icon-text">Vegan</span> 
                     </div>
                 </div>
             </div>

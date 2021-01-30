@@ -3,12 +3,12 @@
                 <div class="card hoverable">
                     <!--Image square and centered at any screen size-->
                     <div class="square">
-                        {% if recipe.recipe_image.endswith('jpg') %}
-                            <img class="content gallery-image" src="{{ recipe.recipe_image }}">
-                        {% else %}
+                        {% if recipe.recipe_image == '' %}
                             <div class="flex-center blank_image">
                                 <h4 class="image_header center">{{recipe.recipe_name}}</h4>
                             </div>
+                        {% else %}
+                            <img class="content gallery-image" src="{{ recipe.recipe_image }}">
                         {% endif %}
                     </div>
                     <div class="card-content flex-space">
@@ -23,25 +23,25 @@
                         <div class="card-icons flex-center-wrap">
                             <!--Time-->
                             <div class="flex">
-                                <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Prep Time" src="../static/img/time.png" alt="Time"><span class="icon-text">{{recipe.recipe_time}}</span>
+                                <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Prep Time" src="../static/img/icons/time.png" alt="Time"><span class="icon-text">{{recipe.recipe_time}}</span>
                             </div>
                             <!--Serves-->
                             <div class="mh-icon flex">
-                                <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Serves" src="../static/img/servings.png" alt="Servings"><span class="icon-text">{{recipe.recipe_serves}}</span>
+                                <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Serves" src="../static/img/icons/servings.png" alt="Servings"><span class="icon-text">{{recipe.recipe_serves}}</span>
                             </div>
                             <!--Calories-->
                             <div class="mh-icon flex">
                                 {% if recipe.recipe_cals != "" %}
-                                <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Per Serving" src="../static/img/calories.png" alt="Calories"><span class="icon-text">{{recipe.recipe_cals}}</span>
+                                <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Per Serving" src="../static/img/icons/calories.png" alt="Calories"><span class="icon-text">{{recipe.recipe_cals}}</span>
                                 {% endif %}
                             </div>
                             <!--Vegetarian/Vegan-->
                             <div class="mh-icon flex">
                                 {% if recipe.recipe_is_vegetarian == "on" %}
-                                    <img class="tooltipped" data-position="bottom" data-tooltip="Vegetarian" src="../static/img/vegetarian.png" alt="Vegetarian"> 
+                                    <img class="tooltipped" data-position="bottom" data-tooltip="Vegetarian" src="../static/img/icons/vegetarian.png" alt="Vegetarian"> 
                                 {% endif %}
                                 {% if recipe.recipe_is_vegan == "on" %}
-                                    <img class="tooltipped" data-position="bottom" data-tooltip="Vegan" src="../static/img/vegan.png" alt="Vegan">
+                                    <img class="tooltipped" data-position="bottom" data-tooltip="Vegan" src="../static/img/icons/vegan.png" alt="Vegan">
                                 {% endif %}
                             </div>
                         </div>

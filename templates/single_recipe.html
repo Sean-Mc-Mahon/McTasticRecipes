@@ -5,7 +5,11 @@
     <div class="row s12 container mt1 mb0">
         <div class="recipe-title center-align blue-grey-text text-darken-3 mb1">
             <h2 class="mt0 mb0" id="name">{{ recipe.recipe_name }}</h2>
-            <h5 class="mt0 mb1" id="created-by">Created by: {{ recipe.created_by }}</h5>
+            <h5 class="mt0 mb1" id="created-by">Created by: 
+                <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('view_profile', username_view=recipe.created_by) }}">
+                            {{ recipe.created_by }}
+                </a>
+            </h5>
         </div>
     </div>
 
@@ -16,12 +20,12 @@
                 <div id="blank-header" class="reveal-img"></div>
                 <!-- IMAGE: images are displayed as square regardless of aspect ratio-->
                 <div class="square">
-                    {% if recipe.recipe_image.endswith('jpg') %}
-                        <img class="content gallery-image" src="{{ recipe.recipe_image }}">
-                    {% else %}
+                    {% if recipe.recipe_image == '' %}
                         <div class="flex-center blank_image">
                             <h4 class="image_header center">{{recipe.recipe_name}}</h4>
                         </div>
+                    {% else %}
+                        <img class="content gallery-image" src="{{ recipe.recipe_image }}">
                     {% endif %}
                 </div>
                 <!-- DESCRIPTION -->
@@ -30,23 +34,23 @@
                 <div class="icons grey lighten-2">
                     <!-- TIME -->
                     <div class="flex">
-                        <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Prep Time" src="../static/img/time.png" alt="Time"><span class="icon-text">{{recipe.recipe_time}}</span>
+                        <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Prep Time" src="../static/img/icons/time.png" alt="Time"><span class="icon-text">{{recipe.recipe_time}}</span>
                     </div>
                     <!-- SERVES -->
                     <div class="mh-icon flex">
-                        <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Serves" src="../static/img/servings.png" alt="Servings"><span class="icon-text">{{recipe.recipe_serves}}</span>
+                        <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Serves" src="../static/img/icons/servings.png" alt="Servings"><span class="icon-text">{{recipe.recipe_serves}}</span>
                     </div>
                     <!-- CALORIES -->
                     <div class="mh-icon flex">
-                        <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Per Serving" src="../static/img/calories.png" alt="Calories"><span class="icon-text">{{recipe.recipe_cals}}</span>
+                        <img class="tooltipped mh-icon" data-position="bottom" data-tooltip="Per Serving" src="../static/img/icons/calories.png" alt="Calories"><span class="icon-text">{{recipe.recipe_cals}}</span>
                     </div>
                     <!-- VEGETARIAN AND VEGAN -->
                     <div class="mh-icon flex">
                         {% if recipe.recipe_is_vegetarian == "on" %}
-                            <img class="tooltipped" data-position="bottom" data-tooltip="Vegetarian" src="../static/img/vegetarian.png" alt="Vegetarian">   
+                            <img class="tooltipped" data-position="bottom" data-tooltip="Vegetarian" src="../static/img/icons/vegetarian.png" alt="Vegetarian">   
                         {% endif %}
                         {% if recipe.recipe_is_vegan == "on" %}
-                            <img class="tooltipped" data-position="bottom" data-tooltip="Vegan" src="../static/img/vegan.png" alt="Vegan">
+                            <img class="tooltipped" data-position="bottom" data-tooltip="Vegan" src="../static/img/icons/vegan.png" alt="Vegan">
                         {% endif %}
                     </div>
                 </div>

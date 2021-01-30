@@ -7,7 +7,24 @@
                 <h3 class="center-align m0">
                     {{ username }}
                 </h3>
-            <h5 class="m-all center-align">{{ number_of_user_rec }} Recipes</h5>
+                <h5 class="m-all center-align">{{ number_of_user_rec }} Recipes</h5>
+                {% if session.username|lower == username or session.username|lower == 'admin' %}
+                    <div class="edit-btns flex-center">
+                        <!-- Modal Trigger -->
+                        <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-user" href="#modal1">Delete</a>
+                        <!-- Modal Structure -->
+                        <div id="modal1" class="modal  card-outline">
+                            <div class="modal-content">
+                                <h4>Are you sure?</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Cancel</a>
+                                <a href="{{ url_for('delete_user', username=user.username) }}" 
+                                class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

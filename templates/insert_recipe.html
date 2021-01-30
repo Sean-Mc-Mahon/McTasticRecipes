@@ -4,10 +4,10 @@
     <h3 class="center-align container mt1">Add Recipe</h3>
 
     <div class="card-outline row container">
-        <form class="col l12" method="POST" action="{{ url_for('insert_recipe') }}">
+        <form class="col" method="POST" action="{{ url_for('insert_recipe') }}">
             <div class="row">
                 <!-- Category Selection -->
-                <div class="input-field col s12 l5">
+                <div class="input-field col s12 m5">
                     <select id="category_name" name="category_name" class="validate" required>
                         <option value="" disabled selected>Choose Category *</option>
                         {% for category in categories %}
@@ -16,12 +16,12 @@
                     </select>
                 </div>
                 <!-- Recipe Name -->
-                <div class="input-field col s12 l5">
+                <div class="input-field col s12 m5">
                     <input id="recipe_name" name="recipe_name" type="text" minlength="1" maxlength="25" class="validate" required>
                     <label for="recipe_name">Recipe Name *</label>
                 </div>
                 <!-- Serves -->
-                <div class="input-field col s12 l2">
+                <div class="input-field col s12 m2">
                     <input id="recipe_serves" name="recipe_serves" type="number" min="1" max="99" class="validate" required>
                     <label for="recipe_serves">Serves *</label>
                 </div>
@@ -76,26 +76,28 @@
                                 <label for="recipe_cals">Calories per Serving</label>
                             </div>
                         <!-- Vegetarian Switch -->
-                        <div class="input-field col s12 m6">
+                        <div class="input-field col s6">
                             <div class="switch">
                                 <label for="recipe_is_vegetarian">
-                                    <i class="fas fa-seedling lime-text accent-2 tooltipped large-icon"
-                                        data-position="bottom" data-tooltip="Vegetarian"></i>
-                                    <input type="checkbox" id="recipe_is_vegetarian" name="recipe_is_vegetarian">
-                                    <span class="lever"></span>
-                                    Vegetarian
+                                    <p class="f16">Vegetarian</p>
+                                    <div class="flex">
+                                        <img class="tooltipped ml-half" data-position="bottom" data-tooltip="Vegetarian" src="../static/img/icons/vegetarian.png" alt="Vegetarian">
+                                        <input type="checkbox" id="recipe_is_vegetarian" name="recipe_is_vegetarian">
+                                        <span class="lever"></span>
+                                    </div>
                                 </label>
                             </div>
                         </div>
                         <!-- Vegan Switch -->
-                        <div class="input-field col s12 m6">
+                        <div class="input-field col s6 m6">
                             <div class="switch">
                                 <label for="recipe_is_vegan">
-                                    <i class="fas fa-seedling light-green-text accent-4 tooltipped  large-icon"
-                                        data-position="bottom" data-tooltip="Vegan"></i>
-                                    <input type="checkbox" id="recipe_is_vegan" name="recipe_is_vegan">
-                                    <span class="lever"></span>
-                                    Vegan
+                                    <p class="f16">Vegan</p>
+                                    <div class="flex">
+                                        <img class="tooltipped ml-half" data-position="bottom" data-tooltip="Vegan" src="../static/img/icons/vegan.png" alt="Vegan">
+                                        <input type="checkbox" id="recipe_is_vegan" name="recipe_is_vegan">
+                                        <span class="lever"></span>
+                                    </div>
                                 </label>
                             </div>
                         </div>

@@ -4,11 +4,10 @@
     <div class="row">
         <div class="col s12 m8 offset-m2">
             <div class="card-outline card-panel transparent p-half">
-                <h3 class="center-align m0">
-                    {{ username }}'s Recipes
-                </h3>
+                <h3 class="center-align m0">{{ username }}'s Recipes</h3>
+                <h5 class="center-align">Recipes: {{ number_of_user_rec }}</h5>
+                {% if session.username|lower == username or session.username|lower == 'admin' %}
                 <div class="edit-btns flex-center">
-                    <h5 class="center-align">Recipes: {{ number_of_user_rec }}</h5>
                     <!-- Modal Trigger -->
                     <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-user" href="#modal1">Delete</a>
                     <!-- Modal Structure -->
@@ -23,6 +22,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -34,5 +34,21 @@
             {% include "partials/recipe_cards_lg.html" %}
         {% endfor %}
     </div>
+
+    {% if number_of_user_rec > 0 %}
+    <!--PAGINATION-->
+        <ul class="pagination center-align margin-bottom-large">
+            <h5>{{ number_of_user_rec }} Recipes</h5>
+            {% for page_num in pages %} 
+                {% if page_num == current_page %}
+                <li class="active"><a>{{ page_num }}</a></li>
+                {% else %}
+                <li class="waves-effect">
+                <a href="{{ url_for('view_profile', username_view=username, current_page=page_num) }}">{{ page_num }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
 
 {% endblock %}

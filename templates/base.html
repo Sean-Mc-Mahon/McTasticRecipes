@@ -61,9 +61,6 @@
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger right  ">
                     <i class="material-icons  right">menu</i></a>
                     <ul class="right hide-on-med-and-down  ">
-                        <li class="{{'active-link' if title == 'McTastic Cooking'}}"><a id="cooking" href="{{ url_for('cooking')}}">Cooking</a></li>
-                        <li class="{{'active-link' if title == 'McTastic Baking'}}"><a id="baking" href="{{ url_for('baking')}}">Baking</a></li>
-                        <li class="{{'active-link' if title == 'McTastic Snacks'}}"><a id="snacks" href="{{ url_for('snacks')}}">Snacks</a></li>
                         <!-- USERS -->
                         {% if session.user|lower == 'admin' %}
                         <li class="{{'active-link' if title == 'McTastic Users'}}"><a id="users" href="{{ url_for('users')}}">Users</a></li>
@@ -88,9 +85,6 @@
         <ul class="sidenav" id="mobile-demo">
             <li><h4 class="center-align">Menu</h4></li>
             <li><a href="{{ url_for('recipes')}}">Home</a></li>
-            <li><a href="{{ url_for('cooking')}}">Cooking</a></li>
-            <li><a href="{{ url_for('baking')}}">Baking</a></li>
-            <li><a href="{{ url_for('snacks')}}">Snacks</a></li>
             <!-- USERS -->
                         {% if session.user|lower == 'admin' %}
                         <li><a href="{{ url_for('users')}}">Users</a></li>

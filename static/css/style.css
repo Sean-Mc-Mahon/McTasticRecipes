@@ -95,6 +95,9 @@ h1,h2,h3,h4,h5,h6 {
 .text-right {
     text-align: right;
 }
+.f16 {
+    font-size: 16px;
+}
 
 /* Hide */
 .xxl-only{
@@ -296,12 +299,11 @@ nav ul a {
     align-items: center;
 }
 /* newsletter signup */
-#formContact {
+#form_contact {
     display: flex;
     background-color: white;
     border-radius: 20px;
     overflow: hidden;
-    min-width: 265px;
 }
 #formContact input {
     background-color: white;
@@ -461,9 +463,6 @@ ul .instruction-list {
     font-size: 1.3rem;
     color: #263238;
 }
-#placeholder {
-    max-width: 350px;
-}
 
 /*** USERS ***/
 .users-cards {
@@ -546,12 +545,6 @@ ul .instruction-list {
 }
 
 /* UNITS PAGE */
-/* .unit_input {
-    width: 135px !important;
-}
-.unit_input_sm {
-    width: 70px !important;
-} */
 .unit_label {
     width: 40px !important;
 }
@@ -564,7 +557,7 @@ ul .instruction-list {
 .ingredient .flex {
     min-width: 230px;
 }
-#modal1 {
+.ingredient_modal {
     min-height: 500px;
 }
 .sm-card .card .card-content {
@@ -577,11 +570,15 @@ ul .instruction-list {
 /* MEDIA QUERIES */
 /*m tablet*/
 @media screen and (min-width: 600px) {
+    .row.col.info-icon{
+    padding: 0;
+    }
+    /* BASE */
     .nav-wrapper {
     margin: 0 2rem;
     }
-    .row.col.info-icon{
-    padding: 0;
+    #form_contact {
+    width: 90%;
     }
     /** Footer **/
     .page-footer .row .col {
@@ -597,9 +594,10 @@ ul .instruction-list {
     .card-outline {
     padding: 1rem;
     }
+    #placeholder {
+    max-width: 350px;
 }
 }
-
 
 /* l desktop */
 @media screen and (min-width: 993px) {
@@ -610,7 +608,6 @@ ul .instruction-list {
     .sm-card .card {
         min-height: 70px;
     }
-    
     /* single recipe page */
     .tab-title {
     letter-spacing: 0px;
@@ -619,9 +616,6 @@ ul .instruction-list {
 
 /* xl  large desktop */
 @media screen and (min-width: 1200px) {
-    /* *{
-        font-size: 1.05rem;
-    } */
     /* single recipe page */
     .tab-title {
     letter-spacing: 1px;
@@ -645,9 +639,6 @@ ul .instruction-list {
     .recipe_cards {
         display: none;
     }
-    /* Add/EDIT RECIPE */
-    /* #placeholder {
-    width: 300px; */
 }
 
 /*xxl  v large desktop*/
@@ -680,9 +671,4 @@ ul .instruction-list {
     .tabs .tab a {
         font-size: 1.2rem;
     }
-    /* Add/EDIT RECIPE */
-    /* #placeholder {
-    width: 400px;
-} */
-
 }

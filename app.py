@@ -47,7 +47,6 @@ def recipes():
     # sort recipes by newest first
     recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
         (current_page - 1)*limit_per_page).limit(limit_per_page)
-
     # total of recipes in database
     number_of_all_rec = recipes.count()
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
@@ -59,40 +58,6 @@ def recipes():
         current_page=current_page,
         pages=pages,
         number_of_all_rec=number_of_all_rec)
-
-
-# ALL USERS
-@app.route("/")
-@app.route("/users")
-def users():
-    """
-    READ
-    Displays all users. This feature
-    is only available to the admin.
-    Pagination limits the number of recipes displayed.
-    """
-    # set title to display in browser tab
-    # and apply active-link to nav link
-    title = 'McTastic Users'
-    # code for pagination modified from irinatu17:
-    # https://github.com/irinatu17/MyCookBook
-    limit_per_page = 6
-    current_page = int(request.args.get('current_page', 1))
-    # total of users in database
-    number_of_all_users = users_coll.count()
-    #  Number of Pages
-    pages = range(1, int(math.ceil(number_of_all_users / limit_per_page)) + 1)
-    # sort users by alphabetical order
-    users = users_coll.find().sort('username', 1).skip(
-        (current_page - 1)*limit_per_page).limit(limit_per_page)
-
-    return render_template(
-        "users.html",
-        title=title,
-        users=users,
-        current_page=current_page,
-        pages=pages,
-        number_of_all_users=number_of_all_users)
 
 
 # SEARCH
@@ -114,7 +79,7 @@ def search():
         # used when a search is made
         query = request.form.get('query')
     else:
-        # used when a pagination link is clicked
+        # used when a pagination link is clicked following a search
         query = request.args.get('query')
 
     sort_by = "Sort By"
@@ -158,7 +123,7 @@ def sort():
         query = request.args.get('query')
         sort_by = request.form.get('sort_by')
     else:
-        # used when a pagination link is clicked
+        # used when a pagination link is clicked following a sort
         query = request.args.get('query')
         sort_by = request.args.get('sort_by')
 
@@ -278,7 +243,7 @@ def sort_filter():
         sort_by = request.args.get('sort_by')
         filter_by = request.args.get('filter_by')
 
-    # sort recipes by user preference
+    # sort recipes by user preference and chosen filter
     if sort_by == 'A-Z':
         if filter_by == "Cooking":
             recipes = recipes_coll.find(
@@ -376,12 +341,10 @@ def filter():
     if request.method == "POST":
         # used when a filter parameter is selected
         query = request.args.get('query')
-        sort_by = request.args.get('sort_by')
         filter_by = request.form.get('filter_by')
     else:
         # used when a pagination link is clicked
         query = request.args.get('query')
-        sort_by = request.args.get('sort_by')
         filter_by = request.args.get('filter_by')
 
     # filter recipes by user preference
@@ -520,100 +483,38 @@ def filter_sort():
         sort_by=sort_by)
 
 
-# COOKING
-@app.route("/cooking")
-def cooking():
+# ALL USERS
+@app.route("/")
+@app.route("/users")
+def users():
     """
     READ
-    Searches recipes with a category
-    of cooking.
+    Displays all users. This feature
+    is only available to the admin.
+    Pagination limits the number of recipes displayed.
     """
     # set title to display in browser tab
     # and apply active-link to nav link
-    title = 'McTastic Cooking'
+    title = 'McTastic Users'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
-    # recipes to display in order of latest created
-    recipes = recipes_coll.find(
-            {"category_name": "cooking"}).sort('_id', pymongo.DESCENDING).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    # total of recipes in database
-    number_of_all_rec = recipes.count()
-    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
+    # total of users in database
+    number_of_all_users = users_coll.count()
+    #  Number of Pages
+    pages = range(1, int(math.ceil(number_of_all_users / limit_per_page)) + 1)
+    # sort users by alphabetical order
+    users = users_coll.find().sort('username', 1).skip(
+        (current_page - 1)*limit_per_page).limit(limit_per_page)
 
     return render_template(
-        "cooking.html",
+        "users.html",
         title=title,
-        recipes=recipes,
+        users=users,
         current_page=current_page,
         pages=pages,
-        number_of_all_rec=number_of_all_rec)
-
-
-# BAKING
-@app.route("/baking")
-def baking():
-    """
-    READ
-    Searches recipes with a category
-    of baking.
-    """
-    # set title to display in browser tab
-    # and apply active-link to nav link
-    title = 'McTastic Baking'
-    # code for pagination modified from irinatu17:
-    # https://github.com/irinatu17/MyCookBook
-    limit_per_page = 6
-    current_page = int(request.args.get('current_page', 1))
-    # recipes to display in order of latest created
-    recipes = recipes_coll.find(
-            {"category_name": "baking"}).sort('_id', pymongo.DESCENDING).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    # total of recipes in database
-    number_of_all_rec = recipes.count()
-    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
-
-    return render_template(
-        "baking.html",
-        title=title,
-        recipes=recipes,
-        current_page=current_page,
-        pages=pages,
-        number_of_all_rec=number_of_all_rec)
-
-
-# SNACKS
-@app.route("/snacks")
-def snacks():
-    """
-    READ
-    Searches recipes with a category
-    of snacks.
-    """
-    # set title to display in browser tab
-    # and apply active-link to nav link
-    title = 'McTastic Snacks'
-    # code for pagination modified from irinatu17:
-    # https://github.com/irinatu17/MyCookBook
-    limit_per_page = 6
-    current_page = int(request.args.get('current_page', 1))
-    # recipes to display in order of latest created
-    recipes = recipes_coll.find(
-            {"category_name": "snacks"}).sort('_id', pymongo.DESCENDING).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-    # total of recipes in database
-    number_of_all_rec = recipes.count()
-    pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
-
-    return render_template(
-        "snacks.html",
-        title=title,
-        recipes=recipes,
-        current_page=current_page,
-        pages=pages,
-        number_of_all_rec=number_of_all_rec)
+        number_of_all_users=number_of_all_users)
 
 
 # PROFILE
@@ -655,17 +556,17 @@ def profile(username):
     return redirect(url_for("login"))
 
 
-# ADMIN VIEW PROFILE
-@app.route("/admin_profile/<username_view>", methods=["GET", "POST"])
-def admin_profile(username_view):
+# VIEW PROFILE
+@app.route("/view_profile/<username_view>", methods=["GET", "POST"])
+def view_profile(username_view):
     """
     READ
-    Displays the username and recipes
-    of the user selected by the admin.
+    Allows users to view other users profiles
     """
     # set title to display in browser tab
     # and apply active-link to nav link
     title = 'McTastic Users'
+
     # grab the session user's username from db
     user = users_coll.find_one(
         {"username": username_view})
@@ -680,7 +581,7 @@ def admin_profile(username_view):
     recipes = user_recipes.sort('_id', pymongo.DESCENDING).skip(
             (current_page - 1) * limit_per_page).limit(limit_per_page)
     return render_template(
-        "admin_profile.html",
+        "view_profile.html",
         title=title,
         user=user,
         recipes=recipes,
@@ -704,9 +605,12 @@ def single_recipe(recipe_id):
     # set title to display in browser tab
     title = rec_name
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    username = mongo.db.recipes.find_one(
+        {"_id": ObjectId(recipe_id)})['created_by']
     return render_template(
         "single_recipe.html",
         title=title,
+        username=username,
         recipe=recipe)
 
 
@@ -770,13 +674,10 @@ def login():
 
         if existing_user:
             # ensure hashed password matches user input
-            if check_password_hash(
-                existing_user["password"], request.form.get("password")):
-                    session["user"] = request.form.get("username").lower()
-                    flash("Welcome, {}".format(
-                        request.form.get("username")))
-                    return redirect(url_for(
-                        "profile", username=session["user"]))
+            if check_password_hash(existing_user["password"], request.form.get("password")):
+                session["user"] = request.form.get("username").lower()
+                flash("Welcome, {}".format(request.form.get("username")))
+                return redirect(url_for("profile", username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or password")
@@ -966,11 +867,14 @@ def edit_recipe(recipe_id):
         return redirect(url_for("profile", username=username))
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    user_image = mongo.db.recipes.find_one(
+        {"_id": ObjectId(recipe_id)})["recipe_image"]
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template(
         "edit_recipe.html",
         title=title,
         recipe=recipe,
+        user_image=user_image,
         categories=categories,
         active_page=active_page)
 
@@ -1076,7 +980,7 @@ def error_404(error):
     READ
     Handles 404 error (page not found)
     '''
-    return render_template('404.html', error=True,
+    return render_template('error/404.html', error=True,
                            title="Page not found"), 404
 
 
@@ -1087,7 +991,7 @@ def error_500(error):
     READ
     Handles 500 error (internal server error)
     '''
-    return render_template('500.html', error=True,
+    return render_template('error/500.html', error=True,
                            title="Internal Server Error"), 500
 
 

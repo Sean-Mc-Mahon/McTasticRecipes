@@ -39,7 +39,7 @@ def recipes():
     Pagination limits the number of recipes displayed.
     """
     # set title to display in browser tab
-    title = 'McTastic Recipes'
+    title = 'Recipes'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -69,7 +69,7 @@ def search():
     title and ingredients.
     """
     # set title to display in browser tab
-    title = 'McTastic Search'
+    title = 'Search'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -90,6 +90,7 @@ def search():
             (current_page - 1)*limit_per_page).limit(limit_per_page)
     #  Number of Search results
     number_of_all_rec = recipes.count()
+    print(number_of_all_rec)
     #  Number of Pages
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
 
@@ -112,7 +113,7 @@ def sort():
     Sorts recipes by user preference
     """
     # set title to display in browser tab
-    title = 'McTastic Recipes Sort'
+    title = 'Recipes Sort'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -167,7 +168,7 @@ def sort_query():
     Used following a search
     """
     # set title to display in browser tab
-    title = 'McTastic Recipes Search Sort'
+    title = 'Recipes Search Sort'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -228,7 +229,7 @@ def sort_filter():
     Used following a filter
     """
     # set title to display in browser tab
-    title = 'McTastic Recipes Sort Filter'
+    title = 'Recipes Sort Filter'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -255,9 +256,13 @@ def sort_filter():
                 {"category_name": "baking"}).sort(
                     'recipe_name', 1).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
-        else:
+        elif filter_by == "Snacks":
             recipes = recipes_coll.find(
                 {"category_name": "snacks"}).sort(
+                    'recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find().sort(
                     'recipe_name', 1).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
     elif sort_by == 'Z-A':
@@ -271,10 +276,14 @@ def sort_filter():
                 {"category_name": "baking"}).sort(
                     'recipe_name', -1).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
-        else:
+        elif filter_by == "Snacks":
             recipes = recipes_coll.find(
                 {"category_name": "snacks"}).sort(
-                    'recipe_name', -1).skip(
+                    'recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find().sort(
+                    'recipe_name', 1).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
     elif sort_by == 'Oldest':
         if filter_by == "Cooking":
@@ -287,10 +296,14 @@ def sort_filter():
                 {"category_name": "baking"}).sort(
                     '_id', pymongo.ASCENDING).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
-        else:
+        elif filter_by == "Snacks":
             recipes = recipes_coll.find(
                 {"category_name": "snacks"}).sort(
-                    '_id', pymongo.ASCENDING).skip(
+                    'recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find().sort(
+                    'recipe_name', 1).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
     else:
         if filter_by == "Cooking":
@@ -303,10 +316,14 @@ def sort_filter():
                 {"category_name": "baking"}).sort(
                     '_id', pymongo.DESCENDING).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
-        else:
+        elif filter_by == "Snacks":
             recipes = recipes_coll.find(
                 {"category_name": "snacks"}).sort(
-                    '_id', pymongo.DESCENDING).skip(
+                    'recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find().sort(
+                    'recipe_name', 1).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
 
     # total of recipes
@@ -332,7 +349,7 @@ def filter():
     filter recipes by user preference
     """
     # set title to display in browser tab
-    title = 'McTastic Recipes Filter'
+    title = 'Recipes Filter'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -357,9 +374,12 @@ def filter():
         recipes = recipes_coll.find(
             {"category_name": "snacks"}).sort('_id', pymongo.DESCENDING).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
-    else:
+    elif filter_by == 'Cooking':
         recipes = recipes_coll.find(
             {"category_name": "cooking"}).sort('_id', pymongo.DESCENDING).skip(
+            (current_page - 1)*limit_per_page).limit(limit_per_page)
+    else:
+        recipes = recipes_coll.find().sort('_id', pymongo.DESCENDING).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
 
     # total of recipes
@@ -387,7 +407,7 @@ def filter_sort():
     Used following a sort
     """
     # set title to display in browser tab
-    title = 'McTastic Recipes Filter Sort'
+    title = 'Recipes Filter Sort'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -414,9 +434,13 @@ def filter_sort():
                 {"category_name": "baking"}).sort(
                     'recipe_name', 1).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
-        else:
+        elif filter_by == "Snacks":
             recipes = recipes_coll.find(
                 {"category_name": "snacks"}).sort(
+                    'recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find().sort(
                     'recipe_name', 1).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
     elif sort_by == 'Z-A':
@@ -430,10 +454,14 @@ def filter_sort():
                 {"category_name": "baking"}).sort(
                     'recipe_name', -1).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
-        else:
+        elif filter_by == "Snacks":
             recipes = recipes_coll.find(
                 {"category_name": "snacks"}).sort(
-                    'recipe_name', -1).skip(
+                    'recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find().sort(
+                    'recipe_name', 1).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
     elif sort_by == 'Oldest':
         if filter_by == "Cooking":
@@ -446,10 +474,14 @@ def filter_sort():
                 {"category_name": "baking"}).sort(
                     '_id', pymongo.ASCENDING).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
-        else:
+        elif filter_by == "Snacks":
             recipes = recipes_coll.find(
                 {"category_name": "snacks"}).sort(
-                    '_id', pymongo.ASCENDING).skip(
+                    'recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find().sort(
+                    'recipe_name', 1).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
     else:
         if filter_by == "Cooking":
@@ -462,10 +494,14 @@ def filter_sort():
                 {"category_name": "baking"}).sort(
                     '_id', pymongo.DESCENDING).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
-        else:
+        elif filter_by == "Snacks":
             recipes = recipes_coll.find(
                 {"category_name": "snacks"}).sort(
-                    '_id', pymongo.DESCENDING).skip(
+                    'recipe_name', 1).skip(
+                (current_page - 1)*limit_per_page).limit(limit_per_page)
+        else:
+            recipes = recipes_coll.find().sort(
+                    'recipe_name', 1).skip(
                 (current_page - 1)*limit_per_page).limit(limit_per_page)
 
     # total of recipes
@@ -495,7 +531,7 @@ def users():
     """
     # set title to display in browser tab
     # and apply active-link to nav link
-    title = 'McTastic Users'
+    title = 'Users'
     # code for pagination modified from irinatu17:
     # https://github.com/irinatu17/MyCookBook
     limit_per_page = 6
@@ -517,45 +553,6 @@ def users():
         number_of_all_users=number_of_all_users)
 
 
-# PROFILE
-@app.route("/profile/<username>", methods=["GET", "POST"])
-def profile(username):
-    """
-    READ
-    Displays the username and recipes
-    of the session user.
-    """
-    # grab the session user's username from db
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    # combine site name with user name to
-    # set title to display in browser tab
-    # and apply active-link to nav link
-    title = username + ("s McTastic Profile")
-
-    if session["user"]:
-        user_recipes = recipes_coll.find({"created_by": session["user"]})
-        number_of_user_rec = user_recipes.count()
-        limit_per_page = 6
-        current_page = int(request.args.get('current_page', 1))
-        pages = range(
-            1, int(math.ceil(number_of_user_rec / limit_per_page)) + 1)
-        recipes = user_recipes.sort('_id', pymongo.DESCENDING).skip(
-            (current_page - 1)*limit_per_page).limit(limit_per_page)
-
-        return render_template(
-            "profile.html",
-            title=title,
-            number_of_user_rec=number_of_user_rec,
-            username=username,
-            recipes=recipes,
-            user_recipes=user_recipes,
-            current_page=current_page,
-            pages=pages)
-
-    return redirect(url_for("login"))
-
-
 # VIEW PROFILE
 @app.route("/view_profile/<username_view>", methods=["GET", "POST"])
 def view_profile(username_view):
@@ -563,15 +560,11 @@ def view_profile(username_view):
     READ
     Allows users to view other users profiles
     """
-    # set title to display in browser tab
-    # and apply active-link to nav link
-    title = 'McTastic Users'
-
     # grab the session user's username from db
     user = users_coll.find_one(
         {"username": username_view})
     username = users_coll.find_one(
-        {"username": username_view})["username"]
+        {"username": username_view})["username"].capitalize()
     user_recipes = recipes_coll.find({"created_by": username_view})
     number_of_user_rec = user_recipes.count()
     limit_per_page = 6
@@ -580,6 +573,14 @@ def view_profile(username_view):
     # recipes to display in order of latest created
     recipes = user_recipes.sort('_id', pymongo.DESCENDING).skip(
             (current_page - 1) * limit_per_page).limit(limit_per_page)
+
+    # set title to display in browser tab
+    # and apply active-link to nav link
+    if session["user"] == username:
+        title = username
+    else:
+        title = 'Profiles'
+
     return render_template(
         "view_profile.html",
         title=title,
@@ -599,11 +600,10 @@ def single_recipe(recipe_id):
     READ
     Displays a single recipe.
     """
-    # combine site name with recipe name
-    rec_name = 'McTastic ' + (mongo.db.recipes.find_one(
-        {"_id": ObjectId(recipe_id)})['recipe_name'])
     # set title to display in browser tab
-    title = rec_name
+    title = mongo.db.recipes.find_one(
+        {"_id": ObjectId(recipe_id)})['recipe_name']
+    
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     username = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})['created_by']
@@ -628,7 +628,7 @@ def register():
     """
     # set title to display in browser tab
     # and apply active-link to nav link
-    title = 'McTastic Registration'
+    title = 'Registration'
     if request.method == "POST":
         # check if username already exists in db
         existing_user = mongo.db.users.find_one(
@@ -666,7 +666,7 @@ def login():
     """
     # set title to display in browser tab
     # and apply active-link to nav link
-    title = 'McTastic Login'
+    title = 'Login'
     if request.method == "POST":
         # check if username exists
         existing_user = mongo.db.users.find_one(
@@ -677,7 +677,8 @@ def login():
             if check_password_hash(existing_user["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
                 flash("Welcome, {}".format(request.form.get("username")))
-                return redirect(url_for("profile", username=session["user"]))
+                return redirect(
+                    url_for("view_profile", username_view=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or password")
@@ -719,7 +720,7 @@ def insert_recipe():
     """
     # set title to display in browser tab
     # and apply active-link to nav link
-    title = 'McTastic Add Recipe'
+    title = 'Add Recipe'
     if request.method == "POST":
         recipe_is_vegetarian = "on" if request.form.get(
             "recipe_is_vegetarian") else "off"
@@ -801,7 +802,7 @@ def insert_ingredient():
     """
     # set title to display in browser tab
     # andset active page to apply active-link to nav link
-    title = 'McTastic Units'
+    title = 'Units'
     if request.method == "POST":
         # check if ingredient already exists in db
         existing_ingredient = mongo.db.ingredients.find_one(
@@ -838,7 +839,7 @@ def edit_recipe(recipe_id):
     has been successful.
     """
     # set title to display in browser tab
-    title = 'McTastic Edit Recipe'
+    title = 'Edit Recipe'
     # set active page to apply active-link to nav link
     active_page = 'edit'
     if request.method == "POST":
@@ -940,7 +941,7 @@ def units():
     """
     # set title to display in browser tab
     # and apply active-link to nav link
-    title = 'McTastic Units'
+    title = 'Units'
     ingredients = mongo.db.ingredients.find().sort("ingredient_name", 1)
     dairy_ingredients = mongo.db.ingredients.find(
         {"group_name": "Dairy"}).sort("ingredient_name", 1)

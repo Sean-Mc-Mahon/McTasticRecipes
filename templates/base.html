@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     {% block styles %}
     {% endblock %}
-    <title>{{ title }}</title>
+    <title>McTastic {{ title }}</title>
     <!-- EmailJS -->
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js">
@@ -47,7 +47,7 @@
 
     <header>
         <!-- Top Nav Bar -->
-        <nav class="nav-extended blue-grey darken-3 text-shadow">
+        <nav class="nav-extended blue-grey darken-3 text-shadow-2">
             <div class="nav-wrapper slide">
                 <!-- LOGO -->
                 <div class="left">
@@ -62,14 +62,12 @@
                     <i class="material-icons  right">menu</i></a>
                     <ul class="right hide-on-med-and-down  ">
                         <!-- USERS -->
-                        {% if session.user|lower == 'admin' %}
-                        <li class="{{'active-link' if title == 'McTastic Users'}}"><a id="users" href="{{ url_for('users')}}">Users</a></li>
-                        {% endif %}
                         <!-- LOGGED IN USERS -->
                         {% if session.user %}
                             <li><a id="logout" href="{{ url_for('logout')}}">Log Out</a></li>
                             <li class="{{'active-link' if title == 'McTastic Add Recipe'}}"><a id="add" href="{{ url_for('insert_recipe')}}">Add Recipe</a></li>
-                            <li class="{{'active-link' if title == (session['user'] + '&apos s McTastic Profile' ) }}"><a id="profile" href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                            <li class="{{'active-link' if title == (session['user'] + '&apos s McTastic Profile' ) }}"><a id="profile" href="{{ url_for('view_profile', username_view=session['user']) }}">Profile</a></li>
+                            <li class="{{'active-link' if title == 'McTastic Users'}}"><a id="users" href="{{ url_for('users')}}">Users</a></li>
                         <!-- NOT LOGGED IN USERS -->
                         {% else %}
                             <li class="{{'active-link' if title == 'McTastic Login'}}"><a id="login" href="{{ url_for('login')}}">Log In</a></li>
@@ -86,14 +84,12 @@
             <li><h4 class="center-align">Menu</h4></li>
             <li><a href="{{ url_for('recipes')}}">Home</a></li>
             <!-- USERS -->
-                        {% if session.user|lower == 'admin' %}
-                        <li><a href="{{ url_for('users')}}">Users</a></li>
-                        {% endif %}
             <!-- LOGGED IN USERS -->
             {% if session.user %}
                 <li><a href="{{ url_for('logout')}}">Log Out</a></li>
                 <li><a href="{{ url_for('insert_recipe')}}">Add Recipe</a></li>
-                <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                <li><a href="{{ url_for('view_profile', username_view=session['user']) }}">Profile</a></li>
+                <li><a href="{{ url_for('users')}}">Users</a></li>
             <!-- NOT LOGGED IN USERS -->
             {% else %}
                 <li><a href="{{ url_for('login')}}">Log In</a></li>

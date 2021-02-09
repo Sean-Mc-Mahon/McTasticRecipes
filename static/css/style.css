@@ -13,50 +13,6 @@ body {
     min-height: 100vh;
     flex-direction: column;
 }
-/* pagination */
-.pagination li.active {
-    background-color: #4c809b;
-}
-/* used to make footer sticky */
-main {
-    flex: 1 0 auto;
-}
-.activator {
-    cursor: pointer;
-}
-/*Images*/
-/*perfect square code from: https://codepen.io/Tyler_Potts_/pen/qBBXoVQ*/
-.square {
-    position: relative;
-    overflow: hidden;
-}
-.square:after {
-    content: "";
-    display: block;
-    padding-top: 100%;
-}
-.content {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.blank_image {
-    background-color:rgba(38, 50, 56, 0.5);
-    color: white;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-}
-.image_header{
-    padding: 2rem;
-    opacity: 1;
-    transition: 1s ease;
-}
-.header_fade {
-    pointer-events: none;
-    opacity: 0;
-}
 
 /* Font Rules */
 h1,h2,h3,h4,h5,h6 {
@@ -83,30 +39,8 @@ h1,h2,h3,h4,h5,h6 {
 .larger-text {
     font-size: 1.2rem;
 }
-.text-newsletter {
-    text-align: center;
-}
-.red {
-    color: red;
-}
-.text-center {
-    text-align: center;
-}
-.text-right {
-    text-align: right;
-}
 .f16 {
     font-size: 16px;
-}
-
-/* Hide */
-.xxl-only{
-    display: none;
-}
-
-/* Icons */
-.large-icon {
-    font-size: 1.5rem;
 }
 
 /* Flex Rules */
@@ -155,11 +89,6 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 /* Margin Rules */
-/* .m-auto {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-} */
 .m-auto {
     margin: 0 auto;
 }
@@ -224,6 +153,58 @@ h1,h2,h3,h4,h5,h6 {
 .w-80 {
     width: 80%;
     margin: auto;
+}
+
+/* pagination */
+.pagination li.active {
+    background-color: #4c809b;
+}
+/* used to make footer sticky */
+main {
+    flex: 1 0 auto;
+}
+/*Images*/
+/*perfect square code from: https://codepen.io/Tyler_Potts_/pen/qBBXoVQ*/
+.square {
+    position: relative;
+    overflow: hidden;
+}
+.square:after {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+.content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.blank_image {
+    background-color:rgba(38, 50, 56, 0.5);
+    color: white;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.image_header{
+    padding: 2rem;
+    opacity: 1;
+    transition: 1s ease;
+}
+.header_fade {
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* Hide */
+.xxl-only{
+    display: none;
+}
+
+/* Icons */
+.large-icon {
+    font-size: 1.5rem;
 }
 
 /* Cards and Buttons */
@@ -343,6 +324,9 @@ nav ul a {
     transition: 1s ease;
     color: #449bff;
 }
+.activator {
+    cursor: pointer;
+}
 /* large recipes */
 .recipe_cards_lg {
     display: none;
@@ -354,13 +338,11 @@ nav ul a {
     height: 100%;
     display: inline-block;
 }
-
 .gallery-item .gallery-image {
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
-
 .gallery-item .gallery-image img {
   width: 100%;
   height: 100%;
@@ -370,7 +352,6 @@ nav ul a {
   transition: 1s ease-in-out;
   display: block;
 }
-
 .overlay {
   position: absolute;
   height: 100%;
@@ -379,26 +360,21 @@ nav ul a {
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.6);
 }
-
 .gallery-item:hover .overlay {
   opacity: 1;
 }
-
 .overlay-fade {
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
 }
-
 .gallery-item:hover .overlay-fade {
   width: 100%;
 }
-
 .gallery-item:hover .gallery-image img {
   transform: scale(1.2);
 }
-
 .gallery-item .gallery-text {
   opacity: 0;
   position: absolute;
@@ -410,7 +386,6 @@ nav ul a {
   z-index: 3;
   transition: 2s ease-in-out;
 }
-
 .gallery-item:hover .gallery-text {
   opacity: 1;
 }
@@ -484,7 +459,7 @@ ul .instruction-list {
     margin: 1.0933333333rem 0 0.656rem 1rem;
 }
 
-/* SINGLE RECIPE PAGE */
+/*** SINGLE RECIPE PAGE ***/
 /* Reveals */
 .text-wrapper,
 .image-wrapper {
@@ -544,7 +519,7 @@ ul .instruction-list {
     border-bottom: 2px solid #263238;
 }
 
-/* UNITS PAGE */
+/*** UNITS PAGE ***/
 .unit_label {
     width: 40px !important;
 }
@@ -596,7 +571,11 @@ ul .instruction-list {
     }
     #placeholder {
     max-width: 350px;
-}
+    }
+    /* recipe cards */
+    .recipe-card {
+        height: 72px;
+    }
 }
 
 /* l desktop */

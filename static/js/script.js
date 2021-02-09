@@ -68,13 +68,13 @@ function sendMail(contactForm) {
     return false;  // To block from loading a new page
 }
 
-//FADE BLANK IMAGE HEADER ON HOVER
+//RECIPE CARDS: FADE RECIPE NAME ON HOVER FOR RECIPES WHERE IMAGE HAS NOT BEEN PROVIDED
 $('.overlay').hover(
        function(){ $('.image_header').addClass('header_fade') },
        function(){ $('.image_header').removeClass('header_fade') }
 );
 
-//IMAGE AND TEXT REVEALS FOR SINGLE_RECIPE
+//LOGO AND TEXT REVEALS FOR NAVBAR
 //code modified from tutorial as part of Creative Javascript Course @ https://developedbyed.com/
 if (window.location.pathname=='/') {
     function animateNav() {
@@ -449,4 +449,9 @@ document.getElementById("recipe_image").addEventListener("input", function() {
         document.getElementById("img").setAttribute("src", document.getElementById("recipe_image").value);
         document.getElementById("img").setAttribute("alt", `Image of ${document.getElementById("recipe_name").value}`);
     }
+});
+
+// Ingredient Live Input
+document.getElementById("recipe_ingredients").addEventListener("input", function() {
+    let liveIngredients = document.getElementById("recipe_ingredients").value;
 });

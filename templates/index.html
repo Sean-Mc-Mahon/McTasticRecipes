@@ -65,6 +65,7 @@
                                 {% else %}
                                 <option value="" disabled selected>Filter By</option>
                                 {% endif %}
+                                <option value="All">All</option>
                                 <option value="Cooking">Cooking</option>
                                 <option value="Baking">Baking</option>
                                 <option value="Snacks">Snacks</option>
@@ -76,48 +77,55 @@
         </div>
 
         {% if number_of_all_rec > 0 %}
-        <!--Recipe Cards-->
-        <div class="row container">
-            {% if query %}
-            <h5 class="m-all center-align">{{ number_of_all_rec }} Results for {{ query }}</h5>
-            {% elif filter_by %}
-            <h5 class="m-all center-align">{{ number_of_all_rec }} Results for {{ filter_by }}</h5>
-            {% endif %}
-            {% for recipe in recipes %}
-                {% include "partials/recipe_cards.html" %}
-                {% include "partials/recipe_cards_lg.html" %}
-            {% endfor %}
-        </div>
-
-        <!--PAGINATION-->
-        <ul class="pagination center-align margin-bottom-large">
-            <h5>{{ number_of_all_rec }} Recipes</h5>
-            {% for page_num in pages %} 
-                {% if page_num == current_page %}
-                <li class="active"><a>{{ page_num }}</a></li>
-                {% else %}
-                <li class="waves-effect">
-                    {% if title == 'McTastic Recipes' %}
-                        <a href="{{ url_for('recipes', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
-                    {% elif title == 'McTastic Search' %}
-                        <a href="{{ url_for('search', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
-                    {% elif title == 'McTastic Recipes Sort' %}
-                        <a href="{{ url_for('sort', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
-                    {% elif title == 'McTastic Recipes Search Sort' %}
-                        <a href="{{ url_for('sort_query', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
-                    {% elif title == 'McTastic Recipes Filter' %}
-                        <a href="{{ url_for('filter', filter_by=filter_by, query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
-                    {% elif title == 'McTastic Recipes Filter Sort' %}
-                        <a href="{{ url_for('filter_sort', filter_by=filter_by, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
-                    {% elif title == 'McTastic Recipes Sort Filter' %}
-                        <a href="{{ url_for('sort_filter', filter_by=filter_by, query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+            <!--Recipe Cards-->
+            <div class="row container">
+                {% if query %}
+                    <!--displayed where there is one result-->
+                    {% if number_of_all_rec == 1 %}
+                    <h5 class="m-all center-align">1 Result for {{ query }}</h5>
+                    <!--displayed where there are multiple results-->
+                    {% else %}
+                    <h5 class="m-all center-align">{{ number_of_all_rec }} Results for {{ query }}</h5>
                     {% endif %}
-                </li>
-                {% endif %} 
-            {% endfor %}
-        </ul>
+                {% elif filter_by %}
+                    <h5 class="m-all center-align">{{ number_of_all_rec }} Results for {{ filter_by }}</h5>
+                {% endif %}
+                {% for recipe in recipes %}
+                    {% include "partials/recipe_cards.html" %}
+                    {% include "partials/recipe_cards_lg.html" %}
+                {% endfor %}
+            </div>
+            <!--PAGINATION-->
+            {% if number_of_all_rec > 6 %}
+                <ul class="pagination center-align margin-bottom-large">
+                    <h5>{{ number_of_all_rec }} Recipes</h5>
+                    {% for page_num in pages %} 
+                        {% if page_num == current_page %}
+                        <li class="active"><a>{{ page_num }}</a></li>
+                        {% else %}
+                        <li class="waves-effect">
+                            {% if title == 'McTastic Recipes' %}
+                                <a href="{{ url_for('recipes', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+                            {% elif title == 'McTastic Search' %}
+                                <a href="{{ url_for('search', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+                            {% elif title == 'McTastic Recipes Sort' %}
+                                <a href="{{ url_for('sort', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+                            {% elif title == 'McTastic Recipes Search Sort' %}
+                                <a href="{{ url_for('sort_query', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+                            {% elif title == 'McTastic Recipes Filter' %}
+                                <a href="{{ url_for('filter', filter_by=filter_by, query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+                            {% elif title == 'McTastic Recipes Filter Sort' %}
+                                <a href="{{ url_for('filter_sort', filter_by=filter_by, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+                            {% elif title == 'McTastic Recipes Sort Filter' %}
+                                <a href="{{ url_for('sort_filter', filter_by=filter_by, query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+                            {% endif %}
+                        </li>
+                        {% endif %} 
+                    {% endfor %}
+                </ul>
+            {% endif %}
         {% else %}
-            <h3 class="center-align">No Results Found for {{ query }}</h3>
+                <h3 class="center-align">No Results Found for {{ query }}</h3>
         {% endif %}
-
+    </div>
 {% endblock %}

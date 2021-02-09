@@ -11,9 +11,9 @@
                             <img class="content gallery-image" src="{{ recipe.recipe_image }}">
                         {% endif %}
                     </div>
-                    <div class="card-content flex-space">
+                    <div class="recipe-card card-content flex-space">
                         <!--Displayed under image-->
-                        <p><a class="bolder blue-grey-text text-darken-4 card-anchor" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">{{recipe.recipe_name}}</a></p>
+                        <p><a id="recipe-link" class="bolder blue-grey-text text-darken-4 card-anchor" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">{{recipe.recipe_name}}</a></p>
                         <span class="bold activator"><i class="material-icons right">more_vert</i></span>
                     </div>
                     <!--Revelaed when card is clicked-->

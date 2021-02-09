@@ -1,12 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
+    <!--SEARCH & SORT-->
+    <div class="vm1 container mt1">
+        <div class="row">
+            <!--SEARCH-->
+                <form class="col s12" action="{{ url_for('search', sort_by=sort_by, query=query) }}" method="post">
+                    <div class="input-field flex">
+                        <input type="text" name="query" id="query" minlength="3" class="validate" required>
+                        <label class="flex-space" for="query">Search Recipes</label>
+                        <button id="search-button"  type="submit" class="transparent blue-grey-text text-darken-3 no-border"><i class="fas fa-search left"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
     <!-- RECIPE TITLE AND CREATER-->
     <div class="row s12 container mt1 mb0">
         <div class="recipe-title center-align blue-grey-text text-darken-3 mb1">
             <h2 class="mt0 mb0" id="name">{{ recipe.recipe_name }}</h2>
             <h5 class="mt0 mb1" id="created-by">Created by: 
-                <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('view_profile', username_view=recipe.created_by) }}">
+                <a class="" href="{{ url_for('view_profile', username_view=recipe.created_by) }}">
                             {{ recipe.created_by }}
                 </a>
             </h5>
@@ -25,7 +39,7 @@
                             <h4 class="image_header center">{{recipe.recipe_name}}</h4>
                         </div>
                     {% else %}
-                        <img class="content gallery-image" src="{{ recipe.recipe_image }}">
+                        <img class="content gallery-image materialboxed" src="{{ recipe.recipe_image }}">
                     {% endif %}
                 </div>
                 <!-- DESCRIPTION -->

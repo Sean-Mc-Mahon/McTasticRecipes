@@ -8,65 +8,91 @@
 
 McTastic Recipes is a Milestone 3 project, it is part of the Fullstack Software Development Course of [Code Institute](https://codeinstitute.net/).
 
-## Table of Contents
+# Table of Contents
 
-1. [**Project overview**](#project-overview)
+**<details><summary>Project overview</summary>**
+* [**_Project overview_**](#project-overview)
+* [**_User Stories_**](#user-stories)
+</details>
 
-   - [**User Stories**](#user-stories)
+**<details><summary>UX</summary>**
+* [**_Strategy Plane_**](#strategy-plane)
+* [**_Scope Plane_**](#scope-plane)
+* [**_Structure Plane_**](#structure-plane)
+* [**_Skeleton Plane_**](#skeleton-plane)
+* [**_Surface Plane_**](#surface-plane)
+    * [_Color Scheme_](#color-scheme)
+    * [_Typography_](#typography)
+    * [_Media_](#Media)
+    * [_Wireframes_](#wireframes)
+</details>
 
-2. [**UX Planes**](#ux-planes)
+**<details><summary>Features</summary>**
+* [**_Existing Features_**](#existing-features)
+* [**_Features Left to Implement_**](#features-left-to-implement)
+</details>
 
-   - [**Strategy Plane**](#strategy-plane)
-   - [**Scope Plane**](#scope-plane)
-   - [**Structure Plane**](#structure-plane)
-   - [**Skeleton Plane**](#skeleton-plane)
-   - [**Surface Plane**](#surface-plane)
-     - [**_*Color Scheme*_**](#color-scheme)
-     - [**_*Typography*_**](#typography)
-     - [**_*Media*_**](#Media)
-     - [**_Wireframes_**](#wireframes)
+**<details><summary>Technologies Used</summary>**
+* [**_Libraries_**](#libraries)
+* [**_Version Control_**](#version-control)
+</details>
 
-3. [**Features**](#features)
+**<details><summary>Testing</summary>**
+* [**_Problems and Solutions_**](#problems-and-solutions)
+* [**_Validators_**](#validators)
+* [**_Manual Testing_**](#manual-testing)
+</details>
 
-   - [**Existing Features**](#existing-features)
-   - [**Features Left to Implement**](#features-left-to-implement)
+**<details><summary>Deployment</summary>**
+* [**Deployment**](#deployment)
+</details>
 
-4. [**Technologies Used**](#technologies-used)
-
-   - [**_Libraries_**](#libraries)
-   - [**_Version Control_**](#version-control)
-
-5. [**Testing**](#testing)
-
-   - [**_Problems and Solutions_**](#problems-and-solutions)
-   - [**_Validators_**](#validators)
-   - [**_Manual Testing_**](#manual-testing)
-
-6. [**Deployment**](#deployment)
-
-7. [**Credits**](#credits)
-
-   - [**_Content_**](#content)
-   - [**_Acknowledgements_**](#acknowledgements)
+**<details><summary>Credits</summary>**
+* [**_Content_**](#content)
+* [**_Acknowledgements_**](#acknowledgements)
+</details>
 
 ---
 
-## Project Overview
+# Project Overview
 
-McTastic Recipes is a recipe website. It is designed to be useful for people with different levels of abilities in the kitchen, from complete novice to experienced cook. It is also designed to be easy to navigate for users of all ages. 
+McTastic Recipes is a recipe website. It is designed to be useful for people with different levels of abilities in the kitchen, from complete novice to experienced cook. <br> 
+It is also designed to be easy to navigate for users of all ages. Users may add not just recipes but also ingredients so that when they add recipes in the future the may easily view the calory values of their favourite recipes.
+
+---
 
 ### User Stories
 
-_- User Story A: As a casual user I would to easily browse recipes. _  
-_- User Story B: As a registered user I would like to add, edit, update or delete my own recipes. _  
-_- User Story C: As a registered user I would like to be able to edit my profile. _  
-_- User Story D: As a registered user I would like to save my favourite recipes. _  
-_- User Story E: I would like to be able to view the recipes clearly regardless of the type of device I use. _  
-_- User Story F: I would like confirmation of what I'm doing, such as when I've registered, logged in, added, edited or deleted a recipe. _
+- User Story A: As a casual user I would to easily browse recipes.
+- User Story B: As a registered user I would like to add, edit, update or delete my own recipes.
+- User Story C: As a registered user I would like to be able to edit my recipes.
+- User Story D: As a registered user I would like to view what recipes other users have created.
+- User Story E: I would like to be able to view the recipes clearly regardless of the type of device I use.
+- User Story F: I would like confirmation of what I'm doing, such as when I've registered, logged in, added, edited or deleted a recipe.
+- User Story G: I would to be able to convert units from metric to imperial and vice versa.
+
+---
+
+## Opportunities arising from user stories
+
+<div align="center">
+ 
+|Opportunities | Importance | Viability / Feasibility
+|-----|:------:|:-----:|
+|**Simple Clean UI** | 5 | 5 |
+|**Clearly indicate purpose** | 5 | 5 |
+|**Clear Simple Instructions** | 5 | 5 |
+|**Simple creation of recipes/ingredients** | 5 | 5 |
+|**Simple edit of recipes/ingredients** | 5 | 5 |
+|**Search/filter/sort Feature** | 5 | 5 |
+|**Share Feature** | 3 | 5 |
+|**Unit Conversion** | 3 | 5 |
+
+</div>
+
+---
 
 ## UX Planes
-
-
 
 ### Strategy Plane
 
@@ -77,19 +103,6 @@ _- User Story F: I would like confirmation of what I'm doing, such as when I've 
 
 - Content: The content is determined by the users and presented in a uniform and clear manner.
 
-#### Project Goals:
-
-- 
-- 
-- 
-
-#### User Goals:
-
-- 
-- 
-- 
-- 
-
 #### Personal Goals
 
 - To learn and practice frontend and backend programming together for the first time. To combine the use of HTML, CSS, Materialize and JavaScript with Python, MongoDB, Flask and Jinja.
@@ -98,28 +111,23 @@ _- User Story F: I would like confirmation of what I'm doing, such as when I've 
 
 - What is needed is a site which integrates input from users in a way which is clean, simple and easily navigable. Users must be able to upload photographs as well as provide information such as ingredients, instructions prep time etc...
 
-- The data on each cat must be presented in a visually compelling way to encourage interaction with the site with the ultimate goal of finding a suitable home for every cat.
+- The data on each recipe must be presented in a visually compelling way to encourage interaction with the site with the ultimate goal of casual users deciding to register and add their own recipes.
 
-- Recipes are divided into categories of cooking baking and snacks, each page provides a selection of recipes.
+- Recipes may be filtered into categories of cooking baking and snacks, as well as being sorted by alphabetical order or order of creation.
 
-- User profiles allow users to store their recipes in a convenient location.
+- User profiles allow users to store their recipes and ingredients in a convenient location.
 
 - In the future a blog or video instructions for recipes may be integrated.
 
 
-### Structure Plane
+### Structure/Skeleton Planes
 
-- The site users a consistent structure, a navbar is at the top of the page which allow a user to navigate the site and login if needed. A footer at the bottom provides copyright information and links to social media pages. The content is consistant with text kept to a minimum. Where information is to be provided drop down menus and binary options are provided where necessary for consistancy. 
-
+- The site uses a consistent structure, a navbar is at the top of the page which allow a user to navigate the site and login if needed. A burger menu is used for small devices.
+- The index page has a search bar, filter and sort feature. If a user performs a search they will be able to sort the search results. 
+- The content is consistant with text kept to a minimum. Majority of imagery and text is determined by users.
+- A footer at the bottom provides copyright information and links to social media pages and a key guide of icon meanings to aid users on mobile devices who do not have the benefit of tooltips. 
 - The number of clicks needed to reach any page is kept to a minimum. Sections such as user profiles will not be visible to users who are not logged in.
-
-
-### Skeleton Plane
-
-- Nav Bar: 
-- Main: 
-- Footer: Displays copyright information and provides links to social pages.
-
+- Buttons/modals/links are consistant in design.
 
 ### Surface Plane
 
@@ -133,7 +141,7 @@ A standard layout is fully responsive on mobile devices and larger screens.
 
 Colors are kept to a minimum in order to keep focus on the imagery of the recipes, chosen colousr are various shades of grey. Color scheme can be found on my Coolors profile: [Coolors](https://coolors.co/u/sean_mcmahon)
 
-![Color Palette](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/coolors.JPG)
+![Color Palette](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/mctastic-colors.JPG)
 
 #### Typography
 
@@ -142,15 +150,13 @@ Colors are kept to a minimum in order to keep focus on the imagery of the recipe
 - [Pattaya](https://fonts.google.com/specimen/Pattaya?query=patt) : Logo & Headings, used for it's flowing relaxed style.
 - [Montserrat](https://fonts.google.com/specimen/Montserrat?query=montse) : Body, used for it's excellent readability.
 
-Font sizes for the headings are mostly responsive using the calc() function.
-
 #### Media
 
-All images, models and featured products are the authors own. Logos are also produced by the author.
+All images, and recipes are the authors own unless provided by other users. Logos are also produced by the author using Affinity Design.
 
 #### Wireframes
 
-I used Balsamiq and figma to create the wireframes. The layout has altered since I created the wireframes as I decided to replace the contact page with a newsletter sign up in the footer. The parallax felt too distracting and so that has been omitted.
+I used Balsamiq and figma to create the wireframes. The layout has altered since I created the wireframes as I decided to replace the contact page with a newsletter sign up in the footer. The parallax felt too distracting and so that has been omitted. Originally there were to be seperate pages for Cooking/Baking/snacks but instead I implemented a feature to filter recipes by category.
 I used affinity designer to design the logo, I went through many iterations of the design until I was happy with two final logos, one for the navigation bar on the site and the other for the browser tab icon.
 
 - [Balsamiq Wireframe](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/mctastic-wire.pdf)
@@ -166,83 +172,86 @@ I used affinity designer to design the logo, I went through many iterations of t
 ## Existing Features
 
 ### Elements on every page
-- Navbar
-    - The navigation bar features the PCR logo in the top left corner. The logo and name are links to the home page.
+- **Navbar**
+    - The navigation bar features a logo and name in the top left corner, both are links to the home page. Navigation links are in the top right. An animation slides the logo, name and navigation links into view on loading but only on the home page in order that it not be too distracting while navigationg the site.
 
     - For visitors to the site who are not logged in, list items links are available for them to use.
-        1. Cooking
-        2. Baking
-        3. Snacks
-        4. Login
-        5. Register
+        1. Login
+        2. Register
+        3. Units
 
     - For users who are logged in, the list items are as follows: 
-        1. Cooking
-        2. Baking
-        3. Snacks
-        4. Logout
-        5. Profile
-        6. Add Recipe
+        1. Logout
+        2. Add Recipes
+        3. Profile
+        4. Users
+        5. Units
 
     - Python determines if the user is logged in or not by checking `if 'user' in session` and passes this data to Jinja to display the correct navbar for the user.
 
-    - On small screens the navbar is collapsed into a burger icon on small screens.
+    - On the smaller resolutions (tablet, mobile) the navbar is collapsed into a burger icon. A slide out menu opens when the burger icon is clicked.
 
-- Footer
-    - The footer features:
-        - Newsletter signup
-        - Directory
+- **Footer**
+
+    The footer features:
+        - Newsletter signup: Users may submit an email to request a newsletter.
+        - Key Information
         - Copyright Information
         - Links to social media platforms.
 
-- All Pages - 
+### Individual Pages
 
-- Home - 
+- **Home**
 
-Parallax hero image
+    The index page has a search bar, filter and sort feature. The search feature searches for keywords in recipe titles and ingredients. If a user performs a search they will be able to sort the search results. <br>
+    The sort feature allows users to sort the results by A-Z, Z-A, latest created and oldest created. <br>
+    The filter allows users to display recipes under the categories of cooking, baking, snacks or all. <br>
+    The main section of the home page displays cards for each recipe. On small devices the cards may be expnded to reveal more information (one card per row on small devices, two cards per row on medium devices). <br>
+    On large devices users can hover over cards to reveal more information (3 cards per row). <br>
+    Pagination links allow users to navigate to the next page of results (6 per page).
 
-Welcome Message
+- **Single Recipes**
+    A search function is available below the navigation. The sort and filter functions not available as there is only one recipe. <br>
+    The recipe image and information rows are revealed using animations upon loading. The recipe title is displayed on top with a link to the creator profile below. <br>
+    On larger devices the content is displayed in two columns, on the left an image which may be clicked to enlarge if a valid image is provided, if not a blank image with the recipe title is displayed. <br>
+    Under the image are icons to summarize key information about the recipe, tooltips give further context on large devices. Alternatively a key guide to the icons is provided in the footer.<br>
+    On the right are the ingredients and instructions which may be toggled. Checkboxes allow the user to mark off ingredients and steps as they progress. <br>
+    If viewed by the creater a recipe may be edited or deleted. If viewed by the admin a recipe may be deleted.
 
-Grid of recipes.
+- **Login**
 
-- Cooking/Baking/Snacks - 
+    This section contains a form where users may login and be redirected to their profile. Below the form is a link to register.
 
-This section contains a gallery of recipes.
+- **Register**
 
-- Contact - 
+    This section contains a form where users may register and be redirected to their profile.
 
-This section has a form where users can contact the site administer.
+- **Profile** 
 
-- Login - 
+    This section contains a form where users may update their information and view their recipes.
 
-This section contains a form where users may login and be redirected to their profile.
+- **Add Recipes**
 
-- Register - 
+    This section contains a form where users may provide details for their recipes. Asterixes are used where a field is required. Dropdowns are used for multiple choice fields and switches are used for binary choices. When the user inputs a valid image url a preview image will take the place of a placeholder image. <br>
+    A list of ingredients is displayed under the form for users to reference for calory informtion as they add ingredients to their recipes.
 
-This section contains a form where users may register and be redirected to their profile.
+- **Profile**
 
-- Profile - 
-
-This section contains a form where users may update their information and view their recipes.
-
-- Add Recipes - 
-
-This section contains a form where users may provide details for their recipes.
+    This section displays the user name and number of recipes in a card at the top as well as a welcome message if they are after logging in. <br>
+    Below this card the recipes created by the user are displayed and if the user has contributed more than 6 recipes then pagination links are displayed below the recipes.
 
 
-## Features Left to Implement
+# Features Left to Implement
 
-- Blog.
+- **Image Hosting** <br>
+    Currently, images are stored by pointing to an external url and pulling the image from there. I plan to eventually add the option to allow the user to upload an image to the server instead as this will make it easier for the user.
 
-- Option to provide video instructions.
-
-- Floating to top button:
-    - A floating button appears on the lower right of the screen when the user starts to scroll downwards. Clicking this moves the view back up to the top of the page. I added this feature because some pages can be quite long and the navbar is not fixed to the top of the page.
-    - Adding the class `.active` to the `#to-top-button` changes it's `opacity` from `0` to `0.5`, which gave me the ability to animate the change gently. The opacity is increased again to `1` on hover. 
+-   **Deleted Recipes**
+    When a recipe/user is deleted it is/they are gone forever. Instead, I'd like to have them stored in a deleted items list for review by an admin.
 
 ##### back to [top](#table-of-contents)
 
-## Technologies Used
+# Technologies Used
 
 1. **HTML (Hyper Text Markup Language):** Used throughout the site;  
    https://developer.mozilla.org/en-US/docs/Web/HTML
@@ -283,7 +292,7 @@ This section contains a form where users may provide details for their recipes.
 
 - Branches were used to ...
 
-## Testing
+# Testing
 
 ### User Stories
 
@@ -331,7 +340,7 @@ Hazel can ...
 
 9. **Navigation:** Clicked through all links to ensure they all go to the correct location.
 
-## Deployment
+# Deployment
 
 CHANGE DEBUG=TRUE TO FALSE IN APP.PY PRIOR TO DEPLOYMENT
 
@@ -362,7 +371,7 @@ For more information about the above process; https://help.github.com/en/github/
 
 ---
 
-## Credits
+# Credits
 
 ### Content
 
@@ -376,7 +385,7 @@ For more information about the above process; https://help.github.com/en/github/
 
 8.  Youtube; Bootstrap Carousel inspired by youtube tutorial by [Clever Techie](https://youtu.be/AvMl3StAju4)
 
-9.  developedbyed.com; burger animation and page transitions modified from tutorial @ [developedbyed](https://developedbyed.com/) 
+9.  Format of README modified from Mr-Smyth: https://github.com/Mr-Smyth/circles/blob/master/README.md
 
 ### Acknowledgements
 

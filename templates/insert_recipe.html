@@ -17,7 +17,7 @@
                 </div>
                 <!-- Recipe Name -->
                 <div class="input-field col s12 m5">
-                    <input id="recipe_name" name="recipe_name" type="text" minlength="1" maxlength="25" class="validate" required>
+                    <input id="recipe_name" name="recipe_name" type="text" minlength="1" maxlength="35" class="validate" required>
                     <label for="recipe_name">Recipe Name *</label>
                 </div>
                 <!-- Serves -->
@@ -50,7 +50,7 @@
             </div>
             <div class="row flex-center-wrap">
                 <!-- Placeholder Image -->
-                <div id="placeholder" class="col s12 m5 gallery-image square m-auto mh1">
+                <div id="placeholder" class="col s12 m5 gallery-image square mh1">
                         <img id="img" class="content gallery-image" src="{{ url_for('static', filename='img/placeholder.jpg') }}" alt="Plate">
                 </div>
                 <!-- Image URL -->

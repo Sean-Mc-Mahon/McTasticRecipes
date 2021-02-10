@@ -64,12 +64,13 @@ It is also designed to be easy to navigate for users of all ages. Users may add 
 ### User Stories
 
 - User Story A: As a casual user I would to easily browse recipes.
-- User Story B: As a registered user I would like to add, edit, update or delete my own recipes.
-- User Story C: As a registered user I would like to be able to edit my recipes.
+- User Story B: As a user I would like to create a profile and delete it if I no longer want it.
+- User Story C: As a registered user I would like to add, edit, update or delete my own recipes.
 - User Story D: As a registered user I would like to view what recipes other users have created.
 - User Story E: I would like to be able to view the recipes clearly regardless of the type of device I use.
-- User Story F: I would like confirmation of what I'm doing, such as when I've registered, logged in, added, edited or deleted a recipe.
+- User Story F: I would like to be able to easily share recipes.
 - User Story G: I would to be able to convert units from metric to imperial and vice versa.
+- User Story H: As a registered user I would like to add, edit, update or delete my own ingredients.
 
 ---
 
@@ -172,75 +173,124 @@ I used affinity designer to design the logo, I went through many iterations of t
 ## Existing Features
 
 ### Elements on every page
-- **Navbar**
-    - The navigation bar features a logo and name in the top left corner, both are links to the home page. Navigation links are in the top right. An animation slides the logo, name and navigation links into view on loading but only on the home page in order that it not be too distracting while navigationg the site.
+#### Navbar
+- The navigation bar features a logo and name in the top left corner, both are links to the home page. Navigation links are in the top right. An animation slides the logo, name and navigation links into view on loading but only on the home page in order that it not be too distracting while navigationg the site.
 
-    - For visitors to the site who are not logged in, list items links are available for them to use.
-        1. Login
-        2. Register
-        3. Units
+- For visitors to the site who are not logged in, list items links are available for them to use.
+    1. Login
+    2. Register
+    3. Units
 
-    - For users who are logged in, the list items are as follows: 
-        1. Logout
-        2. Add Recipes
-        3. Profile
-        4. Users
-        5. Units
+- For users who are logged in, the list items are as follows: 
+    1. Logout
+    2. Add Recipes
+    3. Profile
+    4. Users
+    5. Units
 
-    - Python determines if the user is logged in or not by checking `if 'user' in session` and passes this data to Jinja to display the correct navbar for the user.
+- Python determines if the user is logged in or not by checking `if 'user' in session` and passes this data to Jinja to display the correct navbar for the user.
 
-    - On the smaller resolutions (tablet, mobile) the navbar is collapsed into a burger icon. A slide out menu opens when the burger icon is clicked.
+- On the smaller resolutions (tablet, mobile) the navbar is collapsed into a burger icon. A slide out menu opens when the burger icon is clicked.
 
-- **Footer**
+#### Footer
 
-    The footer features:
-        - Newsletter signup: Users may submit an email to request a newsletter.
-        - Key Information
-        - Copyright Information
-        - Links to social media platforms.
+The footer features:
+    - Newsletter signup: Users may submit an email to request a newsletter.
+    - Key Information
+    - Copyright Information
+    - Links to social media platforms.
+
+#### Share
+
+The share button is displayed on the bottom right corner at all times on all pages that do not require a user to be logged in.
+
+### Elements on Multiple Pages
+
+#### Search Sort Filter 
+(index, search, single_recipe)
+
+- The index page has a search bar, filter and sort feature. The search feature searches for keywords in recipe titles and ingredients. If a user performs a search they will be able to sort the search results. <br>
+- The sort feature allows users to sort the results by A-Z, Z-A, latest created and oldest created. <br>
+- The filter allows users to display recipes under the categories of cooking, baking, snacks or all. <br>
+
+#### Recipe Cards 
+(index, view_profile)
+
+- Cards are displayed for each recipe. On small devices the cards may be expnded to reveal more information (one card per row on small devices, two cards per row on medium devices). <br>
+- On large devices users can hover over cards to reveal more information (3 cards per row). <br>
+
+#### Ingredient Cards 
+(units, add_recipe)
+
+- Cards are displayed for each ingredient. On small devices the cards may be expnded to reveal more information (one card per row on small devices, two cards per row on large devices). If logged in a user may add ingredients, if ingredient name does not already exist it will be entered. If a user created the ingredient they may edit or delete it. Admin user may see the creator of any ingredient and may delete any ingredient. 
+
+#### Pagination 
+(index, view_profile, users)
+
+- Where there are more than six results navigation links to pages are displayed below the number of results (6 results per page). 
 
 ### Individual Pages
 
-- **Home**
+### Home
+- [Search/Sort/Filter](#search-sort-filter)
+- [Recipe Cards](#recipe-cards)
+- [Pagination](#pagination)
+- [Share](#share)
 
-    The index page has a search bar, filter and sort feature. The search feature searches for keywords in recipe titles and ingredients. If a user performs a search they will be able to sort the search results. <br>
-    The sort feature allows users to sort the results by A-Z, Z-A, latest created and oldest created. <br>
-    The filter allows users to display recipes under the categories of cooking, baking, snacks or all. <br>
-    The main section of the home page displays cards for each recipe. On small devices the cards may be expnded to reveal more information (one card per row on small devices, two cards per row on medium devices). <br>
-    On large devices users can hover over cards to reveal more information (3 cards per row). <br>
-    Pagination links allow users to navigate to the next page of results (6 per page).
+### Single Recipes
+- [Search/Sort/Filter](#search-sort-filter) (The sort and filter functions not available as there is only one recipe)
+- [Share](#share)
+- The recipe image and information rows are revealed using animations upon loading. The recipe title is displayed on top with a link to the creator profile below.
+- On larger devices the content is displayed in two columns, on the left an image which may be clicked to enlarge if a valid image is provided, if not a blank image with the recipe title is displayed.
+- Under the image are icons to summarize key information about the recipe, tooltips give further context on large devices. Alternatively a key guide to the icons is provided in the footer.
+- On the right are the ingredients and instructions which may be toggled. Checkboxes allow the user to mark off ingredients and steps as they progress. <br>
+- If viewed by the creater a recipe may be edited or deleted. If viewed by the admin a recipe may be deleted.
 
-- **Single Recipes**
+### Login
 
-    A search function is available below the navigation. The sort and filter functions not available as there is only one recipe. <br>
-    The recipe image and information rows are revealed using animations upon loading. The recipe title is displayed on top with a link to the creator profile below. <br>
-    On larger devices the content is displayed in two columns, on the left an image which may be clicked to enlarge if a valid image is provided, if not a blank image with the recipe title is displayed. <br>
-    Under the image are icons to summarize key information about the recipe, tooltips give further context on large devices. Alternatively a key guide to the icons is provided in the footer.<br>
-    On the right are the ingredients and instructions which may be toggled. Checkboxes allow the user to mark off ingredients and steps as they progress. <br>
-    If viewed by the creater a recipe may be edited or deleted. If viewed by the admin a recipe may be deleted.
+- This section contains a form where users may login and be redirected to their profile. Below the form is a link to register.
 
-- **Login**
+### Logout
 
-    This section contains a form where users may login and be redirected to their profile. Below the form is a link to register.
+- Clicking 'Logout' ends a user session and redirects them to the 'Login' page.
 
-- **Register**
+### Register
 
-    This section contains a form where users may register and be redirected to their profile.
+- This section contains a form where users may register and be redirected to their profile. Below the form is a link to login.
 
-- **Profile** 
+### 404 and 500 error pages
 
-    This section contains a form where users may update their information and view their recipes.
+- Customized 404 and 500 pages contain short information about the error and a button "Back Home" placed below a custom logo. As well as that, they display the navbar which allows users to go back easily to any page if they got lost.
 
-- **Add Recipes**
+### Profile
+- [Recipe Cards](#recipe-cards)
+- [Pagination](#pagination)
+- [Share](#share)
+- Below the header is a card displaying the username and number of recipes. Any user can navigate to any other user's profile by clicking the corresponding 'view' button on the 'Users' page.
+- If a logged in user wants to quickly navigate to their own page they can click the 'Profile' link in the navigation menu or side nav on smaller devices.
+- A logged in user may delete their own profile along with all associated recipes by clicking the 'delete' button in their profile. 'Admin' user may delete any user.
 
-    This section contains a form where users may provide details for their recipes. Asterixes are used where a field is required. Dropdowns are used for multiple choice fields and switches are used for binary choices. When the user inputs a valid image url a preview image will take the place of a placeholder image. <br>
-    A list of ingredients is displayed under the form for users to reference for calory informtion as they add ingredients to their recipes.
+### Add Recipes
 
-- **Profile**
+- [Ingredient Cards](#ingredient-cards)
+- This section contains a form where users may provide details for their recipes. Asterisks are used where a field is required. Dropdowns are used for multiple choice fields and switches are used for binary choices. When the user inputs a valid image url a preview image will take the place of a placeholder image.
 
-    This section displays the user name and number of recipes in a card at the top as well as a welcome message if they are after logging in. <br>
-    Below this card the recipes created by the user are displayed and if the user has contributed more than 6 recipes then pagination links are displayed below the recipes.
+### Edit Recipes
 
+- [Ingredient Cards](#ingredient-cards)
+- This section contains a form where users may edit details for their recipes. Asterixes are used where a field is required. Dropdowns are used for multiple choice fields and switches are used for binary choices. When the user inputs a valid image url a preview image will take the place of a placeholder image.
+
+### Users
+
+- [Pagination](#pagination)
+- [Share](#share)
+- Cards display Usernames with a link to their profile.
+
+### Units
+
+- [Ingredient Cards](#ingredient-cards)
+- [Share](#share)
+- Users can convert units from imperial to metric and vice-versa.
 
 # Features Left to Implement
 
@@ -250,34 +300,38 @@ I used affinity designer to design the logo, I went through many iterations of t
 -   **Deleted Recipes**
     When a recipe/user is deleted it is/they are gone forever. Instead, I'd like to have them stored in a deleted items list for review by an admin.
 
+-   **Favourites**
+
+    I'd like to implement a feature to give users an opportunity to "like" other recipes, saving them a "Favourites" collection, which would be displayed on a their own profile. Each recipe card will include a small "heart" icon, clicking which will enable user to add the selected recipe to "my favourits".
+
 ##### back to [top](#table-of-contents)
 
 # Technologies Used
 
-1. **HTML (Hyper Text Markup Language):** Used throughout the site;  
-   https://developer.mozilla.org/en-US/docs/Web/HTML
-2. **CSS (Cascading Style Sheets):** Used throughout the site;
-   https://www.w3.org/Style/CSS/Overview.en.html
-3. **Bootstrap:** Used to aid responsive design and for componants such as carousels and buttons https://getbootstrap.com/
-4. **Gitpod:** Code Editor used to create the site.
-   https://code.visualstudio.com/
-5. **GitHub:** Used to host repos for the site https://https://github.com/Sean-Mc-Mahon/ms2-seanmcmahon-digital-design
-6. **Chrome/Firefox/Bing DevTools:** Regularly used to test the site https://developers.google.com/web/tools/chrome-devtools
-7. **W3C Markup Validation Service** Used to test code for errors; https://validator.w3.org/https://jigsaw.w3.org/css-validator/validator
-8. **Affinity Designer** Illustration software used to create ...; https://affinity.serif.com/en-gb/
-9. **Figma** Collaborative interface design tool used for creating wireframes as well logos and SVGs; https://figma.com
-10. **Balsamiq** Used to create wireframes; https://balsamiq.com/?gclid=EAIaIQobChMIuoqlhfWi6wIV6YBQBh2f9w7DEAAYASAAEgLUTfD_BwE
-11. **Tinypng** Used to compress images; https://tinypng.com/
-12. **Croppola** Used to crop images; https://croppola.com/
-13. **Randomkeygen/** Used to generate random keys; https://randomkeygen.com/
-14. **Kaffeine** Used to keep Heroku app from falling asleep; https://kaffeine.herokuapp.com/
-15. **Uptime Robot** Used to keep Heroku app from falling asleep; https://uptimerobot.com/
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) - Used throughout the site
+- [CSS (Cascading Style Sheets)](https://www.w3.org/Style/CSS/Overview.en.html) - Used throughout the site 
+- [JavaScript](https://www.javascript.com/) - Used for animtions and functions such as unit conversion. 
+- [Materialize](https://materializecss.com/) - Used to aid responsive design and for componants such as modals and functions such as mediabox
+- [Gitpod](https://code.visualstudio.com/) - Code Editor used to create the site.
+- [GitHub](https://github.com/) - Used to host repos for the site.
+- [Imgur](https://imgur.com/) - Used to host images for the site.
+- [Screen Recorder](https://chrome.google.com/webstore/detail/screen-recorder/hniebljpgcogalllopnjokppmgbhaden?hl=en) - Used to make GIFs for README.
+- [Chrome/Firefox/Bing DevTools](https://developers.google.com/web/tools/chrome-devtools) - Regularly used to test the site (Primarily Chrome).
+- [W3C Markup Validation Service](https://validator.w3.org/https://jigsaw.w3.org/) - Used to test code for errors.
+- [Affinity Designer](https://affinity.serif.com/en-gb/) - Illustration software used to create logos and icons.
+- [Figma](https://figma.com) - Collaborative interface design tool used for creating wireframes as well logos and SVGs.
+- [Balsamiq](https://balsamiq.com/?) - Used to create wireframes.
+- [Tinypng](https://tinypng.com/) - Used to compress images.
+- [Croppola](https://croppola.com/) - Used to crop images.
+- [Randomkeygen](https://randomkeygen.com/) - Used to generate random keys.
+- [Kaffeine](https://kaffeine.herokuapp.com/) - Used to keep Heroku app from falling asleep.
+- [Uptime Robot](https://uptimerobot.com/) - Used to keep Heroku app from falling.
 
 ### Libraries
 
-- [Bootstrap 4](https://getbootstrap.com/) - is a framework for building responsive, mobile-first websites. I primarily used bootstrap to format layouts and for certain components such as image carousels and buttons.
+- [Materialize](https://materializecss.com/) - is a framework for building responsive, mobile-first websites. I used materialize to create grid layouts, navbar, cards, forms, buttons and modals as well as features such as collapsibles, materialbox, tooltips and tabs.
 
-- [JQuery](https://jquery.com/) - is a Javascirpt library. I primarily used JQuery to add and remove classes on hover states.
+- [JQuery](https://jquery.com/) - is a Javascirpt library. I primarily used JQuery to add and remove classes on hover states as well as run various Materialize functions.
 
 - [Flask](https://flask.palletsprojects.com/en/1.1.x/) - is a lightweight WSGI web application framework. I primarily used it to construct and render pages.
 
@@ -291,31 +345,77 @@ I used affinity designer to design the logo, I went through many iterations of t
 
 - [Git](https://git-scm.com/) - used for version control
 
-- Branches were used to ...
+- Branches were used to experimaent with pagination.
 
 # Testing
 
 ### User Stories
 
-_- User Story A: ._   
-Joe can ...
+- User Story A: 
+- User Story B: 
+- User Story C: 
+- User Story D: I would like to be able to view the recipes clearly regardless of the type of device I use.
+- User Story E: 
+- User Story F: 
+- User Story G: 
 
-_- User Story B: Liz would also like to..._  
-Liz can...
+_- User Story A:_ As a casual user I would to easily browse recipes.
 
-_- User Story C: Harry is interested in..._  
-Harry can ...
+![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-a.gif)
 
-_- User Story D: Hazel would like to..._
-Hazel can ...
+User can search by ingredient, sort results, hover over an image to preview information with the help of tooltips, navigate to the recipe, enlarge the image and check off ingredients and steps as he makes the recipe.
+
+_- User Story B:_ As a user I would like to create a profile and delete it if I no longer want it.
+
+![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-b.gif)
+
+User can navigate to registration, enter a username and password and if they are valid and the username is not taken she can create a profile and be redirected to their new profile with a flash message to wwelcome them. They can later delete the profile after clicking past a warning from a modal and will be notified by a flash message that the profile has been deleted.
+
+_- User Story C:_ As a registered user I would like to add, edit, update or delete my own recipes.
+
+![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-c.gif)
+
+User can input information, choose categories and preview image prior to adding recipe. User may then edit the recipe or delete it.
+
+_- User Story D:_ As a registered user I would like to view what recipes other users have created.
+
+![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-d.gif)
+
+User can navigate to users page and view any user to browse their reciepes, they may also click the 'Created By' link on any recipe to view the corresponding profile.
+
+_- User Story E:_ I would like to be able to easily share recipes.
+
+![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-e.gif)
+
+User can hover or click on the share icon on the bottom right of the screen and choose what platform thay would like to use to share the page.
+
+_- User Story F:_ I would to be able to convert units from metric to imperial and vice versa.
+
+![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-f.gif)
+
+User can click on any field of a card on the conversions section and any figures they input will be converted to all other units on that card.
+
+_- User Story G:_ As a registered user I would like to add, edit, update or delete my own ingredients.
+
+![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-g.gif)
+
+User can click add button on units page to add ingredient using a modal, if fields are filled and ingredient name is not in use the ingredient will be added and the user may edit or delete the ingredient as long as they are logged in.
 
 ### Problems and Solutions
 
-- 
+#### Deleting User Error
 
-- 
+- Problem: If a user deletes their profile they may cause an error if they click the 'Profile' link.
 
-- 
+- Solution: If the Admin user deletes a profile they are redirected back to the users page. If any other user deletes their own profile they are redirected to the home page and removed from their session.
+
+    `if session["user"] == 'admin':
+        return redirect(url_for("users"))
+    else:
+        session.pop("user")
+        return redirect(url_for("recipes"))`
+
+
 
 ### Validators
 

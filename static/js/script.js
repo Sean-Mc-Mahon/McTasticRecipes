@@ -450,8 +450,3 @@ document.getElementById("recipe_image").addEventListener("input", function() {
         document.getElementById("img").setAttribute("alt", `Image of ${document.getElementById("recipe_name").value}`);
     }
 });
-
-// Ingredient Live Input
-document.getElementById("recipe_ingredients").addEventListener("input", function() {
-    let liveIngredients = document.getElementById("recipe_ingredients").value;
-});

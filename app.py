@@ -648,7 +648,7 @@ def register():
         # put new user into 'session' cookie
         session['user'] = request.form.get("username").lower()
         flash("Registration Successful!")
-        return redirect(url_for("profile", username=session["user"]))
+        return redirect(url_for("view_profile", username_view=session["user"]))
     return render_template(
         "register.html",
         title=title,)
@@ -870,7 +870,7 @@ def edit_recipe(recipe_id):
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
         flash("Recipe Successfully Updated")
         username = session['user']
-        return redirect(url_for("profile", username=username))
+        return redirect(url_for("view_profile", username_view=username))
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     user_image = mongo.db.recipes.find_one(
@@ -901,8 +901,8 @@ def delete_recipe(recipe_id):
     if username == 'admin':
         return redirect(url_for("recipes"))
     return redirect(url_for(
-        "profile",
-        username=username))
+        "view_profile",
+        username_view=username))
 
 
 # DELETE INGREDIENT
@@ -932,9 +932,12 @@ def delete_user(username):
     mongo.db.users.remove({"username": username})
     mongo.db.recipes.remove({"created_by": username})
     mongo.db.ingredients.remove({"created_by": username})
-    flash("User Successfully Deleted")
-    return redirect(url_for(
-        "users"))
+    flash("Profile Successfully Deleted")
+    if session["user"] == 'admin':
+        return redirect(url_for("users"))
+    else:
+        session.pop("user")
+        return redirect(url_for("recipes"))
 
 
 # UNITS

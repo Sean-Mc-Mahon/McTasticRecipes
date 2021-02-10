@@ -47,32 +47,32 @@
 
     <header>
         <!-- Top Nav Bar -->
-        <nav class="nav-extended blue-grey darken-3 text-shadow-2">
+        <nav class="nav-extended blue-grey darken-3">
             <div class="nav-wrapper slide">
                 <!-- LOGO -->
                 <div class="left">
                     <a class="logo valign-wrapper" href="{{ url_for('recipes')}}">
                         <img class="logo-img" id="logo" src="https://i.imgur.com/hwREljI.png" alt="logo">
-                        <h5 class="ml1 logo-text">McTastic Recipes</h5>
+                        <h5 class="ml1 logo-text text-shadow-2">McTastic Recipes</h5>
                     </a>
                 </div>
                 <!-- LINKS -->
                 <div class="nav-links right-align">
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger right  ">
-                    <i class="material-icons  right">menu</i></a>
-                    <ul class="right hide-on-med-and-down  ">
+                    <i class="material-icons right">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
                         <!-- USERS -->
                         <!-- LOGGED IN USERS -->
                         {% if session.user %}
                             <li><a id="logout" href="{{ url_for('logout')}}">Log Out</a></li>
                             <li class="{{'active-link' if title == 'Add Recipe'}}"><a id="add" href="{{ url_for('insert_recipe')}}">Add Recipe</a></li>
                             <li class="{{'active-link' if title == session['user']|capitalize }}"><a id="profile" href="{{ url_for('view_profile', username_view=session['user']) }}">Profile</a></li>
-                            <li class="{{'active-link' if title == 'Users'}}"><a id="users" href="{{ url_for('users')}}">Users</a></li>
                         <!-- NOT LOGGED IN USERS -->
                         {% else %}
                             <li class="{{'active-link' if title == 'Login'}}"><a id="login" href="{{ url_for('login')}}">Log In</a></li>
                             <li class="{{'active-link' if title == 'Registration'}}"><a id="register" href="{{ url_for('register')}}">Register</a></li>
                         {% endif %}
+                        <li class="{{'active-link' if title == 'Users'}}"><a id="users" href="{{ url_for('users')}}">Users</a></li>
                         <li class="{{'active-link' if title == 'Units'}}"><a id="units" href="{{ url_for('units')}}">Units</a></li>
                     </ul>
                 </div>
@@ -89,12 +89,12 @@
                 <li><a href="{{ url_for('logout')}}">Log Out</a></li>
                 <li><a href="{{ url_for('insert_recipe')}}">Add Recipe</a></li>
                 <li><a href="{{ url_for('view_profile', username_view=session['user']) }}">Profile</a></li>
-                <li><a href="{{ url_for('users')}}">Users</a></li>
             <!-- NOT LOGGED IN USERS -->
             {% else %}
                 <li><a href="{{ url_for('login')}}">Log In</a></li>
                 <li><a href="{{ url_for('register')}}">Register</a></li>
             {% endif %}
+            <li><a href="{{ url_for('users')}}">Users</a></li>
             <li><a href="{{ url_for('units')}}">Units</a></li>
         </ul>
     </header>
@@ -205,16 +205,11 @@
 <script 
     src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
 </script>
-<!-- Share functionality from www.addthis.com --> 
-<script 
-    type="text/javascript" 
-    src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fce212ff264a1fa">
-</script>
+{% block scripts %}
+{% endblock %}
 <!-- Author's own script -->
 <script 
     src="{{ url_for('static', filename='js/script.js') }}">
 </script>
-{% block scripts %}
-{% endblock %}
 </body>
 </html>

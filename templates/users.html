@@ -7,7 +7,7 @@
     <div class="col s12 m7">
         <div class="card horizontal">
             <div class="card-content user-card">
-                <h5>{{user.username}}</h5>
+                <h5>{{user.username|capitalize}}</h5>
                 <div class="edit-btns">
                     <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('view_profile', username_view=user.username) }}">
                         view

@@ -4,25 +4,27 @@
     <div class="row">
         <div class="col s12 m8 offset-m2">
             <div class="card-outline card-panel transparent p-half">
-                <h3 class="center-align m0">{{ username }}'s Recipes</h3>
+                <h3 class="center-align m0">{{ username|capitalize }}'s Recipes</h3>
+                <div class="flex-center">
                 <h5 class="center-align">Recipes: {{ number_of_user_rec }}</h5>
-                {% if session.user|capitalize == username or session.user|lower == 'admin' %}
-                    <div class="edit-btns flex-center">
-                        <!-- Modal Trigger -->
-                        <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-user" href="#modal1">Delete</a>
-                        <!-- Modal Structure -->
-                        <div id="modal1" class="modal  card-outline">
-                            <div class="modal-content">
-                                <h4>Are you sure?</h4>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="#!" class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Cancel</a>
-                                <a href="{{ url_for('delete_user', username=user.username) }}" 
-                                class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Delete</a>
+                    {% if session.user == username or session.user|lower == 'admin' %}
+                        <div class="edit-btns flex-center">
+                            <!-- Modal Trigger -->
+                            <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-user" href="#modal1">Delete</a>
+                            <!-- Modal Structure -->
+                            <div id="modal1" class="modal  card-outline">
+                                <div class="modal-content">
+                                    <h4>Are you sure?</h4>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#!" class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Cancel</a>
+                                    <a href="{{ url_for('delete_user', username=user.username) }}" 
+                                    class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Delete</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endif %}
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

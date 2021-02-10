@@ -211,6 +211,7 @@ I used affinity designer to design the logo, I went through many iterations of t
     Pagination links allow users to navigate to the next page of results (6 per page).
 
 - **Single Recipes**
+
     A search function is available below the navigation. The sort and filter functions not available as there is only one recipe. <br>
     The recipe image and information rows are revealed using animations upon loading. The recipe title is displayed on top with a link to the creator profile below. <br>
     On larger devices the content is displayed in two columns, on the left an image which may be clicked to enlarge if a valid image is provided, if not a blank image with the recipe title is displayed. <br>

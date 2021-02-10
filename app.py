@@ -564,7 +564,7 @@ def view_profile(username_view):
     user = users_coll.find_one(
         {"username": username_view})
     username = users_coll.find_one(
-        {"username": username_view})["username"].capitalize()
+        {"username": username_view})["username"]
     user_recipes = recipes_coll.find({"created_by": username_view})
     number_of_user_rec = user_recipes.count()
     limit_per_page = 6
@@ -576,8 +576,9 @@ def view_profile(username_view):
 
     # set title to display in browser tab
     # and apply active-link to nav link
-    if session["user"] == username:
+    if session["user"] == username_view:
         title = username
+        print(title)
     else:
         title = 'Profiles'
 
@@ -603,7 +604,7 @@ def single_recipe(recipe_id):
     # set title to display in browser tab
     title = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})['recipe_name']
-    
+
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     username = mongo.db.recipes.find_one(
         {"_id": ObjectId(recipe_id)})['created_by']
@@ -804,6 +805,8 @@ def insert_ingredient():
     # andset active page to apply active-link to nav link
     title = 'Units'
     if request.method == "POST":
+        food_groups = mongo.db.food_groups.find().sort("group_name", 1)
+        units = mongo.db.units.find().sort("unit_name", 1)
         # check if ingredient already exists in db
         existing_ingredient = mongo.db.ingredients.find_one(
             {"ingredient_name": request.form.get("ingredient_name")})
@@ -826,7 +829,9 @@ def insert_ingredient():
         flash("Ingredient Successfully Added")
         return redirect(url_for(
             "units",
-            title=title,))
+            title=title,
+            food_groups=food_groups,
+            units=units))
 
 
 # EDIT RECIPE

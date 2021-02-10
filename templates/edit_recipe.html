@@ -128,11 +128,11 @@
             </div>
             <div class="row">
                 <!-- Submit Button -->
-                <div class="row center-align">
-                    <a class="col s10 push-s1 m4 push-m1 btn-large transparent btn-outline m-all bold" href="{{ url_for('profile', username=session['user']) }}">
+                <div class="flex-center">
+                    <a class="btn waves-effect waves-light transparent btn-outline mh1" href="{{ url_for('view_profile', username_view=session['user']) }}">
                         Cancel<i class="fas fa-times-circle right"></i>
                     </a>
-                    <button type="submit" class="col s10 push-s1 m4 pull-m1 p btn-large transparent btn-outline m-all right bold">
+                    <button type="submit" class="btn waves-effect waves-light transparent btn-outline mh1">
                         Submit <i class="fas fa-edit right"></i>
                     </button>
                 </div>

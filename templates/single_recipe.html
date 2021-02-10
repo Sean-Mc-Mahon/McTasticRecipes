@@ -21,7 +21,7 @@
             <h2 class="mt0 mb0" id="name">{{ recipe.recipe_name }}</h2>
             <h5 class="mt0 mb1" id="created-by">Created by: 
                 <a class="" href="{{ url_for('view_profile', username_view=recipe.created_by) }}">
-                            {{ recipe.created_by }}
+                            {{ recipe.created_by|capitalize }}
                 </a>
             </h5>
         </div>
@@ -84,11 +84,10 @@
                 </ul>
                 <div class="col s12" id="ingredients">
                     <form action="#">
-
                         {% for line in recipe.recipe_ingredients.splitlines() %}
                             {% if line.endswith(':') %}
                                 <p>
-                                        <strong>{{ line }}</strong>
+                                    <strong>{{ line }}</strong>
                                 </p>
                             {% else %}
                                 <p>

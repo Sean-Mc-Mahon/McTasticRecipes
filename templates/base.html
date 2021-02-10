@@ -65,15 +65,15 @@
                         <!-- LOGGED IN USERS -->
                         {% if session.user %}
                             <li><a id="logout" href="{{ url_for('logout')}}">Log Out</a></li>
-                            <li class="{{'active-link' if title == 'McTastic Add Recipe'}}"><a id="add" href="{{ url_for('insert_recipe')}}">Add Recipe</a></li>
-                            <li class="{{'active-link' if title == (session['user'] + '&apos s McTastic Profile' ) }}"><a id="profile" href="{{ url_for('view_profile', username_view=session['user']) }}">Profile</a></li>
-                            <li class="{{'active-link' if title == 'McTastic Users'}}"><a id="users" href="{{ url_for('users')}}">Users</a></li>
+                            <li class="{{'active-link' if title == 'Add Recipe'}}"><a id="add" href="{{ url_for('insert_recipe')}}">Add Recipe</a></li>
+                            <li class="{{'active-link' if title == session['user']|capitalize }}"><a id="profile" href="{{ url_for('view_profile', username_view=session['user']) }}">Profile</a></li>
+                            <li class="{{'active-link' if title == 'Users'}}"><a id="users" href="{{ url_for('users')}}">Users</a></li>
                         <!-- NOT LOGGED IN USERS -->
                         {% else %}
-                            <li class="{{'active-link' if title == 'McTastic Login'}}"><a id="login" href="{{ url_for('login')}}">Log In</a></li>
-                            <li class="{{'active-link' if title == 'McTastic Registration'}}"><a id="register" href="{{ url_for('register')}}">Register</a></li>
+                            <li class="{{'active-link' if title == 'Login'}}"><a id="login" href="{{ url_for('login')}}">Log In</a></li>
+                            <li class="{{'active-link' if title == 'Registration'}}"><a id="register" href="{{ url_for('register')}}">Register</a></li>
                         {% endif %}
-                        <li class="{{'active-link' if title == 'McTastic Units'}}"><a id="units" href="{{ url_for('units')}}">Units</a></li>
+                        <li class="{{'active-link' if title == 'Units'}}"><a id="units" href="{{ url_for('units')}}">Units</a></li>
                     </ul>
                 </div>
             </div>

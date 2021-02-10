@@ -104,19 +104,19 @@
                         <li class="active"><a>{{ page_num }}</a></li>
                         {% else %}
                         <li class="waves-effect">
-                            {% if title == 'McTastic Recipes' %}
+                            {% if title == 'Recipes' %}
                                 <a href="{{ url_for('recipes', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
-                            {% elif title == 'McTastic Search' %}
+                            {% elif title == 'Search' %}
                                 <a href="{{ url_for('search', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
-                            {% elif title == 'McTastic Recipes Sort' %}
+                            {% elif title == 'Recipes Sort' %}
                                 <a href="{{ url_for('sort', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
-                            {% elif title == 'McTastic Recipes Search Sort' %}
+                            {% elif title == 'Recipes Search Sort' %}
                                 <a href="{{ url_for('sort_query', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
-                            {% elif title == 'McTastic Recipes Filter' %}
+                            {% elif title == 'Recipes Filter' %}
                                 <a href="{{ url_for('filter', filter_by=filter_by, query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
-                            {% elif title == 'McTastic Recipes Filter Sort' %}
+                            {% elif title == 'Recipes Filter Sort' %}
                                 <a href="{{ url_for('filter_sort', filter_by=filter_by, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
-                            {% elif title == 'McTastic Recipes Sort Filter' %}
+                            {% elif title == 'Recipes Sort Filter' %}
                                 <a href="{{ url_for('sort_filter', filter_by=filter_by, query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
                             {% endif %}
                         </li>

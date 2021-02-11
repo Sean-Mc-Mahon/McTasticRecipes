@@ -43,8 +43,8 @@
     })();
     </script>
 </head>
-<body>
 
+<body>
     <header>
         <!-- Top Nav Bar -->
         <nav class="nav-extended blue-grey darken-3">
@@ -181,35 +181,35 @@
             </div>
         </div>
     </footer>
-<!--GSAP used to animate divs in single_recipe-->
-<script 
-    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js" 
-    integrity="sha512-1dalHDkG9EtcOmCnoCjiwQ/HEB5SDNqw8d4G2MKoNwjiwMNeBAkudsBCmSlMnXdsH8Bm0mOd3tl/6nL5y0bMaQ==" 
-    crossorigin="anonymous">
-</script>
-<script 
-    src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js" 
-    integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg==" 
-    crossorigin="anonymous">
-</script>
-<script 
-    src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.js" 
-    integrity="sha512-judXDFLnOTJsUwd55lhbrX3uSoSQSOZR6vNrsll+4ViUFv+XOIr/xaIK96soMj6s5jVszd7I97a0H+WhgFwTEg==" 
-    crossorigin="anonymous">
-</script>
-<!--Sweet alert used for alerts upon form submission https://sweetalert.js.org/-->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!-- Minified JQuery script taken from http://code.jquery.com/-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script> 
-<!-- Compiled and minified JavaScript taken from https://materializecss.com/getting-started.html-->
-<script 
-    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
-</script>
-{% block scripts %}
-{% endblock %}
-<!-- Author's own script -->
-<script 
-    src="{{ url_for('static', filename='js/script.js') }}">
-</script>
+    <!--GSAP used to animate divs in single_recipe-->
+    <script 
+        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js" 
+        integrity="sha512-1dalHDkG9EtcOmCnoCjiwQ/HEB5SDNqw8d4G2MKoNwjiwMNeBAkudsBCmSlMnXdsH8Bm0mOd3tl/6nL5y0bMaQ==" 
+        crossorigin="anonymous">
+    </script>
+    <script 
+        src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js" 
+        integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg==" 
+        crossorigin="anonymous">
+    </script>
+    <script 
+        src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.js" 
+        integrity="sha512-judXDFLnOTJsUwd55lhbrX3uSoSQSOZR6vNrsll+4ViUFv+XOIr/xaIK96soMj6s5jVszd7I97a0H+WhgFwTEg==" 
+        crossorigin="anonymous">
+    </script>
+    <!--Sweet alert used for alerts upon form submission https://sweetalert.js.org/-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Minified JQuery script taken from http://code.jquery.com/-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script> 
+    <!-- Compiled and minified JavaScript taken from https://materializecss.com/getting-started.html-->
+    <script 
+        src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+    </script>
+    {% block scripts %}
+    {% endblock %}
+    <!-- Author's own script -->
+    <script 
+        src="{{ url_for('static', filename='js/script.js') }}">
+    </script>
 </body>
 </html>

@@ -13,6 +13,7 @@ McTastic Recipes is a Milestone 3 project, it is part of the Fullstack Software 
 **<details><summary>Project overview</summary>**
 * [**_Project overview_**](#project-overview)
 * [**_User Stories_**](#user-stories)
+* [**_Admin Stories_**](#admin-stories)
 </details>
 
 **<details><summary>UX</summary>**
@@ -38,6 +39,7 @@ McTastic Recipes is a Milestone 3 project, it is part of the Fullstack Software 
 </details>
 
 **<details><summary>Testing</summary>**
+* [**_User Testing_**](#user-testing)
 * [**_Problems and Solutions_**](#problems-and-solutions)
 * [**_Validators_**](#validators)
 * [**_Manual Testing_**](#manual-testing)
@@ -71,6 +73,10 @@ It is also designed to be easy to navigate for users of all ages. Users may add 
 - User Story F: I would like to be able to easily share recipes.
 - User Story G: I would to be able to convert units from metric to imperial and vice versa.
 - User Story H: As a registered user I would like to add, edit, update or delete my own ingredients.
+
+### Admin Stories
+
+- Admin Story A: As the admin I would like to be able to delete any user along with all recipes created by that user.
 
 ---
 
@@ -209,9 +215,9 @@ The share button is displayed on the bottom right corner at all times on all pag
 #### Search Sort Filter 
 (index, search, single_recipe)
 
-- The index page has a search bar, filter and sort feature. The search feature searches for keywords in recipe titles and ingredients. If a user performs a search they will be able to sort the search results. <br>
-- The sort feature allows users to sort the results by A-Z, Z-A, latest created and oldest created. <br>
-- The filter allows users to display recipes under the categories of cooking, baking, snacks or all. <br>
+- The index page has a search bar, filter and sort feature. The search feature searches for keywords in recipe titles and ingredients. If a user performs a search they will be able to sort the search results.
+- The sort feature allows users to sort the results by A-Z, Z-A, latest created and oldest created.
+- The filter allows users to display recipes under the categories of cooking, baking, snacks or all.
 
 #### Recipe Cards 
 (index, view_profile)
@@ -348,22 +354,15 @@ The share button is displayed on the bottom right corner at all times on all pag
 - Branches were used to experimaent with pagination.
 
 # Testing
+## User Testing
 
-### User Stories
-
-- User Story A: 
-- User Story B: 
-- User Story C: 
-- User Story D: I would like to be able to view the recipes clearly regardless of the type of device I use.
-- User Story E: 
-- User Story F: 
-- User Story G: 
+### User Story Testing
 
 _- User Story A:_ As a casual user I would to easily browse recipes.
 
 ![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-a.gif)
 
-User can search by ingredient, sort results, hover over an image to preview information with the help of tooltips, navigate to the recipe, enlarge the image and check off ingredients and steps as he makes the recipe.
+User can search by ingredient, sort results, hover over an image to preview information with the help of tooltips, navigate to the recipe, enlarge the image and check off ingredients and steps as they make the recipe.
 
 _- User Story B:_ As a user I would like to create a profile and delete it if I no longer want it.
 
@@ -383,25 +382,45 @@ _- User Story D:_ As a registered user I would like to view what recipes other u
 
 User can navigate to users page and view any user to browse their reciepes, they may also click the 'Created By' link on any recipe to view the corresponding profile.
 
-_- User Story E:_ I would like to be able to easily share recipes.
+_- User Story E:_ I would like to be able to view the recipes clearly regardless of the type of device I use.
 
 ![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-e.gif)
 
-User can hover or click on the share icon on the bottom right of the screen and choose what platform thay would like to use to share the page.
+The app is fully resonsive and a user can use the app comfortably on any device size.
 
-_- User Story F:_ I would to be able to convert units from metric to imperial and vice versa.
+_- User Story F:_ I would like to be able to easily share recipes.
 
 ![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-f.gif)
 
+User can hover or click on the share icon on the bottom right of the screen and choose what platform thay would like to use to share the page.
+
+_- User Story G:_ I would to be able to convert units from metric to imperial and vice versa.
+
+![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-g.gif)
+
 User can click on any field of a card on the conversions section and any figures they input will be converted to all other units on that card.
 
-_- User Story G:_ As a registered user I would like to add, edit, update or delete my own ingredients.
+_- User Story H:_ As a registered user I would like to add, edit, update or delete my own ingredients.
 
 ![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-g.gif)
 
 User can click add button on units page to add ingredient using a modal, if fields are filled and ingredient name is not in use the ingredient will be added and the user may edit or delete the ingredient as long as they are logged in.
 
+### Admin Story Testing
+
+_- Admin Story A:_ As the admin I would like to be able to delete any user along with all recipes created by that user.
+
+![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/admin-story-a.gif)
+
+Admin may access any profile by the 'Created By' link in a single_recipe page or by the corresponding 'view' button on the users page and after confirming the intention to delete in a modal the user will be deleted along with any recipe they created.
+
 ### Problems and Solutions
+
+#### Edit Recipe Changing the Creator: 
+
+- Problem: If the admin were to edit a recipe then the created by value would become 'admin'
+
+- Solution: I felt that while there are valid reasons for the admin to have the ability to delete a recipe it was not appropriate for them to be able to edit a recipe, for this reason only the recipe creator may now edit a recipe.
 
 #### Deleting User Error
 
@@ -415,15 +434,19 @@ User can click add button on units page to add ingredient using a modal, if fiel
         session.pop("user")
         return redirect(url_for("recipes"))`
 
+### Currently Unsolved Problems
+- If a user were to sort the recipes on the home page and them filter them and finally press the back button they would be asked to confirm resubmission. Currently I do not have a solution to this problem.
 
 
 ### Validators
 
-1. **HTML:** [W3C HTML Validator](https://validator.w3.org/) Used to identify HTML errors.
+1. **HTML:** [W3C HTML Validator](https://validator.w3.org/) Used to identify HTML errors, as it does not recognize Jinja2 templating language, it showed a number of errors. Apart from that, no other errors were found across the html pages.
 
-2. **CSS:** [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) Used to identify CSS errors.
+2. **CSS:** [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) Used to identify CSS errors, no errors found.
 
 3. **Javascript:** [JSHint](https://jshint.com/) Used to identify Javascript errors.
+
+4. **Python:** [Pep8](http://pep8online.com/) Used to check that python files are PEP8 compliant, no errors found.
 
 ### Manual Testing
 
@@ -437,38 +460,120 @@ User can click add button on units page to add ingredient using a modal, if fiel
 
 5. **Friends and family:** I asked for feedback from friends and family in order to get a users perspective.
 
-6. **Contact Form:** On the contact page the form may not be submitted without using correct syntax for the e-mail input or if either input is blank. Once inputs are filled properly and submit is clicked the form will clear without the page being refreshed and an alert will inform user that the message has been sent.
+6. **Newsletter Signup:** In the footer the form may not be submitted without using correct syntax for the e-mail input or if either input is blank. Once inputs are filled properly and submit is clicked the form will clear without the page being refreshed and an alert will inform user that the message has been sent.
 
 9. **Navigation:** Clicked through all links to ensure they all go to the correct location.
 
 # Deployment
+## Local Deployment
+The following is required to run this project:
+- IDE  (I used [GitPod](https://www.gitpod.io/) online IDE for creating this project.
+- [MongoDB Atlas](https://www.mongodb.com/) for the creation of databases.
+- [Git](https://git-scm.com/) for version control.
+- [PIP](https://pip.pypa.io/en/stable/installing/) for installing packages.
+- [Python](https://www.python.org/) 
 
 CHANGE DEBUG=TRUE TO FALSE IN APP.PY PRIOR TO DEPLOYMENT
 
-1. I Created a Github account at https://github.com
-   My account url; https://github.com/Sean-Mc-Mahon
+1. This repository may be cloned directly into an editor by pasting the following command into the terminal:   
+`git clone https://github.com/Sean-Mc-Mahon/McTasticRecipes`    
+Alternatively, you can save a copy of this repository by clicking the green button "Clone or download" , then "Download Zip" button, and after extract the Zip file to your folder.
+2. In the terminal window change directory (CD) to the correct file location (directory that you have just created).
+3. Set up environment variables:
+    - Create **.env** file in the root directory.
+    - On the top of the file add `import os` to set the environment variables in the operating system.
+    - Set the connection to your MongoDB database(MONGO_URI) and a SECRET_KEY with the following syntax:
+    `os.environ["SECRET_KEY"] = "YourSecretKey"`   
+    `os.environ["MONGO_URI"] = "YourMongoURI"`  
+    .
+4. Install all requirements from the **requirements.txt** file putting this command into your terminal:   
+`pip3 install -r requirements.txt`  
+*Note: GitPod does not require `sudo`, so if you use another IDE, you will need to include `sudo` in the beginning of the command: `sudo pip3 install -r requirements.txt`.*
+5. Create a new Database called "recipe_manager" in [MongoDB Atlas](https://www.mongodb.com/).   
+*You can sign up for free account, if you do not have one.*
+6. In "recipe_manager" database create eight following collections:
+###### categories
+```
+_id: <ObjectId>
+category_name: <String>
+```
+###### food Groups
+```
+_id: <ObjectId>
+group_name: <String>
+```
+###### ingredients
+```
+_id: <ObjectId>
+ingredient_name: <String>
+ingredient_cal: <String>
+group_name: <String>
+unit_name: <String>
+created_by: <String>
+```
+###### prep
+```
+_id: <ObjectId>
+prep: <String>
+```
+###### Recipes
+```
+_id: <ObjectId>
+category_name: <String>
+recipe_name: <String>
+recipe_ingredients: <String>
+recipe_instructions: <String>
+recipe_image: <String>
+recipe_serves: <String>
+recipe_time: <String>
+recipe_cals: <String>
+recipe_description: <Array>
+recipe_is_vegan: <Array>
+recipe_is_vegetarian: <ObjectId>
+created_by: <String>
+```
+###### sort_parameters
+```
+_id: <ObjectId>
+parameter_name: <String>
+```
+###### units
+```
+_id: <ObjectId>
+unit_name: <String>
+```
+###### users
+```
+_id: <ObjectId>
+username: <String>
+password: <String>
+```
+7. You will now be able to run the application using the following command `python3 run.py`. 
 
-2. I installed Git and set up a username and password.
+### Heroku Deployment
+To deploy the project to [Heroku](https://heroku.com/) the following steps need to be completed:
+1. Create a **requirement.txt** file, which contains a list of the dependencies, using the following command in the terminal:  
+`pip3 freeze > requirements.txt`
+2. Create a **Procfile**, in order to tell Heroku how to run the project, using the following command in the terminal:   
+`echo web: python run.py > Procfile`
+3. `git add`, `git commit` and `git push` these files to GitHub repository
+4. Create a **new app** in Heroku, assigning a name (must be unique) and set a region (for my project I set Europe)
+5. From the Heroku dashboard link the new Heroku app to your GitHub repository:    
+    - "Deploy" -> "Deployment method" -> "GitHub"
+    - then "Enable automatic deployment"
+6. To start the web process, put the following command into the terminal: `heroku ps:scale web=1` to scale dynos
+7. In the **Settings** tab of the new Heroku app, click on "Reveal Config Vars" and set the following config vars:
+    - **IP** : 0.0.0.0
+    - **PORT** : 8080
+    - **MONGO_URI** : `<link to your MongoDB database>`
+    - **SECRET_KEY** : `<your secret key>`
+    - **DEBUG**: **FALSE**  
+*Note: your MONGO_URI and SECRET_KEY must match the ones you entered in .env.py file*
 
-3. I created a repository on Github (https://github.com/Sean-Mc-Mahon/cat-rescue)
+8. The app will be deployed and ready to run. Click "Open App" to view the app.   
 
-4. On VS Code I opened the command pallette and selected Git Clone, I pasted in the URL for the repo on GitHub and selected a folder on my computer to sync to.
-
-5. I uploaded all files to my Github repository.
-
-6. To publish the project to see it on the web, I then went into the Settings on my respository, scrolled down to the heading, GitHub Pages. Under the Source setting, I used the drop-down menu to select master branch as a publishing source and saved it. Refreshed the github page, and you are then given a url where your page is published;
-   Your site is published at https://github.com/Sean-Mc-Mahon/
-
-7. To run this code on a local machine, you would go to my respository at
-   https://github.com/Sean-Mc-Mahon/cat-rescue and on the home page on the right hand side just above all the files, you will see a green button that says,
-   "Clone or download", this button will give you options to clone with HTTPS, open in desktop or download as a zip file.
-   To continue with cloning, you would;
-
-- Open Git Bash
-- Change the current working directory to the location where you want the cloned directory to be made.
-- Type git clone, and then paste this URL; https://github.com/Sean-Mc-Mahon/ Press Enter. Your local clone will be created.
-
-For more information about the above process; https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository
+**Note**: if you have not linked GitHub and Heroku following step **5**, alternatively as the last step of deployment, you can put the following command into your terminal:   
+ `heroku login`, after a successful log in `git push heroku master` - to push the app to Heroku, and finally click "Open App" in Heroku dashboard to view the app.
 
 ---
 
@@ -480,18 +585,30 @@ For more information about the above process; https://help.github.com/en/github/
 
 2.  Youtube; Various resources for Materialize taken from [The Net Ninja](https://www.youtube.com/playlist?list=PL4cUxeGkcC9gGrbtvASEZSlFEYBnPkmff)
 
-3.  Stack Overfow; Code to implement ... taken from answer by ... [Stack Overflow](https://stackoverflow.com/)
+3.  Youtube; Code for temperature conversion modified from [Whatsdev](https://youtu.be/EHclqGV_KME)
 
-7.  Slack; ... inspired by tutorial via ....
+4.  Youtube; Code for temperature conversion modified from [Whatsdev](https://youtu.be/EHclqGV_KME)
 
-8.  Youtube; Bootstrap Carousel inspired by youtube tutorial by [Clever Techie](https://youtu.be/AvMl3StAju4)
+5.  Github; Code for pagination modified from [irinatu17](https://github.com/irinatu17/MyCookBook)
 
-9.  Format of README modified from Mr-Smyth: https://github.com/Mr-Smyth/circles/blob/master/README.md
+6.  Github; Code for url validation and placehoder image modified from [Paulloy](https://github.com/paulloy/whiskey_herald_msp3/blob/master/app.py)
+
+7.  Github; Format of README modified from [Mr-Smyth](https://github.com/Mr-Smyth/circles/blob/master/README.md) and [irinatu17](https://github.com/irinatu17/MyCookBook/blob/master/README.md)
+
+7.  Icons sourced from [Iconmonstr](https://iconmonstr.com/)
+
+8.  Button icons sourced from [Fontawesome](https://fontawesome.com/)
+
+ 
 
 ### Acknowledgements
 
 1.  My mentor Adegbenga Adeye for his support and input.
 
 2.  My peers on slack for their generosity in sharing their knowledge and experience.
+
+---
+
+This project is for educational use only
 
 ##### back to [top](#table-of-contents)

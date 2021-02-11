@@ -64,7 +64,7 @@ function sendMail(contactForm) {
     }
     );
     //clear form when submitting
-    $("#formContact").val("");
+    $("#emailaddress").val("");
     return false;  // To block from loading a new page
 }
 
@@ -440,13 +440,15 @@ if (window.location.pathname=='/units') {
 // Allowed extensions to image address
 let url_types = ["jpg", "jpeg", "png"];
 
-// If the image address is valid, update src attr of #img
-document.getElementById("recipe_image").addEventListener("input", function() {
-    let arr = document.getElementById("recipe_image").value.split(".");
-    let pop = arr.pop().toLowerCase();
-    if (pop === url_types[0] || pop === url_types[1] || pop === url_types[2]) {
-        console.log(pop);
-        document.getElementById("img").setAttribute("src", document.getElementById("recipe_image").value);
-        document.getElementById("img").setAttribute("alt", `Image of ${document.getElementById("recipe_name").value}`);
-    }
-});
+if (window.location.pathname=='/insert_recipe') {
+    // If the image address is valid, update src attr of #img
+    document.getElementById("recipe_image").addEventListener("input", function() {
+        let arr = document.getElementById("recipe_image").value.split(".");
+        let pop = arr.pop().toLowerCase();
+        if (pop === url_types[0] || pop === url_types[1] || pop === url_types[2]) {
+            console.log(pop);
+            document.getElementById("img").setAttribute("src", document.getElementById("recipe_image").value);
+            document.getElementById("img").setAttribute("alt", `Image of ${document.getElementById("recipe_name").value}`);
+        }
+    });
+}

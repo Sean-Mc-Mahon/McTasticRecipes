@@ -39,10 +39,7 @@ McTastic Recipes is a Milestone 3 project, it is part of the Fullstack Software 
 </details>
 
 **<details><summary>Testing</summary>**
-* [**_User Testing_**](#user-testing)
-* [**_Problems and Solutions_**](#problems-and-solutions)
-* [**_Validators_**](#validators)
-* [**_Manual Testing_**](#manual-testing)
+* [**_Testing_**](#testing)
 </details>
 
 **<details><summary>Deployment</summary>**
@@ -127,7 +124,7 @@ It is also designed to be easy to navigate for users of all ages. Users may add 
 - In the future a blog or video instructions for recipes may be integrated.
 
 
-### Structure/Skeleton Planes
+### Structure Plane
 
 - The site uses a consistent structure, a navbar is at the top of the page which allow a user to navigate the site and login if needed. A burger menu is used for small devices.
 - The index page has a search bar, filter and sort feature. If a user performs a search they will be able to sort the search results. 
@@ -135,6 +132,12 @@ It is also designed to be easy to navigate for users of all ages. Users may add 
 - A footer at the bottom provides copyright information and links to social media pages and a key guide of icon meanings to aid users on mobile devices who do not have the benefit of tooltips. 
 - The number of clicks needed to reach any page is kept to a minimum. Sections such as user profiles will not be visible to users who are not logged in.
 - Buttons/modals/links are consistant in design.
+
+### Skeleton Plane
+#### Wireframes
+
+I used Balsamiq and figma to create the wireframes. The layout has altered since I created the wireframes as I decided to replace the contact page with a newsletter sign up in the footer. The parallax felt too distracting and so that has been omitted. Originally there were to be seperate pages for Cooking/Baking/snacks but instead I implemented a feature to filter recipes by category.
+I used affinity designer to design the logo, I went through many iterations of the design until I was happy with two final logos, one for the navigation bar on the site and the other for the browser tab icon.
 
 ### Surface Plane
 
@@ -160,11 +163,6 @@ Colors are kept to a minimum in order to keep focus on the imagery of the recipe
 #### Media
 
 All images, and recipes are the authors own unless provided by other users. Logos are also produced by the author using Affinity Design.
-
-#### Wireframes
-
-I used Balsamiq and figma to create the wireframes. The layout has altered since I created the wireframes as I decided to replace the contact page with a newsletter sign up in the footer. The parallax felt too distracting and so that has been omitted. Originally there were to be seperate pages for Cooking/Baking/snacks but instead I implemented a feature to filter recipes by category.
-I used affinity designer to design the logo, I went through many iterations of the design until I was happy with two final logos, one for the navigation bar on the site and the other for the browser tab icon.
 
 - [Balsamiq Wireframe](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/mctastic-wire.pdf)
 
@@ -354,126 +352,9 @@ The share button is displayed on the bottom right corner at all times on all pag
 - Branches were used to experimaent with pagination.
 
 # Testing
-## User Testing
-
-### User Story Testing
-
-_- User Story A:_ As a casual user I would to easily browse recipes.
-
-![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-a.gif)
-
-User can search by ingredient, sort results, hover over an image to preview information with the help of tooltips, navigate to the recipe, enlarge the image and check off ingredients and steps as they make the recipe.
-
-_- User Story B:_ As a user I would like to create a profile and delete it if I no longer want it.
-
-![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-b.gif)
-
-User can navigate to registration, enter a username and password and if they are valid and the username is not taken she can create a profile and be redirected to their new profile with a flash message to wwelcome them. They can later delete the profile after clicking past a warning from a modal and will be notified by a flash message that the profile has been deleted.
-
-_- User Story C:_ As a registered user I would like to add, edit, update or delete my own recipes.
-
-![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-c.gif)
-
-User can input information, choose categories and preview image prior to adding recipe. User may then edit the recipe or delete it.
-
-_- User Story D:_ As a registered user I would like to view what recipes other users have created.
-
-![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-d.gif)
-
-User can navigate to users page and view any user to browse their reciepes, they may also click the 'Created By' link on any recipe to view the corresponding profile.
-
-_- User Story E:_ I would like to be able to view the recipes clearly regardless of the type of device I use.
-
-![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-e.gif)
-
-The app is fully resonsive and a user can use the app comfortably on any device size.
-
-_- User Story F:_ I would like to be able to easily share recipes.
-
-![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-f.gif)
-
-User can hover or click on the share icon on the bottom right of the screen and choose what platform thay would like to use to share the page.
-
-_- User Story G:_ I would to be able to convert units from metric to imperial and vice versa.
-
-![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-g.gif)
-
-User can click on any field of a card on the conversions section and any figures they input will be converted to all other units on that card.
-
-_- User Story H:_ As a registered user I would like to add, edit, update or delete my own ingredients.
-
-![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-g.gif)
-
-User can click add button on units page to add ingredient using a modal, if fields are filled and ingredient name is not in use the ingredient will be added and the user may edit or delete the ingredient as long as they are logged in.
-
-### Admin Story Testing
-
-_- Admin Story A:_ As the admin I would like to be able to delete any user along with all recipes created by that user.
-
-![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/admin-story-a.gif)
-
-Admin may access any profile by the 'Created By' link in a single_recipe page or by the corresponding 'view' button on the users page and after confirming the intention to delete in a modal the user will be deleted along with any recipe they created.
-
-### Problems and Solutions
-
-#### Edit Recipe Changing the Creator: 
-
-- Problem: If the admin were to edit a recipe then the created by value would become 'admin'
-
-- Solution: I felt that while there are valid reasons for the admin to have the ability to delete a recipe it was not appropriate for them to be able to edit a recipe, for this reason only the recipe creator may now edit a recipe.
-
-#### Deleting User Error
-
-- Problem: If a user deletes their profile they may cause an error if they click the 'Profile' link.
-
-- Solution: If the Admin user deletes a profile they are redirected back to the users page. If any other user deletes their own profile they are redirected to the home page and removed from their session.
-
-    `if session["user"] == 'admin':
-        return redirect(url_for("users"))
-    else:
-        session.pop("user")
-        return redirect(url_for("recipes"))`
-
-### Currently Unsolved Problems
-- If a user were to sort the recipes on the home page and them filter them and finally press the back button they would be asked to confirm resubmission. Currently I do not have a solution to this problem.
-
-
-### Validators
-
-1. **HTML:** [W3C HTML Validator](https://validator.w3.org/) Used to identify HTML errors, as it does not recognize Jinja2 templating language, it showed a number of errors. Apart from that, no other errors were found across the html pages.
-
-2. **CSS:** [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) Used to identify CSS errors, no errors found.
-
-3. **Javascript:** [JSHint](https://jshint.com/) Used to identify Javascript errors.
-
-4. **Python:** [Pep8](http://pep8online.com/) Used to check that python files are PEP8 compliant, no errors found.
-
-### Manual Testing
-
-1. **Developer Tools:** Chrome, Firefox and Microsoft Edge web dev tools using iPhone 5 and Ipad as toggle devices to test responsiveness.
-
-2. **Lighthouse:** A number of issues were resolved using lighthouse.
-
-3. **Mobile Devices:** I used my Google Pixel 3a phone and Amazon Fire tablet to test the site.
-
-4. **amiresponsive:** [Am I Responsive](http://ami.responsivedesign.is/) Used to test responsiveness across a range of devices.
-
-5. **Friends and family:** I asked for feedback from friends and family in order to get a users perspective.
-
-6. **Newsletter Signup:** In the footer the form may not be submitted without using correct syntax for the e-mail input or if either input is blank. Once inputs are filled properly and submit is clicked the form will clear without the page being refreshed and an alert will inform user that the message has been sent.
-
-9. **Navigation:** Clicked through all links to ensure they all go to the correct location.
+All testing and validation is contained within a separate .md file. <br> [View TESTING.md](TESTING.md)
 
 # Deployment
-## Local Deployment
-The following is required to run this project:
-- IDE  (I used [GitPod](https://www.gitpod.io/) online IDE for creating this project.
-- [MongoDB Atlas](https://www.mongodb.com/) for the creation of databases.
-- [Git](https://git-scm.com/) for version control.
-- [PIP](https://pip.pypa.io/en/stable/installing/) for installing packages.
-- [Python](https://www.python.org/) 
-
-CHANGE DEBUG=TRUE TO FALSE IN APP.PY PRIOR TO DEPLOYMENT
 
 1. This repository may be cloned directly into an editor by pasting the following command into the terminal:   
 `git clone https://github.com/Sean-Mc-Mahon/McTasticRecipes`    

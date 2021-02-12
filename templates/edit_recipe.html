@@ -35,7 +35,7 @@
             <div class="row">
                 <!-- Description -->
                 <div class="input-field col s12">
-                    <textarea id="recipe_description" name="recipe_description" maxlength="300" class="materialize-textarea">
+                    <textarea id="recipe_description" name="recipe_description" maxlength="300" class="materialize-textarea" required>
                     {{- recipe.recipe_description -}}
                     </textarea>
                     <label for="recipe_description">Recipe Description *</label>
@@ -45,7 +45,7 @@
             <div class="row">
                 <!-- Ingredients -->
                 <div class="input-field col s12">
-                    <textarea id="recipe_ingredients" name="recipe_ingredients" maxlength="2000" class="materialize-textarea">
+                    <textarea id="recipe_ingredients" name="recipe_ingredients" maxlength="2000" class="materialize-textarea" required>
                     {{- recipe.recipe_ingredients -}}
                     </textarea>
                     <label for="recipe_ingredients">Recipe Ingredients *</label>
@@ -54,7 +54,7 @@
             <div class="row">
                 <!-- Instructions -->
                 <div class="input-field col s12">
-                    <textarea id="recipe_instructions" name="recipe_instructions" maxlength="2000" class="materialize-textarea">
+                    <textarea id="recipe_instructions" name="recipe_instructions" maxlength="2000" class="materialize-textarea" required>
                     {{- recipe.recipe_instructions -}}
                     </textarea>
                     <label for="recipe_instructions">Recipe Instructions *</label>

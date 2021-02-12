@@ -544,7 +544,7 @@ ul .instruction-list {
 
 /* MEDIA QUERIES */
 /*m tablet*/
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 601px) {
     .row.col.info-icon{
     padding: 0;
     }
@@ -594,7 +594,7 @@ ul .instruction-list {
 }
 
 /* xl  large desktop */
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1201px) {
     /* single recipe page */
     .tab-title {
     letter-spacing: 1px;

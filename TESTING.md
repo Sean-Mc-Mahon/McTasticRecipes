@@ -79,6 +79,7 @@ Admin may access any profile by the 'Created By' link in a single_recipe page or
 1. **Developer Tools:** Chrome, Firefox and Microsoft Edge web dev tools using iPhone 5 and Ipad as toggle devices to test responsiveness.
 
 2. **Lighthouse:** A number of issues were resolved using lighthouse.
+**Accessability**
 - Contrast: Alpha level on .blank-image was set to 0.6 which did not offer sufficient contrast with white text. Alpah level rasied to 0.8.
 - Aria labels: Aria labels added to buttons such as #search-button and #submit
 - Alt Text: Alt text dynamically applied to images eg `alt="{{recipe.recipe_name}} image"`
@@ -157,28 +158,25 @@ On single_recipe: | Search field occupies 12 columns, sort_by and filter options
 #### index.html & view_profile.html
 action taken | expected result | pass/fail
 ------------ | --------------- | --------- 
-**On displays =< 600px**|
-view index.html or view_profile.html |recipe_cards displayed occupying 12 columns, card displays square image above title/anchor and card reveal icon|pass
-**On displays > 600px**|
-view index.html or view_profile.html |recipe_cards displayed occupying 6 columns, card displays square image above title/anchor and card reveal icon|pass
+**On displays =< 600px**|recipe_cards displayed occupying 12 columns, card displays square image above title/anchor and card reveal icon|pass
+**On displays > 600px**|recipe_cards displayed occupying 6 columns, card displays square image above title/anchor and card reveal icon|pass
 **recipe_cards**|
 Clicked #recipe-link |single_recipe.html loads displaying corresponding recipe|pass
 Clicked .activator |.card-reveal revealed. Recipe name, prep time, Servings, Description, creator and link to recipe shown|pass
 Clicked 'View Recipe' anchor |single_recipe.html loads displaying corresponding recipe|pass
 Clicked close icon |.card-reveal collapse|pass
-**On displays > 1200px**|
-view index.html or view_profile.html |recipe_cards_lg displayed occupying 4 columns, card displays square image|pass
+**On displays > 1200px**|recipe_cards_lg displayed occupying 4 columns, card displays square image|pass
 Hovered over .overlay |.gallery item revealed displaying recipe name, creator, prep time, servings, calories(if present), vegan(if vegan) and vegetarian (if vegetarian) but NOT description|pass
 Hovered over .icon |Tooltip displays|pass
 Clicked on .overlay |single_recipe.html loads displaying corresponding recipe|pass
-**On displays => 1500px**|
+**On displays => 1500px**|recipe_cards_lg displayed occupying 4 columns, card displays square image|pass
 Hovered over .overlay |.gallery item revealed displaying recipe name, description, creator, prep time, servings, calories(if present), vegan(if vegan) and vegetarian (if vegetarian)|pass
 
 ### Single Recipes
 #### single_recipe.html
 action taken | expected result | pass/fail
 ------------ | --------------- | --------- 
-single_recipe.html loaded|correct recipe loaded, reveal animations triggered|pass
+single_recipe.html loaded|correct recipe loaded, reveal animations triggered, Browser tab displays 'McTastic + Recipe Name'|pass
 On displays =< 992px:|image section and text section each occupy 12 columns|pass
 On displays > 992px|image section and text section each occupy 6 columns|pass
 On displays =< 992px:|image section and text section each occupy 12 columns|pass
@@ -195,6 +193,7 @@ Clicked 'DELETE' button in 'Delete Modal'|Recipe is deleted, index.html loaded, 
 #### registration.html
 action taken | expected result | pass/fail
 ------------ | --------------- | --------- 
+registration.html loaded|Browser tab displays 'McTastic Registration' and #register nav link is active|pass
 Submit registration without password or username |User prompted to fill required fields|pass
 Submit registration with too few characters for password or username |User prompted to fill required fields|pass
 Submit registration with username that has been taken |register.html loaded and message flashed|pass
@@ -207,6 +206,7 @@ Failed tests remedied following testing.
 #### login.html
 action taken | expected result | pass/fail
 ------------ | --------------- | --------- 
+login.html loaded|Browser tab displays 'McTastic Login' and #login nav link is active|pass
 Submit login without password or username |User prompted to fill required fields|pass
 Submit login with incorrect username or password |login.html loaded and message flashed|pass
 Submit login with valid username and password |view_profile.html loaded and message flashed|pass
@@ -231,7 +231,10 @@ action taken | expected result | pass/fail
 ------------ | --------------- | --------- 
  Pagination:|Pagination links displayed if user has created more than 7 recipes|pass
  Pagination links clicked|next/previous recipes loaded|pass
+ **If session user does not match profile username**|
+ view_profile.html loaded|Browser tab displays 'McTastic Profile'|pass
  **If session user matches profile username**|
+ view_profile.html loaded|Browser tab displays 'McTastic + Username' and #profile nav link is active|pass
  Clicked Delete|modal displayed asking user for confirmation|pass
  Clicked 'Cancel' button in Delete Profile modal|modal closes|pass
  Clicked 'Delete' button in Delete Profile modal|Profile and associated recipes deleted, index.html loaded, message flashed|pass
@@ -244,6 +247,7 @@ action taken | expected result | pass/fail
 #### insert_recipe.html
 action taken | expected result | pass/fail
 ------------ | --------------- | --------- 
+ insert_recipe.html loaded|Browser tab displays 'McTastic Add Recipe' and #add-recipe nav link is active|pass
  'Add Recipe' submitted without all required fields|User prompted to fill all fields|pass
  'Add Recipe' submitted with all required fields but no image url or else url not ending in .png/.jpg/.jpeg|Recipe added and 'blank' image with Recipe Name takes place of recipe image|pass
  Valid url ending with .png/.jpg/.jpeg entered prior to submission|Placeholder image replaced with a preview image|pass
@@ -253,6 +257,7 @@ action taken | expected result | pass/fail
 #### edit_recipe.html
 action taken | expected result | pass/fail
 ------------ | --------------- | --------- 
+ edit_recipe.html loaded|Browser tab displays 'McTastic Edit Recipe'|pass
  View edit_recipe.html|Fields are filled with corresponding values from MongoDB|pass
  Clicked 'Submit' without all required fields filled|User prompted to fill required fields|pass
  Clicked 'Submit' with all required fields filled|Recipe is updated, view_profile.html loaded, message flashed|pass
@@ -261,6 +266,7 @@ action taken | expected result | pass/fail
 #### users.html
 action taken | expected result | pass/fail
 ------------ | --------------- | --------- 
+ users.html loaded|Browser tab displays 'McTastic Users' and #users nav link is active|pass
  Clicked 'View' button|view_profile.html loaded displaying information for correct user|pass
  Clicked pagination links|users.html loaded with next/previous user cards displayed|pass
 
@@ -268,6 +274,7 @@ action taken | expected result | pass/fail
 #### units.html
 action taken | expected result | pass/fail
 ------------ | --------------- | --------- 
+units.html loaded|Browser tab displays 'McTastic Units' and #units nav link is active|pass
 **Conversions**|
 **On displays =< 600px**|
  For .card-content:|Input occupies 12 columns|pass
@@ -323,11 +330,18 @@ Clicked delete|Ingredient deleted|pass
 
 - Solution: If the Admin user deletes a profile they are redirected back to the users page. If any other user deletes their own profile they are redirected to the home page and removed from their session.
 
-    `if session["user"] == 'admin':
-        return redirect(url_for("users"))
-    else:
-        session.pop("user")
-        return redirect(url_for("recipes"))`
+    `if session["user"] == 'admin':` <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;`return redirect(url_for("users"))` <br>
+    `else:` <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;`session.pop("user")` <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;`return redirect(url_for("recipes"))`
+
+#### GSAP Warnings
+
+- Problem: Warning of `gsap.min.js:10 GSAP target [object NodeList] not found. ` shown on pages using GSAP animations.
+
+- Solution: `nullTargetWarn` set to `false` in GSAP's configuration using `gsap.config()`
+
 
 #### Recipe Cards not displaying at 1200px
 - Problem: For displays with width of exactly 1200px neither the recipe-cards nor the recipe_cards_lg were displayed.
@@ -337,6 +351,9 @@ Clicked delete|Ingredient deleted|pass
 ### Currently Unsolved Problems
 #### Back button prompts request to confirm resubmission
 - If a user were to sort the recipes on the home page and them filter them and finally press the back button they would be asked to confirm resubmission. Currently I do not have a solution to this problem.
+
+#### 'addthis' causing console errors
+- If an adblocker is present a console error will occur (moatframe.js:1 Failed to load resource: net::ERR_BLOCKED_BY_CLIENT) on pages where the 'addthis' script is running. I only run this script on pages where I require that the user be able to share the page via email, social media etc...
 
 ---
 

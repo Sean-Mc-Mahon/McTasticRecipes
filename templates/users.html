@@ -1,4 +1,6 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% block meta %}
+    <meta name="Description" content="View all users.">
+{% endblock %}
 {% block content %}
 
 <!--Users-->
@@ -33,11 +35,4 @@
         {% endfor %}
     </ul>
 
-{% endblock %}
-{% block scripts %}
-<!-- Share functionality from www.addthis.com --> 
-<script 
-    type="text/javascript" 
-    src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fce212ff264a1fa">
-</script>
 {% endblock %}

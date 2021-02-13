@@ -1,10 +1,12 @@
 {% extends "base.html" %}
+{% block meta %}
+    <meta name="Description" content="Individual user profile">
+{% endblock %}
 {% block content %}
-    
     <div class="row">
         <div class="col s12 m8 offset-m2">
             <div class="card-outline card-panel transparent p-half">
-                <h3 class="center-align m0">{{ username|capitalize }}'s Recipes</h3>
+                <h4 class="center-align m0">{{ username|capitalize }}'s Recipes</h4>
                 <div class="flex-center">
                 <h5 class="center-align">Recipes: {{ number_of_user_rec }}</h5>
                     {% if session.user == username or session.user|lower == 'admin' %}
@@ -52,4 +54,11 @@
         </ul>
     {% endif %}
 
+{% endblock %}
+{% block scripts %}
+<!-- Share functionality from www.addthis.com --> 
+<script 
+    type="text/javascript" 
+    src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fce212ff264a1fa">
+</script>
 {% endblock %}

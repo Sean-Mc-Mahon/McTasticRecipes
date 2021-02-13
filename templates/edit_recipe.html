@@ -1,7 +1,10 @@
 {% extends "base.html" %}
+{% block meta %}
+    <meta name="Description" content="edit a recipe">
+{% endblock %}
 {% block content %}
 
-    <h3 class="center-align container mt1">Edit Recipe</h3>
+    <h4 class="center-align container mt1">Edit Recipe</h4>
 
     <div class="row container card-outline">
         <form class="col l12" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
@@ -76,21 +79,21 @@
                         <!-- Prep Time -->
                         <div class="input-field col s12 m12 l6">
                             <select id="recipe_time" name="recipe_time" class="validate" required>
-                        <option value="" disabled>Prep Time *</option>
-                        {% if recipe.recipe_time ==  "&lt;30m" %}
-                            <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}</option>
-                            <option value=" &lt;60m"> &lt;60m</option>
-                            <option value=" &gt;60m"> &gt;60m</option>
-                        {% elif recipe.recipe_time ==  "&lt;60m" %}
-                            <option value=" &lt;30m"> &lt;30m</option>
-                            <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}</option>
-                            <option value=" &gt;60m"> &gt;60m</option>
-                        {% else %}
-                            <option value=" &lt;30m"> &lt;30m</option>
-                            <option value=" &lt;60m"> &lt;60m</option>
-                            <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}</option>
-                        {% endif %}
-                    </select>
+                                <option value="" disabled>Prep Time *</option>
+                                {% if recipe.recipe_time ==  "&lt;30m" %}
+                                    <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}</option>
+                                    <option value=" &lt;60m"> &lt;60m</option>
+                                    <option value=" &gt;60m"> &gt;60m</option>
+                                {% elif recipe.recipe_time ==  "&lt;60m" %}
+                                    <option value=" &lt;30m"> &lt;30m</option>
+                                    <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}</option>
+                                    <option value=" &gt;60m"> &gt;60m</option>
+                                {% else %}
+                                    <option value=" &lt;30m"> &lt;30m</option>
+                                    <option value=" &lt;60m"> &lt;60m</option>
+                                    <option value="{{ recipe.recipe_time }}" selected>{{ recipe.recipe_time }}</option>
+                                {% endif %}
+                            </select>
                         </div>
                         <!-- Calories. Not required to submit recipe -->
                         <div class="input-field col s12 m12 l6">

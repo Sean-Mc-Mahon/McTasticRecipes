@@ -1,9 +1,12 @@
 {% extends "base.html" %}
+{% block meta %}
+    <meta name="Description" content="Add a recipe">
+{% endblock %}
 {% block content %}
 
-    <h3 class="center-align container mt1">Add Recipe</h3>
+    <h4 class="center-align container mt1">Add Recipe</h4>
 
-    <div class="card-outline row container">
+    <section class="card-outline row container">
         <form class="col" method="POST" action="{{ url_for('insert_recipe') }}">
             <div class="row">
                 <!-- Category Selection -->
@@ -116,7 +119,7 @@
                 </div>
             </div>
         </form>
-    </div>
+    </section>
 
 {% include "partials/ingredient_cards.html" %}
 

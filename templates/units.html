@@ -1,9 +1,11 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% block meta %}
+    <meta name="Description" content="Convert units and view/add ingredients">
+{% endblock %}
 {% block content %}
 
 <!--UNIT CONVERSIONS-->
 <section class="container">
-    <h3 class="center-align">Conversions</h3>
+    <h4 class="center-align">Conversions</h4>
     <!--Weight-->
     <div class="row users-cards mt1">
         <div class="col s12 m9">
@@ -138,11 +140,4 @@
 
 {% include "partials/ingredient_cards.html" %}
 
-{% endblock %}
-{% block scripts %}
-<!-- Share functionality from www.addthis.com --> 
-<script 
-    type="text/javascript" 
-    src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fce212ff264a1fa">
-</script>
 {% endblock %}

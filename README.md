@@ -38,6 +38,10 @@ McTastic Recipes is a Milestone 3 project, it is part of the Fullstack Software 
 * [**_Version Control_**](#version-control)
 </details>
 
+**<details><summary>Accessibility</summary>**
+* [**_Semantics_**](#semantics)
+</details>
+
 **<details><summary>Testing</summary>**
 * [**_Testing_**](#testing)
 </details>
@@ -350,6 +354,21 @@ The share button is displayed on the bottom right corner at all times on all pag
 - [Git](https://git-scm.com/) - used for version control
 
 - Branches were used to experimaent with pagination.
+
+---
+
+# Accessibility
+
+### Semantics
+
+- HTML5 Semantics used throughout (header, nav, main etc...)
+- Titles used throughout (McTastic Recipes, McTastic Profiles etc...)
+- Language is set to english (`<html lang="en">`)
+
+---
+
+- Aria labels used throughout eg `<button id="submit" aria-label="submit" type="submit">`
+- Alt Text: Alt text dynamically applied to images eg `alt="{{recipe.recipe_name}} image"`
 
 # Testing
 All testing and validation is contained within a separate .md file. <br> [View TESTING.md](TESTING.md)

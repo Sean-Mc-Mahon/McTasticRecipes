@@ -560,7 +560,7 @@ def view_profile(username_view):
     READ
     Allows users to view other users profiles
     """
-    # grab the session user's username from db
+    # grab the user's username from db
     user = users_coll.find_one(
         {"username": username_view})
     username = users_coll.find_one(
@@ -576,7 +576,11 @@ def view_profile(username_view):
 
     # set title to display in browser tab
     # and apply active-link to nav link
-    title = 'Profiles'
+    if session["user"] == username_view:
+        title = session['user'].capitalize()
+        print(title)
+    else:
+        title = 'Profiles'
 
     return render_template(
         "view_profile.html",

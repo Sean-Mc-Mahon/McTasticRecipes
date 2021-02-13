@@ -8,7 +8,7 @@
                     <h4 class="image_header center">{{recipe.recipe_name}}</h4>
                 </div>
             {% else %}
-                <img class="content gallery-image" src="{{ recipe.recipe_image }}">
+                <img class="content gallery-image" src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }} Image">
             {% endif %}
         </div>
         <a class="bold" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">

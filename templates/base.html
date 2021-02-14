@@ -125,9 +125,11 @@
                 <p class="grey-text text-lighten-4 mv-half text-newsletter">Enter your email address to recieve out weekly newsletter</p>    
                 <form  id="form_contact" onsubmit="return sendMail(this);">
                     <input type="email" name="emailaddress" id="emailaddress" placeholder="email" required>
-                    <button id="submit" aria-label="submit" type="submit">
-                    <i class="far fa-paper-plane large-icon"></i>
-                    </button>
+                    <label for="emailaddress" class="valign-wrapper">
+                        <button id="submit" aria-label="submit" type="submit">
+                        <i class="far fa-paper-plane large-icon"></i>
+                        </button>
+                    </label>
                 </form>
             </div>
             <!--Icon info: Servings,Calories,Vegetarian,Vegan-->
@@ -136,7 +138,7 @@
                     <div class="all-icons">
                     <!--Time-->
                     <div class="flex mt-half">
-                        <img class="mr-half" src="../static/img/icons/time-white.png" alt="Time"><span class="icon-text">Prep Time</span>
+                        <i class="fas fa-clock mr-half"></i><span class="icon-text">Prep Time</span>
                     </div>
                     <!--Serves-->
                     <div class="flex mt-half">
@@ -164,6 +166,7 @@
                             rel="noopener"
                             target="_blank"
                             href="https://www.linkedin.com/in/sean-mcmahon-profile/"
+                            title="LinkedIn"
                             >
                             <i aria-label="linkedin" class="fab fa-linkedin-in"></i>
                         </a>
@@ -173,6 +176,7 @@
                             rel="noopener"
                             target="_blank"
                             href="https://github.com/Sean-Mc-Mahon"
+                            title="Github"
                             >
                             <i aria-label="github" class="fab fa-github"></i>
                         </a>

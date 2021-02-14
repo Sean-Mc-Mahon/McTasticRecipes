@@ -157,7 +157,7 @@ h1,h2,h3,h4,h5,h6 {
 
 /* pagination */
 .pagination li.active {
-    background-color: #4c809b;
+    background-color: #37474f ;
 }
 /* used to make footer sticky */
 main {
@@ -242,6 +242,16 @@ input {
     font-weight: 500;
 }
 
+/* Links */
+.internal-link {
+    color: #121212;
+    font-weight: 700;
+    text-decoration: underline;
+}
+/* Lists */
+li:focus {
+    outline: solid;
+}
 /*** PAGES ***/
 /** Sections **/
 /* Sub Sections */

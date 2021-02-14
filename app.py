@@ -576,7 +576,7 @@ def view_profile(username_view):
 
     # set title to display in browser tab
     # and apply active-link to nav link
-    if session["user"] == username_view:
+    if 'session["user"]' == "username_view":
         title = session['user'].capitalize()
         print(title)
     else:
@@ -646,7 +646,7 @@ def register():
         mongo.db.users.insert_one(register)
 
         # put new user into 'session' cookie
-        session['user'] = request.form.get("username").lower()
+        session["user"] = request.form.get("username").lower()
         flash("Registration Successful!")
         return redirect(url_for("view_profile", username_view=session["user"]))
     return render_template(

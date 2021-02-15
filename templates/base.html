@@ -85,20 +85,20 @@
         <!-- Side Nav Bar -->
         <ul class="sidenav" id="mobile-demo">
             <li><h4 class="center-align">Menu</h4></li>
-            <li><a href="{{ url_for('recipes')}}">Home</a></li>
+            <li><a tabindex="-1" href="{{ url_for('recipes')}}">Home</a></li>
             <!-- USERS -->
             <!-- LOGGED IN USERS -->
             {% if session.user %}
-                <li><a href="{{ url_for('logout')}}">Log Out</a></li>
-                <li><a href="{{ url_for('insert_recipe')}}">Add Recipe</a></li>
-                <li><a href="{{ url_for('view_profile', username_view=session['user']) }}">Profile</a></li>
+                <li><a tabindex="-1" href="{{ url_for('logout')}}">Log Out</a></li>
+                <li><a tabindex="-1" href="{{ url_for('insert_recipe')}}">Add Recipe</a></li>
+                <li><a tabindex="-1" href="{{ url_for('view_profile', username_view=session['user']) }}">Profile</a></li>
             <!-- NOT LOGGED IN USERS -->
             {% else %}
-                <li><a href="{{ url_for('login')}}">Log In</a></li>
-                <li><a href="{{ url_for('register')}}">Register</a></li>
+                <li><a tabindex="-1" href="{{ url_for('login')}}">Log In</a></li>
+                <li><a tabindex="-1" href="{{ url_for('register')}}">Register</a></li>
             {% endif %}
-            <li><a href="{{ url_for('users')}}">Users</a></li>
-            <li><a href="{{ url_for('units')}}">Units</a></li>
+            <li><a tabindex="-1" href="{{ url_for('users')}}">Users</a></li>
+            <li><a tabindex="-1" href="{{ url_for('units')}}">Units</a></li>
         </ul>
     </header>
     <section class="mh1">
@@ -126,8 +126,8 @@
                 <form  id="form_contact" onsubmit="return sendMail(this);">
                     <input type="email" name="emailaddress" id="emailaddress" placeholder="email" required>
                     <label for="emailaddress" class="valign-wrapper">
-                        <button id="submit" aria-label="submit" type="submit">
-                        <i class="far fa-paper-plane large-icon"></i>
+                        <button id="submit" tabindex="0" aria-label="submit" type="submit" class="focus-outline">
+                            <i class="far fa-paper-plane large-icon"></i>
                         </button>
                     </label>
                 </form>

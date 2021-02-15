@@ -2,16 +2,16 @@
 <div class="col xl4 recipe_cards_lg">
     <div class="gallery-item">
         <!--Image-->
-        <div class="gallery-image square">
-            {% if recipe.recipe_image == '' %}
-                <div class="flex-center blank_image">
-                    <h4 class="image_header center">{{recipe.recipe_name}}</h4>
-                </div>
-            {% else %}
-                <img class="content gallery-image" src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }} Image">
-            {% endif %}
-        </div>
-        <a class="bold" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">
+        <a class="bold recipe-link" href="{{ url_for('single_recipe', recipe_id=recipe._id) }}">
+            <div class="gallery-image square">
+                {% if recipe.recipe_image == '' %}
+                    <div class="flex-center blank_image">
+                        <h4 class="image_header center">{{recipe.recipe_name}}</h4>
+                    </div>
+                {% else %}
+                    <img class="content gallery-image" src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }} Image">
+                {% endif %}
+            </div>
             <div class="overlay overlay-fade">
                 <div class="gallery-text">
                     <h5>{{recipe.recipe_name}}</h5>

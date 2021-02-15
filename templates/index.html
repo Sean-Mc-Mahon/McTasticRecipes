@@ -16,7 +16,8 @@
                     <div class="input-field flex">
                         <input type="text" name="query" id="query" minlength="3" class="validate" required>
                         <label class="flex-space" for="query">Search Recipes</label>
-                        <button id="search-button" aria-label="search" type="submit" class="transparent blue-grey-text text-darken-3 no-border"><i class="fas fa-search left"></i>
+                        <button id="search-button" tabindex="0" aria-label="search" type="submit" class="transparent blue-grey-text text-darken-3 no-border focus-outline">
+                            <i class="fas fa-search left"></i>
                         </button>
                     </div>
                 </form>
@@ -108,23 +109,23 @@
                 <ul class="pagination center-align margin-bottom-large">
                     {% for page_num in pages %} 
                         {% if page_num == current_page %}
-                        <li class="active"><a href="#">{{ page_num }}</a></li>
+                        <li class="active"><a tabindex="0" href="#">{{ page_num }}</a></li>
                         {% else %}
                         <li class="waves-effect">
                             {% if title == 'Recipes' %}
-                                <a href="{{ url_for('recipes', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+                                <a tabindex="0" href="{{ url_for('recipes', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
                             {% elif title == 'Search' %}
-                                <a href="{{ url_for('search', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+                                <a tabindex="0" href="{{ url_for('search', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
                             {% elif title == 'Recipes Sort' %}
-                                <a href="{{ url_for('sort', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+                                <a tabindex="0" href="{{ url_for('sort', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
                             {% elif title == 'Recipes Search Sort' %}
-                                <a href="{{ url_for('sort_query', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+                                <a tabindex="0" href="{{ url_for('sort_query', query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
                             {% elif title == 'Recipes Filter' %}
-                                <a href="{{ url_for('filter', filter_by=filter_by, query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+                                <a tabindex="0" href="{{ url_for('filter', filter_by=filter_by, query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
                             {% elif title == 'Recipes Filter Sort' %}
-                                <a href="{{ url_for('filter_sort', filter_by=filter_by, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+                                <a tabindex="0" href="{{ url_for('filter_sort', filter_by=filter_by, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
                             {% elif title == 'Recipes Sort Filter' %}
-                                <a href="{{ url_for('sort_filter', filter_by=filter_by, query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
+                                <a tabindex="0" href="{{ url_for('sort_filter', filter_by=filter_by, query=query, sort_by=sort_by, current_page=page_num) }}">{{ page_num }}</a>
                             {% endif %}
                         </li>
                         {% endif %} 
@@ -152,5 +153,9 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.js" 
         integrity="sha512-judXDFLnOTJsUwd55lhbrX3uSoSQSOZR6vNrsll+4ViUFv+XOIr/xaIK96soMj6s5jVszd7I97a0H+WhgFwTEg==" 
         crossorigin="anonymous">
+    </script>
+    <script 
+        type="text/javascript" 
+        src="../static/js/index_animation.js">
     </script>
 {% endblock %}

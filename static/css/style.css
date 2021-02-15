@@ -95,6 +95,9 @@ h1,h2,h3,h4,h5,h6 {
 .m0 {
     margin: 0;
 }
+.m-half{
+    margin: 0.5rem;
+}
 .m-all{
     margin: 1rem;
 }
@@ -124,6 +127,9 @@ h1,h2,h3,h4,h5,h6 {
 }
 .mb0 {
     margin-bottom: 0;
+}
+.mb-half {
+    margin-bottom: 0.5rem;
 }
 .mb1 {
     margin-bottom: 1rem;
@@ -158,6 +164,9 @@ h1,h2,h3,h4,h5,h6 {
 /* pagination */
 .pagination li.active {
     background-color: #37474f ;
+}
+.pagination li a:focus {
+    text-decoration: underline !important;
 }
 /* used to make footer sticky */
 main {
@@ -224,6 +233,9 @@ main {
     border: 2px solid #263238;
     border-radius: 20px;
 }
+.btn-outline:focus {
+    border: 2px solid #00911f;
+}
 
 /* Labels and Inputs */
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -251,6 +263,18 @@ input {
 /* Lists */
 li:focus {
     outline: solid;
+}
+.focus-outline:focus {
+    outline: solid !important;
+}
+.focus-background:focus {
+    background-color: rgba(0, 0, 0, 0.15) !important;
+}
+.collapsible-header:focus {
+    background-color: rgba(0, 0, 0, 0.15) !important;
+    transition: all 1s ease-in-out;
+    color: #00911f !important;
+    font-size: 1.3rem;
 }
 /*** PAGES ***/
 /** Sections **/
@@ -373,6 +397,15 @@ nav ul a {
 .gallery-item:hover .overlay {
   opacity: 1;
 }
+.recipe-link:focus .overlay {
+  opacity: 1;
+}
+.gallery-item:hover .image_header {
+  opacity: 0;
+}
+.recipe-link:focus .image_header {
+  opacity: 0;
+}
 .overlay-fade {
   height: 100%;
   width: 100%;
@@ -383,6 +416,9 @@ nav ul a {
   width: 100%;
 }
 .gallery-item:hover .gallery-image img {
+  transform: scale(1.2);
+}
+.recipe-link:focus .gallery-image img {
   transform: scale(1.2);
 }
 .gallery-item .gallery-text {
@@ -397,6 +433,9 @@ nav ul a {
   transition: 2s ease-in-out;
 }
 .gallery-item:hover .gallery-text {
+  opacity: 1;
+}
+.recipe-link:focus .gallery-text {
   opacity: 1;
 }
 

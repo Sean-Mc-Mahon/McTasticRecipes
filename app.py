@@ -573,20 +573,21 @@ def view_profile(username_view):
     # recipes to display in order of latest created
     recipes = user_recipes.sort('_id', pymongo.DESCENDING).skip(
             (current_page - 1) * limit_per_page).limit(limit_per_page)
+    ingredients = mongo.db.ingredients.find(
+        {"created_by": username_view}).sort("ingredient_name", 1)
+    num_ingredients = ingredients.count()
 
     # set title to display in browser tab
-    # and apply active-link to nav link
-    if 'session["user"]' == "username_view":
-        title = session['user'].capitalize()
-        print(title)
-    else:
-        title = 'Profiles'
+    # and apply active-link to nav link if profile belongs to session user
+    title = username_view.capitalize()
 
     return render_template(
         "view_profile.html",
         title=title,
         user=user,
         recipes=recipes,
+        ingredients=ingredients,
+        num_ingredients=num_ingredients,
         username=username,
         number_of_user_rec=number_of_user_rec,
         user_recipes=user_recipes,
@@ -766,31 +767,15 @@ def insert_recipe():
             title=title,))
 
     categories = mongo.db.categories.find().sort("category_name", 1)
-    dairy_ingredients = mongo.db.ingredients.find(
-        {"group_name": "Dairy"}).sort("ingredient_name", 1)
-    fruit_ingredients = mongo.db.ingredients.find(
-        {"group_name": "Fruit"}).sort("ingredient_name", 1)
-    grain_ingredients = mongo.db.ingredients.find(
-        {"group_name": "Grains"}).sort("ingredient_name", 1)
-    protein_ingredients = mongo.db.ingredients.find(
-        {"group_name": "Protein"}).sort("ingredient_name", 1)
-    spice_ingredients = mongo.db.ingredients.find(
-        {"group_name": "Oils & Spices"}).sort("ingredient_name", 1)
-    sweet_ingredients = mongo.db.ingredients.find(
-        {"group_name": "Sweet"}).sort("ingredient_name", 1)
-    veg_ingredients = mongo.db.ingredients.find(
-        {"group_name": "Veg"}).sort("ingredient_name", 1)
+    ingredients = mongo.db.ingredients.find(
+        {"created_by": session["user"]}).sort("ingredient_name", 1)
+    num_ingredients = ingredients.count()
     prep = mongo.db.prep.find().sort("prep", 1)
     return render_template(
         "insert_recipe.html",
         categories=categories,
-        dairy_ingredients=dairy_ingredients,
-        fruit_ingredients=fruit_ingredients,
-        grain_ingredients=grain_ingredients,
-        spice_ingredients=spice_ingredients,
-        sweet_ingredients=sweet_ingredients,
-        veg_ingredients=veg_ingredients,
-        protein_ingredients=protein_ingredients,
+        ingredients=ingredients,
+        num_ingredients=num_ingredients,
         title=title,
         prep=prep)
 
@@ -951,8 +936,7 @@ def units():
     # set title to display in browser tab
     # and apply active-link to nav link
     title = 'Units'
-    ingredients = mongo.db.ingredients.find().sort("ingredient_name", 1)
-    dairy_ingredients = mongo.db.ingredients.find(
+    dairy_ingredients = ingredients_coll.find(
         {"group_name": "Dairy"}).sort("ingredient_name", 1)
     fruit_ingredients = mongo.db.ingredients.find(
         {"group_name": "Fruit"}).sort("ingredient_name", 1)
@@ -973,7 +957,6 @@ def units():
         title=title,
         food_groups=food_groups,
         units=units,
-        ingredients=ingredients,
         dairy_ingredients=dairy_ingredients,
         fruit_ingredients=fruit_ingredients,
         grain_ingredients=grain_ingredients,

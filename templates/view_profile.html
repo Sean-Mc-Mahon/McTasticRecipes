@@ -7,8 +7,11 @@
         <div class="col s12 m8 offset-m2">
             <div class="card-outline card-panel transparent p-half">
                 <h4 class="center-align m0">{{ username|capitalize }}'s Recipes</h4>
-                <div class="flex-center">
-                <h5 class="center-align">Recipes: {{ number_of_user_rec }}</h5>
+                <div class="flex-col">
+                    <div class="flex">
+                        <h5 class="center-align m-half">Recipes: {{ number_of_user_rec }}</h5>
+                        <h5 class="center-align m-half">Ingredients: {{ num_ingredients }}</h5>
+                    </div>
                     {% if session.user == username or session.user|lower == 'admin' %}
                         <div class="edit-btns flex-center">
                             <!-- Modal Trigger -->
@@ -31,12 +34,48 @@
         </div>
     </div>
     
+    <!-- Dispaly Recipes -->
     <div class="row container">
         {% for recipe in recipes %}
             {% include "partials/recipe_cards.html" %}
             {% include "partials/recipe_cards_lg.html" %}
         {% endfor %}
     </div>
+    <!-- Dispaly Ingredients -->
+    <!-- If user has added recipes they are displayed here -->
+    {% if num_ingredients > 0 %}
+        <div class="row container">
+            <ul class="collapsible popout">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons focus-color">expand_more</i>My Ingredients</div>
+                    <div class="collapsible-body">
+                        <div class="row w100 sm-card">
+                            {% for ingredient in ingredients %}
+                                <div class="col s12 l6 card horizontal">
+                                    <div class="card-content w100">
+                                        <div class="ingredient flex-wrap">
+                                            <div class="flex">
+                                                <h6>{{ ingredient.ingredient_name }}</h6>
+                                                <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
+                                            </div>
+                                            {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
+                                            <div class="flex-right mv-half">
+                                                <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
+                                                <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
+                                                Delete
+                                                </a>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
 
     {% if number_of_user_rec > 6 %}
     <!--PAGINATION-->

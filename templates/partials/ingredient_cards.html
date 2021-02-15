@@ -1,13 +1,13 @@
+<!--Ingredients dispalyed in a collapsible-->
 <!--Ingredients-->
 <section class="container">
     <div class="flex-col">
         <h4 class="center">Ingredient <br> Calories</h4>
-        <div class="edit-btns flex-center">
+        <div class="edit-btns flex-center mb-half">
             <!-- 'Add' option if user is logged in -->
             {% if session.user %}
                 <!-- Modal Trigger -->
                 <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Add</a>
-
                 <!-- Modal Structure -->
                 <div id="modal1" class="modal ingredient_modal card-outline">
                     <div class="modal-content">
@@ -15,7 +15,7 @@
                             <div class="row">
                                 <!-- Ingredient Name -->
                                 <div class="input-field col s12 l6">
-                                    <input id="ingredient_name" name="ingredient_name" type="text" minlength="1" maxlength="25" class="validate" required>
+                                    <input id="ingredient_name" name="ingredient_name" type="text" minlength="1" maxlength="21" class="validate" required>
                                     <label for="ingredient_name">Ingredient Name *</label>
                                 </div>
                                 <!-- Food Group Selection -->
@@ -60,277 +60,204 @@
             {% endif %}
         </div>
     </div>
-    <!-- Dairy Card -->
-    <div class="row users-cards mt1">
-        <div class="col s12">
-            <div class="card horizontal w100">
-                <div class="card-content user-card flex-col">
-                    <h5>Dairy</h5>
-                    <div class="row w100 sm-card">
-                        {% for ingredient in dairy_ingredients %}
-                            <div class="col s12 l6 card horizontal">
-                                <div class="card-content w100">
-                                    <div class="ingredient flex-wrap">
-                                        <div class="flex">
-                                            <h6>{{ ingredient.ingredient_name }}</h6>
-                                            <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
-                                        </div>
-                                        {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
-                                        <div class="flex-right">
-                                            <!-- Only Admin may view Created by -->
-                                            {% if session.user|lower == 'admin' %}
-                                                <em class="mh-half">{{ ingredient.created_by }}</em>
-                                            <!-- Only Ingredient Creator may edit ingredient -->
-                                            {% else %}
-                                                <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
-                                            {% endif %}
-                                            <!-- Only Admin or Ingredient Creator may delete ingredient -->
-                                            <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
-                                            Delete
-                                            </a>
-                                        </div>
-                                        {% endif %}
-                                    </div>
+    <ul class="collapsible popout">
+        <!-- Fruit Card -->
+        <li>
+            <div class="collapsible-header"><i class="material-icons">expand_more</i>Fruit</div>
+            <div class="collapsible-body">
+                {% for ingredient in fruit_ingredients %}
+                    <div class="col s12 l6 card horizontal">
+                        <div class="card-content w100">
+                            <div class="ingredient flex-wrap">
+                                <div class="flex">
+                                    <h6>{{ ingredient.ingredient_name }}</h6>
+                                    <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
                                 </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Fruit Card -->
-    <div class="row users-cards mt1">
-        <div class="col s12">
-            <div class="card horizontal w100">
-                <div class="card-content user-card flex-col">
-                    <h5>Fruit</h5>
-                    <div class="row w100 sm-card">
-                        {% for ingredient in fruit_ingredients %}
-                            <div class="col s12 l6 card horizontal">
-                                <div class="card-content w100">
-                                    <div class="ingredient flex-wrap">
-                                        <div class="flex">
-                                            <h6>{{ ingredient.ingredient_name }}</h6>
-                                            <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
-                                        </div>
-                                        {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
-                                        <div class="flex-right">
-                                            <!-- Only Admin may view Created by -->
-                                            {% if session.user|lower == 'admin' %}
-                                                <em class="mh-half">{{ ingredient.created_by }}</em>
-                                            <!-- Only Ingredient Creator may edit ingredient -->
-                                            {% else %}
-                                                <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
-                                            {% endif %}
-                                            <!-- Only Admin or Ingredient Creator may delete ingredient -->
-                                            <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
-                                            Delete
-                                            </a>
-                                        </div>
-                                        {% endif %}
-                                    </div>
+                                {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
+                                <div class="flex-right">
+                                    <!-- Only Admin may view Created by -->
+                                    {% if session.user|lower == 'admin' %}
+                                        <em class="mh-half">{{ ingredient.created_by }}</em>
+                                    <!-- Only Ingredient Creator may edit ingredient -->
+                                    {% else %}
+                                        <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
+                                    {% endif %}
+                                    <!-- Only Admin or Ingredient Creator may delete ingredient -->
+                                    <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
+                                    Delete
+                                    </a>
                                 </div>
+                                {% endif %}
                             </div>
-                        {% endfor %}
+                        </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
-        </div>
-    </div>
-    <!-- Grains Card -->
-    <div class="row users-cards mt1">
-        <div class="col s12">
-            <div class="card horizontal">
-                <div class="card-content user-card flex-col">
-                    <h5>Grains</h5>
-                    <div class="row w100 sm-card">
-                        {% for ingredient in grain_ingredients %}
-                            <div class="col s12 l6 card horizontal">
-                                <div class="card-content  w100">
-                                    <div class="ingredient flex-wrap">
-                                        <div class="flex">
-                                            <h6>{{ ingredient.ingredient_name }}</h6>
-                                            <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
-                                        </div>
-                                        {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
-                                        <div class="flex-right">
-                                            <!-- Only Admin may view Created by -->
-                                            {% if session.user|lower == 'admin' %}
-                                                <em class="mh-half">{{ ingredient.created_by }}</em>
-                                            <!-- Only Ingredient Creator may edit ingredient -->
-                                            {% else %}
-                                                <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
-                                            {% endif %}
-                                            <!-- Only Admin or Ingredient Creator may delete ingredient -->
-                                            <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
-                                            Delete
-                                            </a>
-                                        </div>
-                                        {% endif %}
-                                    </div>
+        </li>
+        <!-- Grains Card -->
+        <li>
+            <div class="collapsible-header"><i class="material-icons">expand_more</i>Grains</div>
+            <div class="collapsible-body">
+                {% for ingredient in grain_ingredients %}
+                    <div class="col s12 l6 card horizontal">
+                        <div class="card-content  w100">
+                            <div class="ingredient flex-wrap">
+                                <div class="flex">
+                                    <h6>{{ ingredient.ingredient_name }}</h6>
+                                    <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
                                 </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Proteins Card -->
-    <div class="row users-cards mt1">
-        <div class="col s12">
-            <div class="card horizontal">
-                <div class="card-content user-card flex-col">
-                    <h5>Protein (Meat, Nuts, Seeds)</h5>
-                    <div class="row w100 sm-card">
-                        {% for ingredient in protein_ingredients %}
-                            <div class="col s12 l6 card horizontal">
-                                <div class="card-content w100">
-                                    <div class="ingredient flex-wrap">
-                                        <div class="flex">
-                                            <h6>{{ ingredient.ingredient_name }}</h6>
-                                            <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
-                                        </div>
-                                        {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
-                                        <div class="flex-right">
-                                            <!-- Only Admin may view Created by -->
-                                            {% if session.user|lower == 'admin' %}
-                                                <em class="mh-half">{{ ingredient.created_by }}</em>
-                                            <!-- Only Ingredient Creator may edit ingredient -->
-                                            {% else %}
-                                                <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
-                                            {% endif %}
-                                            <!-- Only Admin or Ingredient Creator may delete ingredient -->
-                                            <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
-                                            Delete
-                                            </a>
-                                        </div>
-                                        {% endif %}
-                                    </div>
+                                {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
+                                <div class="flex-right">
+                                    <!-- Only Admin may view Created by -->
+                                    {% if session.user|lower == 'admin' %}
+                                        <em class="mh-half">{{ ingredient.created_by }}</em>
+                                    <!-- Only Ingredient Creator may edit ingredient -->
+                                    {% else %}
+                                        <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
+                                    {% endif %}
+                                    <!-- Only Admin or Ingredient Creator may delete ingredient -->
+                                    <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
+                                    Delete
+                                    </a>
                                 </div>
+                                {% endif %}
                             </div>
-                        {% endfor %}
+                        </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
-        </div>
-    </div>
-    <!-- Spices & Oils Card -->
-    <div class="row users-cards mt1">
-        <div class="col s12">
-            <div class="card horizontal">
-                <div class="card-content user-card flex-col">
-                    <h5>Spices & Oils</h5>
-                    <div class="row w100 sm-card">
-                        {% for ingredient in spice_ingredients %}
-                            <div class="col s12 l6 card horizontal">
-                                <div class="card-content w100">
-                                    <div class="ingredient flex-wrap">
-                                        <div class="flex">
-                                            <h6>{{ ingredient.ingredient_name }}</h6>
-                                            <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
-                                        </div>
-                                        {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
-                                        <div class="flex-right">
-                                            <!-- Only Admin may view Created by -->
-                                            {% if session.user|lower == 'admin' %}
-                                                <em class="mh-half">{{ ingredient.created_by }}</em>
-                                            <!-- Only Ingredient Creator may edit ingredient -->
-                                            {% else %}
-                                                <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
-                                            {% endif %}
-                                            <!-- Only Admin or Ingredient Creator may delete ingredient -->
-                                            <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
-                                            Delete
-                                            </a>
-                                        </div>
-                                        {% endif %}
-                                    </div>
+        </li>
+        <!-- Proteins Card -->
+        <li>
+            <div class="collapsible-header"><i class="material-icons">expand_more</i>Proteins</div>
+            <div class="collapsible-body">
+                {% for ingredient in protein_ingredients %}
+                    <div class="col s12 l6 card horizontal">
+                        <div class="card-content w100">
+                            <div class="ingredient flex-wrap">
+                                <div class="flex">
+                                    <h6>{{ ingredient.ingredient_name }}</h6>
+                                    <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
                                 </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Sweet Card -->
-    <div class="row users-cards mt1">
-        <div class="col s12">
-            <div class="card horizontal">
-                <div class="card-content user-card flex-col">
-                    <h5>Sweet</h5>
-                    <div class="row w100 sm-card">
-                        {% for ingredient in sweet_ingredients %}
-                            <div class="col s12 l6 card horizontal">
-                                <div class="card-content w100">
-                                    <div class="ingredient flex-wrap">
-                                        <div class="flex">
-                                            <h6>{{ ingredient.ingredient_name }}</h6>
-                                            <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
-                                        </div>
-                                        {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
-                                        <div class="flex-right">
-                                            <!-- Only Admin may view Created by -->
-                                            {% if session.user|lower == 'admin' %}
-                                                <em class="mh-half">{{ ingredient.created_by }}</em>
-                                            <!-- Only Ingredient Creator may edit ingredient -->
-                                            {% else %}
-                                                <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
-                                            {% endif %}
-                                            <!-- Only Admin or Ingredient Creator may delete ingredient -->
-                                            <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
-                                            Delete
-                                            </a>
-                                        </div>
-                                        {% endif %}
-                                    </div>
+                                {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
+                                <div class="flex-right">
+                                    <!-- Only Admin may view Created by -->
+                                    {% if session.user|lower == 'admin' %}
+                                        <em class="mh-half">{{ ingredient.created_by }}</em>
+                                    <!-- Only Ingredient Creator may edit ingredient -->
+                                    {% else %}
+                                        <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
+                                    {% endif %}
+                                    <!-- Only Admin or Ingredient Creator may delete ingredient -->
+                                    <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
+                                    Delete
+                                    </a>
                                 </div>
+                                {% endif %}
                             </div>
-                        {% endfor %}
+                        </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
-        </div>
-    </div>
-    <!-- Veg Card -->
-    <div class="row users-cards mt1">
-        <div class="col s12">
-            <div class="card horizontal">
-                <div class="card-content user-card flex-col">
-                    <h5>Vegetables</h5>
-                    <div class="row w100 sm-card">
-                        {% for ingredient in veg_ingredients %}
-                            <div class="col s12 l6 card horizontal">
-                                <div class="card-content w100">
-                                    <div class="ingredient flex-wrap">
-                                        <div class="flex">
-                                            <h6>{{ ingredient.ingredient_name }}</h6>
-                                            <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
-                                        </div>
-                                        {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
-                                        <div class="flex-right">
-                                            <!-- Only Admin may view Created by -->
-                                            {% if session.user|lower == 'admin' %}
-                                                <em class="mh-half">{{ ingredient.created_by }}</em>
-                                            <!-- Only Ingredient Creator may edit ingredient -->
-                                            {% else %}
-                                                <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
-                                            {% endif %}
-                                            <!-- Only Admin or Ingredient Creator may delete ingredient -->
-                                            <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
-                                            Delete
-                                            </a>
-                                        </div>
-                                        {% endif %}
-                                    </div>
+        </li>
+        <!-- Spices & Oils Card -->
+        <li>
+            <div class="collapsible-header"><i class="material-icons">expand_more</i>Spices & Oils</div>
+            <div class="collapsible-body">
+                {% for ingredient in spice_ingredients %}
+                    <div class="col s12 l6 card horizontal">
+                        <div class="card-content w100">
+                            <div class="ingredient flex-wrap">
+                                <div class="flex">
+                                    <h6>{{ ingredient.ingredient_name }}</h6>
+                                    <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
                                 </div>
+                                {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
+                                <div class="flex-right">
+                                    <!-- Only Admin may view Created by -->
+                                    {% if session.user|lower == 'admin' %}
+                                        <em class="mh-half">{{ ingredient.created_by }}</em>
+                                    <!-- Only Ingredient Creator may edit ingredient -->
+                                    {% else %}
+                                        <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
+                                    {% endif %}
+                                    <!-- Only Admin or Ingredient Creator may delete ingredient -->
+                                    <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
+                                    Delete
+                                    </a>
+                                </div>
+                                {% endif %}
                             </div>
-                        {% endfor %}
+                        </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
-        </div>
-    </div>
+        </li>
+        <!-- Sweet Card -->
+        <li>
+            <div class="collapsible-header"><i class="material-icons">expand_more</i>Sweet</div>
+            <div class="collapsible-body">
+                {% for ingredient in sweet_ingredients %}
+                    <div class="col s12 l6 card horizontal">
+                        <div class="card-content w100">
+                            <div class="ingredient flex-wrap">
+                                <div class="flex">
+                                    <h6>{{ ingredient.ingredient_name }}</h6>
+                                    <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
+                                </div>
+                                {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
+                                <div class="flex-right">
+                                    <!-- Only Admin may view Created by -->
+                                    {% if session.user|lower == 'admin' %}
+                                        <em class="mh-half">{{ ingredient.created_by }}</em>
+                                    <!-- Only Ingredient Creator may edit ingredient -->
+                                    {% else %}
+                                        <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
+                                    {% endif %}
+                                    <!-- Only Admin or Ingredient Creator may delete ingredient -->
+                                    <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
+                                    Delete
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </li>
+        <!-- Veg Card -->
+        <li>
+            <div class="collapsible-header"><i class="material-icons">expand_more</i>Vegetables</div>
+            <div class="collapsible-body">
+                {% for ingredient in veg_ingredients %}
+                    <div class="col s12 l6 card horizontal">
+                        <div class="card-content w100">
+                            <div class="ingredient flex-wrap">
+                                <div class="flex">
+                                    <h6>{{ ingredient.ingredient_name }}</h6>
+                                    <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
+                                </div>
+                                {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
+                                <div class="flex-right">
+                                    <!-- Only Admin may view Created by -->
+                                    {% if session.user|lower == 'admin' %}
+                                        <em class="mh-half">{{ ingredient.created_by }}</em>
+                                    <!-- Only Ingredient Creator may edit ingredient -->
+                                    {% else %}
+                                        <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
+                                    {% endif %}
+                                    <!-- Only Admin or Ingredient Creator may delete ingredient -->
+                                    <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
+                                    Delete
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </li>
+    </ul>
 </section>

@@ -79,11 +79,33 @@ Admin may access any profile by the 'Created By' link in a single_recipe page or
 1. **Developer Tools:** Chrome, Firefox and Microsoft Edge web dev tools using iPhone 5 and Ipad as toggle devices to test responsiveness.
 
 2. **Lighthouse:** A number of issues were resolved using lighthouse.
-**Accessability**
-- Contrast: Alpha level on .blank-image was set to 0.6 which did not offer sufficient contrast with white text. Alpah level rasied to 0.8.
-- Aria labels: Aria labels added to buttons such as #search-button and #submit
-- Alt Text: Alt text dynamically applied to images eg `alt="{{recipe.recipe_name}} image"`
-- Lists: <h5> moved from inside pagination <ul> to above the list.
+
+    Page | Performance | Accessability | Best Practices | SEO
+    ------------ | --------------- | --------- | --------- | ---------
+    **index.html** |82|100|100|99
+    **login.html** |93|90|100|100
+    **register.html** |93|98|100|100
+    **view_profile.html** |57|100|93|99
+    **insert_recipe.html** |89|92|100|98
+    **edit_recipe.html** |87|92|100|98
+    **single_recipe.html** |54|99|93|100
+    **users.html** |94|100|100|99
+    **units.html** |94|100|100|100
+
+    **Performance**
+    - Script.js broken into seperate files as unnused Javascript was the biggest factor in low performance scores.
+
+    **Accessability**
+    - Contrast: Alpha level on .blank-image was set to 0.6 which did not offer sufficient contrast with white text. Alpah level rasied to 0.8.
+    - Aria labels: Aria labels added to buttons such as #search-button and #submit
+    - Alt Text: Alt text dynamically applied to images eg `alt="{{recipe.recipe_name}} image"`
+    - Lists: headers moved from inside pagination `<ul>` to above the list.
+    
+    **Best Practices**
+    - Logo image resized.
+    
+    **SEO**
+    - Description meta tag added on all pages.
 
 3. **Mobile Devices:** I used my Google Pixel 3a phone and Amazon Fire tablet to test the site.
 

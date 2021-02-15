@@ -40,6 +40,9 @@ McTastic Recipes is a Milestone 3 project, it is part of the Fullstack Software 
 
 **<details><summary>Accessibility</summary>**
 * [**_Semantics_**](#semantics)
+* [**_Labels_**](#labels)
+* [**_Contrast_**](#contrast)
+* [**_Keyboard_**](#keyboard)
 </details>
 
 **<details><summary>Testing</summary>**
@@ -365,11 +368,19 @@ The share button is displayed on the bottom right corner at all times on all pag
 - Titles used throughout (McTastic Recipes, McTastic Profiles etc...)
 - Language is set to english (`<html lang="en">`)
 
----
+### Labels
 
 - Aria labels used throughout eg `<button id="submit" aria-label="submit" type="submit">`
 - Alt Text: Alt text dynamically applied to images eg `alt="{{recipe.recipe_name}} image"`
 
+### Contrast
+
+- All pages have been checked for contrast issues using [Lighthouse](https://developers.google.com/web/tools/lighthouse) and contrast adjusted as necessary throughout.
+
+### Keyboard
+
+- All clickable elements are focusable with classes such as `.focus-outline`, `.focus-background` etc... added in `style.css` in order to make the site smoothly navigable without the use of a mouse.
+  
 # Testing
 All testing and validation is contained within a separate .md file. <br> [View TESTING.md](TESTING.md)
 

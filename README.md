@@ -25,7 +25,6 @@ McTastic Recipes is a Milestone 3 project, it is part of the Fullstack Software 
     * [_Color Scheme_](#color-scheme)
     * [_Typography_](#typography)
     * [_Media_](#Media)
-    * [_Wireframes_](#wireframes)
 </details>
 
 **<details><summary>Features</summary>**
@@ -63,7 +62,7 @@ McTastic Recipes is a Milestone 3 project, it is part of the Fullstack Software 
 # Project Overview
 
 McTastic Recipes is a recipe website. It is designed to be useful for people with different levels of abilities in the kitchen, from complete novice to experienced cook. <br> 
-It is also designed to be easy to navigate for users of all ages. Users may add not just recipes but also ingredients so that when they add recipes in the future the may easily view the calory values of their favourite recipes.
+It is also designed to be easy to navigate for users of all ages. Users may add not just recipes but also ingredients so that when they add recipes in the future the may easily view the calorie values of their favourite recipes.
 
 ---
 
@@ -143,6 +142,8 @@ It is also designed to be easy to navigate for users of all ages. Users may add 
 ### Skeleton Plane
 #### Wireframes
 
+![Wireframes](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/mctastic-wire.pdf)
+
 I used Balsamiq and figma to create the wireframes. The layout has altered since I created the wireframes as I decided to replace the contact page with a newsletter sign up in the footer. The parallax felt too distracting and so that has been omitted. Originally there were to be seperate pages for Cooking/Baking/snacks but instead I implemented a feature to filter recipes by category.
 I used affinity designer to design the logo, I went through many iterations of the design until I was happy with two final logos, one for the navigation bar on the site and the other for the browser tab icon.
 
@@ -156,7 +157,7 @@ A standard layout is fully responsive on mobile devices and larger screens.
 
 #### Color Scheme
 
-Colors are kept to a minimum in order to keep focus on the imagery of the recipes, chosen colousr are various shades of grey. Color scheme can be found on my Coolors profile: [Coolors](https://coolors.co/u/sean_mcmahon)
+Colors are kept to a minimum in order to keep focus on the imagery of the recipes, chosen colours are various shades of grey. Color scheme can be found on my Coolors profile: [Coolors](https://coolors.co/u/sean_mcmahon)
 
 ![Color Palette](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/mctastic-colors.JPG)
 
@@ -176,7 +177,6 @@ All images, and recipes are the authors own unless provided by other users. Logo
 - [Affinity Designer Logo Process](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/logo-design.jpg)
 
 ##### back to [top](#table-of-contents)
-
 ---
 
 # Features
@@ -211,10 +211,6 @@ The footer features:
     - Copyright Information
     - Links to social media platforms.
 
-#### Share
-
-The share button is displayed on the bottom right corner at all times on all pages that do not require a user to be logged in.
-
 ### Elements on Multiple Pages
 
 #### Search Sort Filter 
@@ -239,6 +235,11 @@ The share button is displayed on the bottom right corner at all times on all pag
 (index, view_profile, users)
 
 - Where there are more than six results navigation links to pages are displayed below the number of results (6 results per page). 
+
+#### Share
+(view_profile, single_recipe)
+
+The share button is displayed on the bottom right corner at all times on profile and recipe pages.
 
 ### Individual Pages
 
@@ -316,6 +317,7 @@ The share button is displayed on the bottom right corner at all times on all pag
     I'd like to implement a feature to give users an opportunity to "like" other recipes, saving them a "Favourites" collection, which would be displayed on a their own profile. Each recipe card will include a small "heart" icon, clicking which will enable user to add the selected recipe to "my favourits".
 
 ##### back to [top](#table-of-contents)
+---
 
 # Technologies Used
 
@@ -358,6 +360,7 @@ The share button is displayed on the bottom right corner at all times on all pag
 
 - Branches were used to experimaent with pagination.
 
+##### back to [top](#table-of-contents)
 ---
 
 # Accessibility
@@ -383,6 +386,9 @@ The share button is displayed on the bottom right corner at all times on all pag
   
 # Testing
 All testing and validation is contained within a separate .md file. <br> [View TESTING.md](TESTING.md)
+
+##### back to [top](#table-of-contents)
+---
 
 # Deployment
 
@@ -486,6 +492,7 @@ To deploy the project to [Heroku](https://heroku.com/) the following steps need 
 **Note**: if you have not linked GitHub and Heroku following step **5**, alternatively as the last step of deployment, you can put the following command into your terminal:   
  `heroku login`, after a successful log in `git push heroku master` - to push the app to Heroku, and finally click "Open App" in Heroku dashboard to view the app.
 
+##### back to [top](#table-of-contents)
 ---
 
 # Credits
@@ -498,7 +505,7 @@ To deploy the project to [Heroku](https://heroku.com/) the following steps need 
 
 3.  Youtube; Code for temperature conversion modified from [Whatsdev](https://youtu.be/EHclqGV_KME)
 
-4.  Youtube; Code for temperature conversion modified from [Whatsdev](https://youtu.be/EHclqGV_KME)
+4.  Codepen; Code for perfect squares taken from [Tyler_Potts](https://codepen.io/Tyler_Potts_/pen/qBBXoVQ)
 
 5.  Github; Code for pagination modified from [irinatu17](https://github.com/irinatu17/MyCookBook)
 
@@ -509,6 +516,9 @@ To deploy the project to [Heroku](https://heroku.com/) the following steps need 
 7.  Icons sourced from [Iconmonstr](https://iconmonstr.com/)
 
 8.  Button icons sourced from [Fontawesome](https://fontawesome.com/)
+
+##### back to [top](#table-of-contents)
+---
 
  
 

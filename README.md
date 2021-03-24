@@ -142,7 +142,7 @@ It is also designed to be easy to navigate for users of all ages. Users may add 
 ### Skeleton Plane
 #### Wireframes
 
-![Wireframes](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/mctastic-wire.pdf)
+[Wireframes](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/mctastic-wire.pdf)
 
 I used Balsamiq and figma to create the wireframes. The layout has altered since I created the wireframes as I decided to replace the contact page with a newsletter sign up in the footer. The parallax felt too distracting and so that has been omitted. Originally there were to be seperate pages for Cooking/Baking/snacks but instead I implemented a feature to filter recipes by category.
 I used affinity designer to design the logo, I went through many iterations of the design until I was happy with two final logos, one for the navigation bar on the site and the other for the browser tab icon.

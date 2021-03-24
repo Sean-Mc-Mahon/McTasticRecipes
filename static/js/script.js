@@ -67,18 +67,27 @@ function sendMail(contactForm) {
     return false;  // To block from loading a new page
 }
 
+//RECIPE PLACEHOLDER IMAGE
 // Allowed extensions to image address
 let url_types = ["jpg", "jpeg", "png"];
 
-if (window.location.pathname=='/insert_recipe') {
-    // If the image address is valid, update src attr of #img
-    document.getElementById("recipe_image").addEventListener("input", function() {
-        let arr = document.getElementById("recipe_image").value.split(".");
-        let pop = arr.pop().toLowerCase();
-        if (pop === url_types[0] || pop === url_types[1] || pop === url_types[2]) {
-            console.log(pop);
-            document.getElementById("img").setAttribute("src", document.getElementById("recipe_image").value);
-            document.getElementById("img").setAttribute("alt", `Image of ${document.getElementById("recipe_name").value}`);
-        }
-    });
-}
+
+//update placeholder image with recipe title
+recipeName = document.getElementById('recipe_name')
+recipeName.addEventListener('input', function() {
+    document.getElementById('placename').innerText = recipeName.value;
+    document.getElementById('placename').style.zIndex = '5';
+})
+// If the image address is valid, update src attr of #img and change z-index of placename to 0
+document.getElementById("recipe_image").addEventListener("input", function() {
+    let arr = document.getElementById("recipe_image").value.split(".");
+    let pop = arr.pop().toLowerCase();
+    if (pop === url_types[0] || pop === url_types[1] || pop === url_types[2]) {
+        document.getElementById('placename').style.display = 'none';
+        document.getElementById('img').style.display = 'block';
+        document.getElementById("img").setAttribute("src", document.getElementById("recipe_image").value);
+    } else {
+        document.getElementById('placename').style.display = 'block';
+        document.getElementById("img").style.display = 'none';
+    }
+});

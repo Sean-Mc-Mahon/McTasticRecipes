@@ -1,7 +1,3 @@
-/* *{
-    border: 1px solid pink;
-} */
-
 /**** GLOBAL STYLES ****/
 body {
     margin: 0;
@@ -155,6 +151,11 @@ h1,h2,h3,h4,h5,h6 {
     padding: 0.5rem;
 }
 
+/* Display */
+.display0 {
+    display: none;
+}
+
 /* Widths */
 .w-80 {
     width: 80%;
@@ -200,6 +201,7 @@ main {
     padding: 2rem;
     opacity: 1;
     transition: 1s ease;
+    z-index: 0;
 }
 .header_fade {
     pointer-events: none;
@@ -620,6 +622,7 @@ ul .instruction-list {
     }
     #placeholder {
     max-width: 350px;
+    position: relative;
     }
     /* recipe cards */
     .recipe-card {

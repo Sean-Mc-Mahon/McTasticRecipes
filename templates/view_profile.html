@@ -15,11 +15,12 @@
                     {% if session.user == username or session.user|lower == 'admin' %}
                         <div class="edit-btns flex-center">
                             <!-- Modal Trigger -->
-                            <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-user" href="#modal1">Delete</a>
-                            <!-- Modal Structure -->
-                            <div id="modal1" class="modal  card-outline">
+                            <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-user" href="#delete-modal">Delete Profile</a>
+                            <!-- Delete Profile Modal Structure -->
+                            <div id="delete-modal" class="modal  card-outline">
                                 <div class="modal-content">
                                     <h4>Are you sure?</h4>
+                                    <h5>This will delete your profile as well as all your recipes & ingredients.</h5>
                                 </div>
                                 <div class="modal-footer">
                                     <a href="#!" class="modal-close waves-effect waves-green btn transparent btn-outline m-all flat hoverable">Cancel</a>
@@ -43,39 +44,44 @@
     </div>
     <!-- Dispaly Ingredients -->
     <!-- If user has added recipes they are displayed here -->
-    {% if num_ingredients > 0 %}
-        <div class="row container">
-            <ul class="collapsible popout">
-                <li>
-                    <div class="collapsible-header"><i class="material-icons focus-color">expand_more</i>My Ingredients</div>
-                    <div class="collapsible-body">
-                        <div class="row w100 sm-card">
-                            {% for ingredient in ingredients %}
-                                <div class="col s12 l6 card horizontal">
-                                    <div class="card-content w100">
-                                        <div class="ingredient flex-wrap">
-                                            <div class="flex">
-                                                <h6>{{ ingredient.ingredient_name }}</h6>
-                                                <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
-                                            </div>
-                                            {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
-                                            <div class="flex-right mv-half">
-                                                <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#modal1">Edit</a>
-                                                <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id) }}">
-                                                Delete
-                                                </a>
-                                            </div>
-                                            {% endif %}
+    <div class="row container">
+        <ul class="collapsible popout">
+            <li>
+                <div class="collapsible-header flex-space">
+                    <div class="valign-wrapper">
+                        <i class="material-icons focus-color">expand_more</i>My Ingredients
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    {% if session.user == username %}
+                        {% include "partials/add_ingredient_modal.html" %}
+                    {% endif %}
+                    <div class="row w100 sm-card">
+                        {% for ingredient in ingredients %}
+                            <div class="col s12 l6 card horizontal">
+                                <div class="card-content w100">
+                                    <div class="ingredient flex-wrap">
+                                        <div class="flex">
+                                            <h6>{{ ingredient.ingredient_name }}</h6>
+                                            <p>{{ ingredient.ingredient_cal }} kcal/{{ ingredient.unit_name }}</p>
                                         </div>
+                                        {% if session.user|lower == ingredient.created_by|lower or session.user|lower == 'admin' %}
+                                        <div class="flex-right mv-half">
+                                            <a class="mh-half waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable" href="#ingredient-modal">Edit</a>
+                                            <a class="waves-effect waves-light btn-small modal-trigger transparent btn-outline flat hoverable delete-use" href="{{ url_for('delete_ingredient', ingredient_id=ingredient._id, username_view=user.username) }}">
+                                            Delete
+                                            </a>
+                                        </div>
+                                        {% endif %}
                                     </div>
                                 </div>
-                            {% endfor %}
-                        </div>
+                            </div>
+                        {% endfor %}
                     </div>
-                </li>
-            </ul>
-        </div>
-    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </div>
 
     {% if number_of_user_rec > 6 %}
     <!--PAGINATION-->
@@ -96,8 +102,7 @@
 {% endblock %}
 {% block scripts %}
 <!-- Share functionality from www.addthis.com --> 
-<script 
-    type="text/javascript" 
+<script
     src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fce212ff264a1fa">
 </script>
 {% endblock %}

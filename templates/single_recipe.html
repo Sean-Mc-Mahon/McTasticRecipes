@@ -6,16 +6,16 @@
     <div class="vm1 container mt1">
         <div class="row">
             <!--SEARCH-->
-                <form class="col s12" action="{{ url_for('search', sort_by=sort_by, query=query) }}" method="post">
-                    <div class="input-field flex">
-                        <input type="text" name="query" id="query" minlength="3" class="validate" required>
-                        <label class="flex-space" for="query">Search Recipes</label>
-                        <button id="search-button"  aria-label="search" type="submit" class="transparent blue-grey-text text-darken-3 no-border focus-outline"><i class="fas fa-search left"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
+            <form class="col s12" action="{{ url_for('search', sort_by=sort_by, query=query) }}" method="post">
+                <div class="input-field flex">
+                    <input type="text" name="query" id="query" minlength="3" class="validate" required>
+                    <label class="flex-space" for="query">Search Recipes</label>
+                    <button id="search-button"  aria-label="search" type="submit" class="transparent blue-grey-text text-darken-3 no-border focus-outline"><i class="fas fa-search left"></i>
+                    </button>
+                </div>
+            </form>
         </div>
+    </div>
 
     <!-- RECIPE TITLE AND CREATER-->
     <div class="row s12 container mt1 mb0">
@@ -145,12 +145,11 @@
                 {% endif %}
             </div>
         </div>
+
 {% endblock %}
 {% block scripts %}
 <!-- Share functionality from www.addthis.com --> 
-<script 
-    type="text/javascript" 
-    src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fce212ff264a1fa">
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fce212ff264a1fa">
 </script>
 <!--GSAP used to animate divs in single_recipe-->
     <script 
@@ -159,7 +158,6 @@
         crossorigin="anonymous">
     </script>
     <script 
-        type="text/javascript" 
         src="../static/js/single_recipe.js">
     </script>
 {% endblock %}

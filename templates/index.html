@@ -27,62 +27,62 @@
             {% else %}
                 <div class="input-field col s4">
             {% endif %}
-                {% if query %}
-                    <!--sort results of a query-->
-                    <form action="{{ url_for('sort_query', sort_by=sort_by, query=query) }}" method="POST" >
-                {% elif filter_by %}
-                    <!--sort results of a query-->
-                    <form action="{{ url_for('sort_filter', filter_by=filter_by, sort_by=sort_by, query=query) }}" method="POST" >
+            {% if query %}
+                <!--sort results of a query-->
+                <form action="{{ url_for('sort_query', sort_by=sort_by, query=query) }}" method="POST" >
+            {% elif filter_by %}
+                <!--sort results of a query-->
+                <form action="{{ url_for('sort_filter', filter_by=filter_by, sort_by=sort_by, query=query) }}" method="POST" >
+            {% else %}
+                <!--sort all-->
+                <form action="{{ url_for('sort', filter_by=filter_by, sort_by=sort_by, query=query) }}" method="POST" >
+            {% endif %}
+                    <label for="sort_by">
+                        <select id="sort_by" name="sort_by" onchange="this.form.submit()">
+                            <!--Display sort preference if one is selected-->
+                            {% if sort_by %}
+                            <option value="" disabled selected>{{ sort_by }}</option>
+                            {% else %}
+                            <option value="" disabled selected>Sort By</option>
+                            {% endif %}
+                            <option value="A-Z">A-Z</option>
+                            <option value="Z-A">Z-A</option>
+                            <option value="Newest">Newest</option>
+                            <option value="Oldest">Oldest</option>
+                        </select>
+                    </label>
+                </form>
+            </div>
+            <!--Option to filter category only if a search has not been made-->
+            {% if not query %}
+                <!--FILTER-->
+                <div class="input-field col s6 m3 xl4">
+                {% if sort_by %}
+                    <!--filter results of a query-->
+                    <form action="{{ url_for('filter_sort', sort_by=sort_by) }}" method="POST" >
                 {% else %}
-                    <!--sort all-->
-                    <form action="{{ url_for('sort', filter_by=filter_by, sort_by=sort_by, query=query) }}" method="POST" >
+                    <!--filter all-->
+                    <form action="{{ url_for('filter') }}" method="POST" >
                 {% endif %}
-                        <label for="sort_by">
-                            <select id="sort_by" name="sort_by" onchange="this.form.submit()">
+                        <label for="filter_by">
+                            <select id="filter_by" name="filter_by" onchange="this.form.submit()">
                                 <!--Display sort preference if one is selected-->
-                                {% if sort_by %}
-                                <option value="" disabled selected>{{ sort_by }}</option>
+                                {% if filter_by %}
+                                <option value="" disabled selected>{{ filter_by }}</option>
                                 {% else %}
-                                <option value="" disabled selected>Sort By</option>
+                                <option value="" disabled selected>Filter By</option>
                                 {% endif %}
-                                <option value="A-Z">A-Z</option>
-                                <option value="Z-A">Z-A</option>
-                                <option value="Newest">Newest</option>
-                                <option value="Oldest">Oldest</option>
+                                <option value="All">All</option>
+                                <option value="Cooking">Cooking</option>
+                                <option value="Baking">Baking</option>
+                                <option value="Snacks">Snacks</option>
                             </select>
                         </label>
                     </form>
                 </div>
-                <!--Option to filter category only if a search has not been made-->
-                {% if not query %}
-                    <!--FILTER-->
-                    <div class="input-field col s6 m3 xl4">
-                    {% if sort_by %}
-                        <!--filter results of a query-->
-                        <form action="{{ url_for('filter_sort', sort_by=sort_by) }}" method="POST" >
-                    {% else %}
-                        <!--filter all-->
-                        <form action="{{ url_for('filter') }}" method="POST" >
-                    {% endif %}
-                            <label for="filter_by">
-                                <select id="filter_by" name="filter_by" onchange="this.form.submit()">
-                                    <!--Display sort preference if one is selected-->
-                                    {% if filter_by %}
-                                    <option value="" disabled selected>{{ filter_by }}</option>
-                                    {% else %}
-                                    <option value="" disabled selected>Filter By</option>
-                                    {% endif %}
-                                    <option value="All">All</option>
-                                    <option value="Cooking">Cooking</option>
-                                    <option value="Baking">Baking</option>
-                                    <option value="Snacks">Snacks</option>
-                                </select>
-                            </label>
-                        </form>
-                    </div>
-                {% endif %}
-            </div>
+            {% endif %}
         </div>
+    </div>
 
         {% if number_of_all_rec > 0 %}
             <!--Recipe Cards-->
@@ -135,7 +135,7 @@
         {% else %}
                 <h3 class="center-align">No Results Found for {{ query }}</h3>
         {% endif %}
-    </div>
+
 {% endblock %}
 {% block scripts %}
 <!--GSAP used to animate divs in single_recipe-->
@@ -154,8 +154,7 @@
         integrity="sha512-judXDFLnOTJsUwd55lhbrX3uSoSQSOZR6vNrsll+4ViUFv+XOIr/xaIK96soMj6s5jVszd7I97a0H+WhgFwTEg==" 
         crossorigin="anonymous">
     </script>
-    <script 
-        type="text/javascript" 
+    <script
         src="../static/js/index_animation.js">
     </script>
 {% endblock %}

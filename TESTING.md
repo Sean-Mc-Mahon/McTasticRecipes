@@ -60,7 +60,7 @@ User can click on any field of a card on the conversions section and any figures
 
 _- User Story H:_ As a registered user I would like to add, edit, update or delete my own ingredients.
 
-![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-g.gif)
+![Browse](https://github.com/Sean-Mc-Mahon/McTasticRecipes/blob/master/wireframes/story-h.gif)
 
 User can click add button on units page to add ingredient using a modal, if fields are filled and ingredient name is not in use the ingredient will be added and the user may edit or delete the ingredient as long as they are logged in.
 

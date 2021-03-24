@@ -36,15 +36,6 @@
     {% block styles %}
     {% endblock %}
     <title>McTastic {{ title }}</title>
-    <!-- EmailJS -->
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js">
-    </script>
-    <script type="text/javascript">
-    (function(){
-        emailjs.init("user_phcTljyBItI7OTOrLNHqx");
-    })();
-    </script>
 </head>
 
 <body>
@@ -55,7 +46,7 @@
                 <!-- LOGO -->
                 <div class="left">
                     <a class="logo valign-wrapper" href="{{ url_for('recipes')}}">
-                        <img class="logo-img" height="40px" width="40px" id="logo" src="https://i.imgur.com/wf0bmMz.png" alt="logo">
+                        <img class="logo-img" height="40" width="40" id="logo" src="https://i.imgur.com/wf0bmMz.png" alt="logo">
                         <h5 class="ml1 logo-text text-shadow-2">McTastic Recipes</h5>
                     </a>
                 </div>
@@ -125,11 +116,9 @@
                 <p class="grey-text text-lighten-4 mv-half text-newsletter">Enter your email address to recieve out weekly newsletter</p>    
                 <form  id="form_contact" onsubmit="return sendMail(this);">
                     <input type="email" name="emailaddress" id="emailaddress" placeholder="email" required>
-                    <label for="emailaddress" class="valign-wrapper">
-                        <button id="submit" tabindex="0" aria-label="submit" type="submit" class="focus-outline">
-                            <i class="far fa-paper-plane large-icon"></i>
-                        </button>
-                    </label>
+                    <button id="submit" tabindex="0" aria-label="submit" type="submit" class="focus-outline">
+                        <i class="far fa-paper-plane large-icon"></i>
+                    </button>
                 </form>
             </div>
             <!--Icon info: Servings,Calories,Vegetarian,Vegan-->
@@ -188,6 +177,14 @@
             </div>
         </div>
     </footer>
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js">
+    </script>
+    <script>
+    (function(){
+        emailjs.init("user_phcTljyBItI7OTOrLNHqx");
+    })();
+    </script>
     <!--Sweet alert used for alerts upon form submission https://sweetalert.js.org/-->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- Minified JQuery script taken from http://code.jquery.com/-->

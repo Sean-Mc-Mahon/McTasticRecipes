@@ -88,9 +88,11 @@ def search():
         {"$text": {"$search": str(
             query)}}).sort('_id', pymongo.DESCENDING).skip(
             (current_page - 1)*limit_per_page).limit(limit_per_page)
+
     #  Number of Search results
     number_of_all_rec = recipes.count()
     print(number_of_all_rec)
+
     #  Number of Pages
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
 
@@ -114,8 +116,8 @@ def sort():
     """
     # set title to display in browser tab
     title = 'Recipes Sort'
-    # code for pagination modified from irinatu17:
-    # https://github.com/irinatu17/MyCookBook
+
+    # pagination
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
 
@@ -145,6 +147,7 @@ def sort():
 
     # total of recipes
     number_of_all_rec = recipes.count()
+
     # number of pages
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
 
@@ -169,8 +172,8 @@ def sort_query():
     """
     # set title to display in browser tab
     title = 'Recipes Search Sort'
-    # code for pagination modified from irinatu17:
-    # https://github.com/irinatu17/MyCookBook
+
+    # pagination
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
 
@@ -230,8 +233,8 @@ def sort_filter():
     """
     # set title to display in browser tab
     title = 'Recipes Sort Filter'
-    # code for pagination modified from irinatu17:
-    # https://github.com/irinatu17/MyCookBook
+
+    # pagination
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
 
@@ -350,8 +353,8 @@ def filter():
     """
     # set title to display in browser tab
     title = 'Recipes Filter'
-    # code for pagination modified from irinatu17:
-    # https://github.com/irinatu17/MyCookBook
+
+    # pagination
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
 
@@ -384,6 +387,7 @@ def filter():
 
     # total of recipes
     number_of_all_rec = recipes.count()
+
     # number of pages
     pages = range(1, int(math.ceil(number_of_all_rec / limit_per_page)) + 1)
 
@@ -408,8 +412,8 @@ def filter_sort():
     """
     # set title to display in browser tab
     title = 'Recipes Filter Sort'
-    # code for pagination modified from irinatu17:
-    # https://github.com/irinatu17/MyCookBook
+
+    # pagination
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
 
@@ -532,8 +536,8 @@ def users():
     # set title to display in browser tab
     # and apply active-link to nav link
     title = 'Users'
-    # code for pagination modified from irinatu17:
-    # https://github.com/irinatu17/MyCookBook
+
+    # pagination
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     # total of users in database
@@ -560,6 +564,12 @@ def view_profile(username_view):
     READ
     Allows users to view other users profiles
     """
+    if request.method == "POST":
+        ingredient_name = request.args.get('ingredient_name')
+        mongo.db.ingredients.remove({"ingredient_name": ingredient_name})
+        flash("Ingredient Successfully Deleted")
+        print(ingredient_name)
+
     # grab the user's username from db
     user = users_coll.find_one(
         {"username": username_view})
@@ -570,12 +580,17 @@ def view_profile(username_view):
     limit_per_page = 6
     current_page = int(request.args.get('current_page', 1))
     pages = range(1, int(math.ceil(number_of_user_rec / limit_per_page)) + 1)
+
     # recipes to display in order of latest created
     recipes = user_recipes.sort('_id', pymongo.DESCENDING).skip(
             (current_page - 1) * limit_per_page).limit(limit_per_page)
     ingredients = mongo.db.ingredients.find(
         {"created_by": username_view}).sort("ingredient_name", 1)
     num_ingredients = ingredients.count()
+
+    # Foodgroups and units to edit ingredients
+    food_groups = mongo.db.food_groups.find().sort("group_name", 1)
+    units = mongo.db.units.find().sort("unit_name", 1)
 
     # set title to display in browser tab
     # and apply active-link to nav link if profile belongs to session user
@@ -588,6 +603,8 @@ def view_profile(username_view):
         recipes=recipes,
         ingredients=ingredients,
         num_ingredients=num_ingredients,
+        food_groups=food_groups,
+        units=units,
         username=username,
         number_of_user_rec=number_of_user_rec,
         user_recipes=user_recipes,
@@ -762,6 +779,7 @@ def insert_recipe():
         }
         mongo.db.recipes.insert_one(recipe)
         flash("Recipe Successfully Added")
+
         return redirect(url_for(
             "recipes",
             title=title,))
@@ -788,7 +806,7 @@ def insert_ingredient():
     Inserts new ingredient to the database.
     """
     # set title to display in browser tab
-    # andset active page to apply active-link to nav link
+    # and set active page to apply active-link to nav link
     title = 'Units'
     if request.method == "POST":
         food_groups = mongo.db.food_groups.find().sort("group_name", 1)
@@ -811,13 +829,16 @@ def insert_ingredient():
             "unit_name": request.form.get("unit_name"),
             "created_by": session["user"]
         }
+
         mongo.db.ingredients.insert_one(ingredient)
         flash("Ingredient Successfully Added")
+
+        username = session['user']
+
         return redirect(url_for(
-            "units",
-            title=title,
-            food_groups=food_groups,
-            units=units))
+            "view_profile",
+            username_view=username,
+            title=title))
 
 
 # EDIT RECIPE
@@ -831,6 +852,7 @@ def edit_recipe(recipe_id):
     """
     # set title to display in browser tab
     title = 'Edit Recipe'
+
     # set active page to apply active-link to nav link
     active_page = 'edit'
     if request.method == "POST":
@@ -902,7 +924,13 @@ def delete_ingredient(ingredient_id):
     """
     mongo.db.ingredients.remove({"_id": ObjectId(ingredient_id)})
     flash("Ingredient Successfully Deleted")
-    return redirect(url_for("units"))
+
+    username = session['user']
+    if username == 'admin':
+        return redirect(url_for("recipes"))
+    return redirect(url_for(
+        "view_profile",
+        username_view=username))
 
 
 # DELETE USER
